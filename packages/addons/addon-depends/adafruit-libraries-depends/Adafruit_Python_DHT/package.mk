@@ -1,55 +1,32 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="Adafruit_Python_DHT"
-PKG_VERSION="310c59b"
-PKG_ARCH="any"
+PKG_VERSION="18846deec6a96572b3f2c4a9edfb5bac55b46f5b"
+PKG_SHA256="9125f8f42b4874db257a45184b866e8b424aa67230d2ffbc734b53686da7817f"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/adafruit/${PKG_NAME}"
 PKG_URL="https://github.com/adafruit/${PKG_NAME}/archive/$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain Python distutilscross:host"
-PKG_SECTION="python"
-PKG_SHORTDESC="Adafruit Python DHT Library"
-PKG_LONGDESC="Python library to read the DHT series of humidity and temperature sensors on a Raspberry Pi or Beaglebone Black."
-PKG_AUTORECONF="no"
-
-case $PROJECT in
-  RPi)
-    RPI_VERSION="--force-pi"
-    ;;
-  RPi2)
-    RPI_VERSION="--force-pi2"
-    ;;
-esac
+PKG_DEPENDS_TARGET="toolchain Python2 distutilscross:host"
+PKG_LONGDESC="Python library to read the DHT series of humidity and temperature sensors on a Raspberry Pi."
+PKG_TOOLCHAIN="manual"
 
 pre_make_target() {
   export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
   export LDSHARED="$CC -shared"
-
-  sed -e 's/from ez_setup import use_setuptools/\#from ez_setup import use_setuptools/' \
-      -e 's/use_setuptools()/\#use_setuptools()/' \
-      -i setup.py
 }
 
 make_target() {
-  python setup.py build $RPI_VERSION --cross-compile
-}
+  case "$PROJECT:$DEVICE" in
+    "RPi:RPi")
+      PKG_RPI_VERSION="--force-pi"
+      ;;
+    "RPi:RPi2")
+      PKG_RPI_VERSION="--force-pi2"
+      ;;
+    *)
+      PKG_RPI_VERSION=""
+  esac
 
-makeinstall_target() {
-  : # nop
+  python setup.py build $PKG_RPI_VERSION --cross-compile
 }

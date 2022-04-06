@@ -1,35 +1,17 @@
-################################################################################
-#      This file is part of LibreELEC - http://www.libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="patch"
-PKG_VERSION="2.7.5"
-PKG_ARCH="any"
+PKG_VERSION="2.7.6"
+PKG_SHA256="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd"
 PKG_LICENSE="GPL"
 PKG_SITE="http://savannah.gnu.org/projects/patch/"
 PKG_URL="http://ftpmirror.gnu.org/patch/$PKG_NAME-$PKG_VERSION.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="tools"
-PKG_SHORTDESC="GNU patch"
-PKG_LONGDESC="Patch takes a patch file containing a difference listing produced by the diff program and applies those differences to one or more original files, producing patched versions"
-PKG_AUTORECONF="no"
+PKG_LONGDESC="Patch takes a patch file containing a difference listing produced by the diff."
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-xattr"
 
 makeinstall_target() {
-  : # nop
+  :
 }

@@ -1,34 +1,16 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2019-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="dbus"
-PKG_VERSION="1.11.16"
-PKG_ARCH="any"
+PKG_VERSION="1.13.10"
+PKG_SHA256="a11239e504b99adfa9ded0bbdb2f752fd51f1afc768d78a7e5642282622855f2"
 PKG_LICENSE="GPL"
 PKG_SITE="https://dbus.freedesktop.org"
-PKG_URL="https://dbus.freedesktop.org/releases/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_URL="https://dbus.freedesktop.org/releases/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.xz"
 PKG_DEPENDS_TARGET="toolchain expat systemd"
-PKG_SECTION="system"
-PKG_SHORTDESC="dbus: simple interprocess messaging system"
-PKG_LONGDESC="D-Bus is a message bus, used for sending messages between applications. This package contains the D-Bus daemon and related utilities and the dbus shared library."
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+PKG_LONGDESC="D-Bus is a message bus, used for sending messages between applications."
+PKG_TOOLCHAIN="configure"
 
 PKG_CONFIGURE_OPTS_TARGET="export ac_cv_have_abstract_sockets=yes \
                            --with-sysroot=$SYSROOT_PREFIX \
@@ -40,7 +22,6 @@ PKG_CONFIGURE_OPTS_TARGET="export ac_cv_have_abstract_sockets=yes \
                            --disable-ansi \
                            --disable-xml-docs \
                            --disable-doxygen-docs \
-                           --enable-abstract-sockets \
                            --disable-x11-autolaunch \
                            --disable-selinux \
                            --disable-libaudit \
@@ -48,7 +29,9 @@ PKG_CONFIGURE_OPTS_TARGET="export ac_cv_have_abstract_sockets=yes \
                            --enable-inotify \
                            --without-valgrind \
                            --without-x \
-                           --with-dbus-user=dbus"
+                           --with-dbus-user=dbus \
+                           --runstatedir=/run \
+                           --with-system-socket=/run/dbus/system_bus_socket"
 
 post_makeinstall_target() {
   rm -rf $INSTALL/etc/rc.d

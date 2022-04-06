@@ -1,35 +1,20 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2009-2016 Lukas Rusak (lrusak@libreelec.tv)
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2017 Lukas Rusak (lrusak@libreelec.tv)
+# Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="docker"
-PKG_VERSION="1.13.1"
-PKG_REV="114"
+PKG_VERSION="18.09.7"
+PKG_SHA256="f05dc15f5c11635472534c3aaf759c39c1bba842dd1ac23059431c2fd1ae1795"
+PKG_REV="127"
 PKG_ARCH="any"
-PKG_ADDON_PROJECTS="Generic RPi RPi2 imx6 WeTek_Hub WeTek_Play_2 Odroid_C2"
 PKG_LICENSE="ASL"
 PKG_SITE="http://www.docker.com/"
-PKG_URL="https://github.com/docker/docker/archive/v${PKG_VERSION}.tar.gz"
-PKG_SOURCE_DIR="moby-$PKG_VERSION"
-PKG_DEPENDS_TARGET="toolchain sqlite go:host containerd runc libnetwork tini"
+PKG_URL="https://github.com/docker/docker-ce/archive/v${PKG_VERSION}.tar.gz"
+PKG_DEPENDS_TARGET="toolchain sqlite go:host containerd runc libnetwork tini systemd"
 PKG_SECTION="service/system"
 PKG_SHORTDESC="Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere."
 PKG_LONGDESC="Docker containers can encapsulate any payload, and will run consistently on and between virtually any server. The same container that a developer builds and tests on a laptop will run at scale, in production*, on VMs, bare-metal servers, OpenStack clusters, public instances, or combinations of the above."
-PKG_AUTORECONF="no"
+PKG_TOOLCHAIN="manual"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Docker"
@@ -43,20 +28,20 @@ configure_target() {
                            exclude_graphdriver_btrfs \
                            journald"
 
-  case $TARGET_ARCH in
+  case ${TARGET_ARCH} in
     x86_64)
       export GOARCH=amd64
       ;;
     arm)
       export GOARCH=arm
 
-      case $TARGET_CPU in
+      case ${TARGET_CPU} in
         arm1176jzf-s)
           export GOARM=6
           ;;
-        cortex-a7|cortex-a9)
-         export GOARM=7
-         ;;
+        *)
+          export GOARM=7
+          ;;
       esac
       ;;
     aarch64)
@@ -67,30 +52,73 @@ configure_target() {
   export GOOS=linux
   export CGO_ENABLED=1
   export CGO_NO_EMULATION=1
-  export CGO_CFLAGS=$CFLAGS
+  export CGO_CFLAGS=${CFLAGS}
   export LDFLAGS="-w -linkmode external -extldflags -Wl,--unresolved-symbols=ignore-in-shared-libs -extld $CC"
-  export GOLANG=$TOOLCHAIN/lib/golang/bin/go
-  export GOPATH=$PKG_BUILD/.gopath
-  export GOROOT=$TOOLCHAIN/lib/golang
-  export PATH=$PATH:$GOROOT/bin
+  export GOLANG=${TOOLCHAIN}/lib/golang/bin/go
+  export GOPATH=${PKG_BUILD}/.gopath_cli:${PKG_BUILD}/.gopath
+  export GOROOT=${TOOLCHAIN}/lib/golang
+  export PATH=${PATH}:${GOROOT}/bin
 
-  mkdir -p $PKG_BUILD/.gopath
-  if [ -d $PKG_BUILD/vendor ]; then
-    mv $PKG_BUILD/vendor $PKG_BUILD/.gopath/src
+  mkdir -p ${PKG_BUILD}/.gopath
+  mkdir -p ${PKG_BUILD}/.gopath_cli
+
+  PKG_ENGINE_PATH=${PKG_BUILD}/components/engine
+  PKG_CLI_PATH=${PKG_BUILD}/components/cli
+
+  if [ -d ${PKG_ENGINE_PATH}/vendor ]; then
+    mv ${PKG_ENGINE_PATH}/vendor ${PKG_BUILD}/.gopath/src
   fi
-  ln -fs $PKG_BUILD $PKG_BUILD/.gopath/src/github.com/docker/docker
+
+  if [ -d ${PKG_CLI_PATH}/vendor ]; then
+    mv ${PKG_CLI_PATH}/vendor ${PKG_BUILD}/.gopath_cli/src
+  fi
+
+  # Fix missing/incompatible .go files
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/moby/buildkit/frontend/*               ${PKG_BUILD}/.gopath_cli/src/github.com/moby/buildkit/frontend
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/moby/buildkit/frontend/gateway/*       ${PKG_BUILD}/.gopath_cli/src/github.com/moby/buildkit/frontend/gateway
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/moby/buildkit/solver/*                 ${PKG_BUILD}/.gopath_cli/src/github.com/moby/buildkit/solver
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/moby/buildkit/util/progress/*          ${PKG_BUILD}/.gopath_cli/src/github.com/moby/buildkit/util/progress
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/docker/swarmkit/manager/*              ${PKG_BUILD}/.gopath_cli/src/github.com/docker/swarmkit/manager
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/coreos/etcd/raft/*                     ${PKG_BUILD}/.gopath_cli/src/github.com/coreos/etcd/raft
+  cp -rf ${PKG_BUILD}/.gopath/src/golang.org/x/*                                    ${PKG_BUILD}/.gopath_cli/src/golang.org/x
+  cp -rf ${PKG_BUILD}/.gopath/src/github.com/opencontainers/runtime-spec/specs-go/* ${PKG_BUILD}/.gopath_cli/src/github.com/opencontainers/runtime-spec/specs-go
+
+  rm -rf   ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/containerd
+  mkdir -p ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/containerd
+  cp -rf   ${PKG_BUILD}/.gopath/src/github.com/containerd/containerd/* ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/containerd
+
+  rm -rf   ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/continuity
+  mkdir -p ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/continuity
+  cp -rf   ${PKG_BUILD}/.gopath/src/github.com/containerd/continuity/* ${PKG_BUILD}/.gopath_cli/src/github.com/containerd/continuity
+
+  mkdir -p ${PKG_BUILD}/.gopath_cli/src/github.com/docker/docker/builder
+  cp -rf   ${PKG_ENGINE_PATH}/builder/* ${PKG_BUILD}/.gopath_cli/src/github.com/docker/docker/builder
+
+  if [ ! -L ${PKG_BUILD}/.gopath/src/github.com/docker/docker ];then
+    ln -fs  ${PKG_ENGINE_PATH} ${PKG_BUILD}/.gopath/src/github.com/docker/docker
+  fi
+
+  if [ ! -L ${PKG_BUILD}/.gopath_cli/src/github.com/docker/cli ];then
+    ln -fs ${PKG_CLI_PATH} ${PKG_BUILD}/.gopath_cli/src/github.com/docker/cli
+  fi
 
   # used for docker version
-  export GITCOMMIT=$PKG_VERSION
-  export VERSION=$PKG_VERSION
+  export GITCOMMIT=${PKG_VERSION}
+  export VERSION=${PKG_VERSION}
   export BUILDTIME="$(date --utc)"
-  bash ./hack/make/.go-autogen
+
+  cd ${PKG_ENGINE_PATH}
+  bash hack/make/.go-autogen
+  cd ${PKG_BUILD}
 }
 
 make_target() {
   mkdir -p bin
-  $GOLANG build -v -o bin/docker -a -tags "$DOCKER_BUILDTAGS" -ldflags "$LDFLAGS" ./cmd/docker
-  $GOLANG build -v -o bin/dockerd -a -tags "$DOCKER_BUILDTAGS" -ldflags "$LDFLAGS" ./cmd/dockerd
+  PKG_CLI_FLAGS="-X 'github.com/docker/cli/cli.Version=${VERSION}'"
+  PKG_CLI_FLAGS="${PKG_CLI_FLAGS} -X 'github.com/docker/cli/cli.GitCommit=${GITCOMMIT}'"
+  PKG_CLI_FLAGS="${PKG_CLI_FLAGS} -X 'github.com/docker/cli/cli.BuildTime=${BUILDTIME}'"
+  ${GOLANG} build -v -o bin/docker -a -tags "${DOCKER_BUILDTAGS}" -ldflags "${LDFLAGS} ${PKG_CLI_FLAGS}" ./components/cli/cmd/docker
+  ${GOLANG} build -v -o bin/dockerd -a -tags "${DOCKER_BUILDTAGS}" -ldflags "${LDFLAGS}" ./components/engine/cmd/dockerd
 }
 
 makeinstall_target() {
@@ -98,20 +126,20 @@ makeinstall_target() {
 }
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin
-    cp -P $PKG_BUILD/bin/docker $ADDON_BUILD/$PKG_ADDON_ID/bin
-    cp -P $PKG_BUILD/bin/dockerd $ADDON_BUILD/$PKG_ADDON_ID/bin
+  mkdir -p ${ADDON_BUILD}/${PKG_ADDON_ID}/bin
+    cp -P ${PKG_BUILD}/bin/docker ${ADDON_BUILD}/${PKG_ADDON_ID}/bin
+    cp -P ${PKG_BUILD}/bin/dockerd ${ADDON_BUILD}/${PKG_ADDON_ID}/bin
 
     # containerd
-    cp -P $(get_build_dir containerd)/bin/containerd $ADDON_BUILD/$PKG_ADDON_ID/bin/docker-containerd
-    cp -P $(get_build_dir containerd)/bin/containerd-shim $ADDON_BUILD/$PKG_ADDON_ID/bin/docker-containerd-shim
+    cp -P $(get_build_dir containerd)/bin/containerd ${ADDON_BUILD}/${PKG_ADDON_ID}/bin/containerd
+    cp -P $(get_build_dir containerd)/bin/containerd-shim ${ADDON_BUILD}/${PKG_ADDON_ID}/bin/containerd-shim
 
     # libnetwork
-    cp -P $(get_build_dir libnetwork)/bin/docker-proxy $ADDON_BUILD/$PKG_ADDON_ID/bin/docker-proxy
+    cp -P $(get_build_dir libnetwork)/bin/docker-proxy ${ADDON_BUILD}/${PKG_ADDON_ID}/bin/docker-proxy
 
     # runc
-    cp -P $(get_build_dir runc)/bin/runc $ADDON_BUILD/$PKG_ADDON_ID/bin/docker-runc
+    cp -P $(get_build_dir runc)/bin/runc ${ADDON_BUILD}/${PKG_ADDON_ID}/bin/runc
 
     # tini
-    cp -P $(get_build_dir tini)/.$TARGET_NAME/tini-static $ADDON_BUILD/$PKG_ADDON_ID/bin/docker-init
+    cp -P $(get_build_dir tini)/.${TARGET_NAME}/tini-static ${ADDON_BUILD}/${PKG_ADDON_ID}/bin/docker-init
 }

@@ -1,34 +1,15 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2019-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="glew"
-PKG_VERSION="1.13.0"
-PKG_ARCH="any"
+PKG_VERSION="2.1.0"
+PKG_SHA256="04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95"
 PKG_LICENSE="BSD"
 PKG_SITE="http://glew.sourceforge.net/"
 PKG_URL="$SOURCEFORGE_SRC/glew/glew/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tgz"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="graphics"
-PKG_SHORTDESC="glew: The OpenGL Extension Wrangler Library"
-PKG_LONGDESC="The OpenGL Extension Wrangler Library (GLEW) is a cross-platform C/C++ extension loading library. GLEW provides efficient run-time mechanisms for determining which OpenGL extensions are supported on the target platform. OpenGL core and extension functionality is exposed in a single header file."
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+PKG_DEPENDS_TARGET="toolchain libX11"
+PKG_LONGDESC="A cross-platform C/C++ extension loading library."
 
 make_target() {
   make CC="$CC" LD="$CC" AR="$AR" \

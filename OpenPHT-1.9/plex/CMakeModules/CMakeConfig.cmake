@@ -1,0 +1,169 @@
+
+if(NOT WIN32)
+  include(CheckSystemIncludes)
+  include(CheckSystemFunctions)
+endif(NOT WIN32)
+
+set(PLEX_TARGET_NAME OpenPHT)
+
+set(CONFIG_INTERNAL_LIBS
+  lib_hts
+  lib_squish
+  lib_upnp
+)
+
+OPTION(ENABLE_DVD_DRIVE "Enable the DVD drive" OFF)
+OPTION(ENABLE_PYTHON "Enable Python addon support" OFF)
+OPTION(CREATE_BUNDLE "Create the finished bundle" ON)
+OPTION(ENABLE_TESTING "Enable unit testing" OFF)
+if(ENABLE_TESTING)
+  enable_testing()
+endif(ENABLE_TESTING)
+
+OPTION(ENABLE_AUTOUPDATE "Enable the cool autoupdate system" ON)
+
+OPTION(USE_PAGING "Enable media section paging" ON)
+if(USE_PAGING)
+  add_definitions(-DUSE_PAGING)
+endif(USE_PAGING)
+
+OPTION(COMPRESS_TEXTURES "If we should compress the textures or not" ON)
+
+if(NOT DEFINED TARGET_PLATFORM)
+  if(APPLE)
+    set(TARGET_PLATFORM "OSX")
+  elseif(WIN32)
+    set(TARGET_PLATFORM "WIN32")
+  elseif(UNIX)
+    set(TARGET_PLATFORM ${CMAKE_SYSTEM_NAME})
+  endif()
+endif()
+
+string(TOUPPER ${TARGET_PLATFORM} TARGET_PLATFORM)
+
+if("x${TARGET_PLATFORM}" STREQUAL "xOSX")
+  set(TARGET_OSX 1 CACHE BOOL "Target is OSX")
+  set(TARGET_COMMON_DARWIN 1 CACHE BOOL "Common Darwin platforms")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX platform")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xWIN32")
+  set(TARGET_WIN32 1 CACHE BOOL "Target is Windows")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xLINUX")
+  set(TARGET_COMMON_LINUX 1 CACHE BOOL "Common Linux platforms")
+  set(TARGET_LINUX 1 CACHE BOOL "Target is Linux")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX platform")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xFREEBSD")
+  set(TARGET_FREEBSD 1 CACHE BOOL "Target is FreeBSD")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX platform")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xRPI")
+  set(TARGET_RPI 1 CACHE BOOL "Target is RaspberryPI")
+  set(TARGET_COMMON_LINUX 1 CACHE BOOL "Common Linux platforms")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX platform")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xAML")
+  set(TARGET_AML 1 CACHE BOOL "Target is AMLogic")
+  set(TARGET_COMMON_LINUX 1 CACHE BOOL "Common Linux platforms")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX platform")
+elseif("x${TARGET_PLATFORM}" STREQUAL "xIOS")
+  set(TARGET_IOS 1 CACHE BOOL "Target is iOS")
+  set(TARGET_COMMON_DARWIN 1 CACHE BOOL "Common Darwin platforms")
+  set(TARGET_POSIX 1 CACHE BOOL "POSIX Platform")
+  message(WARNING "TARGET_IOS not yet supported")
+else()
+  message(FATAL_ERROR "Unknown platform target ${TARGET_PLATFORM}")
+endif()
+
+set(TARGET_PLATFORM ${TARGET_PLATFORM} CACHE STRING "Platform string")
+
+message(STATUS "Building for target ${TARGET_PLATFORM}")
+
+include(PlatformConfig${TARGET_PLATFORM})
+
+if(TARGET_POSIX)
+  include(PlatformConfigPOSIX)
+endif(TARGET_POSIX)
+
+############ global definitions set for all platforms
+
+if(TARGET_OSX)
+  set(BUILD_TAG "macosx-${OSX_ARCH}")
+elseif(TARGET_WIN32)
+  set(BUILD_TAG "windows-x86")
+elseif(TARGET_FREEBSD)
+  set(BUILD_TAG "freebsd-${ARCH}")
+elseif(TARGET_COMMON_LINUX)
+  if(DEFINED ENV{ARCH} AND DEFINED ENV{PROJECT})
+    set(BUILD_TAG "$ENV{PROJECT}-$ENV{ARCH}")
+  else()
+    set(BUILD_TAG "linux-generic")
+  endif()
+endif(TARGET_OSX)
+
+set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS $<$<CONFIG:Debug>:_DEBUG>)
+add_definitions(-D__PLEX__ -D__PLEX__XBMC__ -DPLEX_BUILD_TAG="${BUILD_TAG}" -DPLEX_TARGET_NAME="${EXECUTABLE_NAME}" -DENABLE_DVDINPUTSTREAM_STACK)
+
+include(CheckFFmpegIncludes)
+include(CheckLibshairportConfig)
+include(CheckLibshairplayConfig)
+
+if(DEFINED SDL_FOUND)
+  set(HAVE_SDL 1)
+endif()
+
+if(ENABLE_PYTHON)
+  set(HAS_PYTHON 1)
+endif()
+
+set(USE_UPNP 1)
+
+if(ENABLE_DVD_DRIVE)
+  set(HAS_DVD_DRIVE 1)
+endif(ENABLE_DVD_DRIVE)
+
+configure_file(${root}/xbmc/DllPaths_generated.h.in ${CMAKE_BINARY_DIR}/xbmc/DllPaths_generated.h)
+
+if(NOT TARGET_AML)
+find_package(SSE)
+if(NOT TARGET_WIN32)
+  if(SSSE3_FOUND)
+    set(CMAKE_SSE_CFLAGS "-mssse3")
+  elseif(SSE3_FOUND)
+    set(CMAKE_SSE_CFLAGS "-msse3")
+  elseif(SSE2_FOUND)
+    set(CMAKE_SSE_CFLAGS "-msse2")
+  endif(SSSE3_FOUND)
+else(NOT TARGET_WIN32)
+  set(CMAKE_SSE_CFLAGS "/arch:SSE2")
+endif(NOT TARGET_WIN32)
+endif(NOT TARGET_AML)
+
+find_package(Breakpad)
+if(HAVE_BREAKPAD)
+  include_directories(${BREAKPAD_INC_DIR})
+  add_definitions(-DHAVE_BREAKPAD)
+endif(HAVE_BREAKPAD)
+
+# check some compiler Intrinsics
+find_package(Intrinsics)
+
+# this file is not needed on windows
+if(NOT WIN32)
+  configure_file(${plexdir}/config.h.in ${CMAKE_BINARY_DIR}/xbmc/config.h)
+  set_source_files_properties(xbmc/config.h PROPERTIES GENERATED TRUE)
+endif(NOT WIN32)
+
+message(STATUS "-- Configuration Summary:")
+message(STATUS "Enable DVD drive: " ${ENABLE_DVD_DRIVE})
+message(STATUS "Enable Python support: " ${ENABLE_PYTHON})
+message(STATUS "Enabling bundling: " ${CREATE_BUNDLE})
+message(STATUS "Compress textures: " ${COMPRESS_TEXTURES})
+message(STATUS "Enable AutoUpdate: " ${ENABLE_AUTOUPDATE})
+if(CMAKE_SSE_CFLAGS)
+  message(STATUS "SSE CFLAGS: ${CMAKE_SSE_CFLAGS}")
+else(CMAKE_SSE_CFLAGS)
+  message(STATUS "SSE CFLAGS: none")
+endif(CMAKE_SSE_CFLAGS)
+
+if(HAVE_BREAKPAD)
+  message(STATUS "Enable CrashReports: yes")
+else(HAVE_BREAKPAD)
+  message(STATUS "Enable CrashReports: no")
+endif(HAVE_BREAKPAD)

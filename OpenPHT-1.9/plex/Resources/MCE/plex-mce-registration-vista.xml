@@ -1,0 +1,29 @@
+<!-- Windows Media Center registration file for Plex on Windows Vista -->
+<application title="OpenPHT"
+             id="{58c81b86-8d46-4cf3-9623-b9825d6b4bb8}"
+             companyname="Team RasPlex"
+             description="The solution for your local and online media"
+             StartMenuStripTitle="OpenPHT"
+             StartMenuStripCategory="Custom Start Menu\OpenPHT">
+
+  <entrypoint id="{c28220a5-fa84-4499-b94b-b030d06a8ca1}"
+              run=".\OpenPHT.exe"
+              title="OpenPHT"
+              nowPlayingDirective="stop"
+              description="The solution for your local and online media"
+              imageUrl=".\plex-mce-icon-square.png"
+              inactiveImageURL=".\plex-mce-icon-square.png">
+    <category category="More Programs" />
+  </entrypoint>
+
+  <entrypoint id="{fe5d8b47-9be3-42d9-abde-4c60d8b0598d}"
+              run=".\OpenPHT.exe"
+              title="OpenPHT"
+              nowPlayingDirective="stop"
+              description="The solution for your local and online media"
+              imageUrl=".\plex-mce-icon-square.png"
+              inactiveImageURL=".\plex-mce-icon-square.png">
+    <category category="Custom Start Menu\OpenPHT" order="1" />
+  </entrypoint>
+
+</application>

@@ -1,202 +1,219 @@
 #!/bin/bash
 
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018 Team LibreELEC (https://libreelec.tv)
+# Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
 
-. config/options $1
+. config/options "${1}"
 
-if [ -z "$1" ]; then
-  echo "usage: $0 package_name"
-  exit 1
+if [ -z "${1}" ]; then
+  die "usage: ${0} package_name [parent_pkg]"
 fi
 
-if [ ! -f $PKG_DIR/package.mk ]; then
-  printf "${boldred}$1: no package.mk file found${endcolor}\n"
-  exit 1
+if [ -z "${PKG_NAME}" ]; then
+  die "$(print_color CLR_ERROR "${1}: no package.mk file found")"
+fi
+PARENT_PKG="${2:-${PKG_NAME}}"
+
+pkg_lock "${PKG_NAME}" "unpack" "${PARENT_PKG}"
+
+${SCRIPTS}/get "${PKG_NAME}"
+
+if [ -n "${PKG_DEPENDS_UNPACK}" ]; then
+  for p in ${PKG_DEPENDS_UNPACK}; do
+    ${SCRIPTS}/unpack "${p}" "${PARENT_PKG}"
+  done
 fi
 
-$SCRIPTS/get $1
+STAMP="${PKG_BUILD}/.libreelec-unpack"
 
-STAMP=$PKG_BUILD/.libreelec-unpack
-
-mkdir -p $BUILD
-
-STAMP_DEPENDS="$PKG_DIR $PKG_NEED_UNPACK $PROJECT_DIR/$PROJECT/patches/$PKG_NAME"
-[ -n "$DEVICE" ] && STAMP_DEPENDS="$STAMP_DEPENDS $PROJECT_DIR/$PROJECT/devices/$DEVICE/patches/$PKG_NAME"
+mkdir -p ${BUILD}
 
 # Perform a wildcard match on the package to ensure old versions are cleaned too
-PKG_DEEPMD5=
-for i in $BUILD/$1-*; do
-  if [ -d $i -a -f "$i/.libreelec-unpack" ] ; then
-    . "$i/.libreelec-unpack"
-    if [ "$STAMP_PKG_NAME" = "$1" ]; then
-      [ -z "${PKG_DEEPMD5}" ] && PKG_DEEPMD5=$(find $STAMP_DEPENDS -exec md5sum {} \; 2>/dev/null | sort | md5sum | cut -d" " -f1)
-      if [ ! "$PKG_DEEPMD5" = "$STAMP_PKG_DEEPMD5" ] ; then
-        $SCRIPTS/clean $1
+PKG_DEEPHASH=
+for i in ${BUILD}/${PKG_NAME}-*; do
+  if [ -d ${i} -a -f "${i}/.libreelec-unpack" ] ; then
+    . "${i}/.libreelec-unpack"
+    if [ "${STAMP_PKG_NAME}" = "${PKG_NAME}" ]; then
+      [ -z "${PKG_DEEPHASH}" ] && PKG_DEEPHASH=$(calculate_stamp)
+      if [ ! "${PKG_DEEPHASH}" = "${STAMP_PKG_DEEPHASH}" ] ; then
+        ${SCRIPTS}/clean "${PKG_NAME}"
+        [ "${PKG_NAME}" = "linux" -a "${KERNEL_EXTRA_DEPENDS_TARGET}" = "device-trees-amlogic" ] && ${SCRIPTS}/clean "device-trees-amlogic"
       fi
     fi
   fi
 done
 
-if [ -d "$PKG_BUILD" -a ! -f "$STAMP" ]; then
+if [ -d "${PKG_BUILD}" -a ! -f "${STAMP}" ]; then
   # stale pkg build dir
-  $SCRIPTS/clean $1
+  ${SCRIPTS}/clean "${PKG_NAME}"
 fi
 
-[ -f "$STAMP" ] && exit 0
+if [ -f "${STAMP}" ]; then
+  pkg_lock_status "UNLOCK" "${PKG_NAME}" "unpack" "already unpacked"
+  exit 0
+fi
 
-if [ -d "$SOURCES/$1" -o -d "$PKG_DIR/sources" ]; then
-  printf "%${BUILD_INDENT}c ${boldcyan}UNPACK${endcolor}   $1\n" ' '>&$SILENT_OUT
-  export BUILD_INDENT=$((${BUILD_INDENT:-1}+$BUILD_INDENT_SIZE))
+pkg_lock_status "ACTIVE" "${PKG_NAME}" "unpack"
 
-  # unset functions
-  unset -f pre_unpack
-  unset -f unpack
-  unset -f post_unpack
-  unset -f pre_patch
-  unset -f post_patch
+if [ -d "${SOURCES}/${PKG_NAME}" -o -d "${PKG_DIR}/sources" ] || pkg_call_exists unpack; then
+  build_msg "CLR_UNPACK" "UNPACK" "${PKG_NAME}" "indent"
 
-  . $PKG_DIR/package.mk
+  # unpack into a unique location as unpacking into a single ${BUILD} directory is not thread-safe
+  PKG_UNPACK_DIR="${BUILD}/.unpack/${PKG_NAME}"
+  rm -rf "${PKG_UNPACK_DIR}"
+  mkdir -p "${PKG_UNPACK_DIR}"
 
-  if [ "$(type -t pre_unpack)" = "function" ]; then
-    pre_unpack
-  fi
+  # Save PKG_BUILD and point at our private unpack directory so that any
+  # modifications to the content of ${PKG_BUILD} will be "safe".
+  PKG_BUILD_ORIG="${PKG_BUILD}"
+  PKG_BUILD="${PKG_UNPACK_DIR}/${PKG_NAME}-${PKG_VERSION}"
 
-  if [ "$(type -t unpack)" = "function" ]; then
-    unpack
+  pkg_call_exists pre_unpack && pkg_call pre_unpack
+
+  if pkg_call_exists unpack; then
+    pkg_call unpack
   else
-    if [ -n "$PKG_URL" ]; then
-      $SCRIPTS/extract $1 $BUILD
+    if [ -n "${PKG_URL}" ]; then
+      ${SCRIPTS}/extract "${PKG_NAME}" "${PKG_UNPACK_DIR}"
     fi
   fi
 
-  if [ ! -d $BUILD/$PKG_NAME-$PKG_VERSION ]; then
-    if [ -n "$PKG_SOURCE_DIR" ]; then
-      mv $BUILD/$PKG_SOURCE_DIR $BUILD/$PKG_NAME-$PKG_VERSION
-    elif [ -d $BUILD/$PKG_NAME-$PKG_VERSION* ]; then
-      mv $BUILD/$PKG_NAME-$PKG_VERSION* $BUILD/$PKG_NAME-$PKG_VERSION
+  if [ -z "${PKG_SOURCE_DIR}" -a -d "${PKG_UNPACK_DIR}/${PKG_NAME}-${PKG_VERSION}"* ]; then
+    mv "${PKG_UNPACK_DIR}/${PKG_NAME}-${PKG_VERSION}"* "${PKG_UNPACK_DIR}/.intermediate"
+  fi
+
+  if [ ! -d "${PKG_UNPACK_DIR}/.intermediate" ]; then
+    if [ -n "${PKG_SOURCE_DIR}" ]; then
+      if [ -d "${PKG_UNPACK_DIR}"/${PKG_SOURCE_DIR} ]; then
+        mv "${PKG_UNPACK_DIR}"/${PKG_SOURCE_DIR} "${PKG_UNPACK_DIR}/.intermediate"
+      else
+        # fallback
+        mv "${BUILD}"/${PKG_SOURCE_DIR} "${PKG_UNPACK_DIR}/.intermediate"
+      fi
     fi
   fi
 
-  if [ -d "$PKG_DIR/sources" ]; then
-    [ ! -d "$BUILD/${PKG_NAME}-${PKG_VERSION}" ] && mkdir -p $BUILD/${PKG_NAME}-${PKG_VERSION}
-    cp -PRf $PKG_DIR/sources/* $BUILD/${PKG_NAME}-${PKG_VERSION}
+  [ ! -d "${PKG_UNPACK_DIR}/.intermediate" ] && mkdir -p "${PKG_UNPACK_DIR}/.intermediate"
+
+  if [ -d "${PKG_DIR}/sources" ]; then
+    cp -PRf "${PKG_DIR}/sources/"* "${PKG_UNPACK_DIR}/.intermediate"
   fi
 
-  if [ -z "$PKG_URL" ]; then
-    mkdir -p "${BUILD}/${PKG_NAME}-${PKG_VERSION}"
-  fi
+  # Add a tag to the unpacked folder before transferring into the shared build folder
+  echo "INFO_PKG_NAME=\"${PKG_NAME}\"" > "${PKG_UNPACK_DIR}/.intermediate/.libreelec-package"
 
-  if [ "$(type -t post_unpack)" = "function" ]; then
-    post_unpack
-  fi
+  # Restore original PKG_BUILD, and transfer the unpacked folder
+  PKG_BUILD="${PKG_BUILD_ORIG}"
+  rm -fr "${PKG_BUILD}"
+  mv "${PKG_UNPACK_DIR}/.intermediate" "${PKG_BUILD}"
 
-  if [ "$(type -t pre_patch)" = "function" ]; then
-    pre_patch
-  fi
+  # cleanup
+  rm -rf "${PKG_UNPACK_DIR}"
 
-  if [ "$TARGET_ARCH" = "x86_64" ]; then
-    PATCH_ARCH="x86"
-  else
-    PATCH_ARCH="$TARGET_ARCH"
-  fi
+  pkg_call_exists post_unpack && pkg_call post_unpack
 
-  PATCH_DIRS_PKG=""
-  PATCH_DIRS_PRJ=""
-  if [ -n "$PKG_PATCH_DIRS" ]; then
-    for patch_dir in $PKG_PATCH_DIRS; do
-      [ -d $PKG_DIR/patches/$patch_dir ] && PATCH_DIRS_PKG="$PATCH_DIRS_PKG $PKG_DIR/patches/$patch_dir/*.patch"
-      [ -d $PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$patch_dir ] && PATCH_DIRS_PRJ="$PATCH_DIRS_PRJ $PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$patch_dir/*.patch"
-    done
-  fi
+  if [ "${PKG_SKIP_PATCHES}" != "yes" ]; then
+    pkg_call_exists pre_patch && pkg_call pre_patch
 
-  for i in $PKG_DIR/patches/$PKG_NAME-*.patch \
-           $PKG_DIR/patches/$PATCH_ARCH/$PKG_NAME-*.patch \
-           $PATCH_DIRS_PKG \
-           $PKG_DIR/patches/$PKG_VERSION/*.patch \
-           $PKG_DIR/patches/$PKG_VERSION/$PATCH_ARCH/*.patch \
-           $PROJECT_DIR/$PROJECT/patches/$PKG_NAME/*.patch \
-           $PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$PATCH_ARCH/*.patch \
-           $PATCH_DIRS_PRJ \
-           $PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$PKG_VERSION/*.patch \
-           $PROJECT_DIR/$PROJECT/devices/$DEVICE/patches/$PKG_NAME/*.patch; do
-
-    thisdir="$(dirname "$i")"
-
-    if [ "$thisdir" = "$PKG_DIR/patches" ]; then
-      PATCH_DESC="(common)"
-    elif [ "$thisdir" = "$PKG_DIR/patches/$PATCH_ARCH" ]; then
-      PATCH_DESC="(common - $PATCH_ARCH)"
-    elif [ "$thisdir" = "$PKG_DIR/patches/$PKG_VERSION" ]; then
-      PATCH_DESC="(common - $PKG_VERSION)"
-    elif [ "$thisdir" = "$PKG_DIR/patches/$PKG_VERSION/$PATCH_ARCH" ]; then
-      PATCH_DESC="($PKG_VERSION - $PATCH_ARCH)"
-    elif [ "$thisdir" = "$PROJECT_DIR/$PROJECT/patches/$PKG_NAME" ]; then
-      PATCH_DESC="(project)"
-    elif [ "$thisdir" = "$PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$PATCH_ARCH" ]; then
-      PATCH_DESC="(project - $PATCH_ARCH)"
-    elif [ "$thisdir" = "$PROJECT_DIR/$PROJECT/patches/$PKG_NAME/$PKG_VERSION" ]; then
-      PATCH_DESC="(project - $PKG_VERSION)"
-    elif [ "$thisdir" = "$PROJECT_DIR/$PROJECT/devices/$DEVICE/patches/$PKG_NAME" ]; then
-      PATCH_DESC="(device)"
+    if [ "${TARGET_ARCH}" = "x86_64" ]; then
+      PATCH_ARCH="x86"
     else
-      if [[ "$thisdir" =~ ^$PKG_DIR/.* ]]; then
-        PATCH_DESC="(common - $(basename "$thisdir"))"
-      elif [[ "$thisdir" =~ ^$PROJECT_DIR/.* ]]; then
-        PATCH_DESC="(project - $(basename "$thisdir"))"
-      else
-        PATCH_DESC="(unknown - $(basename "$thisdir"))"
-      fi
+      PATCH_ARCH="${TARGET_PATCH_ARCH:-${TARGET_ARCH}}"
     fi
 
-    if [ -f "$i" ]; then
-      printf "%${BUILD_INDENT}c ${boldgreen}APPLY PATCH${endcolor} ${boldwhite}${PATCH_DESC}${endcolor}   ${i#$ROOT/}\n" ' '>&$SILENT_OUT
-      if [ -n "$(grep -E '^GIT binary patch$' $i)" ]; then
-        cat $i | git apply --directory=`echo "$PKG_BUILD" | cut -f1 -d\ ` -p1 --verbose --whitespace=nowarn --unsafe-paths >&$VERBOSE_OUT
-      else
-        cat $i | patch -d `echo "$PKG_BUILD" | cut -f1 -d\ ` -p1 >&$VERBOSE_OUT
-      fi
+    PATCH_DIRS_PKG=""
+    PATCH_DIRS_PRJ=""
+    if [ -n "${PKG_PATCH_DIRS}" ]; then
+      for patch_dir in ${PKG_PATCH_DIRS}; do
+        if [[ ${patch_dir} =~ ^/ ]]; then
+          [ -f ${patch_dir} ] && PATCH_DIRS_PKG+=" ${patch_dir}"
+          [ -d ${patch_dir} ] && PATCH_DIRS_PKG+=" ${patch_dir}/*.patch"
+        else
+          [ -d ${PKG_DIR}/patches/${patch_dir} ] && PATCH_DIRS_PKG+=" ${PKG_DIR}/patches/${patch_dir}/*.patch"
+          [ -d ${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${patch_dir} ] && PATCH_DIRS_PRJ+=" ${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${patch_dir}/*.patch"
+          [ -d ${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/patches/${PKG_NAME}/${patch_dir} ] && PATCH_DIRS_PRJ+=" ${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/patches/${PKG_NAME}/${patch_dir}/*.patch"
+        fi
+      done
     fi
-  done
 
-  if [ "$(type -t post_patch)" = "function" ]; then
-    post_patch
+    for i in ${PKG_DIR}/patches/*.patch \
+             ${PKG_DIR}/patches/${PATCH_ARCH}/*.patch \
+             ${PATCH_DIRS_PKG} \
+             ${PKG_DIR}/patches/${PKG_VERSION}/*.patch \
+             ${PKG_DIR}/patches/${PKG_VERSION}/${PATCH_ARCH}/*.patch \
+             ${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/*.patch \
+             ${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${PATCH_ARCH}/*.patch \
+             ${PATCH_DIRS_PRJ} \
+             ${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${PKG_VERSION}/*.patch \
+             ${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/patches/${PKG_NAME}/*.patch; do
+
+      thisdir="$(dirname "${i}")"
+
+      if [ "${thisdir}" = "${PKG_DIR}/patches" ]; then
+        PATCH_DESC="(common)"
+      elif [ "${thisdir}" = "${PKG_DIR}/patches/${PATCH_ARCH}" ]; then
+        PATCH_DESC="(common - ${PATCH_ARCH})"
+      elif [ "${thisdir}" = "${PKG_DIR}/patches/${PKG_VERSION}" ]; then
+        PATCH_DESC="(common - ${PKG_VERSION})"
+      elif [ "${thisdir}" = "${PKG_DIR}/patches/${PKG_VERSION}/${PATCH_ARCH}" ]; then
+        PATCH_DESC="(${PKG_VERSION} - ${PATCH_ARCH})"
+      elif [ "${thisdir}" = "${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}" ]; then
+        PATCH_DESC="(project)"
+      elif [ "${thisdir}" = "${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${PATCH_ARCH}" ]; then
+        PATCH_DESC="(project - ${PATCH_ARCH})"
+      elif [ "${thisdir}" = "${PROJECT_DIR}/${PROJECT}/patches/${PKG_NAME}/${PKG_VERSION}" ]; then
+        PATCH_DESC="(project - ${PKG_VERSION})"
+      elif [ "${thisdir}" = "${PROJECT_DIR}/${PROJECT}/devices/${DEVICE}/patches/${PKG_NAME}" ]; then
+        PATCH_DESC="(device)"
+      else
+        if [[ "${thisdir}" =~ ^${PKG_DIR}/.* ]]; then
+          PATCH_DESC="(common - $(basename "${thisdir}"))"
+        elif [[ "${thisdir}" =~ ^${PROJECT_DIR}/.*/devices/.* ]]; then
+          PATCH_DESC="(device - $(basename "${thisdir}"))"
+        elif [[ "${thisdir}" =~ ^${PROJECT_DIR}/.* ]]; then
+          PATCH_DESC="(project - $(basename "${thisdir}"))"
+        else
+          PATCH_DESC="(absolute - ${i})"
+        fi
+      fi
+
+      if [ -f "${i}" ]; then
+        build_msg "CLR_APPLY_PATCH" "APPLY PATCH $(print_color "CLR_PATCH_DESC" "${PATCH_DESC}")" "${i#${ROOT}/}"
+        if grep -qE '^GIT binary patch$|^rename from|^rename to' ${i}; then
+          cat ${i} | git apply --directory=$(echo "${PKG_BUILD}" | cut -f1 -d\ ) -p1 --verbose --whitespace=nowarn --unsafe-paths >&${VERBOSE_OUT}
+        else
+          cat ${i} | patch -d $(echo "${PKG_BUILD}" | cut -f1 -d\ ) -p1 >&${VERBOSE_OUT}
+        fi
+      fi
+    done
+
+    pkg_call_exists post_patch && pkg_call post_patch
   fi
 
-  if [ ! "$PKG_NAME" == "configtools" ] ; then
-    for config in `find $PKG_BUILD -name config.guess | sed 's/config.guess//'`; do
-      printf "%${BUILD_INDENT}c ${boldyellow}FIXCONFIG${endcolor}   $config\n" ' '
+  if [ ! "${PKG_NAME}" = "configtools" ] ; then
+    for config in $(find "${PKG_BUILD}" -name config.guess | sed 's/config.guess//'); do
+      build_msg "CLR_FIXCONFIG" "FIXCONFIG" "${config}"
 
-      [ -f "$config/config.guess" -a -f $TOOLCHAIN/configtools/config.guess ] && \
-        cp -f $TOOLCHAIN/configtools/config.guess $config
-      [ -f "$config/config.sub" -a -f $TOOLCHAIN/configtools/config.sub ] && \
-        cp -f $TOOLCHAIN/configtools/config.sub $config
+      [ -f "${config}/config.guess" -a -f ${TOOLCHAIN}/configtools/config.guess ] && \
+        cp -f ${TOOLCHAIN}/configtools/config.guess ${config}
+      [ -f "${config}/config.sub" -a -f ${TOOLCHAIN}/configtools/config.sub ] && \
+        cp -f ${TOOLCHAIN}/configtools/config.sub ${config}
     done
   fi
 fi
 
-if [ "$PKG_SECTION" != "virtual" ]; then
-  mkdir -p $PKG_BUILD
+if [ "${PKG_SECTION}" != "virtual" ]; then
+  mkdir -p "${PKG_BUILD}"
+  echo "INFO_PKG_NAME=\"${PKG_NAME}\"" > "${PKG_BUILD}/.libreelec-package"
 
-  rm -f $STAMPS/$1/build_*
+  rm -f ${STAMPS}/${PKG_NAME}/build_*
 
-  PKG_DEEPMD5=$(find $STAMP_DEPENDS -exec md5sum {} \; 2>/dev/null | sort | md5sum | cut -d" " -f1)
-  for i in PKG_NAME PKG_DEEPMD5; do
-    echo "STAMP_$i=\"${!i}\"" >> $STAMP
+  PKG_DEEPHASH=$(calculate_stamp)
+  for i in PKG_NAME PKG_DEEPHASH; do
+    echo "STAMP_${i}=\"${!i}\"" >> ${STAMP}
   done
 fi
+
+pkg_lock_status "UNLOCK" "${PKG_NAME}" "unpack" "unpacked"

@@ -1,96 +1,113 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
-#
-#  This Program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2, or (at your option)
-#  any later version.
-#
-#  This Program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.tv; see the file COPYING.  If not, write to
-#  the Free Software Foundation, 51 Franklin Street, Suite 500, Boston, MA 02110, USA.
-#  http://www.gnu.org/copyleft/gpl.html
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mpd"
-PKG_VERSION="0.20.9"
-PKG_REV="103"
+PKG_VERSION="0.21.4"
+PKG_SHA256="247112eabf1b818a4052db7f0f5917ab00831ebc60a1ec3bf1154da4dc16a5c7"
+PKG_REV="107"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.musicpd.org"
-PKG_URL="http://www.musicpd.org/download/${PKG_NAME}/${PKG_VERSION%.*}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
-PKG_DEPENDS_TARGET="toolchain boost glib ffmpeg libmad libogg flac faad2 curl alsa-lib yajl libid3tag lame"
+PKG_URL="http://www.musicpd.org/download/mpd/${PKG_VERSION%.*}/mpd-${PKG_VERSION}.tar.xz"
+PKG_DEPENDS_TARGET="toolchain alsa-lib avahi boost curl faad2 ffmpeg flac glib lame libcdio libiconv libid3tag \
+                    libmad libmpdclient libsamplerate libvorbis libnfs libogg mpd-mpc opus pulseaudio samba yajl libgcrypt"
 PKG_SECTION="service.multimedia"
 PKG_SHORTDESC="Music Player Daemon (MPD): a free and open Music Player Server"
 PKG_LONGDESC="Music Player Daemon ($PKG_VERSION) is a flexible and powerful server-side application for playing music"
-PKG_AUTORECONF="no"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Music Player Daemon (MPD)"
 PKG_ADDON_TYPE="xbmc.service"
 
+PKG_MESON_OPTS_TARGET=" \
+  -Dadplug=disabled \
+  -Dalsa=enabled \
+  -Dao=disabled \
+  -Daudiofile=disabled \
+  -Dbzip2=enabled \
+  -Dcdio_paranoia=disabled \
+  -Dchromaprint=disabled \
+  -Dcue=true \
+  -Dcurl=enabled \
+  -Ddatabase=true \
+  -Ddocumentation=false \
+  -Ddsd=true \
+  -Dexpat=enabled \
+  -Dfaad=enabled \
+  -Dffmpeg=enabled \
+  -Dfifo=false \
+  -Dflac=enabled \
+  -Dfluidsynth=disabled \
+  -Dgme=disabled \
+  -Dhttpd=true \
+  -Diconv=disabled \
+  -Dicu=disabled \
+  -Did3tag=enabled \
+  -Dipv6=enabled \
+  -Diso9660=enabled \
+  -Djack=disabled \
+  -Dlame=enabled \
+  -Dlibmpdclient=enabled \
+  -Dlibsamplerate=enabled \
+  -Dlocal_socket=false \
+  -Dmad=enabled \
+  -Dmikmod=disabled \
+  -Dmms=disabled \
+  -Dmodplug=disabled \
+  -Dmpcdec=disabled \
+  -Dmpg123=disabled \
+  -Dneighbor=false \
+  -Dnfs=enabled \
+  -Dopenal=disabled \
+  -Dopus=enabled \
+  -Doss=disabled \
+  -Dpipe=true \
+  -Dpulse=enabled \
+  -Dqobuz=enabled \
+  -Drecorder=false \
+  -Dshine=disabled \
+  -Dshout=disabled \
+  -Dsidplay=disabled \
+  -Dsmbclient=enabled \
+  -Dsndfile=enabled \
+  -Dsndio=disabled \
+  -Dsolaris_output=disabled \
+  -Dsoundcloud=enabled \
+  -Dsoxr=enabled \
+  -Dsqlite=enabled \
+  -Dsyslog=disabled \
+  -Dsystemd=disabled \
+  -Dtest=false \
+  -Dtidal=enabled \
+  -Dtwolame=disabled \
+  -Dupnp=disabled \
+  -Dvorbis=enabled \
+  -Dvorbisenc=enabled \
+  -Dwave_encoder=true \
+  -Dwavpack=disabled \
+  -Dwebdav=enabled \
+  -Dwildmidi=disabled \
+  -Dyajl=enabled \
+  -Dzeroconf=avahi \
+  -Dzlib=enabled \
+  -Dzzip=disabled"
+
 pre_configure_target() {
-  export LIBS="$LIBS -logg -lFLAC"
+  export LIBS="$LIBS -logg -lFLAC -ldl"
 }
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-alsa \
-             --disable-roar \
-             --disable-ao \
-             --disable-audiofile \
-             --disable-bzip2 \
-             --disable-cdio-paranoia \
-             --enable-curl \
-             --disable-smbclient \
-             --disable-soup \
-             --disable-debug \
-             --disable-documentation \
-             --disable-ffado \
-             --enable-ffmpeg \
-             --disable-fluidsynth \
-             --disable-gme \
-             --enable-httpd-output \
-             --enable-id3 \
-             --disable-jack \
-             --disable-lastfm \
-             --disable-despotify \
-             --disable-soundcloud \
-             --enable-lame-encoder \
-             --disable-libwrap \
-             --disable-lsr \
-             --enable-mad \
-             --disable-mikmod\
-             --disable-mms \
-             --disable-modplug \
-             --disable-mpg123 \
-             --disable-mvp \
-             --disable-openal \
-             --disable-oss \
-             --disable-pipe-output \
-             --disable-pulse \
-             --disable-recorder-output \
-             --disable-sidplay \
-             --disable-shout \
-             --disable-sndfile \
-             --disable-solaris-output \
-             --disable-sqlite \
-             --disable-systemd-daemon \
-             --disable-test \
-             --disable-twolame-encoder \
-             --disable-zzip \
-             --with-zeroconf=no \
-             --disable-icu"
-
 makeinstall_target() {
-  : # nop
+  :
 }
 
 addon() {
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin
-  cp -P $PKG_BUILD/.$TARGET_NAME/src/mpd $ADDON_BUILD/$PKG_ADDON_ID/bin
+  cp -P $PKG_BUILD/.$TARGET_NAME/mpd $ADDON_BUILD/$PKG_ADDON_ID/bin
+  # copy mpd cli binary
+  cp -P $(get_build_dir mpd-mpc)/.$TARGET_NAME/mpc $ADDON_BUILD/$PKG_ADDON_ID/bin
+
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/lib
+  cp -p $(get_build_dir libmpdclient)/.install_pkg/usr/lib/libmpdclient.so $ADDON_BUILD/$PKG_ADDON_ID/lib
+  cp -p $(get_build_dir libmpdclient)/.install_pkg/usr/lib/libmpdclient.so.2 $ADDON_BUILD/$PKG_ADDON_ID/lib
 }

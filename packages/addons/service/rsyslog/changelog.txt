@@ -1,3 +1,9 @@
+104
+- Update to 8.37.0
+
+103
+- Rebuild
+
 102
 - Add first run wizard configuration menu
 

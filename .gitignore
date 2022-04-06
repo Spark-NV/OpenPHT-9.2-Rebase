@@ -3,7 +3,6 @@
 /.fakeroot.*
 
 # automatically downloaded source files
-/sources/
 /.stamps/
 
 # prebuild target binarys to provide
@@ -13,6 +12,9 @@
 /tools/mkpkg/*
 !/tools/mkpkg/mkpkg_*
 
+# dtb files
+/tools/place-dtb-here/*
+
 # mkpkg temp
 mkpkg-temp
 
@@ -20,7 +22,6 @@ mkpkg-temp
 /.work/
 
 # symlinks...
-/sources
 /.work
 
 # ccache
@@ -31,3 +32,8 @@ mkpkg-temp
 
 # crap
 .DS_Store
+.pre_setup_done
+
+#sources
+/sources/
+sources.tar.gz

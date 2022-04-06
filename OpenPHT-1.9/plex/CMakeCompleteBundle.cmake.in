@@ -1,0 +1,67 @@
+set(PLEXDIR "@PLEXDIR@")
+set(ROOTDIR "@ROOTDIR@")
+set(DEPENDDIR "@DEPENDDIR@")
+set(RESOURCEPATH "@RESOURCEPATH@")
+set(BINPATH "@BINPATH@")
+set(LIBPATH "@LIBPATH@")
+set(ARCH @ARCH@)
+set(EXECUTABLE_NAME "@EXECUTABLE_NAME@")
+
+if(APPLE)
+  set(TARGET_COMMON_DARWIN 1)
+elseif(WIN32)
+  set(TARGET_WIN32 1)
+endif(APPLE)
+
+if(NOT TARGET_WIN32)
+  if(TARGET_COMMON_DARWIN)
+    set(TARGET "${EXECUTABLE_NAME}")
+  else(TARGET_COMMON_DARWIN)
+    set(TARGET "${BINPATH}/${EXECUTABLE_NAME}")
+  endif(TARGET_COMMON_DARWIN)
+
+  function(gp_item_default_embedded_path_override item default_embedded_path_var)
+    set(path "@executable_path")
+    if(TARGET_COMMON_DARWIN)
+      set(path "@executable_path/../Frameworks")
+    else(TARGET_COMMON_DARWIN)
+      set(path "@executable_path")
+    endif(TARGET_COMMON_DARWIN)
+    set(${default_embedded_path_var} ${path} PARENT_SCOPE)
+  endfunction(gp_item_default_embedded_path_override item default_embedded_path_var)
+
+  if(TARGET_COMMON_DARWIN)
+    include(${PLEXDIR}/BundleUtilitiesPlex.cmake)
+  else(TARGET_COMMON_DARWIN)
+    include(BundleUtilities)
+  endif(TARGET_COMMON_DARWIN)
+
+  set(BU_CHMOD_BUNDLE_ITEMS ON)
+  file(GLOB INST_LIBS ${CMAKE_INSTALL_PREFIX}/${LIBPATH}/*${CMAKE_SHARED_LIBRARY_SUFFIX})
+  
+  if(ENABLE_PYTHON)
+    file(GLOB PYTHON_DYLIB ";${CMAKE_INSTALL_PREFIX}/${LIBPATH}/lib/python2.7/lib-dynload/*.so")
+  endif(ENABLE_PYTHON)
+  
+  set(plugins "${CMAKE_INSTALL_PREFIX}/${RESOURCEPATH}/system/ImageLib-${ARCH}.so")
+  fixup_bundle("${CMAKE_INSTALL_PREFIX}/${TARGET}.app" "${plugins};${INST_LIBS}${PYTHON_DYLIB}" "${DEPENDDIR}/lib;${DEPENDDIR}/Frameworks;${DEPENDDIR}/lib64" COMPONENT RUNTIME)
+
+  if(TARGET_COMMON_DARWIN)
+    file(GLOB_RECURSE DYLIBS ${CMAKE_INSTALL_PREFIX}/*.dylib)
+    foreach(LIB ${DYLIBS})
+      message("Signing: ${LIB}")
+      execute_process(COMMAND codesign --force --sign "Developer ID Application" "${LIB}")
+    endforeach(LIB ${DYLIBS})
+
+    message("Signing binary: ${EXECUTABLE_NAME}.app/Contents/Resources/XBMC/tools/updater")
+    execute_process(COMMAND codesign --force --sign "Developer ID Application" "${CMAKE_INSTALL_PREFIX}/${EXECUTABLE_NAME}.app/Contents/Resources/XBMC/tools/updater")
+
+    message("Signing binary: ${EXECUTABLE_NAME}.app")
+    execute_process(COMMAND codesign --force --sign "Developer ID Application" -r ${PLEXDIR}/Resources/requirement.bin "${CMAKE_INSTALL_PREFIX}/${EXECUTABLE_NAME}.app")
+
+    message("Verifing signature")
+    execute_process(COMMAND codesign --verbose=4 --verify --deep "${CMAKE_INSTALL_PREFIX}/${EXECUTABLE_NAME}.app")
+    execute_process(COMMAND spctl --verbose=4 --assess --type execute "${CMAKE_INSTALL_PREFIX}/${EXECUTABLE_NAME}.app")
+  endif(TARGET_COMMON_DARWIN)
+endif(NOT TARGET_WIN32)
+

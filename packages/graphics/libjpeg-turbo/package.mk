@@ -1,53 +1,36 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libjpeg-turbo"
-PKG_VERSION="1.5.0"
-PKG_ARCH="any"
+PKG_VERSION="2.0.2"
+PKG_SHA256="b45255bd476c19c7c6b198c07c0487e8b8536373b82f2b38346b32b4fa7bb942"
 PKG_LICENSE="GPL"
-PKG_SITE="http://libjpeg-turbo.virtualgl.org/"
-PKG_URL="$SOURCEFORGE_SRC/libjpeg-turbo/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_SITE="https://libjpeg-turbo.org/"
+PKG_URL="https://github.com/libjpeg-turbo/libjpeg-turbo/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_HOST="toolchain"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="graphics"
-PKG_SHORTDESC="libjpeg-turbo: a high-speed version of libjpeg for x86 and x86-64 processors which uses SIMD instructions (MMX, SSE2, etc.) to accelerate baseline JPEG compression and decompression."
-PKG_LONGDESC="libjpeg-turbo is a high-speed version of libjpeg for x86 and x86-64 processors which uses SIMD instructions (MMX, SSE2, etc.) to accelerate baseline JPEG compression and decompression. libjpeg-turbo is generally 2-4x as fast as the unmodified version of libjpeg, all else being equal."
+PKG_LONGDESC="A high-speed version of libjpeg for x86 and x86-64 processors which uses SIMD."
+PKG_BUILD_FLAGS="+pic +pic:host"
 
-PKG_IS_ADDON="no"
-PKG_USE_CMAKE="no"
-PKG_AUTORECONF="no"
+PKG_CMAKE_OPTS_HOST="-DENABLE_STATIC=ON \
+                     -DENABLE_SHARED=OFF \
+                     -DWITH_JPEG8=ON \
+                     -DWITH_SIMD=OFF"
 
-PKG_CONFIGURE_OPTS_HOST="--enable-static \
-                         --disable-shared \
-                         --with-jpeg8 \
-                         --without-simd"
+PKG_CMAKE_OPTS_TARGET="-DENABLE_STATIC=ON \
+                       -DENABLE_SHARED=OFF \
+                       -DWITH_JPEG8=ON"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static --disable-shared --with-jpeg8"
+if target_has_feature "(neon|sse)"; then
+  PKG_CMAKE_OPTS_TARGET+=" -DWITH_SIMD=ON"
+else
+  PKG_CMAKE_OPTS_TARGET+=" -DWITH_SIMD=OFF"
+fi
 
-pre_configure_host() {
-  export CFLAGS="$CFLAGS -fPIC -DPIC"
-}
-
-pre_configure_target() {
-  export CFLAGS="$CFLAGS -fPIC -DPIC"
-}
-
-if [ "$SIMD_SUPPORT" = "no" ]; then
-  PKG_CONFIGURE_OPTS_TARGET="$PKG_CONFIGURE_OPTS_TARGET --without-simd"
+if [ $TARGET_ARCH = "x86_64" ]; then
+  PKG_DEPENDS_HOST+=" nasm:host"
+  PKG_DEPENDS_TARGET+=" nasm:host"
 fi
 
 post_makeinstall_target() {

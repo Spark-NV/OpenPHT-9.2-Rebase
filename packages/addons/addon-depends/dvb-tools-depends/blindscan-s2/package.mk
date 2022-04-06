@@ -1,32 +1,14 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2017-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="blindscan-s2"
-PKG_VERSION="94cb626"
-PKG_ARCH="any"
+PKG_VERSION="192eaf0b3eccfb9721b3d49b9010b5c1447776e0"
+PKG_SHA256="c9e5bd07672765b30dac758844e2eb87ab68d5dc6bc731e9df6394159acddcbb"
 PKG_LICENSE="GPL"
 PKG_SITE="https://bitbucket.org/majortom/blindscan-s2"
-PKG_URL="https://github.com/persianpros/blindscan-s2/archive/$PKG_VERSION.tar.gz"
+PKG_URL="https://github.com/PLi-metas/blindscan-s2/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="tools"
-PKG_SHORTDESC="blindscan-s2 is a program to blindscan digital satellite signals"
 PKG_LONGDESC="blindscan-s2 is a program to blindscan digital satellite signals"
-PKG_AUTORECONF="no"
 
 makeinstall_target() {
   :

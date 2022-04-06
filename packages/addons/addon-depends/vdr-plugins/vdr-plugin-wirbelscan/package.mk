@@ -1,41 +1,18 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="vdr-plugin-wirbelscan"
-PKG_VERSION="0.0.9"
-PKG_ARCH="any"
+PKG_VERSION="2018.11.04"
+PKG_SHA256="62c2848aefdb768c165310f70b3746665f57b96a95ebae96761febbb07e942e3"
 PKG_LICENSE="GPL"
 PKG_SITE="http://wirbel.htpc-forum.de/wirbelscan/index2.html"
-PKG_URL="http://wirbel.htpc-forum.de/wirbelscan/${PKG_NAME/-plugin/}-$PKG_VERSION.tgz"
-PKG_SOURCE_DIR="wirbelscan-${PKG_VERSION}"
+PKG_URL="http://wirbel.htpc-forum.de/wirbelscan/vdr-wirbelscan-$PKG_VERSION.tgz"
 PKG_DEPENDS_TARGET="toolchain vdr"
-PKG_SECTION="multimedia"
-PKG_SHORTDESC="TV"
-PKG_LONGDESC="TV"
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
-
-pre_configure_target() {
-  export CFLAGS="$CFLAGS -fPIC"
-  export CXXFLAGS="$CXXFLAGS -fPIC"
-  export LDFLAGS="$LDFLAGS -fPIC"
-}
+PKG_NEED_UNPACK="$(get_pkg_directory vdr)"
+PKG_LONGDESC="Performs a channel scans for DVB-T, DVB-C and DVB-S"
+PKG_TOOLCHAIN="manual"
+PKG_BUILD_FLAGS="+pic"
 
 make_target() {
   VDR_DIR=$(get_build_dir vdr)
@@ -43,8 +20,3 @@ make_target() {
     LIBDIR="." \
     LOCALEDIR="./locale"
 }
-
-makeinstall_target() {
-  : # installation not needed, done by create-addon script
-}
-

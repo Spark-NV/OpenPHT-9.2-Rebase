@@ -1,32 +1,15 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="ffmpegx"
-PKG_VERSION="3.4"
-PKG_ARCH="any"
+PKG_VERSION="4.2.4"
+PKG_SHA256="0d5da81feba073ee78e0f18e0966bcaf91464ae75e18e9a0135186249e3d2a0b"
 PKG_LICENSE="LGPLv2.1+"
 PKG_SITE="https://ffmpeg.org"
-PKG_URL="https://github.com/FFmpeg/FFmpeg/archive/n${PKG_VERSION}.tar.gz"
-PKG_SOURCE_DIR="FFmpeg-n${PKG_VERSION}"
-PKG_DEPENDS_TARGET="toolchain bzip2 fdk-aac libvorbis openssl opus x264 x265 zlib"
-PKG_SECTION="multimedia"
-PKG_LONGDESC="FFmpegx is an complete FFmpeg build to support encoding and decoding"
-PKG_AUTORECONF="no"
+PKG_URL="https://ffmpeg.org/releases/ffmpeg-$PKG_VERSION.tar.xz"
+PKG_DEPENDS_TARGET="toolchain aom bzip2 gnutls libvorbis opus x264 zlib"
+PKG_LONGDESC="FFmpegx is an complete FFmpeg build to support encoding and decoding."
+PKG_BUILD_FLAGS="-gold"
 
 # Dependencies
 get_graphicdrivers
@@ -35,26 +18,31 @@ if [ "$KODIPLAYER_DRIVER" == "bcm2835-driver" ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET bcm2835-driver"
 fi
 
-# ARMv6 is no longer supported by libvpx
-if [ "$PROJECT" != "RPi" -a "$PROJECT" != "Slice" ]; then
+if [ "$TARGET_ARCH" = "x86_64" ]; then
+  PKG_DEPENDS_TARGET+=" nasm:host intel-vaapi-driver x265"
+fi
+
+if [[ ! $TARGET_ARCH = arm ]] || target_has_feature neon; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libvpx"
+fi
+
+# X11 grab for screen recording
+if [ "$DISPLAYSERVER" = "x11" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libxcb libX11"
 fi
 
 pre_configure_target() {
   cd $PKG_BUILD
   rm -rf .$TARGET_NAME
 
-# ffmpeg builds better with these options
-  strip_gold
-  strip_lto
+  # pass gnutls to build
+  PKG_CONFIG_PATH="$(get_build_dir gnutls)/.INSTALL_PKG/usr/lib/pkgconfig"
+  CFLAGS="$CFLAGS -I$(get_build_dir gnutls)/.INSTALL_PKG/usr/include"
+  LDFLAGS="$LDFLAGS -L$(get_build_dir gnutls)/.INSTALL_PKG/usr/lib"
 
   if [ "$KODIPLAYER_DRIVER" == "bcm2835-driver" ]; then
-    CFLAGS="-DRPI=1 -I$SYSROOT_PREFIX/usr/include/IL -I$SYSROOT_PREFIX/usr/include/interface/vcos/pthreads -I$SYSROOT_PREFIX/usr/include/interface/vmcs_host/linux $CFLAGS"
+    CFLAGS="$CFLAGS -DRPI=1 -I$SYSROOT_PREFIX/usr/include/IL"
     PKG_FFMPEG_LIBS="-lbcm_host -ldl -lmmal -lmmal_core -lmmal_util -lvchiq_arm -lvcos -lvcsm"
-  fi
-
-  if [ "$TARGET_ARCH" == "arm" ]; then
-    PKG_FFMPEG_ARM_AO="--enable-hardcoded-tables"
   fi
 
 # HW encoders
@@ -78,22 +66,24 @@ pre_configure_target() {
   if [[ "$TARGET_ARCH" = "x86_64" ]]; then
     PKG_FFMPEG_HW_ENCODERS_GENERIC="\
     `#Video encoders` \
-    --enable-encoder=h264_nvenc \
     --enable-encoder=h264_vaapi \
-    --enable-encoder=hevc_nvenc \
     --enable-encoder=hevc_vaapi \
     --enable-encoder=mjpeg_vaapi \
     --enable-encoder=mpeg2_vaapi \
     --enable-encoder=vp8_vaapi \
     --enable-encoder=vp9_vaapi \
+    --disable-encoder=h264_nvenc \
+    --disable-encoder=hevc_nvenc \
     \
     `#Video hwaccel` \
     --enable-hwaccel=h263_vaapi \
     --enable-hwaccel=h264_vaapi \
     --enable-hwaccel=hevc_vaapi \
+    --enable-hwaccel=mjpeg_vaapi \
     --enable-hwaccel=mpeg2_vaapi \
     --enable-hwaccel=mpeg4_vaapi \
     --enable-hwaccel=vc1_vaapi \
+    --enable-hwaccel=vp8_vaapi \
     --enable-hwaccel=vp9_vaapi \
     --enable-hwaccel=wmv3_vaapi"
   fi
@@ -108,12 +98,13 @@ pre_configure_target() {
     --enable-encoder=x264 \
     --enable-libx265 \
     --enable-encoder=x265 \
+    --enable-libaom \
+    --enable-encoder=libaom_av1 \
     \
     `#Audio encoders` \
+    --enable-encoder=aac \
     --enable-encoder=ac3 \
     --enable-encoder=eac3 \
-    --enable-libfdk-aac \
-    --enable-encoder=libfdk-aac \
     --enable-encoder=flac \
     --enable-libmp3lame \
     --enable-encoder=libmp3lame \
@@ -122,6 +113,15 @@ pre_configure_target() {
     --enable-libvorbis \
     --enable-encoder=libvorbis"
 
+# X11 grab for screen recording
+  if [ "$DISPLAYSERVER" = "x11" ]; then
+    PKG_FFMPEG_LIBS="$PKG_FFMPEG_LIBS -lX11"
+    PKG_FFMPEG_X11_GRAB="\
+    --enable-libxcb \
+    --enable-libxcb-shm \
+    --enable-libxcb-xfixes \
+    --enable-libxcb-shape"
+  fi
 }
 
 configure_target() {
@@ -131,7 +131,6 @@ configure_target() {
     --enable-ffmpeg \
     --disable-ffplay \
     --enable-ffprobe \
-    --disable-ffserver \
     \
     `#Static and Shared` \
     --enable-static \
@@ -139,7 +138,6 @@ configure_target() {
     \
     `#Licensing options` \
     --enable-gpl \
-    --enable-nonfree \
     \
     `#Documentation options` \
     --disable-doc \
@@ -150,6 +148,9 @@ configure_target() {
     \
     `#General options` \
     --enable-avresample \
+    --disable-lzma \
+    --disable-alsa \
+    $PKG_FFMPEG_X11_GRAB \
     \
     `#Toolchain options` \
     --arch="$TARGET_ARCH" \
@@ -172,19 +173,15 @@ configure_target() {
     --extra-cflags="$CFLAGS" \
     --extra-ldflags="$LDFLAGS" \
     --extra-libs="$PKG_FFMPEG_LIBS" \
-    --extra-version="x" \
     --enable-pic \
-    --enable-openssl \
+    --enable-gnutls \
+    --disable-openssl \
     \
     `#Advanced options` \
-    $PKG_FFMPEG_ARM_AO \
+    --disable-hardcoded-tables \
 
 }
 
 makeinstall_target() {
   make install DESTDIR="$INSTALL/../.INSTALL_PKG"
-}
-
-post_makeinstall_target() {
-  for ff in "$INSTALL/../.INSTALL_PKG/usr/local/bin/"*; do mv "$ff" "${ff}x"; done
 }

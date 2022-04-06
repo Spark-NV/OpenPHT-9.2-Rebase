@@ -1,33 +1,16 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="unrar"
-PKG_VERSION="5.5.5"
-PKG_ARCH="any"
+PKG_VERSION="5.6.8"
+PKG_SHA256="a4cc0ac14a354827751912d2af4a0a09e2c2129df5766576fa7e151791dd3dff"
 PKG_LICENSE="free"
 PKG_SITE="http://www.rarlab.com"
 PKG_URL="http://www.rarlab.com/rar/unrarsrc-$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="${PKG_NAME}"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="tools"
-PKG_SHORTDESC="unrar: Extract, test and view RAR archives"
-PKG_LONGDESC="Unrar is a package to handle files compressed in the RAR format. Due to strange licensing issues this package can only view, test and extract files in a given archive, but not pack files. But since we have far more advanced open-source compression utils it should be enough to extract the content when you get a RAR archive."
-PKG_AUTORECONF="no"
+PKG_LONGDESC="unrar extract, test and view RAR archives"
+PKG_TOOLCHAIN="manual"
+PKG_BUILD_FLAGS="+pic"
 
 make_target() {
   make CXX="$CXX" \
@@ -35,9 +18,17 @@ make_target() {
      RANLIB="$RANLIB" \
      AR="$AR" \
      STRIP="$STRIP" \
-     -f makefile
+     -f makefile unrar
+
+  make clean
+
+  make CXX="$CXX" \
+     CXXFLAGS="$TARGET_CXXFLAGS" \
+     RANLIB="$RANLIB" \
+     AR="$AR" \
+     -f makefile lib
 }
 
-makeinstall_target() {
-  : # nop
+post_make_target() {
+  rm -f libunrar.so
 }

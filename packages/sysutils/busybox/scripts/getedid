@@ -1,22 +1,7 @@
 #!/bin/sh
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
-#
+
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 #
 # exit 1 = unsupported GPU
 # exit 2 = dual boot system
@@ -36,7 +21,7 @@ help() {
   echo ""
   echo "If you don't want to use the created EDID file anymore use: getedid delete"
   echo ""
-  echo "If you hardware has changed and you want to have a custom EDID again, then you have to delete the old EDID first."
+  echo "If your hardware or kernel has changed and you want to have a custom EDID again, then you have to delete the old EDID first."
   echo "For this use: getedid delete "
   echo "And then use: getedid create"
 }
@@ -44,8 +29,8 @@ help() {
 
 # check for GPU and store string
 check_gpu() {
-  if lspci | grep -i vga | grep -i -q intel ; then
-    gpu="intel"
+  if lspci | grep -i vga | grep -i -q -E 'intel|amd' ; then
+    gpu="intel/amd"
   elif lspci | grep -i vga | grep -i -q nvidia; then
     gpu="nvidia"
   else
@@ -57,7 +42,7 @@ check_gpu() {
 
 # run this first if the user already has a custom EDID but want to create a new one (TV or AVR change)
 del_edid() {
-  if [ "$gpu" = "intel" ]; then
+  if [ "$gpu" = "intel/amd" ]; then
     check_file
     if [ -f "$file".old ];  then
       mount_rw
@@ -65,11 +50,10 @@ del_edid() {
       mv "$file".old "$file"
       rm -f /flash/edid.cpio
       mount_ro
-      rm -fr /storage/.config/firmware
       sys_reboot
     else
       echo "You don't have a backup file for $file. You did not use this script to create the custom EDID"
-      echo "Therefore we can't be sure the script is working prooerly. Exiting"
+      echo "Therefore we can't be sure the script is working properly. Exiting"
       exit 3
     fi
   else
@@ -82,8 +66,8 @@ del_edid() {
 
 # run main script depending on the GPU
 run() {
-  if [ "$gpu" = "intel" ]; then
-    intel 
+  if [ "$gpu" = "intel/amd" ]; then
+    intel_amd
   elif [ "$gpu" = "nvidia" ]; then
     nvidia
   fi
@@ -114,7 +98,7 @@ sys_reboot() {
 # check syslinux.cfg and/or extlinux.conf
 check_file() {
   # check boot system
-  if [ -d /sys/firmware/efi ]; then
+  if [ -d /sys/firmware/efi -a -f /flash/EFI/BOOT/syslinux.cfg ] ; then
     sys_boot="UEFI"
     sys_path="/flash/EFI/BOOT"
   else
@@ -122,7 +106,7 @@ check_file() {
     sys_path="/flash"
   fi
 
-  #check which file is available
+  # check which file is available
   if [ -f "$sys_path/syslinux.cfg" -a -f "$sys_path/extlinux.conf" ]; then
     echo "Your system contains both a /flash/syslinux.cfg and a /flash/extlinux.conf file"
     echo "Something is wrong on your system. Exiting"
@@ -141,15 +125,29 @@ check_file() {
 
 check_content() {
   # check if changes are already made to $file and exit if yes
-  if grep -q "initrd=/edid.cpio drm_kms_helper.edid_firmware=" $file ; then
-    echo "$file has been modified. Exiting."
+  if grep -q "initrd=/edid.cpio" $file ; then
+    echo "$file has been modified. Please run 'getedid delete' first if you want to modify it again. Exiting."
     exit 5
   fi
 }
 
 
-intel() {
-  #check which output is connnected:
+create_edid() {
+  # create edid 
+  mkdir -p /tmp/cpio/lib/firmware/edid
+  cat "/sys/class/drm/$card/edid" > /tmp/cpio/lib/firmware/edid/edid.bin
+  mkdir -p /storage/.config/firmware/edid
+  cp /tmp/cpio/lib/firmware/edid/edid.bin /storage/.config/firmware/edid
+
+
+  # create cpio archive
+  cd /tmp/cpio/
+  find . -print | cpio -ov -H newc > /storage/edid.cpio
+}
+
+
+intel_amd() {
+  # check which output is connnected:
   counter=0
   for i in /sys/class/drm/*; do
     if [ "$(cat "$i"/status 2>/dev/null)" = "connected" ]; then
@@ -164,34 +162,24 @@ intel() {
     fi
   done
 
-  #create edid
-  mkdir -p /storage/.config/firmware/edid
-  cat "/sys/class/drm/$card/edid" > /storage/.config/firmware/edid/edid.bin
+  # create the edid 
+  create_edid
 
-  #create cpio archive
-  cd /storage
-  mkdir -p cpio/lib/firmware/edid
-  cp /storage/.config/firmware/edid/edid.bin /storage/cpio/lib/firmware/edid/
-  cd cpio/
-  find . -print | cpio -ov -H newc > /storage/edid.cpio
-  cd /storage
-  rm -rf cpio
-
-  #check extlinux.conf and syslinux.cfg
+  # check extlinux.conf and syslinux.cfg
   check_file
   check_content
 
-  #remount /flash to rw
+  # remount /flash to rw
   mount_rw
   mv /storage/edid.cpio /flash
 
   # make a backup of $file
   cp "$file" "$file".old
+  
+  # add boot parameters to $file
+  sed -i "/ APPEND/s/$/ initrd=\/edid.cpio drm.edid_firmware=edid\/edid.bin video=$hdmi:D/" "$file"
 
-  #add things to $file
-  sed -i "/ APPEND/s/$/ initrd=\/edid.cpio drm_kms_helper.edid_firmware=$hdmi:edid\/edid.bin video=$hdmi:D/" "$file"
-
-  #reboot
+  # reboot
   sys_reboot
 }
 

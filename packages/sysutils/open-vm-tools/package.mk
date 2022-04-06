@@ -1,35 +1,18 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
-#      Copyright (C) 2011 Anthony Nash (nash.ant@gmail.com)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2011 Anthony Nash (nash.ant@gmail.com)
+# Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="open-vm-tools"
-PKG_VERSION="stable-10.1.0"
+PKG_VERSION="stable-10.3.10"
+PKG_SHA256="6e39e643edcd85bae04ba8db608bd500d14ff3771e6e89b171ffb31020fed945"
 PKG_ARCH="x86_64"
 PKG_LICENSE="GPL"
-PKG_SITE="http://open-vm-tools.sourceforge.net"
+PKG_SITE="https://github.com/vmware/open-vm-tools"
 PKG_URL="https://github.com/vmware/open-vm-tools/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain glib:host glib libdnet fuse"
-PKG_SECTION="virtualization"
-PKG_SHORTDESC="open-vm-tools: open source implementation of VMware Tools"
+PKG_DEPENDS_TARGET="toolchain fuse glib:host glib libdnet libtirpc"
 PKG_LONGDESC="open-vm-tools: open source implementation of VMware Tools"
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="yes"
+PKG_TOOLCHAIN="autotools"
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-docs \
                            --disable-tests \
@@ -41,7 +24,6 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-docs \
                            --without-x \
                            --without-xerces \
                            --without-icu \
-                           --without-procps \
                            --without-kernel-modules \
                            --with-udev-rules-dir=/usr/lib/udev/rules.d/ \
                            --with-sysroot=$SYSROOT_PREFIX"
@@ -54,7 +36,7 @@ post_unpack() {
 }
 
 pre_configure_target() {
-  export LIBS="-ldnet"
+  export LIBS="-ldnet -ltirpc"
 }
 
 post_makeinstall_target() {

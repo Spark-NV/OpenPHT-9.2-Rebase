@@ -1,43 +1,16 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
-
-# Notes:
-# - build curl with OpenSSL support instead GnuTLS support to 
-#   work around a long standing bug on Pi where https streams often hang on
-#   start. This hang is normally fatal and requires a reboot.
-#   see also http://trac.xbmc.org/ticket/14674 .
-#   Easiest way to reproduce is to install gdrive addon and play a video from
-#   there: http://forum.xbmc.org/showthread.php?tid=177557
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="curl"
-PKG_VERSION="7.58.0"
-PKG_ARCH="any"
+PKG_VERSION="7.71.1"
+PKG_SHA256="40f83eda27cdbeb25cd4da48cefb639af1b9395d6026d2da1825bf059239658c"
 PKG_LICENSE="MIT"
 PKG_SITE="http://curl.haxx.se"
-PKG_URL="http://curl.haxx.se/download/$PKG_NAME-$PKG_VERSION.tar.bz2"
-PKG_DEPENDS_TARGET="toolchain zlib openssl rtmpdump"
-PKG_SECTION="web"
-PKG_SHORTDESC="curl: Client and library for (HTTP, HTTPS, FTP, ...) transfers"
-PKG_LONGDESC="Curl is a client to get documents/files from or send documents to a server, using any of the supported protocols (HTTP, HTTPS, FTP, FTPS, GOPHER, DICT, TELNET, LDAP or FILE). The command is designed to work without user interaction or any kind of interactivity."
-
-PKG_IS_ADDON="no"
-PKG_USE_CMAKE="no"
-PKG_AUTORECONF="no"
+PKG_URL="http://curl.haxx.se/download/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_DEPENDS_TARGET="toolchain zlib openssl rtmpdump nghttp2"
+PKG_LONGDESC="Client and library for (HTTP, HTTPS, FTP, ...) transfers."
+PKG_TOOLCHAIN="configure"
 
 PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_rtmp_RTMP_Init=yes \
                            ac_cv_header_librtmp_rtmp_h=yes \
@@ -62,6 +35,7 @@ PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_rtmp_RTMP_Init=yes \
                            --disable-smb \
                            --disable-smtp \
                            --disable-gopher \
+                           --disable-mqtt \
                            --disable-manual \
                            --enable-libgcc \
                            --enable-ipv6 \
@@ -86,13 +60,15 @@ PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_rtmp_RTMP_Init=yes \
                            --with-ssl \
                            --without-polarssl \
                            --without-nss \
-                           --with-ca-bundle=/etc/ssl/cert.pem \
+                           --with-ca-bundle=/run/libreelec/cacert.pem \
                            --without-ca-path \
                            --without-libpsl \
                            --without-libmetalink \
                            --without-libssh2 \
                            --with-librtmp=$SYSROOT_PREFIX/usr \
-                           --without-libidn"
+                           --without-libidn \
+                           --without-libidn2 \
+                           --with-nghttp2"
 
 pre_configure_target() {
 # link against librt because of undefined reference to 'clock_gettime'

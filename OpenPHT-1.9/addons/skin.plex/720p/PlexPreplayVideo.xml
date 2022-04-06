@@ -1,0 +1,26 @@
+<window id="10090">
+	<defaultcontrol always="false">102</defaultcontrol>
+	<views>60,61,58</views>
+	<allowoverlay>no</allowoverlay>
+	<onload condition="Container.PlexContent(Clips)">Skin.SetString(SectionType,preplay)</onload>
+	<onload condition="!Window.Previous(fullscreenvideo)">Control.SetFocus(102)</onload>
+	<onunload>Skin.Reset(SectionType)</onunload>
+	<onunload condition="!Window.Next(fullscreenvideo)">Control.SetFocus(102)</onunload>
+	<controls>
+		<!-- bg's (Backgrounds.xml) -->
+		<include>BGGrainy</include>
+		<include>BGFanart</include>
+		<include>BGOverlay</include>
+		<!-- Preplay screens (ViewsPreplay.xml) -->
+		<include>PreplayMovie</include>
+		<include>PreplayEpisode</include>
+		<include>PreplayClip</include>
+		<!-- top-level ui (LeftSidemenu.xml & IncludesGlobals.xml & Debug.xml) -->
+		<include>LeftSideMenu</include>
+		<!--<include>TopBar</include>-->
+		<include>debugInfos</include>
+		<include>Grid</include>
+		<include>WindowFade</include>
+		<include>Non16x9Cache</include>
+	</controls>
+</window>

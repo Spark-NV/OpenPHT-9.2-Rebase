@@ -1,0 +1,1261 @@
+# XBMC Media Center language file
+# XBMC-core v12.0-RC1
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Main Translation Project (Frodo)\n"
+"Report-Msgid-Bugs-To: http://trac.xbmc.org/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: XBMC Translation Team\n"
+"Language-Team: English (http://www.transifex.com/projects/p/XBMC-Main-Frodo/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+### PLEX/HT ###
+
+msgctxt "#6"
+msgid "XBMC SVN"
+msgstr "Plex/HT Git"
+
+#empty strings from id 7 to 8
+
+msgctxt "#9"
+msgid "xbmc media center"
+msgstr "OpenPHT"
+
+msgctxt "#10"
+msgid "Plex"
+msgstr "Plex"
+
+#empty strings from id 11 to 262
+
+msgctxt "#263"
+msgid "Allow control of XBMC via HTTP"
+msgstr "Allow control of PHT via HTTP"
+
+msgctxt "#482"
+msgid "About XBMC"
+msgstr "About PHT"
+
+#empty strings from id 747 to 790
+
+msgctxt "#791"
+msgid "Allow programs on this system to control XBMC"
+msgstr "Allow programs on this system to control PHT"
+
+#empty strings from id 792 to 793
+
+msgctxt "#794"
+msgid "Allow programs on other systems to control XBMC"
+msgstr "Allow programs on other systems to control PHT"
+
+#empty strings from id 795 to 1001
+
+msgctxt "#1002"
+msgid "XBMC was unable to connect to the network location."
+msgstr "PHT was unable to connect to the network location"
+
+#empty strings from id 1003 to 1269
+
+msgctxt "#1270"
+msgid "Allow XBMC to receive AirPlay content"
+msgstr "Allow PHT to receive AirPlay content"
+
+msgctxt "#13134"
+msgid "H.264 Speed Boost"
+msgstr "H.264 Speed Boost"
+
+msgctxt "#13135"
+msgid "Disabled"
+msgstr "Disabled"
+
+msgctxt "#13136"
+msgid "Medium"
+msgstr "Medium"
+
+msgctxt "#13137"
+msgid "High"
+msgstr "High"
+
+msgctxt "#13138"
+msgid "Automatically Select Audio Stream"
+msgstr "Automatically Select Audio Stream"
+
+msgctxt "#13139"
+msgid "Automatically Select Subtitle Stream"
+msgstr "Automatically Select Subtitle Stream"
+
+#empty string with id 13140
+
+msgctxt "#13141"
+msgid "If you proceed, you might not be able to control XBMC"
+msgstr "If you proceed, you might not be able to control PHT"
+
+#empty string with id 13142
+
+msgctxt "#13143"
+msgid "Search remote libraries"
+msgstr "Search remote libraries"
+
+#empty strings from id 13144 to 13145
+
+msgctxt "#13146"
+msgid "XBMC, changing this setting might affect your ability"
+msgstr "PHT, changing this setting might affect your ability"
+
+#empty string with id 13147
+
+msgctxt "#13148"
+msgid "Allow Picking Alternate Library Media"
+msgstr "Allow Picking Alternate Library Media"
+
+msgctxt "#13149"
+msgid "Quality From Remote Media Servers"
+msgstr "Quality From Remote Media Servers"
+
+#empty strings from id 13150 to 13179
+
+msgctxt "#13180"
+msgid "Preferred Online Video Quality"
+msgstr "Preferred online video quality"
+
+msgctxt "#13181"
+msgid "Always ask"
+msgstr "Always ask"
+
+msgctxt "#13182"
+msgid "1080p"
+msgstr "1080p"
+
+msgctxt "#13183"
+msgid "720p"
+msgstr "720p"
+
+msgctxt "#13184"
+msgid "480p"
+msgstr "480p"
+
+msgctxt "#13185"
+msgid "SD"
+msgstr "SD"
+
+msgctxt "#13190"
+msgid "Auto"
+msgstr "Auto"
+
+#empty strings from id 13186 to 13308
+
+msgctxt "#13309"
+msgid "instead of just XBMC?"
+msgstr "instead of just PHT?"
+
+#empty strings from id 13310 to 13601
+
+msgctxt "#13602"
+msgid "Allow start of XBMC using the remote"
+msgstr "Allow start of PHT using the remote"
+
+#empty strings from id 13603 to 13621
+
+msgctxt "#13622"
+msgid "Please see Remote Buddy FAQ to uninstall."
+msgstr "Please see Remote Buddy FAQ to uninstall."
+
+msgctxt "#13623"
+msgid "Sofa Control is running."
+msgstr "Sofa Control is running."
+
+msgctxt "#13624"
+msgid "Please see Sofa Control documentation to uninstall."
+msgstr "Please see Sofa Control documentation to uninstall."
+
+#empty strings from id 13625 to 13629
+
+msgctxt "#13630"
+msgid "Media Server"
+msgstr "Media Server"
+
+msgctxt "#13631"
+msgid "Mode"
+msgstr "Mode"
+msgstr "Mode"
+
+msgctxt "#13632"
+msgid "- Always Running"
+msgstr "- Always Running"
+
+msgctxt "#13633"
+msgid "Disabled"
+msgstr "Disabled"
+
+msgctxt "#13634"
+msgid "Enabled"
+msgstr "Enabled"
+
+msgctxt "#13635"
+msgid "Enable Scrobbling"
+msgstr "Enable Scrobbling"
+
+#empty strings from id 13636 to 14028
+
+msgctxt "#14029"
+msgid "Cache Size"
+msgstr "Cache Size"
+
+#empty strings from id 14030 to 14035
+
+msgctxt "#14036"
+msgid "Servers"
+msgstr "Servers"
+
+msgctxt "#14037"
+msgid "Look and Feel"
+msgstr "Look and Feel"
+
+#empty string with id 14038
+
+msgctxt "#14039"
+msgid "Plex/HT requires a restart to change your"
+msgstr "PHT requires a restart to change your"
+
+#empty strings from id 14040 to 15149
+
+msgctxt "#15150"
+msgid "Use library artwork backgrounds"
+msgstr "Use library artwork backgrounds"
+
+#empty strings from id 15151 to 15204
+
+msgctxt "#15205"
+msgid "Please update Plex/HT"
+msgstr "Please update PHT"
+
+#empty strings from id 15206 to 16000
+
+msgctxt "#16001"
+msgid "Configure Audio Hardware..."
+msgstr "Configure audio hardware..."
+
+#empty strings from id 16002 to 17500
+
+msgctxt "#17501"
+msgid "Display Brightness"
+msgstr "Display brightness"
+
+#empty strings from id 17502 to 17700
+
+msgctxt "#17701"
+msgid "Low Battery"
+msgstr "Low battery"
+
+msgctxt "#17702"
+msgid "Connect to AC Power"
+msgstr "Connect to AC Power"
+
+#empty strings from id 17703 to 17999
+
+msgctxt "#18000"
+msgid "Model"
+msgstr "Model"
+
+msgctxt "#18001"
+msgid "Power source"
+msgstr "Power source"
+
+msgctxt "#18002"
+msgid "AC power"
+msgstr "AC power"
+
+msgctxt "#18003"
+msgid "AC power (charging)"
+msgstr "AC power (charging)"
+
+msgctxt "#18004"
+msgid "Battery power"
+msgstr "Battery power"
+
+msgctxt "#18005"
+msgid "Power level"
+msgstr "Power level"
+
+msgctxt "#18006"
+msgid "until full"
+msgstr "until full"
+
+msgctxt "#18007"
+msgid "remaining"
+msgstr "remaining"
+
+msgctxt "#18008"
+msgid "Calculating time"
+msgstr "Calculating time"
+
+msgctxt "#18009"
+msgid "Enable low battery warning"
+msgstr "Enable low battery warning"
+
+#empty strings from id 18010 to 18100
+
+msgctxt "#18101"
+msgid "Theme music volume"
+msgstr "Theme music volume"
+
+msgctxt "#18102"
+msgid "Enable TV theme music"
+msgstr "Enable TV theme music"
+
+msgctxt "#18103"
+msgid "- Automatically Download Theme Music"
+msgstr "- Automatically download theme music"
+
+msgctxt "#18104"
+msgid "Enable Background Music"
+msgstr "Enable background music"
+
+msgctxt "#18105"
+msgid "Advanced"
+msgstr "Advanced"
+
+msgctxt "#18106"
+msgid "Video"
+msgstr "Video"
+
+msgctxt "#18107"
+msgid "Music"
+msgstr "Music"
+
+msgctxt "#18108"
+msgid "Photos"
+msgstr "Photos"
+
+msgctxt "#18109"
+msgid "Video render method"
+msgstr "Video render method"
+
+msgctxt "#18110"
+msgid "Audio output channels"
+msgstr "Audio output channels"
+
+msgctxt "#18111"
+msgid "Advanced video"
+msgstr "Advanced video"
+
+msgctxt "#18112"
+msgid "Logging"
+msgstr "Logging"
+
+msgctxt "#18113"
+msgid "Theme music"
+msgstr "Theme music"
+
+msgctxt "#18114"
+msgid "Visualize dirty regions"
+msgstr "Visualize dirty regions"
+
+msgctxt "#18115"
+msgid "Dirty regions algorithm"
+msgstr "Dirty regions algorithm"
+
+msgctxt "#18116"
+msgid "Dirty regions no flip timeout (ms)"
+msgstr "Dirty regions no flip timeout (ms)"
+
+#empty strings from id 18117 to 18999
+
+
+#empty strings from id 19022 to 20008
+
+msgctxt "#20009"
+msgid "Use Plex/HT"
+msgstr "Use PHT"
+
+#empty strings from id 20010 to 20249
+
+msgctxt "#20250"
+msgid "Recent Music Count"
+msgstr "Recent music count"
+
+#empty strings from id 20251 to 20340
+
+msgctxt "#20341"
+msgid "this path from the Plex/HT library?"
+msgstr "this path from the PHT library?"
+
+#empty strings from id 20342 to 21880
+
+msgctxt "#21881"
+msgid "Allow control of XBMC via UPnP"
+msgstr "Allow control of PHT via UPnP"
+
+msgctxt "#22003"
+msgid "%2.3fs"
+msgstr "%d ms"
+
+msgctxt "#22004"
+msgid "Delayed by: %2.3fs"
+msgstr "Delayed by: %d ms"
+
+msgctxt "#22005"
+msgid "Ahead by: %2.3fs"
+msgstr "Ahead by: %d ms"
+
+msgctxt "#33075"
+msgid "Plex/HT revision of %s or greater to run."
+msgstr "PHT revision of %s or greater to run."
+
+msgctxt "#33076"
+msgid "Please update Plex/HT."
+msgstr "Please update PHT"
+
+#empty strings from id 33077 to 36006
+
+msgctxt "#36007"
+msgid "Power on the TV when starting Plex/HT"
+msgstr "Power on the TV when starting PHT"
+
+msgctxt "#36008"
+msgid "Power off devices when stopping Plex/HT"
+msgstr "Power off devices when stopping PHT"
+
+#empty strings from id 36009 to 36012
+
+msgctxt "#36013"
+msgid "Unsupported libcec interface version. %d is greater than the version Plex/HT supports (%d)"
+msgstr "Unsupported libcec interface version. %d is greater than the version PHT supports (%d)."
+
+#empty strings from id 36014 to 39999
+
+msgctxt "#40000"
+msgid "Software update"
+msgstr "Software update"
+
+msgctxt "#40001"
+msgid "Checking for available updates..."
+msgstr "Checking for available updates..."
+
+msgctxt "#40002"
+msgid "Update channel"
+msgstr "Update channel"
+
+msgctxt "#40003"
+msgid "Stable"
+msgstr "Stable"
+
+msgctxt "#40004"
+msgid "PlexPass"
+msgstr "PlexPass"
+
+msgctxt "#40005"
+msgid "Ninja"
+msgstr "Ninja"
+
+msgctxt "#40006"
+msgid "I am Special!"
+msgstr "I am Special!"
+
+msgctxt "#40007"
+msgid "Pre-release"
+msgstr "Pre-release"
+
+msgctxt "#40008"
+msgid "Beta"
+msgstr "Beta"
+
+msgctxt "#40016"
+msgid "Check for update now..."
+msgstr "Check for update now..."
+
+msgctxt "#40017"
+msgid "Automatically check for updates"
+msgstr "Automatically check for updates"
+
+msgctxt "#40018"
+msgid "Update and restart"
+msgstr "Update and restart"
+
+msgctxt "#40029"
+msgid "Current version"
+msgstr "Current version"
+
+msgctxt "#40028"
+msgid "Update Available!"
+msgstr "Update available!"
+
+msgctxt "#40030"
+msgid "Downloading update %d%%..."
+msgstr "Downloading update %d%%..."
+
+#empty strings from id 40029 to 40099
+
+msgctxt "#40100"
+msgid "Applications"
+msgstr "Applications"
+
+msgctxt "#40101"
+msgid "Add Application"
+msgstr "Add application"
+
+msgctxt "#40102"
+msgid "Remove Application"
+msgstr "Remove application"
+
+msgctxt "#40103"
+msgid "Browse for Application"
+msgstr "Browse for application"
+
+msgctxt "#40104"
+msgid "RSS"
+msgstr "RSS"
+
+msgctxt "#40105"
+msgid "Energy Saver"
+msgstr "Energy saver"
+
+msgctxt "#40106"
+msgid "Remove Workflow"
+msgstr "Remove workflow"
+
+#empty strings from id 40107 to 40149
+
+msgctxt "#40150"
+msgid "Now Playing"
+msgstr "Now playing"
+
+#empty strings from id 40151 to 40199
+
+msgctxt "#40200"
+msgid "Unsupported path"
+msgstr "Unsupported path"
+
+msgctxt "#40201"
+msgid "Plex Media Server paths can't be added to multipath"
+msgstr "Plex Media Server paths can't be added to multipath"
+
+msgctxt "#40202"
+msgid "sources."
+msgstr "source"
+
+msgctxt "#40203"
+msgid "Plex Media Server"
+msgstr "Plex Media Server"
+
+msgctxt "#40204"
+msgid "Waiting for response..."
+msgstr "Waiting for response..."
+
+msgctxt "#40205"
+msgid "Rate..."
+msgstr "Rate..."
+
+msgctxt "#40206"
+msgid "Change Rating..."
+msgstr "Change Rating..."
+
+msgctxt "#40207"
+msgid "Set Rating"
+msgstr "Set rating"
+
+msgctxt "#40208"
+msgid "Change Rating"
+msgstr "Change rating"
+
+#empty string with id 40209
+
+msgctxt "#40210"
+msgid "Media Server"
+msgstr "Media Server"
+
+msgctxt "#40211"
+msgid "Manually specify server"
+msgstr "Manually specify server"
+
+msgctxt "#40212"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "#40213"
+msgid "Force transcoding on local network"
+msgstr "Force transcoding on local network"
+
+msgctxt "#40214"
+msgid "Quality"
+msgstr "Quality"
+
+msgctxt "#40215"
+msgid "Scan localhost"
+msgstr "Scan localhost"
+
+#empty strings from id 40216 to 40299
+
+msgctxt "#40300"
+msgid "Set Quit Timer"
+msgstr "Set quit timer"
+
+msgctxt "#40301"
+msgid "Set Sleep Timer"
+msgstr "Set sleep timer"
+
+msgctxt "#40302"
+msgid "Set Shut Down Timer"
+msgstr "Set shut down timer"
+
+#empty strings from id 40303 to 40304
+
+msgctxt "#40305"
+msgid "Change Quit Timer"
+msgstr "Change quit timer"
+
+msgctxt "#40306"
+msgid "Change Sleep Timer"
+msgstr "Change sleep timer"
+
+msgctxt "#40307"
+msgid "Change Shut Down Timer"
+msgstr "Change shut down timer"
+
+msgctxt "#40308"
+msgid "Change Sleep Display Timer"
+msgstr "Change sleep display timer"
+
+#empty string with id 40309
+
+msgctxt "#40310"
+msgid "Plex/HT will quit at"
+msgstr "PHT will quit at"
+
+msgctxt "#40311"
+msgid "The system will sleep at"
+msgstr "The system will sleep at"
+
+msgctxt "#40312"
+msgid "The system will shut down at"
+msgstr "The system will shut down at"
+
+msgctxt "#40313"
+msgid "The system will sleep the display at"
+msgstr "The system will sleep the display at"
+
+#empty string with id 40314
+
+msgctxt "#40315"
+msgid "You have already set a quit timer."
+msgstr "You have already set a quit timer"
+
+msgctxt "#40316"
+msgid "You have already set a sleep timer."
+msgstr "You have already set a sleep timer"
+
+msgctxt "#40317"
+msgid "You have already set a shut down timer."
+msgstr "You have already set a shut down timer"
+
+msgctxt "#40318"
+msgid "You have already set a sleep display timer."
+msgstr "You have already set a sleep display timer"
+
+#empty string with id 40319
+
+msgctxt "#40320"
+msgid "Would you like to set a quit timer instead?"
+msgstr "Would you like to set a quit timer instead?"
+
+msgctxt "#40321"
+msgid "Would you like to set a sleep timer instead?"
+msgstr "Would you like to set a sleep timer instead?"
+
+msgctxt "#40322"
+msgid "Would you like to set a shut down timer instead?"
+msgstr "Would you like to set a shut down timer instead?"
+
+msgctxt "#40323"
+msgid "Set Sleep Display Timer"
+msgstr "Set Sleep Display Timer"
+
+#empty string with id 40324
+
+msgctxt "#40325"
+msgid "Timer already set"
+msgstr "Timer already set"
+
+#empty strings from id 40326 to 41999
+
+msgctxt "#42000"
+msgid "Could not read from input stream"
+msgstr "Could not read from input stream"
+
+msgctxt "#42001"
+msgid "Could not determine input format"
+msgstr "Could not determine input format"
+
+msgctxt "#42002"
+msgid "Could not read file header"
+msgstr "Could not read file header"
+
+msgctxt "#42003"
+msgid "Unknown format"
+msgstr "Unknown format"
+
+msgctxt "#42004"
+msgid "Could not read data from file"
+msgstr "Could not read data from file"
+
+msgctxt "#42005"
+msgid "Not enough memory to open file"
+msgstr "Not enough memory to open file"
+
+msgctxt "#42006"
+msgid "File was not found"
+msgstr "File was not found"
+
+msgctxt "#42007"
+msgid "Unsupported network protocol"
+msgstr "Unsupported network protocol"
+
+msgctxt "#42008"
+msgid "Error while opening file"
+msgstr "Error while opening file"
+
+#empty strings from id 42009 to 42998
+
+msgctxt "#42999"
+msgid "Direct Play"
+msgstr "Direct Play"
+
+#. 3
+msgctxt "#43000"
+msgid "320 kbps"
+msgstr "320 kbps"
+
+msgctxt "#43001"
+msgid "720 kbps"
+msgstr "720 kbps"
+
+msgctxt "#43002"
+msgid "1.5 Mbps"
+msgstr "1.5 Mbps"
+
+msgctxt "#43003"
+msgid "2 Mbps"
+msgstr "2 Mbps"
+
+msgctxt "#43004"
+msgid "3 Mbps"
+msgstr "3 Mbps"
+
+msgctxt "#43005"
+msgid "4 Mbps"
+msgstr "4 Mbps"
+
+msgctxt "#43006"
+msgid "8 Mbps"
+msgstr "8 Mbps"
+
+msgctxt "#43007"
+msgid "10 Mbps"
+msgstr "10 Mbps"
+
+msgctxt "#43008"
+msgid "12 Mbps"
+msgstr "12 Mbps"
+
+msgctxt "#43009"
+msgid "20 Mbps"
+msgstr "20 Mbps"
+
+msgctxt "#43010"
+msgid "Maximum"
+msgstr "Maximum"
+
+msgctxt "#44000"
+msgid "Email"
+msgstr "Email"
+
+msgctxt "#44001"
+msgid "Password"
+msgstr "Password"
+
+msgctxt "#44002"
+msgid "Use PIN"
+msgstr "Use PIN"
+
+msgctxt "#44003"
+msgid "Sign out"
+msgstr "Sign out"
+
+msgctxt "#44004"
+msgid "Sign in"
+msgstr "Sign in"
+
+msgctxt "#44010"
+msgid "Not signed in"
+msgstr "Not signed in"
+
+msgctxt "#44011"
+msgid "Signed in"
+msgstr "Signed in"
+
+msgctxt "#44012"
+msgid "Error signing in"
+msgstr "Error signing in"
+
+msgctxt "#44013"
+msgid "Manually enter username and password to sign in"
+msgstr "Manually enter username and password to sign in"
+
+msgctxt "#44020"
+msgid "Shared Content"
+msgstr "Shared Content"
+
+msgctxt "#44021"
+msgid "Watch Later"
+msgstr "Watch Later"
+
+msgctxt "#44022"
+msgid "Recommended"
+msgstr "Recommended"
+
+msgctxt "#44030"
+msgid "FILTERS"
+msgstr "FILTERS"
+
+msgctxt "#44031"
+msgid "SORTING"
+msgstr "SORTING"
+
+msgctxt "#44032"
+msgid "Clear Filters"
+msgstr "Clear Filters"
+
+msgctxt "#44100"
+msgid "Sign in to Plex"
+msgstr "Sign in to Plex"
+
+msgctxt "#44101"
+msgid "From your computer go to http://plex.tv/pin"
+msgstr "From your computer go to http://plex.tv/pin"
+
+msgctxt "#44102"
+msgid "retrieving code..."
+msgstr "retrieving code..."
+
+msgctxt "#44103"
+msgid "and enter this code:"
+msgstr "and enter this code:"
+
+msgctxt "#44104"
+msgid "Hooray we are signed in!"
+msgstr "Hooray we are signed in!"
+
+msgctxt "#44105"
+msgid "Signed in to Plex"
+msgstr "Signed in to Plex"
+
+msgctxt "#44200"
+msgid "PlexPass Required"
+msgstr "PlexPass required"
+
+msgctxt "#44201"
+msgid "For this preview release, you must be signed into Plex and have a PlexPass"
+msgstr "For this preview release, you must be signed into Plex and have a PlexPass"
+
+msgctxt "#44202"
+msgid "Press OK to be taken to the Settings screen"
+msgstr "Press OK to be taken to the Settings screen"
+
+msgctxt "#44203"
+msgid "PlexPass Required"
+msgstr "PlexPass Required"
+
+msgctxt "#44204"
+msgid "Press OK Quit"
+msgstr "Press OK Quit"
+
+msgctxt "#44300"
+msgid "Allow control of Plex/HT from Plex Clients"
+msgstr "Allow control of PHT from Plex Clients"
+
+msgctxt "#44400"
+msgid "Pre-Caching - Select Servers"
+msgstr "Pre-Caching - Select Servers"
+
+msgctxt "#44401"
+msgid "Processing"
+msgstr "Processing"
+
+msgctxt "#44402"
+msgid "Retrieving Section"
+msgstr "Retrieving section"
+
+msgctxt "#44403"
+msgid "Precaching Section"
+msgstr "Precaching section"
+
+msgctxt "#44404"
+msgid "Precaching item"
+msgstr "Precaching item"
+
+msgctxt "#44405"
+msgid "Progress"
+msgstr "Progress"
+
+msgctxt "#44406"
+msgid "Use FFMPEG AVIO for Network transport"
+msgstr "Use FFMPEG AVIO for Network transport"
+
+msgctxt "#44407"
+msgid "Number of cinema trailers before movies"
+msgstr "Number of cinema trailers before movies"
+
+msgctxt "#44408"
+msgid "Extras"
+msgstr "Extras"
+
+#### Extra / trailers related strings
+
+### Extra Types
+msgctxt "#44501"
+msgid "Trailer"
+msgstr "Trailer"
+
+msgctxt "#44502"
+msgid "Deleted Scene"
+msgstr "Deleted Scene"
+
+msgctxt "#44503"
+msgid "Interview"
+msgstr "Interview"
+
+msgctxt "#44504"
+msgid "Music Video"
+msgstr "Music Video"
+
+msgctxt "#44505"
+msgid "Behind the Scenes"
+msgstr "Behind the Scenes"
+
+msgctxt "#44506"
+msgid "Scene"
+msgstr "Scene"
+
+### other Extras related strings
+msgctxt "#44550"
+msgid "Play Trailer"
+msgstr "Play Trailer"
+
+#### These are error strings shown from channels
+#### errorcode + 50000
+msgctxt "#52000"
+msgid "Unable to play media"
+msgstr "Unable to play media"
+
+msgctxt "#52001"
+msgid "This media is not currently available"
+msgstr "This media is not currently available"
+
+msgctxt "#52002"
+msgid "This media has expired"
+msgstr "This media has expired"
+
+msgctxt "#52003"
+msgid "This live media has not yet started"
+msgstr "This live media has not yet started"
+
+msgctxt "#52004"
+msgid "You are not authorized to access this media"
+msgstr "You are not authorized to access this media"
+
+msgctxt "#52005"
+msgid "This media is geoblocked and can't be accessed from your current location."
+msgstr "This media is geoblocked and can't be accessed from your current location"
+#### end error strings
+
+msgctxt "#52010"
+msgid "Please check that this file exists and the necessary drive is mounted"
+msgstr "Please check that this file exists and the necessary drive is mounted"
+
+msgctxt "#52011"
+msgid "OpenPHT is not able to play this channel content"
+msgstr "OpenPHT is not able to play this channel content"
+
+msgctxt "#52012"
+msgid "OpenPHT is not able to play this channel content"
+msgstr "OpenPHT is not able to play ISO files"
+
+msgctxt "#52100"
+msgid "Select Audio Track"
+msgstr "Select audio track"
+
+msgctxt "#52101"
+msgid "Select Subtitle"
+msgstr "Select subtitle"
+
+msgctxt "#52102"
+msgid "Channels"
+msgstr "Channels"
+
+msgctxt "#52201"
+msgid "Local video quality"
+msgstr "Local video quality"
+
+msgctxt "#52202"
+msgid "Remote video quality"
+msgstr "Remote video quality"
+
+msgctxt "#52203"
+msgid "Online video quality"
+msgstr "Online video quality"
+
+msgctxt "#52209"
+msgid "Show shared libraries in menu"
+msgstr "Show shared libraries in menu"
+
+msgctxt "#52210"
+msgid "Show watch later and recommended"
+msgstr "Show watch later and recommended"
+
+msgctxt "#52211"
+msgid "Automatic sign in"
+msgstr "Automatic sign in"
+
+msgctxt "#52212"
+msgid "Show watched in recently added"
+msgstr "Show watched in recently added"
+
+msgctxt "#52213"
+msgid "Hide channels in menu"
+msgstr "Hide channels in menu"
+
+msgctxt "#52214"
+msgid "Disable preplay screen"
+msgstr "Disable preplay screen"
+
+msgctxt "#52215"
+msgid "Disable server side scaling of fanart"
+msgstr "Disable server side scaling of fanart"
+
+msgctxt "#52216"
+msgid "Disable server side scaling of photos"
+msgstr "Disable server side scaling of photos"
+
+msgctxt "#52217"
+msgid "Show watched in watch later and recommended"
+msgstr "Show watched in watch later and recommended"
+
+msgctxt "#52218"
+msgid "Stack TV Shows in recently added"
+msgstr "Stack TV Shows in recently added"
+
+msgctxt "#52220"
+msgid "Disable preplay screen for movies"
+msgstr "Disable preplay screen for movies"
+
+msgctxt "#52221"
+msgid "Disable preplay screen for episodes"
+msgstr "Disable preplay screen for episodes"
+
+msgctxt "#52222"
+msgid "Disable preplay screen for clips"
+msgstr "Disable preplay screen for clips"
+
+msgctxt "#52300"
+msgid "Media Server went away"
+msgstr "Media Server went away"
+
+msgctxt "#52301"
+msgid "The Server you where browsing went away..."
+msgstr "The Server you were browsing went away..."
+
+msgctxt "#52400"
+msgid "No linked social accounts"
+msgstr "No linked social accounts"
+
+msgctxt "#52401"
+msgid "Go to http://plex.tv to link your account"
+msgstr "Go to http://plex.tv to link your account"
+
+msgctxt "#52402"
+msgid "Enter message"
+msgstr "Enter message"
+
+msgctxt "#52403"
+msgid "Share %s on %s with message:"
+msgstr "Share %s on %s with message:"
+
+msgctxt "#52404"
+msgid "Enable network logging"
+msgstr "Enable network logging"
+
+msgctxt "#52500"
+msgid "Remote connected"
+msgstr "Remote connected"
+
+msgctxt "#52501"
+msgid "Remote disconnected"
+msgstr "Remote disconnected"
+
+msgctxt "#52502"
+msgid "Always transcode subtitles"
+msgstr "Always transcode subtitles"
+
+msgctxt "#52503"
+msgid "Forced"
+msgstr "Forced"
+
+msgctxt "#52504"
+msgid "Allow Plex collect anonymous data to improve your experience"
+msgstr "Allow Plex collect anonymous data to improve your experience"
+
+msgctxt "#52505"
+msgid "Hide CloudSync sections"
+msgstr "Hide CloudSync sections"
+
+msgctxt "#52506"
+msgid "External"
+msgstr "External"
+
+msgctxt "#52600"
+msgid "Shuffle all"
+msgstr "Shuffle all"
+
+msgctxt "#52601"
+msgid "Play all"
+msgstr "Play all"
+
+msgctxt "#52602"
+msgid "Play Next"
+msgstr "Play next"
+
+msgctxt "#52603"
+msgid "Add to Up Next"
+msgstr "Add to Up Next"
+
+msgctxt "#52604"
+msgid "Play Now?"
+msgstr "Play now?"
+
+msgctxt "#52605"
+msgid "This will clear the contents of Up Next"
+msgstr "This will clear the contents of Up Next"
+
+msgctxt "#52606"
+msgid "and play the selection instead"
+msgstr "and play the selection instead"
+
+msgctxt "#52607"
+msgid "Queue"
+msgstr "Queue"
+
+msgctxt "#52608"
+msgid "Toggle Edit Mode"
+msgstr "Toggle Edit Mode"
+
+msgctxt "#52609"
+msgid "Force Transcode"
+msgstr "Force Transcode"
+
+msgctxt "#52610"
+msgid "Cannot open Playlist"
+msgstr "Cannot open Playlist"
+
+msgctxt "#52611"
+msgid "Playlist is empty"
+msgstr "Playlist is empty"
+
+msgctxt "#52612"
+msgid "Add to Playlist"
+msgstr "Add to Playlist"
+
+msgctxt "#52613"
+msgid "Create Playlist"
+msgstr "Create Playlist"
+
+msgctxt "#52614"
+msgid "Enter playlist name"
+msgstr "Enter playlist name"
+
+msgctxt "#52615"
+msgid "Playlist could not be created."
+msgstr "Playlist could not be created."
+
+msgctxt "#52620"
+msgid "MyPlex provides a number of features which requires a login"
+msgstr "MyPlex provides a number of features which requires a login"
+
+msgctxt "#52621"
+msgid "Improved server discovery, config-free remote access,"
+msgstr "Improved server discovery, config-free remote access,"
+
+msgctxt "#52622"
+msgid "Queueing and recommending video, Sharing your media"
+msgstr "Queueing and recommending video, Sharing your media"
+
+msgctxt "#52623"
+msgid "Subtitle offset"
+msgstr "Subtitle offset"
+
+msgctxt "#52630"
+msgid "Please try again"
+msgstr "Please try again"
+
+msgctxt "#52631"
+msgid "Please sign in again"
+msgstr "Please sign in again"
+
+msgctxt "#52632"
+msgid "Your credentials have expired. Please sign in again."
+msgstr "Your credentials have expired. Please sign in again."
+
+msgctxt "#52633"
+msgid "Play extra"
+msgstr "Play extra"
+
+msgctxt "#52634"
+msgid "Play from here"
+msgstr "Play from here"
+
+msgctxt "#52635"
+msgid "Go to Show"
+msgstr "Go to Show"
+
+msgctxt "#52636"
+msgid "Go to Season"
+msgstr "Go to Season"
+
+msgctxt "#52639"
+msgid "Direct Play HEVC up to"
+msgstr "Direct Play HEVC up to"
+
+msgctxt "#52640"
+msgid "None"
+msgstr "None"
+
+msgctxt "#52641"
+msgid "540p"
+msgstr "540p"
+
+msgctxt "#52642"
+msgid "720p"
+msgstr "720p"
+
+msgctxt "#52643"
+msgid "1080p"
+msgstr "1080p"
+
+msgctxt "#52644"
+msgid "1440p"
+msgstr "1440p"
+
+msgctxt "#52645"
+msgid "2160p"
+msgstr "2160p"
+
+msgctxt "#52646"
+msgid "Unlimited"
+msgstr "Unlimited"
+
+msgctxt "#52647"
+msgid "Show server name for all libraries"
+msgstr "Show server name for all libraries"

@@ -1,46 +1,34 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="amremote"
-PKG_VERSION="6431040"
-PKG_ARCH="arm aarch64"
 PKG_LICENSE="other"
 PKG_SITE="http://www.amlogic.com"
-PKG_URL="https://github.com/codesnake/amremote/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain usbutils"
-PKG_SECTION="sysutils/remote"
-PKG_SHORTDESC="amremote - IR remote configuration utility for Amlogic-based devices"
 PKG_LONGDESC="amremote - IR remote configuration utility for Amlogic-based devices"
 
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+case "$LINUX" in
+  amlogic-3.14)
+    PKG_VERSION="05b85d1f9821ae65dca250ba87b369327dd71df3"
+    PKG_SHA256="895a64efc05cee3148b4c33f5acbffb87da095d8b8f289f78e0cec26d2ed6f9d"
+    PKG_URL="https://github.com/CoreELEC/amremote/archive/$PKG_VERSION.tar.gz"
+    ;;
+  amlogic-4.9)
+    PKG_VERSION="1db130a0ccd47f6b5c3d1dffab1e89613b796a8c"
+    PKG_SHA256="5b96f2a1dd03200909eed749f5d97d1d02ee7fc8ac92d8fce6b5d6772ee642dc"
+    PKG_URL="https://github.com/CoreELEC/amremote/archive/$PKG_VERSION.tar.gz"
+    ;;
+esac
 
 makeinstall_target() {
   mkdir -p $INSTALL/usr/bin
     cp remotecfg $INSTALL/usr/bin
 
-  mkdir -p $INSTALL/usr/lib/libreelec
-    cp $PKG_DIR/scripts/* $INSTALL/usr/lib/libreelec
-
-  mkdir -p $INSTALL/etc/amremote
-    cp $PKG_DIR/config/*.conf $INSTALL/etc/amremote
+  mkdir -p $INSTALL/usr/lib/coreelec
+    cp $PKG_DIR/scripts/* $INSTALL/usr/lib/coreelec
 }
 
 post_install() {
-  enable_service amlogic-remotecfg.service
+  enable_service remote-config.service
 }

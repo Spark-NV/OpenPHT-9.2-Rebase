@@ -1,35 +1,26 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="sqlite"
-PKG_VERSION="autoconf-3150200"
-PKG_ARCH="any"
+PKG_VERSION="autoconf-3260000"
+PKG_SHA256="5daa6a3fb7d1e8c767cd59c4ded8da6e4b00c61d3b466d0685e35c4dd6d7bf5d"
 PKG_LICENSE="PublicDomain"
 PKG_SITE="https://www.sqlite.org/"
-PKG_URL="https://www.sqlite.org/2016/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_URL="https://www.sqlite.org/2018/$PKG_NAME-$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="database"
-PKG_SHORTDESC="sqlite: An Embeddable SQL Database Engine"
-PKG_LONGDESC="SQLite is a C library that implements an embeddable SQL database engine. Programs that link with the SQLite library can have SQL database access without running a separate RDBMS process. The distribution comes with a standalone command-line access program (sqlite) that can be used to administer an SQLite database and which serves as an example of how to use the SQLite library. SQLite is not a client library used to connect to a big database server. SQLite is the server. The SQLite library reads and writes directly to and from the database files on disk."
+PKG_LONGDESC="An Embeddable SQL Database Engine."
+# libsqlite3.a(sqlite3.o): requires dynamic R_X86_64_PC32 reloc against 'sqlite3_stricmp' which may overflow at runtime
+PKG_BUILD_FLAGS="+pic +pic:host -parallel"
 
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+PKG_CONFIGURE_OPTS_TARGET="--disable-static \
+                           --enable-shared \
+                           --disable-readline \
+                           --enable-threadsafe \
+                           --enable-dynamic-extensions \
+                           --with-gnu-ld"
 
+pre_configure_target() {
 # sqlite fails to compile with fast-math link time optimization.
   CFLAGS=`echo $CFLAGS | sed -e "s|-Ofast|-O3|g"`
   CFLAGS=`echo $CFLAGS | sed -e "s|-ffast-math||g"`
@@ -60,15 +51,4 @@ PKG_AUTORECONF="no"
 # sqlite3_config(SQLITE_CONFIG_MMAP_SIZE) call, or at run-time using the
 # mmap_size pragma.
   CFLAGS="$CFLAGS -DSQLITE_TEMP_STORE=3 -DSQLITE_DEFAULT_MMAP_SIZE=268435456"
-
-pre_make_target() {
-  # dont build parallel
-  MAKEFLAGS=-j1
 }
-
-PKG_CONFIGURE_OPTS_TARGET="--enable-static \
-                           --disable-shared \
-                           --disable-readline \
-                           --enable-threadsafe \
-                           --enable-dynamic-extensions \
-                           --with-gnu-ld"

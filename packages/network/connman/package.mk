@@ -1,38 +1,19 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2019-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="connman"
-PKG_VERSION="1.35"
-PKG_ARCH="any"
+PKG_VERSION="82699007fa89e26206771047d8cbb7c160fd2990" # 1.38 + HEAD 31/7/20
+PKG_SHA256="72710b2a0edd57b9ae61285bc2192bbff7317c721ff8a110360f299c35ba9175"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.connman.net"
-PKG_URL="https://www.kernel.org/pub/linux/network/connman/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_URL="https://git.kernel.org/pub/scm/network/connman/connman.git/snapshot/connman-$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain glib readline dbus iptables wpa_supplicant"
-PKG_SECTION="network"
-PKG_SHORTDESC="connman: Network manager daemon"
-PKG_LONGDESC="The ConnMan project provides a daemon for managing internet connections within embedded devices running the Linux operating system. The Connection Manager is designed to be slim and to use as few resources as possible, so it can be easily integrated. It is a fully modular system that can be extended, through plug-ins, to support all kinds of wired or wireless technologies. Also, configuration methods, like DHCP and domain name resolving, are implemented using plug-ins. The plug-in approach allows for easy adaption and modification for various use cases."
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="yes"
+PKG_LONGDESC="A modular network connection manager."
+PKG_TOOLCHAIN="autotools"
 
 PKG_CONFIGURE_OPTS_TARGET="WPASUPPLICANT=/usr/bin/wpa_supplicant \
                            --srcdir=.. \
-                           --disable-gtk-doc \
                            --disable-debug \
                            --disable-hh2serial-gps \
                            --disable-openconnect \
@@ -58,12 +39,18 @@ PKG_CONFIGURE_OPTS_TARGET="WPASUPPLICANT=/usr/bin/wpa_supplicant \
                            --disable-neard \
                            --disable-wispr \
                            --disable-tools \
+                           --disable-stats \
                            --enable-client \
                            --enable-datafiles \
                            --with-dbusconfdir=/etc \
                            --with-systemdunitdir=/usr/lib/systemd/system \
                            --disable-silent-rules"
 
+if [ "$WIREGUARD_SUPPORT" = "yes" ]; then
+  PKG_CONFIGURE_OPTS_TARGET+=" --enable-wireguard=builtin"
+else
+  PKG_CONGIGURE_OPTS_TARGET+=" --disable-wireguard"
+fi
 
 PKG_MAKE_OPTS_TARGET="storagedir=/storage/.cache/connman \
                       vpn_storagedir=/storage/.config/vpn-config \
@@ -79,26 +66,18 @@ post_makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/connman
     cp -P $PKG_DIR/scripts/connman-setup $INSTALL/usr/lib/connman
 
-  mkdir -p $INSTALL/etc
-    ln -sf /run/connman/resolv.conf $INSTALL/etc/resolv.conf
-
-    # /etc/hosts must be writeable
-    ln -sf /run/connman/hosts $INSTALL/etc/hosts
-
   mkdir -p $INSTALL/etc/connman
     cp ../src/main.conf $INSTALL/etc/connman
     sed -i $INSTALL/etc/connman/main.conf \
         -e "s|^# BackgroundScanning.*|BackgroundScanning = true|g" \
+        -e "s|^# UseGatewaysAsTimeservers.*|UseGatewaysAsTimeservers = false|g" \
         -e "s|^# FallbackNameservers.*|FallbackNameservers = 8.8.8.8,8.8.4.4|g" \
         -e "s|^# FallbackTimeservers.*|FallbackTimeservers = 0.pool.ntp.org,1.pool.ntp.org,2.pool.ntp.org,3.pool.ntp.org|g" \
         -e "s|^# PreferredTechnologies.*|PreferredTechnologies = ethernet,wifi,cellular|g" \
         -e "s|^# TetheringTechnologies.*|TetheringTechnologies = wifi|g" \
         -e "s|^# AllowHostnameUpdates.*|AllowHostnameUpdates = false|g" \
         -e "s|^# PersistentTetheringMode.*|PersistentTetheringMode = true|g" \
-        -e "s|^# NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb|NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb,docker,veth|g"
-
-  mkdir -p $INSTALL/usr/config
-    cp $PKG_DIR/config/hosts.conf $INSTALL/usr/config
+        -e "s|^# NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb|NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb,docker,veth,zt|g"
 
   mkdir -p $INSTALL/usr/share/connman/
     cp $PKG_DIR/config/settings $INSTALL/usr/share/connman/
@@ -109,4 +88,7 @@ post_install() {
   add_group system 430
 
   enable_service connman.service
+  if [ "$WIREGUARD_SUPPORT" = "yes" ]; then
+    enable_service connman-vpn.service
+  fi
 }

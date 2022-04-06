@@ -6,45 +6,42 @@
   # generated code.
     case $TARGET_ARCH in
       arm)
-        # TARGET_CPU:
-        # arm2 arm250 arm3 arm6 arm60 arm600 arm610 arm620 arm7 arm7m arm7d
-        # arm7dm arm7di arm7dmi arm70 arm700 arm700i arm710 arm710c
-        # arm7100 arm720 arm7500 arm7500fe arm7tdmi arm7tdmi-s arm710t
-        # arm720t arm740t strongarm strongarm110 strongarm1100
-        # strongarm1110 arm8 arm810 arm9 arm9e arm920 arm920t arm922t
-        # arm946e-s arm966e-s arm968e-s arm926ej-s arm940t arm9tdmi
-        # arm10tdmi arm1020t arm1026ej-s arm10e arm1020e arm1022e
-        # arm1136j-s arm1136jf-s mpcore mpcorenovfp arm1156t2-s
-        # arm1176jz-s arm1176jzf-s cortex-a8 cortex-a9 cortex-r4
-        # cortex-r4f cortex-m3 cortex-m1 xscale iwmmxt iwmmxt2 ep9312.
-        TARGET_CPU="arm1176jzf-s"
+        # Valid TARGET_CPU for Raspberry Pi based devices are:
+        # arm1176jzf-s cortex-a7 cortex-a53
+        if [ "$DEVICE" = "RPi" -o "$DEVICE" = "Slice" ]; then
+          TARGET_CPU="arm1176jzf-s"
+        elif [ "$DEVICE" = "RPi2" -o "$DEVICE" = "Slice3" ]; then
+          TARGET_CPU="cortex-a7"
+        elif [ "$DEVICE" = "RPi4" ]; then
+          TARGET_CPU="cortex-a53"
+          TARGET_CPU_FLAGS="+crc"
+        fi
 
         # TARGET_FLOAT:
         # Specifies which floating-point ABI to use. Permissible values are:
-        # soft softfp hard
+        # soft hard
         TARGET_FLOAT="hard"
 
-        # TARGET_FPU:
+        # Valid TARGET_FPU for Raspberry Pi based devices:
         # This specifies what floating point hardware (or hardware emulation) is
         # available on the target. Permissible names are:
-        # fpa fpe2 fpe3 maverick vfp vfpv3 vfpv3-fp16 vfpv3-d16 vfpv3-d16-fp16
-        # vfpv3xd vfpv3xd-fp16 neon neon-fp16 vfpv4 vfpv4-d16 fpv4-sp-d16
-        # neon-vfpv4.
-        TARGET_FPU="vfp"
+        # vfp neon-vfpv4 neon-fp-armv8
+        if [ "$DEVICE" = "RPi" -o "$DEVICE" = "Slice" ]; then
+          TARGET_FPU="vfp"
+        elif [ "$DEVICE" = "RPi2" -o "$DEVICE" = "Slice3" ]; then
+          TARGET_FPU="neon-vfpv4"
+        elif [ "$DEVICE" = "RPi4" ]; then
+          TARGET_FPU="neon-fp-armv8"
+        fi
+        TARGET_FEATURES="32bit"
         ;;
     esac
 
-  # Bootloader to use (syslinux / u-boot / bcm2835-bootloader)
+  # Bootloader to use (bcm2835-bootloader)
     BOOTLOADER="bcm2835-bootloader"
 
   # u-boot version to use (default)
     UBOOT_VERSION="default"
-
-  # Configuration for u-boot
-    UBOOT_CONFIG=""
-
-  # Target Configfile for u-boot
-    UBOOT_CONFIGFILE=""
 
   # Kernel target
     KERNEL_TARGET="zImage"
@@ -55,15 +52,12 @@
   # Additional kernel make parameters (for example to specify the u-boot loadaddress)
     KERNEL_MAKE_EXTRACMD="dtbs"
 
+  # Additional kernel dependencies
+    KERNEL_EXTRA_DEPENDS_TARGET=""
+
   # Kernel to use. values can be:
   # default:  default mainline kernel
-    LINUX="default-rpi"
-
-  # NOOBS supported hex versions (legacy)
-    NOOBS_HEX="2,3,4,5,6,7,8,9,d,e,f,10,11,12,14,19,0092,0093"
-
-  # NOOBS supported model versions
-    NOOBS_SUPPORTED_MODELS='"Pi Model","Pi Compute Module","Pi Zero"'
+    LINUX="raspberrypi"
 
 ################################################################################
 # setup build defaults
@@ -72,9 +66,8 @@
   # Project CFLAGS
     PROJECT_CFLAGS=""
 
-  # SquashFS compression method (gzip / lzo / xz)
+  # SquashFS compression method (gzip / lzo / xz / zstd)
     SQUASHFS_COMPRESSION="lzo"
-
 
 ################################################################################
 # setup project defaults
@@ -86,7 +79,7 @@
   # OpenGL(X) implementation to use (no / mesa)
     OPENGL="no"
 
-  # OpenGL-ES implementation to use (no / bcm2835-driver / gpu-viv-bin-mx6q)
+  # OpenGL-ES implementation to use (no / bcm2835-driver / mesa)
     OPENGLES="bcm2835-driver"
 
   # include uvesafb support (yes / no)
@@ -95,15 +88,18 @@
   # Displayserver to use (x11 / no)
     DISPLAYSERVER="no"
 
-  # Windowmanager to use (ratpoison / fluxbox / none)
+  # Windowmanager to use (fluxbox / none)
     WINDOWMANAGER="none"
 
-  # Xorg Graphic drivers to use (all / i915,i965,r200,r300,r600,nvidia)
+  # Xorg Graphic drivers to use (all / vc4 / none)
   # Space separated list is supported,
-  # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 radeonsi nvidia"
+  # e.g. GRAPHIC_DRIVERS="vc4"
     GRAPHIC_DRIVERS=""
 
-  # KODI Player implementation to use (default / bcm2835-driver / libfslvpuwrap)
+  # Use a vendor specific KODI repo
+    KODI_VENDOR="raspberrypi"
+
+  # KODI Player implementation to use (default / bcm2835-driver / mesa)
     KODIPLAYER_DRIVER="bcm2835-driver"
 
   # Modules to install in initramfs for early boot
@@ -112,10 +108,7 @@
   # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
   # Space separated list is supported,
   # e.g. FIRMWARE="dvb-firmware misc-firmware wlan-firmware"
-    FIRMWARE="misc-firmware wlan-firmware brcmfmac_sdio-firmware-rpi"
-
-  # build and install ATV IR remote support (yes / no)
-    ATVCLIENT_SUPPORT="no"
+    FIRMWARE="misc-firmware wlan-firmware dvb-firmware brcmfmac_sdio-firmware-rpi"
 
   # build with installer (yes / no)
     INSTALLER_SUPPORT="no"
@@ -128,7 +121,18 @@
     KERNEL_NAME="kernel.img"
 
   # additional drivers to install:
-  # for a list of additinoal drivers see packages/linux-drivers
+  # for a list of additional drivers see packages/linux-drivers
   # Space separated list is supported,
   # e.g. ADDITIONAL_DRIVERS="DRIVER1 DRIVER2"
-    ADDITIONAL_DRIVERS="$ADDITIONAL_DRIVERS rpi-cirrus-config"
+    ADDITIONAL_DRIVERS="$ADDITIONAL_DRIVERS rpi-cirrus-config bcm2835-driver"
+
+  # build and install driver addons (yes / no)
+    DRIVER_ADDONS_SUPPORT="yes"
+
+  # driver addons to install:
+  # for a list of additional drivers see packages/linux-driver-addons
+  # Space separated list is supported,
+    DRIVER_ADDONS="crazycat dvb-latest"
+
+  # debug tty path
+    DEBUG_TTY="/dev/console"

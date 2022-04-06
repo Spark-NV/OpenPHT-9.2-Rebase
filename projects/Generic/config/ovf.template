@@ -2,11 +2,11 @@
 xmlns:cim="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" 
 xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <References>
-    <File ovf:href="@DISK@.vmdk" ovf:id="file" ovf:size="@DISK_SIZE@"/>
+    <File ovf:href="@DISK@.vmdk" ovf:id="file" ovf:size="@OVA_SIZE@"/>
   </References>
   <DiskSection>
     <Info>Virtual disk information</Info>
-    <Disk ovf:capacity="@DISK_SIZE@" ovf:diskId="disk" ovf:fileRef="file" ovf:format="http://www.vmware.com/interfaces/specifications/vmdk.html#streamOptimized"/>
+    <Disk ovf:capacity="@OVA_SIZE@" ovf:diskId="disk" ovf:fileRef="file" ovf:format="http://www.vmware.com/interfaces/specifications/vmdk.html#streamOptimized"/>
   </DiskSection>
   <NetworkSection>
     <Info>The list of logical networks</Info>
@@ -26,7 +26,7 @@ xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemS
     </ProductSection>
     <AnnotationSection>
       <Info>A human-readable annotation</Info>
-      <Annotation>LibreELEC is &#x2018;Just enough OS&#x2019; for Kodi, a Linux distribution built to run Kodi on current and popular mediacentre hardware.</Annotation>
+      <Annotation>LibreELEC is &#x2018;Just enough OS&#x2019; for Kodi, a Linux distribution built to run Kodi on current and popular mediacentre hardware. After importing the OVA image adjust CPU, RAM, and HDD storage to the required configuration before first boot.</Annotation>
     </AnnotationSection>
     <OperatingSystemSection ovf:id="94" vmw:osType="Ubuntu 64-bit">
       <Info>The kind of installed guest operating system</Info>
@@ -36,7 +36,7 @@ xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemS
         <vssd:ElementName>Virtual Hardware Family</vssd:ElementName>
         <vssd:InstanceID>0</vssd:InstanceID>
         <vssd:VirtualSystemIdentifier>LibreELEC</vssd:VirtualSystemIdentifier>
-        <vssd:VirtualSystemType>vmx-09</vssd:VirtualSystemType>
+        <vssd:VirtualSystemType>vmx-12</vssd:VirtualSystemType>
       </System>
       <Item>
         <rasd:AllocationUnits>hertz * 10^6</rasd:AllocationUnits>
@@ -49,10 +49,10 @@ xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemS
       <Item>
         <rasd:AllocationUnits>byte * 2^20</rasd:AllocationUnits>
         <rasd:Description>Memory Size</rasd:Description>
-        <rasd:ElementName>512MB of memory</rasd:ElementName>
+        <rasd:ElementName>1024MB of memory</rasd:ElementName>
         <rasd:InstanceID>2</rasd:InstanceID>
         <rasd:ResourceType>4</rasd:ResourceType>
-        <rasd:VirtualQuantity>512</rasd:VirtualQuantity>
+        <rasd:VirtualQuantity>1024</rasd:VirtualQuantity>
       </Item>
       <Item ovf:required="false">
         <rasd:Address>0</rasd:Address>

@@ -1,3 +1,40 @@
+111
+- update VDR to 2.4.1
+- update epgsearch to 2019-04-11
+- update robotv to 2019-06-19
+- update satip to 2019-02-08
+
+110
+- fix deprecated VDR_CHARSET_OVERRIDE
+
+109
+- fix script.config.vdr scan:
+  . reststfulapi: use header from current wirbelscan
+  . wirbelscan: fix segv, interface channel counts and device detection
+- update EEPG plugin to c46be44
+- update Sat>IP plugin to a4051bf
+- update VNSI plugin to 1.8.0
+- update VDR 2.4.0 upstream patches
+- update Wirbelscan plugin to 2018-11-04
+
+108
+- update VDR to 2.4.0
+- update EPG-Fixer plugin to 354f28b
+- update EPG-Search plugin to 84b59b8
+- update IPTV plugin to 5ae793f
+- update Sat>IP plugin to 299296b
+- update VNSI to 1.6.0
+
+107
+- add robotv plugin
+- add DDCI2 plugin
+- update VDR to 2.3.8
+- update all addons
+
+106
+- update Sat>IP plugin to 28cc3ca
+- update VNSI to 63d8151
+
 105
 - fix for some scrambled channels
 - update dvbapi to d7c7587

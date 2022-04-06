@@ -1,37 +1,12 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="Adafruit_Python_VCNL40xx"
-PKG_VERSION="e54bff9"
-PKG_ARCH="any"
+PKG_VERSION="5c72575b7390fbedfae0b5fb2a881ca9efe9ca22"
+PKG_SHA256="78346836965562720248138203a4af9dc6aa18815bda2a5b7842e3b9af9d1ea8"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/adafruit/${PKG_NAME}"
 PKG_URL="https://github.com/adafruit/${PKG_NAME}/archive/$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain Python distutilscross:host"
-PKG_SECTION="python"
-PKG_SHORTDESC="Adafruit Python VCNL40xx Library"
-PKG_LONGDESC="Python code to use the VCNL4000 & VCNL4010 proximity sensors with the Raspberry Pi & BeagleBone Black."
-PKG_AUTORECONF="no"
-
-make_target() {
-  : # nop
-}
-
-makeinstall_target() {
-  : # nop
-}
+PKG_DEPENDS_TARGET="toolchain Python2 distutilscross:host"
+PKG_LONGDESC="Python code to use the VCNL4000 & VCNL4010 proximity sensors with the Raspberry Pi."
+PKG_TOOLCHAIN="manual"

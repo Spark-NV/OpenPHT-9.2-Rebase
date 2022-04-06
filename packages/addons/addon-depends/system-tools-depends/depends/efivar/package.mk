@@ -1,41 +1,23 @@
-################################################################################
-#      This file is part of LibreELEC - http://www.libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="efivar"
-PKG_VERSION="70e63d4" # 0.15 # Todo: later versions with buildproblems
+PKG_VERSION="3e687d8072f3ed53ae727ec2cb99ae56dbcdf02b"
+PKG_SHA256="810d386c9f4dafc160c721ef73e491c933c311e3df768e27eec50c28ac0f4d97"
 PKG_ARCH="x86_64"
 PKG_LICENSE="LGPL"
-PKG_SITE="https://github.com/vathpela/efivar"
-PKG_URL="https://github.com/vathpela/efivar-devel/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="efivar-devel-$PKG_VERSION*"
+PKG_SITE="https://github.com/rhboot/efivar"
+PKG_URL="https://github.com/rhboot/efivar/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_HOST="gcc:host"
 PKG_DEPENDS_TARGET="toolchain efivar:host"
-PKG_SECTION="tools"
-PKG_SHORTDESC="evivar: maniulate EFI Variables"
 PKG_LONGDESC="Tools and library to manipulate EFI variables."
-PKG_AUTORECONF="no"
 
 make_host() {
-  make -C src/ makeguids
+  make -C src/ include/efivar/efivar-guids.h
 }
 
 make_target() {
-  strip_lto
-  make -C src/ libefivar.a efivar-guids.h efivar.h
+  make -C src/ libefivar.a libefiboot.a efivar.h efivar
 }
 
 makeinstall_host() {
@@ -44,10 +26,8 @@ makeinstall_host() {
 
 makeinstall_target() {
   mkdir -p $SYSROOT_PREFIX/usr/lib
-    cp -P src/libefivar.a $SYSROOT_PREFIX/usr/lib/
+    cp -P src/libefivar.a src/libefiboot.a $SYSROOT_PREFIX/usr/lib/
 
   mkdir -p $SYSROOT_PREFIX/usr/include/efivar
-    cp -P src/efivar.h $SYSROOT_PREFIX/usr/include/efivar
-    cp -P src/efivar-guids.h $SYSROOT_PREFIX/usr/include/efivar
+    cp -P src/include/efivar/*.h $SYSROOT_PREFIX/usr/include/efivar
 }
-

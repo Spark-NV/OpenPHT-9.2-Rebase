@@ -1,47 +1,42 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="x264"
-PKG_VERSION="snapshot-20171015-2245"
+PKG_VERSION="d4099dd4c722f52c4f3c14575d7d39eb8fadb97f"
+PKG_SHA256="9b6688b81e13cf342fc9b6b7adf1759eebd300c243c0707566ffe7ea9f0ccc7e"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.videolan.org/developers/x264.html"
-PKG_URL="https://download.videolan.org/x264/snapshots/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_URL="http://repo.or.cz/x264.git/snapshot/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="multimedia"
-PKG_LONGDESC="x264"
-PKG_AUTORECONF="no"
+PKG_LONGDESC="x264 codec"
+
+if [ "$TARGET_ARCH" = "x86_64" ]; then
+  PKG_DEPENDS_TARGET+=" nasm:host"
+fi
 
 pre_configure_target() {
   cd $PKG_BUILD
   rm -rf .$TARGET_NAME
+
+  if [ "$TARGET_ARCH" = "x86_64" ]; then
+    export AS="$TOOLCHAIN/bin/nasm"
+  else
+    PKG_X264_ASM="--disable-asm"
+  fi
 }
 
 configure_target() {
   ./configure \
-    --prefix="/usr" \
+    --cross-prefix="$TARGET_PREFIX" \
     --extra-cflags="$CFLAGS" \
     --extra-ldflags="$LDFLAGS" \
-    --disable-cli \
-    --enable-static \
-    --enable-strip \
-    --disable-asm \
-    --enable-pic \
     --host="$TARGET_NAME" \
-    --cross-prefix="$TARGET_PREFIX" \
-    --sysroot="$SYSROOT_PREFIX"
+    --prefix="/usr" \
+    --sysroot="$SYSROOT_PREFIX" \
+    $PKG_X264_ASM \
+    --disable-cli \
+    --enable-lto \
+    --enable-pic \
+    --enable-static \
+    --enable-strip
 }

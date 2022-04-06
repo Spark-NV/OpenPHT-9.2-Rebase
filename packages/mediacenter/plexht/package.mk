@@ -22,7 +22,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.openpht.tv"
 PKG_URL=""
-PKG_DEPENDS_TARGET="toolchain plexht:host boost Python zlib bzip2 systemd pciutils lzo pcre swig:host libass enca curl rtmpdump fontconfig fribidi tinyxml libjpeg-turbo libpng tiff freetype jasper libogg libcdio libmodplug libmpeg2 taglib libxml2 libxslt yajl sqlite libvorbis flac ffmpeg breakpad"
+PKG_DEPENDS_TARGET="toolchain plexht:host boost Python2 zlib bzip2 systemd pciutils lzo pcre swig:host libass enca curl rtmpdump fontconfig fribidi tinyxml libjpeg-turbo libpng tiff freetype jasper libogg libcdio libmodplug libmpeg2 taglib libxml2 libxslt yajl sqlite libvorbis flac ffmpeg" # breakpad"
 PKG_DEPENDS_HOST="ninja:host lzo:host SDL:host SDL_image:host"
 PKG_SECTION="mediacenter"
 PKG_SHORTDESC="OpenPHT is a community driven fork of Plex Home Theater"
@@ -38,7 +38,7 @@ PKG_AUTORECONF="no"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET dbus"
 
 if [ $PROJECT = "RPi" -o $PROJECT = "RPi2" ]; then
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET remotepi-board"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET" # remotepi-board" // FIXME
 fi
 
 if [ "$DISPLAYSERVER" = "x11" ]; then
@@ -153,16 +153,14 @@ export PYTHON_LDFLAGS="-L$SYSROOT_PREFIX/usr/lib/python$PYTHON_VERSION -lpython$
 export PYTHON_SITE_PKG="$SYSROOT_PREFIX/usr/lib/python$PYTHON_VERSION/site-packages"
 export ac_python_version="$PYTHON_VERSION"
 
-unpack() {
+post_patch() {
   rm -fr $BUILD/BUILD_OPENPHT
   rm -rf $BUILD/$PKG_NAME-$PKG_VERSION
-  git clone --depth 1 --branch $OPENPHT_BRANCH $OPENPHT_REPO $BUILD/$PKG_NAME-$PKG_VERSION
-}
-
-post_patch() {
-  OPENPHT_GITREV="$(git --git-dir=$BUILD/$PKG_NAME-$PKG_VERSION/.git rev-parse HEAD)"
-  OPENPHT_VERSION_PREFIX=$(cat $BUILD/$PKG_NAME-$PKG_VERSION/CMakeLists.txt|awk '/VERSION_MAJOR |VERSION_MINOR |VERSION_PATCH / {gsub(/\)/,""); printf $2"."}  END {print ""}'|sed 's/.$//g')
-  OPENPHT_VERSION="${OPENPHT_VERSION_PREFIX}.${BUILD_NUMBER:-0}-$(git --git-dir=$BUILD/$PKG_NAME-$PKG_VERSION/.git rev-parse --short=8 HEAD)"
+  mkdir $BUILD/$PKG_NAME-$PKG_VERSION
+  cp -r $ROOT/OpenPHT-1.9/* $BUILD/$PKG_NAME-$PKG_VERSION/
+  OPENPHT_GITREV="$OPENPHT_BUILD_VERSION"
+  OPENPHT_VERSION_PREFIX="$COREELEC_REVISION_NUMBER"
+  OPENPHT_VERSION="${OPENPHT_GITREV}-CoreELEC-${OPENPHT_VERSION_PREFIX}-`date +"%d-%m-%Y"`"
   echo "OPENPHT_GITREV=$OPENPHT_GITREV" > $BUILD/BUILD_OPENPHT
   echo "OPENPHT_VERSION_PREFIX=$OPENPHT_VERSION_PREFIX" >> $BUILD/BUILD_OPENPHT
   echo "OPENPHT_VERSION=$OPENPHT_VERSION" >> $BUILD/BUILD_OPENPHT
@@ -197,11 +195,8 @@ else
 fi
 
 if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
-  export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
+  export PYTHON_EXECUTABLE=$TOOLCHAIN/bin/$PKG_PYTHON_VERSION
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
-        -DPYTHON_EXEC="$PYTHON_EXEC" \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
         -DCMAKE_PREFIX_PATH="$SYSROOT_PREFIX" \
@@ -216,12 +211,18 @@ if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
+        -DENABLE_PYTHON=ON \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
+
+
 elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
   export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DEXTERNAL_PYTHON_HOME=$SYSROOT_PREFIX/usr \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         -DPYTHON_EXEC="$PYTHON_EXEC" \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
@@ -237,12 +238,16 @@ elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
+        -DENABLE_PYTHON=ON \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
 else
   export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DEXTERNAL_PYTHON_HOME=$SYSROOT_PREFIX/usr \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         -DPYTHON_EXEC="$PYTHON_EXEC" \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
@@ -260,13 +265,17 @@ else
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
+        -DENABLE_PYTHON=ON \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
 fi
 }
 
 make_target() {
 # setup skin dir from default skin
-  SKIN_DIR="skin.`tolower $SKIN_DEFAULT`"
+  SKIN_DIR="skin.$SKIN_DEFAULT"
 
 # setup default skin inside the sources
   sed -i -e "s|skin.confluence|$SKIN_DIR|g" $PKG_BUILD/xbmc/settings/Settings.h
@@ -274,10 +283,10 @@ make_target() {
   ninja -j$CONCURRENCY_MAKE_LEVEL
 
 # generate breakpad symbols
-  ninja symbols
+  #ninja symbols
 
 # Strip the executable now that we have our breakpad symbols
-  debug_strip plex/plexhometheater
+  #debug_strip plex/plexhometheater
 }
 
 makeinstall_target() {
@@ -316,9 +325,9 @@ makeinstall_target() {
 
   mkdir -p $INSTALL/usr/share/XBMC/addons
     cp -R $PKG_DIR/config/os.openelec.tv $INSTALL/usr/share/XBMC/addons
-    $SED "s|@OS_VERSION@|$OS_VERSION|g" -i $INSTALL/usr/share/XBMC/addons/os.openelec.tv/addon.xml
+    sed "s|@OS_VERSION@|$OS_VERSION|g" -i $INSTALL/usr/share/XBMC/addons/os.openelec.tv/addon.xml
     cp -R $PKG_DIR/config/os.libreelec.tv $INSTALL/usr/share/XBMC/addons
-    $SED "s|@OS_VERSION@|$OS_VERSION|g" -i $INSTALL/usr/share/XBMC/addons/os.libreelec.tv/addon.xml
+    sed "s|@OS_VERSION@|$OS_VERSION|g" -i $INSTALL/usr/share/XBMC/addons/os.libreelec.tv/addon.xml
 
 # fix skin.plex
   mv $INSTALL/usr/share/XBMC/addons/skin.plex/Colors $INSTALL/usr/share/XBMC/addons/skin.plex/colors

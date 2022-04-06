@@ -1,0 +1,16 @@
+INCLUDES  = -I@abs_top_srcdir@
+INCLUDES += -I@abs_top_srcdir@/xbmc
+INCLUDES += -I@abs_top_srcdir@/xbmc/linux
+
+.SUFFIXES : .m .mm
+
+SRCS  = XBMCHelper.m
+SRCS += AutoPool.mm
+SRCS += DarwinUtils.mm
+SRCS += CocoaInterface.mm
+SRCS += HotKeyController.m
+SRCS += OSXGNUReplacements.c
+	
+LIB = osx.a
+
+include @abs_top_srcdir@/Makefile.include

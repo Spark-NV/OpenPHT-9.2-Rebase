@@ -1,37 +1,30 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="dtc"
-PKG_VERSION="1.4.4"
-PKG_ARCH="any"
+PKG_VERSION="1.5.0"
+PKG_SHA256="14343cb204aaff386206ea27e39e93d6e35d9a797222e8426f95e57828ca6b94"
 PKG_LICENSE="GPL"
 PKG_SITE="https://git.kernel.org/pub/scm/utils/dtc/dtc.git/"
 PKG_URL="https://git.kernel.org/pub/scm/utils/dtc/dtc.git/snapshot/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="$PKG_VERSION"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="tools"
-PKG_SHORTDESC="The Device Tree Compiler"
+PKG_DEPENDS_TARGET="toolchain zlib"
 PKG_LONGDESC="The Device Tree Compiler"
-PKG_AUTORECONF="no"
 
-PKG_MAKE_OPTS_TARGET="dtc"
+PKG_MAKE_OPTS_TARGET="dtc fdtput fdtget libfdt"
 
 makeinstall_target() {
   mkdir -p $INSTALL/usr/bin
     cp -P $PKG_BUILD/dtc $INSTALL/usr/bin
+    cp -P $PKG_BUILD/fdtput $INSTALL/usr/bin/
+    cp -P $PKG_BUILD/fdtget $INSTALL/usr/bin/
+  mkdir -p $INSTALL/usr/lib
+    cp -P $PKG_BUILD/libfdt/libfdt.a $INSTALL/usr/lib/
+
+  # copy to toolchain
+  mkdir -p $SYSROOT_PREFIX/usr/{include,lib}
+    cp -P $PKG_BUILD/libfdt/libfdt.a $SYSROOT_PREFIX/usr/lib
+    cp -P $PKG_BUILD/libfdt/fdt.h $SYSROOT_PREFIX/usr/include
+    cp -P $PKG_BUILD/libfdt/libfdt.h $SYSROOT_PREFIX/usr/include
+    cp -P $PKG_BUILD/libfdt/libfdt_env.h $SYSROOT_PREFIX/usr/include
 }

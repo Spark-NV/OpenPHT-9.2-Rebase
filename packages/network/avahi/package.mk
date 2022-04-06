@@ -1,42 +1,21 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 
 PKG_NAME="avahi"
-PKG_VERSION="0.6.32"
-PKG_ARCH="any"
+PKG_VERSION="0.7"
+PKG_SHA256="fd45480cef0559b3eab965ea3ad4fe2d7a8f27db32c851a032ee0b487c378329"
 PKG_LICENSE="GPL"
 PKG_SITE="http://avahi.org/"
-PKG_URL="http://sources.openelec.tv/mirror/avahi/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_URL="https://github.com/lathiat/avahi/archive/v$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain expat libdaemon dbus connman"
-PKG_SECTION="network"
-PKG_SHORTDESC="avahi: A Zeroconf mDNS/DNS-SD responder"
-PKG_LONGDESC="Avahi is a framework for Multicast DNS Service Discovery (mDNS/DNS-SD a.k.a. Zeroconf) on Linux. It allows programs to publish and discover services running on a local network with no specific configuration. For example, you can plug into a network and instantly find printers to print to, files to look at, and people to talk to."
-
-PKG_IS_ADDON="no"
-#broken
-PKG_AUTORECONF="no"
-
-MAKEFLAGS="-j1"
+PKG_LONGDESC="Service Discovery for Linux using mDNS/DNS-SD, compatible with Bonjour."
+PKG_TOOLCHAIN="configure"
 
 PKG_CONFIGURE_OPTS_TARGET="py_cv_mod_gtk_=yes \
                            py_cv_mod_dbus_=yes \
                            ac_cv_func_chroot=no \
                            --with-distro=none \
+                           --enable-static \
                            --disable-glib \
                            --disable-gobject \
                            --disable-qt3 \
@@ -48,7 +27,6 @@ PKG_CONFIGURE_OPTS_TARGET="py_cv_mod_gtk_=yes \
                            --disable-gdbm \
                            --enable-libdaemon \
                            --disable-python \
-                           --disable-pygtk \
                            --disable-python-dbus \
                            --disable-mono \
                            --disable-monodoc \
@@ -79,8 +57,6 @@ pre_configure_target() {
 }
 
 post_makeinstall_target() {
-# for some reason avai can fail to start see: http://forums.gentoo.org/viewtopic-p-7322172.html#7322172
-  sed -e "s,^.*disallow-other-stacks=.*$,disallow-other-stacks=yes,g" -i $INSTALL/etc/avahi/avahi-daemon.conf
 # disable wide-area
   sed -e "s,^.*enable-wide-area=.*$,enable-wide-area=no,g" -i $INSTALL/etc/avahi/avahi-daemon.conf
 # publish-hinfo
@@ -105,7 +81,6 @@ post_makeinstall_target() {
 
   mkdir -p $INSTALL/usr/share/services
     cp -P $PKG_DIR/default.d/*.conf $INSTALL/usr/share/services
-
 }
 
 post_install() {

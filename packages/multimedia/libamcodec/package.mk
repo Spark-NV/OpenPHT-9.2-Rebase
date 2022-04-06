@@ -1,42 +1,19 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="libamcodec"
-PKG_ARCH="arm aarch64"
-PKG_LICENSE="other"
+PKG_VERSION="4eebd67"
+PKG_LICENSE="proprietary"
 PKG_SITE="http://openlinux.amlogic.com"
-case $TARGET_ARCH in
-  arm)
-    PKG_VERSION="5e23a81"
-    PKG_URL="https://github.com/codesnake/libamcodec/archive/$PKG_VERSION.tar.gz"
-    ;;
-  aarch64)
-    PKG_VERSION="210755d"
-    PKG_URL="http://amlinux.ru/source/$PKG_NAME-$PKG_VERSION.tar.gz"
-    ;;
-esac
-PKG_DEPENDS_TARGET="toolchain alsa-lib"
-PKG_SECTION="multimedia"
-PKG_SHORTDESC="libamcodec: Interface library for Amlogic media codecs"
+PKG_URL="https://github.com/osmc/libamcodec/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="libamplayer: Interface library for Amlogic media codecs"
+PKG_TOOLCHAIN="manual"
 
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+post_unpack() {
+  sed -e "s|-lamadec||g" -i $PKG_BUILD/amcodec/Makefile
+}
 
 make_target() {
   make -C amavutils CC="$CC" PREFIX="$SYSROOT_PREFIX/usr"
@@ -44,7 +21,7 @@ make_target() {
   cp -PR amavutils/*.so $SYSROOT_PREFIX/usr/lib
 
   make -C amadec CC="$CC" PREFIX="$SYSROOT_PREFIX/usr" CROSS_PREFIX="$TARGET_PREFIX" install
-  make -C amcodec CC="$CC" HEADERS_DIR="$SYSROOT_PREFIX/usr/include/amcodec" PREFIX="$SYSROOT_PREFIX/usr" CROSS_PREFIX="$TARGET_PREFIX" install
+  make -C amcodec HEADERS_DIR="$SYSROOT_PREFIX/usr/include/amcodec" PREFIX="$SYSROOT_PREFIX/usr" install
 }
 
 makeinstall_target() {
@@ -53,4 +30,9 @@ makeinstall_target() {
 
   make -C amadec PREFIX="$INSTALL/usr" install
   make -C amcodec HEADERS_DIR="$INSTALL/usr/include/amcodec" PREFIX="$INSTALL/usr" install
+
+  # kodi prefers libamlplayer
+  ln -sf libamcodec.so $INSTALL/usr/lib/libamplayer.so
+
 }
+

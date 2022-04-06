@@ -1,42 +1,25 @@
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="lm_sensors"
-PKG_VERSION="0d5ccf6"
+PKG_VERSION="e8afbda10fba571c816abddcb5c8180afc435bba"
+PKG_SHA256="255b9a9b30c7969b3df0460392a807239c18b15baac1ff33ff5fef3b1cc1169d"
 PKG_ARCH="arm x86_64"
 PKG_LICENSE="GPL"
 PKG_SITE="http://secure.netroedge.com/~lm78/"
 PKG_URL="https://github.com/groeck/lm-sensors/archive/${PKG_VERSION}.tar.gz"
-PKG_SOURCE_DIR="lm-sensors-${PKG_VERSION}*"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="tools"
-PKG_SHORTDESC="lm_sensors: Hardware monitoring via the SMBus"
-PKG_LONGDESC="lm_sensors is a package to get data from the SMB (System Management Bus - an i2c bus) on modern mainboards. It consists of kernel modules and users space tools to get stuff like cpu / mb temperature, voltages, fan speed..."
+PKG_LONGDESC="Provides user-space support for the hardware monitoring drivers."
 
-# TODO: PKG_MAKE_OPTS_TARGET + ETCDIR=/storage/.kodi/addons/tools.lm_sensors/data if one wants sensor3.conf..
-PKG_MAKE_OPTS_TARGET="PREFIX=/usr CC=$CC AR=$AR"
 PKG_MAKEINSTALL_OPTS_TARGET="PREFIX=/usr"
 
 pre_make_target() {
+  PKG_MAKE_OPTS_TARGET="PREFIX=/usr CC=$CC AR=$AR"
+
   export CFLAGS="$TARGET_CFLAGS"
   export CPPFLAGS="$TARGET_CPPFLAGS"
 }
 
 makeinstall_target() {
-  : # meh
+  :
 }

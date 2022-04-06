@@ -1,38 +1,23 @@
-################################################################################
-#      This file is part of LibreELEC - http://www.libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="efibootmgr"
-PKG_VERSION="95f7a63" # 0.8.0
+PKG_VERSION="99b578501643377e0b1994b2a068b790d189d5ad"
+PKG_SHA256="04bc45dc8a841985d78d8df87b3475eb6e1122f993fae975197bf3adbc6e3341"
 PKG_ARCH="x86_64"
 PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/vathpela/efibootmgr"
-PKG_URL="https://github.com/vathpela/efibootmgr-devel/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="efibootmgr-devel-$PKG_VERSION*"
+PKG_SITE="https://github.com/rhboot/efibootmgr"
+PKG_URL="https://github.com/rhboot/efibootmgr/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain efivar pciutils zlib"
-PKG_SECTION="tools"
-PKG_SHORTDESC="EFI Boot Manager"
-PKG_LONGDESC="This is a Linux user-space application to modify the Intel Extensible Firmware Interface (EFI) Boot Manager configuration. This application can create and destroy boot entries, change the boot order, change the next running boot option, and more."
-PKG_AUTORECONF="no"
+PKG_LONGDESC="Tool to modify UEFI Firmware Boot Manager Variables."
 
-pre_make_target() {
-  strip_lto
-  export EXTRA_CFLAGS="$CFLAGS -I$SYSROOT_PREFIX/usr/include -I$SYSROOT_PREFIX/usr/include/efivar -fgnu89-inline"
+make_target() {
+  export CFLAGS="$CFLAGS -I$SYSROOT_PREFIX/usr/include -I$SYSROOT_PREFIX/usr/include/efivar -fgnu89-inline"
   export LDFLAGS="$LDFLAGS -L$SYSROOT_PREFIX/usr/lib -ludev -ldl"
+
+  make EFIDIR=BOOT EFI_LOADER=bootx64.efi PKG_CONFIG=true \
+    LDLIBS="-lefiboot -lefivar" \
+    efibootmgr
 }
 
 makeinstall_target() {

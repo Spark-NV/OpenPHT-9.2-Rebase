@@ -26,15 +26,9 @@
 # Mediacenter to use (kodi / plexht / no)
   MEDIACENTER="plexht"
 
-if [ -z "$OPENPHT_BRANCH" ]; then
-  OPENPHT_BRANCH="openpht-1.9"
-fi
-if [ -z "$OPENPHT_REPO" ]; then
-  OPENPHT_REPO="https://github.com/RasPlex/OpenPHT.git"
-fi
-if [ -z "$OPENPHT_SETTINGS_REPO" ]; then
-  OPENPHT_SETTINGS_REPO="https://github.com/RasPlex/service.openelec.settings.git"
-fi
+# Set PHT version numbers
+OPENPHT_BUILD_VERSION=1.9
+COREELEC_REVISION_NUMBER=9.2.8
 
 # Skins to install (Estuary)
 # Space separated list is supported,
@@ -206,3 +200,19 @@ fi
   SYSTEM_SIZE=512
 # Default system partition offset, in sectors, eg. 2048
   SYSTEM_PART_START=8192
+
+  GET_HANDLER_SUPPORT="archive"
+
+# Partition labels for USB/SD installation media
+  DISTRO_BOOTLABEL="COREELEC"
+  DISTRO_DISKLABEL="STORAGE"
+
+# Settings package name - blank if not required
+  DISTRO_PKG_SETTINGS="OpenPHT-settings"
+
+# IR remote protocols supported in default config
+  IR_REMOTE_PROTOCOLS="RC6 NEC"
+
+# IR remote keymaps supported in default config
+  IR_REMOTE_KEYMAPS="rc6_mce xbox_360 xbox_one"
+

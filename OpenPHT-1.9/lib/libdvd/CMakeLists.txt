@@ -1,0 +1,16 @@
+if(NOT WIN32)
+  if(TARGET_OSX)
+    set(WORDS_BIGENDIAN 0)
+  else()
+    include(TestBigEndian)
+    TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
+  endif()
+  
+  if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format -Wno-parentheses-equality -Wno-enum-conversion")
+  endif(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
+
+  add_subdirectory(libdvdnav)
+  add_subdirectory(libdvdcss)
+  add_subdirectory(libdvdread)
+endif()

@@ -1,28 +1,16 @@
 #!/bin/sh
 
-################################################################################
-#      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016-present Team LibreELEC
-#
-#  LibreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  LibreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 . /etc/profile
 
 oe_setup_addon service.tvheadend42
 
 ADDON_SETTINGS="$ADDON_HOME/settings.xml"
+
+COMSKIP_DIR="$ADDON_HOME/comskip"
+COMSKIP_SETTINGS_FILE="$COMSKIP_DIR/comskip.ini"
 
 DVR_SETTINGS_DIR="$ADDON_HOME/dvr/config"
 DVR_SETTINGS_FILE="$DVR_SETTINGS_DIR/8d0f5b7ae354d956d7fe5db25f5d0d24"
@@ -49,6 +37,11 @@ if [ -f "$ADDON_HOME/dvr/config/dvr-config" ]; then
   rm $ADDON_HOME/dvr/config/dvr-config
 fi
 
+# workaround to create default Tvh directories without entering samba share
+if [ ! -d "/storage/recordings" ]; then
+  mkdir -p /storage/recordings /storage/picons/tvh /storage/picons/vdr
+fi
+
 if [ -f "$ADDON_HOME/channel/config/config.tmp" ]; then
   rm $ADDON_HOME/channel/config/config.tmp
 fi
@@ -58,6 +51,11 @@ if [ -f "$ADDON_HOME/channel/config/tag.tmp" ]; then
 fi
 
 # copy config files to userdata
+if [ ! -f "$COMSKIP_SETTINGS_FILE" ]; then
+  mkdir -p $COMSKIP_DIR
+  cp $ADDON_DIR/defaults/comskip/comskip.ini $COMSKIP_SETTINGS_FILE
+fi
+
 if [ ! -f "$DVR_SETTINGS_FILE" ]; then
   mkdir -p $DVR_SETTINGS_DIR
   cp $ADDON_DIR/defaults/dvr/config/8d0f5b7ae354d956d7fe5db25f5d0d24 $DVR_SETTINGS_FILE

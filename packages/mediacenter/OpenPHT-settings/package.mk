@@ -22,7 +22,7 @@ PKG_ARCH="any"
 PKG_LICENSE="prop."
 PKG_SITE="http://www.rasplex.com"
 PKG_URL=""
-PKG_DEPENDS_TARGET="toolchain Python connman pygobject dbus-python"
+PKG_DEPENDS_TARGET="toolchain Python2 connman pygobject dbus-python"
 PKG_SECTION=""
 PKG_SHORTDESC="OpenPHT-settings: Settings dialog for OpenPHT-Embedded/RasPlex"
 PKG_LONGDESC="OpenPHT-settings: is a settings dialog for OpenPHT-Embedded/RasPlex"
@@ -38,19 +38,15 @@ else
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET bkeymaps"
 fi
 
-unpack() {
+post_patch() {
   rm -rf $BUILD/$PKG_NAME-$PKG_VERSION
-  git clone --depth 1 --branch $OPENPHT_BRANCH $OPENPHT_SETTINGS_REPO $BUILD/$PKG_NAME-$PKG_VERSION
+  mkdir $BUILD/$PKG_NAME-$PKG_VERSION
+  cp -r $ROOT/OpenPHT-1.9-Settings-Service/* $BUILD/$PKG_NAME-$PKG_VERSION/
 }
 
 post_makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libreelec
     cp $PKG_DIR/scripts/* $INSTALL/usr/lib/libreelec
-
-#  # bluetooth is optional
-#    if [ ! "$BLUETOOTH_SUPPORT" = yes ]; then
-#      rm -f resources/lib/modules/bluetooth.py
-#    fi
 
   python -Wi -t -B $TOOLCHAIN/lib/python2.7/compileall.py $INSTALL/usr/share/XBMC/addons/service.libreelec.settings/resources/lib/ -f
   rm -rf `find $INSTALL/usr/share/XBMC/addons/service.libreelec.settings/resources/lib/ -name "*.py"`
@@ -63,3 +59,4 @@ post_install() {
   enable_service backup-restore.service
   enable_service factory-reset.service
 }
+

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<window id="2006">
+	<defaultcontrol>90</defaultcontrol>
+	<allowoverlay>no</allowoverlay>
+	<controls>
+
+		<!-- Background -->
+		<control type="image">
+			<description>Fanart image</description>
+			<width>1280</width>
+			<height>720</height>
+			<fadetime>750</fadetime>
+			<texture background="true" fallback="special://skin/backgrounds/music.jpg">$INFO[Player.Art(fanart)]</texture>
+			<animation effect="zoom" start="110" end="130" center="auto" time="12000" pulse="true" condition="Skin.HasSetting(Enable.AnimatedBackgrounds)">Conditional</animation>
+			<animation effect="slide" start="-15,-15" end="15,15" time="6000" pulse="true" condition="Skin.HasSetting(Enable.AnimatedBackgrounds)">Conditional</animation>
+		</control>
+
+		<!-- Grain Overlay -->
+		<control type="image">
+			<width>1280</width>
+			<height>720</height>
+			<texture>bg-overlay-grainy.png</texture>
+			<aspectratio>stretch</aspectratio>
+			<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+			<visible>true</visible>
+		</control>
+
+		<control type="visualisation" id="2">
+			<description>visualisation</description>
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+		</control>
+
+		<!-- viz info -->
+		<control type="group" id="0">
+			<visible>Player.ShowInfo + ![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsActive(MusicOSD)]</visible>
+			<animation effect="fade" time="500">VisibleChange</animation>
+			<control type="group">
+				<posx>960</posx>
+				<posy>400</posy>
+				<control type="group">
+					<animation effect="fade" start="0" end="60" condition="true">Conditional</animation>
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>256</width>
+						<height>256</height>
+						<include>Shadow</include>
+					</control>
+					<control type="image">
+						<posx>13</posx>
+						<posy>13</posy>
+						<width>230</width>
+						<height>230</height>
+						<texture>default-square-small.png</texture>
+					</control>
+					<control type="image">
+						<posx>13</posx>
+						<posy>13</posy>
+						<width>230</width>
+						<height>230</height>
+						<texture diffuse="mask-square.png">$INFO[MusicPlayer.Offset(0).Cover]</texture>
+						<aspectratio scalediffuse="false">scale</aspectratio>
+					</control>
+				</control>
+			</control>
+			<control type="group">
+				<posx>934</posx>
+				<posy>500</posy>
+				<animation effect="fade" start="0" end="80" condition="true">Conditional</animation>
+				<control type="label">
+					<posy>48</posy>
+					<width>800</width>
+					<font>Bold-28</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[MusicPlayer.Offset(0).Artist]</label>
+					<align>right</align>
+					<shadowcolor>ff222222</shadowcolor>
+				</control>
+				<control type="label">
+					<posy>90</posy>
+					<width>800</width>
+					<font>Regular-26</font>
+					<textcolor>greyLighter</textcolor>
+					<label>$INFO[MusicPlayer.Offset(0).Album]</label>
+					<align>right</align>
+					<shadowcolor>ff222222</shadowcolor>
+				</control>
+				<control type="label">
+					<posy>130</posy>
+					<width>800</width>
+					<font>Regular-26</font>
+					<textcolor>greyLighter</textcolor>
+					<label>$INFO[MusicPlayer.Offset(0).Title]</label>
+					<align>right</align>
+					<shadowcolor>ff222222</shadowcolor>
+				</control>
+			</control>
+		</control>
+
+	</controls>
+</window>

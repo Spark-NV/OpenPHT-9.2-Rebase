@@ -1,42 +1,16 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="gdb"
-PKG_VERSION="7.11.1"
-PKG_ARCH="any"
+PKG_VERSION="8.2.1"
+PKG_SHA256="0a6a432907a03c5c8eaad3c3cffd50c00a40c3a5e3c4039440624bae703f2202"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.gnu.org/software/gdb/"
 PKG_URL="http://ftpmirror.gnu.org/gdb/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib netbsd-curses expat"
-PKG_SECTION="debug"
-PKG_SHORTDESC="gdb: The GNU Debugger"
-PKG_LONGDESC="The purpose of a debugger such as GDB is to allow you to see what is going on ``inside'' another program while it executes--or what another program was doing at the moment it crashed."
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
-
-CC_FOR_BUILD="$HOST_CC"
-CFLAGS_FOR_BUILD="$HOST_CFLAGS"
-
-pre_configure_target() {
-  # gdb could fail on runtime if build with LTO support
-    strip_lto
-}
+PKG_DEPENDS_TARGET="toolchain zlib ncurses expat"
+PKG_LONGDESC="GNU Project debugger, allows you to see what is going on inside another program while it executes."
+# gdb could fail on runtime if build with LTO support
 
 PKG_CONFIGURE_OPTS_TARGET="bash_cv_have_mbstate_t=set \
                            --disable-shared \
@@ -53,6 +27,15 @@ PKG_CONFIGURE_OPTS_TARGET="bash_cv_have_mbstate_t=set \
                            --enable-libada \
                            --enable-libssp \
                            --disable-werror"
+
+pre_configure_target() {
+  CC_FOR_BUILD="$HOST_CC"
+  CFLAGS_FOR_BUILD="$HOST_CFLAGS"
+}
+
+makeinstall_target() {
+  make DESTDIR=$INSTALL install
+}
 
 post_makeinstall_target() {
   rm -rf $INSTALL/usr/share/gdb/python

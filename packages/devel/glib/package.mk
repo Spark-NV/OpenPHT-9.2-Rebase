@@ -1,71 +1,50 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#      Copyright (C) 2016-     Team LibreELEC
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="glib"
-PKG_VERSION="2.46.2"
-PKG_ARCH="any"
+PKG_VERSION="2.61.1"
+PKG_SHA256="f8d827955f0d8e197ff5c2105dd6ac4f6b63d15cd021eb1de66534c92a762161"
 PKG_LICENSE="LGPL"
 PKG_SITE="http://www.gtk.org/"
-PKG_URL="http://ftp.gnome.org/pub/gnome/sources/glib/2.46/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain zlib libffi Python:host"
-PKG_DEPENDS_HOST="libffi:host"
-PKG_SECTION="devel"
-PKG_SHORTDESC="glib: C support library"
-PKG_LONGDESC="GLib is a library which includes support routines for C such as lists, trees, hashes, memory allocation, and many other things."
+PKG_URL="http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_VERSION%.*}/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_DEPENDS_HOST="libffi:host Python3:host meson:host"
+PKG_DEPENDS_TARGET="toolchain pcre zlib libffi Python3:host util-linux"
+PKG_LONGDESC="A library which includes support routines for C such as lists, trees, hashes, memory allocation."
+PKG_TOOLCHAIN="meson"
 
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="yes"
+PKG_MESON_OPTS_HOST="-Ddefault_library=static \
+                     -Dinternal_pcre=true \
+                     -Dinstalled_tests=false \
+                     -Dlibmount=false"
 
-PKG_CONFIGURE_OPTS_HOST="--enable-static --disable-shared"
-PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_mmap_fixed_mapped=yes \
-                           ac_cv_func_posix_getpwuid_r=yes \
-                           ac_cv_func_posix_getgrgid_r=yes \
-                           ac_cv_func_printf_unix98=yes \
-                           ac_cv_func_snprintf_c99=yes \
-                           ac_cv_func_vsnprintf_c99=yes \
-                           glib_cv_stack_grows=no \
-                           glib_cv_uscore=no \
-                           glib_cv_va_val_copy=no \
-                           --disable-selinux \
-                           --disable-fam \
-                           --enable-xattr \
-                           --disable-libelf \
-                           --disable-gtk-doc \
-                           --disable-man \
-                           --disable-dtrace \
-                           --disable-systemtap \
-                           --enable-Bsymbolic \
-                           --with-gnu-ld \
-                           --with-threads=posix \
-                           --with-pcre=internal"
+PKG_MESON_OPTS_TARGET="-Ddefault_library=shared \
+                       -Dinternal_pcre=false \
+                       -Dinstalled_tests=false \
+                       -Dselinux=disabled \
+                       -Dfam=false \
+                       -Dxattr=true \
+                       -Dgtk_doc=false \
+                       -Dman=false \
+                       -Ddtrace=false \
+                       -Dsystemtap=false \
+                       -Dbsymbolic_functions=true \
+                       -Dforce_posix_threads=true"
 
-post_makeinstall_target() {
-  mkdir -p $SYSROOT_PREFIX/usr/lib/pkgconfig
-    cp g*-2.0.pc $SYSROOT_PREFIX/usr/lib/pkgconfig
+PKG_MESON_PROPERTIES_TARGET="
+have_c99_vsnprintf=false
+have_c99_snprintf=false
+growing_stack=false
+va_val_copy=false"
 
-  mkdir -p $SYSROOT_PREFIX/usr/share/aclocal
-    cp ../m4macros/glib-gettext.m4 $SYSROOT_PREFIX/usr/share/aclocal
+pre_configure_target() {
+  LDFLAGS+=" -lz"
 }
 
 post_makeinstall_target() {
   rm -rf $INSTALL/usr/bin
   rm -rf $INSTALL/usr/lib/gdbus-2.0
   rm -rf $INSTALL/usr/lib/glib-2.0
+  rm -rf $INSTALL/usr/lib/installed-tests
   rm -rf $INSTALL/usr/share
 }

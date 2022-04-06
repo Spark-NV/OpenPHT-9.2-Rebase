@@ -29,11 +29,13 @@
 if [ -z "$OPENPHT_BRANCH" ]; then
   OPENPHT_BRANCH="openpht-1.9"
 fi
+
 if [ -z "$OPENPHT_REPO" ]; then
-  OPENPHT_REPO="https://github.com/RasPlex/OpenPHT.git"
+  OPENPHT_REPO="https://gitlab.com/spark-nv/pht-latest.git"
 fi
+
 if [ -z "$OPENPHT_SETTINGS_REPO" ]; then
-  OPENPHT_SETTINGS_REPO="https://github.com/RasPlex/service.openelec.settings.git"
+  OPENPHT_SETTINGS_REPO="https://gitlab.com/spark-nv/PHT-Settings.git"
 fi
 
 # Skins to install (Estuary)
@@ -195,6 +197,9 @@ fi
   DISTRO_MIRROR="http://sources.openpht.tv/mirror"
   DISTRO_SRC="http://sources.openpht.tv/$LIBREELEC_VERSION"
 
+#  DISTRO_MIRROR="http://sources.libreelec.tv/mirror"
+#  DISTRO_SRC="http://sources.libreelec.tv/$LIBREELEC_VERSION"
+
 # Addon Server Url
   ADDON_SERVER_URL="https://addons.openpht.tv"
 
@@ -202,7 +207,28 @@ fi
   ADDON_PATH="$ADDON_VERSION/$PROJECT/$TARGET_ARCH"
   ADDON_URL="$ADDON_SERVER_URL/$ADDON_PATH"
 
+## Configure debug groups (space delimited key=value pairs, with each value comma-delimited) and default group when DEBUG=yes
+## Use ! or - prefix to prevent a dependent package from being built with debug. Add + suffix to build dependenencies with debug.
+#  DEBUG_GROUPS="kodi+=kodi+,kodi-platform+,p8-platform+,!mesa"
+#  DEBUG_GROUP_YES="kodi+"
+
 # Default size of system partition, in MB, eg. 512
   SYSTEM_SIZE=512
 # Default system partition offset, in sectors, eg. 2048
   SYSTEM_PART_START=8192
+
+  GET_HANDLER_SUPPORT="archive"
+
+# Partition labels for USB/SD installation media
+  DISTRO_BOOTLABEL="RASPLEX"
+  DISTRO_DISKLABEL="STORAGE"
+
+# Settings package name - blank if not required
+  DISTRO_PKG_SETTINGS="OpenPHT-settings"
+
+# IR remote protocols supported in default config
+  IR_REMOTE_PROTOCOLS="RC6 NEC"
+
+# IR remote keymaps supported in default config
+  IR_REMOTE_KEYMAPS="rc6_mce xbox_360 xbox_one"
+

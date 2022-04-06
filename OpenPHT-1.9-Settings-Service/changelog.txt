@@ -1,0 +1,3 @@
+2017-06-23
+  (update) change smbd and nmbd location
+  (update) use upstream method to start lirc

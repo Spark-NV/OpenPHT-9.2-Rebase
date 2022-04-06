@@ -1,35 +1,17 @@
-################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
-#
-#  OpenELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  OpenELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+# Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="vdr-plugin-dummydevice"
 PKG_VERSION="2.0.0"
-PKG_ARCH="any"
+PKG_SHA256="5c0049824415bd463d3abc728a3136ee064b60a37b5d3a1986cf282b0d757085"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.vdr-wiki.de/wiki/index.php/Dummydevice-plugin"
 PKG_URL="http://phivdr.dyndns.org/vdr/vdr-dummydevice/${PKG_NAME/-plugin/}-$PKG_VERSION.tgz"
-PKG_SOURCE_DIR="dummydevice-${PKG_VERSION}"
 PKG_DEPENDS_TARGET="toolchain vdr"
-PKG_SECTION="multimedia"
-PKG_SHORTDESC="vdr dummydevice plugin"
-PKG_LONGDESC="vdr dummydevice plugin"
-
-PKG_IS_ADDON="no"
-PKG_AUTORECONF="no"
+PKG_NEED_UNPACK="$(get_pkg_directory vdr)"
+PKG_LONGDESC="This plugin can be used to run vdr as recording server without any output devices."
+PKG_TOOLCHAIN="manual"
 
 make_target() {
   VDR_DIR=$(get_build_dir vdr)
@@ -48,9 +30,4 @@ post_make_target() {
   LIB_NAME=lib${PKG_NAME/-plugin/}
 
   cp --remove-destination ${LIB_NAME}.so ${LIB_NAME}.so.${VDR_APIVERSION}
-  $STRIP libvdr-*.so*
-}
-
-makeinstall_target() {
-  : # installation not needed, done by create-addon script
 }
