@@ -7,6 +7,58 @@ But as of now everything appears to be functioning and what has quirks there is 
 
 ------------
 
+<details>
+<summary>Amlogic Supported Devices (Theoretically)</summary>
+<br>
+------
+S905
+S905X
+S905D
+S905W
+S905H
+S912
+S812
+------
+<br/><br/>
+All forms of each of those chipsets are most likely supported as long as a DTB is available.
+<br/><br/>
+</details>
+
+<details>
+<summary>Amlogic-ng Supported Devices (Theoretically)</summary>
+<br>
+------
+S905X
+S905X2
+S905X3
+S905Y2
+S905D3
+A311D
+S922X
+------
+<br/><br/>
+And as far as I can see "ng" might also support all the devices the non-ng builds support minus S812
+<br/><br/>
+</details>
+
+<details>
+<summary>Unknown Supported Devices</summary>
+<br>
+These are listed in the projects directory, but are not listed on the CoreELEC site, so no idea if they actually work as I cant test.
+<br/><br/>
+
+Allwinner: A64  H3  H6
+  
+Raspberry Pi: RPi  RPi2  RPi3/3+  RPi4
+  
+Rockchip: MiQi  RK3328  RK3399  TinkerBoard
+  
+All Generic X86/X64 Devices/PC's
+
+</details>
+
+------------
+
 **Build**
 
 Short commands to build preset images:
