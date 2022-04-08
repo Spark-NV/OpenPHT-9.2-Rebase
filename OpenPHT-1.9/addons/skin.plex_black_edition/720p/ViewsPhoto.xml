@@ -1,0 +1,598 @@
+<?xml version="1.0"?>
+<includes>
+	<!-- Common -->
+	
+	<include name="SelectedBorderNoCard">
+		<control type="image">
+			<posx>11</posx>
+			<posy>11</posy>
+			<width>126</width>
+			<height>126</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="PhotoAlbumSelectedBorder">
+		<control type="image">
+			<posx>10</posx>
+			<posy>10</posy>
+			<width>149</width>
+			<height>149</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="PhotoThumb">
+		<control type="group">
+			<!--<visible>ListItem.Type(photo)</visible> Support video in photo section--> 
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>148</width>
+				<height>148</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>122</width>
+				<height>122</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>122</width>
+				<height>122</height>
+				<texture background="true" diffuse="mask-square.png">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+		</control>
+	</include>
+	<include name="PhotoThumbBig">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>169</width>
+				<height>169</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>143</width>
+				<height>143</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>143</width>
+				<height>143</height>
+				<texture background="true" diffuse="mask-square.png">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+		</control>
+	</include>
+	<include name="PhotoAlbumCover">
+		<control type="group">
+			<visible>ListItem.Type(photoAlbum)</visible>
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>148</width>
+				<height>148</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>122</width>
+				<height>122</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>122</width>
+				<height>122</height>
+				<texture background="true" diffuse="mask-square.png">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>97</posy>
+				<width>122</width>
+				<height>39</height>
+				<include>Black</include>
+				<animation effect="fade" start="0" end="40" time="0" condition="true">Conditional</animation>
+			</control>
+		</control>
+	</include>
+	<include name="PhotoAlbumCoverBig">
+		<control type="group">
+			<visible>ListItem.Type(photoAlbum)</visible>
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>169</width>
+				<height>169</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>143</width>
+				<height>143</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>143</width>
+				<height>143</height>
+				<texture background="true" diffuse="mask-square.png">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>127</posy>
+				<width>143</width>
+				<height>29</height>
+				<include>Black</include>
+				<animation effect="fade" start="0" end="40" time="0" condition="true">Conditional</animation>
+			</control>
+		</control>
+	</include>
+	<include name="PhotoAlbumPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>143</width>
+			<height>143</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>54</posx>
+			<posy>54</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+	<include name="PhotoMovieIconBig">
+		<control type="image">
+			<posx>120</posx>
+			<posy>120</posy>
+			<width>30</width>
+			<height>30</height>
+			<texture>icon-video.png</texture>
+			<visible>ListItem.Type(clip)</visible>
+		</control>
+	</include>
+	<include name="PhotoAlbumIconBig">
+		<control type="image">
+			<posx>120</posx>
+			<posy>92</posy>
+			<width>30</width>
+			<height>30</height>
+			<texture>icon-photoalbum.png</texture>
+			<visible>ListItem.Type(photoAlbum)</visible>
+		</control>
+	</include>
+	<include name="PhotoLabel">
+		<posy>139</posy>
+		<posx>14</posx>
+		<width>116</width>
+		<height>20</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>Regular-17</font>
+	</include>
+	<include name="PhotoLabelBig">
+		<control type="label">
+			<posy>130</posy>
+			<posx>85</posx>
+			<width>138</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<visible>ListItem.Type(photoAlbum)</visible>
+		</control>
+	</include>
+	<include name="PhotoLabelBigFocused">
+		<control type="label">
+			<posy>130</posy>
+			<posx>85</posx>
+			<width>138</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<visible>ListItem.Type(photoAlbum)</visible>
+			<textcolor>Focused</textcolor>
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+		</control>
+		<control type="label">
+			<posy>130</posy>
+			<posx>85</posx>
+			<width>138</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<visible>ListItem.Type(photoAlbum)</visible>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+		</control>
+	</include>
+	<!-- LibraryPhoto -->
+	<include name="AlbumTitleLibrary">
+		<control type="group">
+			<posy>20</posy>
+			<posx>41</posx>
+			<control type="label">
+				<posy>0</posy>
+				<posx>0</posx>
+				<width>440</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[Container.SecondTitle]</label>
+				<font>LightCaps-32</font>
+				<textcolor>white</textcolor>
+			</control>
+		</control>
+	</include>
+	<include name="AlbumIconsLibrary">
+		<control type="group">
+			<posx>0</posx>
+			<posy>90</posy>
+			<control type="group">
+				<posx>252</posx>
+				<posy>-12</posy>
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>286</width>
+					<height>286</height>
+					<include>Shadow</include>
+				</control>
+				<control type="image">
+					<description>Poster image</description>
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>260</width>
+					<height>260</height>
+					<texture background="true" diffuse="mask-square.png">$INFO[ListItem.Property(Fanart_Image)]</texture>
+					<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="PlotLibrary">
+		<control type="group">
+			<!-- album plot -->
+			<control type="textbox">
+				<posx>35</posx>
+				<posy>89</posy>
+				<width>1230</width>
+				<height>55</height>
+				<include>PlotFormat</include>
+				<label>$INFO[Container.Property(summary)]</label>
+			</control>
+			<control type="textbox">
+				<posx>35</posx>
+				<posy>80</posy>
+				<width>1230</width>
+				<height>55</height>
+				<include>PlotFormat</include>
+				<include>NoPlotDefault</include>
+				<visible>IsEmpty(Container.Property(summary))</visible>
+			</control>
+		</control>
+	</include>
+	<!-- Library -->
+	<include name="LibraryPhoto">
+		<control type="group">
+			<visible>Control.IsVisible(56)</visible>
+			<control type="group">
+				<visible>isEmpty(Skin.String(56_BGMulti))</visible>
+				<visible>!Skin.String(56_Dim,100)</visible>
+				<visible>!Skin.String(56_Blur,1)</visible>
+				<include>BGFanart</include>
+			</control>	
+			<control type="group">
+				<visible>isEmpty(Skin.String(56_BGMulti))</visible>
+				<visible>!Skin.String(56_Dim,100)</visible>
+				<visible>Skin.String(56_Blur,1)</visible>
+				<include>BGFanartBlur</include>
+			</control>	
+			
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(56_BGSingle)]</texture>		
+				<visible>!isEmpty(Skin.String(56_BGSingle)) + isEmpty(Skin.String(56_BGMulti))</visible>
+			</control>
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>	
+				<info>Skin.String(56_BGMulti)</info>
+				<visible>isEmpty(Skin.String(56_BGSingle)) + !isEmpty(Skin.String(56_BGMulti))</visible>
+			</control>		
+		</control>
+		<control type="group">
+			<!--<visible>!Container.PlexContent(PhotoAlbums) + !Container.PlexContent(Channel)</visible>-->
+			<include>rightSideSlide</include>
+			<!--BG Dim-->		
+			<control type="group">
+				<visible>Control.IsVisible(56)</visible>
+				<visible>!Skin.String(56_Dim,100)</visible>
+				<control type="group">
+					<visible>Skin.String(56_Dim,10)</visible>
+					<include>BGDim10</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,20)</visible>
+					<include>BGDim20</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,30)</visible>
+					<include>BGDim30</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,40)</visible>
+					<include>BGDim40</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,50)</visible>
+					<include>BGDim50</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,60) | IsEmpty(Skin.String(56_Dim))</visible>
+					<include>BGDim60</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,70)</visible>
+					<include>BGDim70</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,80)</visible>
+					<include>BGDim80</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(56_Dim,90)</visible>
+					<include>BGDim90</include>
+				</control>
+			</control>		
+			<control type="group">
+				<visible>Control.IsVisible(56)+Container.PlexContent(PhotoAlbums)</visible>				
+				<include>AlbumTitleLibrary</include>
+				<include>FadeDialog</include>
+			</control>
+			<control type="group" id="777">
+				<!-- main list -->
+				<control type="panel" id="56">
+					<!--<visible>!Container.PlexContent(PhotoAlbums) + !Container.PlexContent(Channel)</visible>-->
+					<viewtype label="Photo Library">panel</viewtype>
+					<include>FadeDialog</include>
+					<onup>56</onup>
+					<ondown>56</ondown>
+					<onright>56</onright>
+					<onleft>998</onleft>
+					<orientation>vertical</orientation>
+					<posx>30</posx>
+					<posy>50</posy>
+					<width>1250</width>
+					<height>610</height>
+					<include>ItemScrollTime</include>
+					<preloaditems>2</preloaditems>
+					<itemlayout width="150" height="150">
+						<control type="group">
+							<animation effect="fade" start="100" end="65" time="400" condition="Skin.String(56_DimUnfocused,1)">Conditional</animation>
+							<include>PhotoThumbBig</include>
+							<include>PhotoAlbumCoverBig</include>								
+							<include>PhotoAlbumIconBig</include>
+							<include>PhotoMovieIconBig</include>							
+						</control>
+						<include>PhotoLabelBig</include>
+					</itemlayout>
+					<focusedlayout width="150" height="150">
+						<control type="group">
+							<animation effect="zoom" start="100" end="117" time="300" center="86,86" condition="Skin.String(56_ZoomFocused,1)">Focus</animation>
+							<control type="group">									
+								<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(560_DimUnfocused,1)">Focus</animation>
+								<include>PhotoThumbBig</include>						
+								<include>PhotoAlbumCoverBig</include>															
+								<include>PhotoAlbumIconBig</include>	
+								<include>PhotoMovieIconBig</include>								
+							</control>
+							<control type="group">
+								<visible>Skin.String(56_FocusedPlayBtn,1)</visible>
+								<include>PhotoAlbumPlayBtnOverlay</include>
+							</control>						
+							<include>PhotoLabelBigFocused</include>							
+							<control type="group">
+								<visible>!Skin.String(56_FocusedNoBorder,1)</visible>
+								<include>PhotoAlbumSelectedBorder</include>
+							</control>
+							
+						</control>
+					</focusedlayout>
+				</control>
+			</control>
+		</control>
+	</include>
+	
+	<!-- Photos-->
+	<include name="AlbumPhotoPreview">
+		<control type="group">
+			<visible>Control.IsVisible(561)</visible>			
+			<control type="group">
+				<visible>isEmpty(Skin.String(561_BGMulti))</visible>
+				<visible>!Skin.String(561_Dim,100)</visible>
+				<visible>!Skin.String(561_Blur,1)</visible>
+				<include>BGFanart</include>
+			</control>	
+			<control type="group">
+				<visible>isEmpty(Skin.String(561_BGMulti))</visible>
+				<visible>!Skin.String(561_Dim,100)</visible>
+				<visible>Skin.String(561_Blur,1)</visible>
+				<include>BGFanartBlur</include>
+			</control>	
+			
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(561_BGSingle)]</texture>		
+				<visible>!isEmpty(Skin.String(561_BGSingle)) + isEmpty(Skin.String(561_BGMulti))</visible>
+			</control>
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>	
+				<info>Skin.String(561_BGMulti)</info>
+				<visible>isEmpty(Skin.String(561_BGSingle)) + !isEmpty(Skin.String(561_BGMulti))</visible>
+			</control>		
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(PhotoAlbums)</visible>
+			<include>rightSideSlide</include>
+			<!--BG Dim-->		
+			<control type="group">
+				<visible>Control.IsVisible(561)</visible>
+				<visible>!Skin.String(561_Dim,100)</visible>
+				<control type="group">
+					<visible>Skin.String(561_Dim,10)</visible>
+					<include>BGDim10</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,20)</visible>
+					<include>BGDim20</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,30)</visible>
+					<include>BGDim30</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,40)</visible>
+					<include>BGDim40</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,50)</visible>
+					<include>BGDim50</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,60) | IsEmpty(Skin.String(561_Dim))</visible>
+					<include>BGDim60</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,70)</visible>
+					<include>BGDim70</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,80)</visible>
+					<include>BGDim80</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(561_Dim,90)</visible>
+					<include>BGDim90</include>
+				</control>
+			</control>	
+			<control type="group" id="777">
+					<control type="group">
+					<visible>Control.IsVisible(561)</visible>
+					<include>FadeDialog</include>
+					<control type="image">
+						<description>Poster image</description>
+						<posx>25</posx>
+						<posy>19</posy>
+						<width>1080</width>
+						<height>682</height>
+						<texture background="true">$INFO[ListItem.FileNameAndPath]</texture>
+						<aspectratio scalediffuse="false" align="center" aligny="center">keep</aspectratio>
+						<fadetime>200</fadetime>
+						<visible>!ListItem.Type(photoAlbum)</visible>
+					</control>			
+					<control type="image">
+						<description>Poster image</description>
+						<posx>25</posx>
+						<posy>19</posy>
+						<width>1080</width>
+						<height>682</height>
+						<texture background="true">$INFO[ListItem.Thumb]</texture>
+						<aspectratio scalediffuse="false" align="center" aligny="center">keep</aspectratio>
+						<fadetime>200</fadetime>
+						<visible>ListItem.Type(photoAlbum)</visible>
+					</control>			
+				</control>
+				<!-- main list -->
+				<control type="fixedlist" id="561">
+					<visible>Container.PlexContent(PhotoAlbums)</visible>
+					<viewtype label="Photos">list</viewtype>
+					<include>FadeDialog</include>
+					<onup>561</onup>
+					<ondown>561</ondown>
+					<onright>561</onright>
+					<onleft>998</onleft>
+					<focusposition>2</focusposition>
+					<orientation>vertical</orientation>
+					<posx>1120</posx>
+					<posy>6</posy>
+					<width>180</width>
+					<height>700</height>
+					<include>ItemScrollTime</include>
+					<preloaditems>2</preloaditems>
+					<itemlayout width="140" height="140">
+						<include>PhotoThumb</include>
+						<include>PhotoAlbumCover</include>
+						<control type="image">
+							<posx>100</posx>
+							<posy>62</posy>
+							<width>30</width>
+							<height>30</height>
+							<texture>icon-photoalbum.png</texture>
+							<visible>ListItem.Type(photoAlbum)</visible>
+							<colordiffuse>Unfocused</colordiffuse>
+						</control>
+						<control type="label">
+							<visible>ListItem.Type(photoAlbum)</visible>
+							<posy>105</posy>
+							<include>PhotoLabel</include>
+							<textcolor>Unfocused</textcolor>
+						</control>	
+					</itemlayout>
+					<focusedlayout width="140" height="140">
+						<include>PhotoThumb</include>
+						<include>PhotoAlbumCover</include>	
+						<control type="image">
+							<posx>100</posx>
+							<posy>62</posy>
+							<width>30</width>
+							<height>30</height>
+							<texture>icon-photoalbum.png</texture>
+							<colordiffuse>Focused</colordiffuse>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="label">
+							<posy>105</posy>
+							<visible>ListItem.Type(photoAlbum)</visible>
+							<include>PhotoLabel</include>
+							<textcolor>Focused</textcolor>
+						</control>
+						<include>SelectedBorderNoCard</include>
+					</focusedlayout>
+				</control>
+			</control>
+		</control>
+	</include>
+</includes>

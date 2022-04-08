@@ -1,0 +1,1549 @@
+<?xml version="1.0"?>
+<window>
+	<defaultcontrol always="true">101</defaultcontrol>
+	<allowoverlay>no</allowoverlay>
+	<controls>
+		
+		<!-- bg's -->
+		<control type="group">
+			<posx>45</posx>
+			<include>SettingsBG</include>
+			<include>FadeDialog</include>
+			<!-- categories menu (top) -->
+			<!--<include>SettingsCategoryMenu</include> deadeye no include-->
+			<!-- settings menu (left) -->
+			<control type="group" id="302">
+				<control type="list" id="101">
+					<posy>135</posy>
+					<posx>120</posx>
+					<width>350</width>
+					<onup>1000</onup>
+					<ondown>101</ondown>
+					<onleft>Plex.ActivateWindow(4997)</onleft>
+					<onright>5</onright>
+					<height>500</height>
+					<scrolltime>200</scrolltime>
+					<itemlayout width="300" height="50">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>300</width>
+							<height>50</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="label">
+							<posx>20</posx>
+							<posy>0</posy>
+							<width>300</width>
+							<font>Regular-18</font>
+							<height>50</height>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+							<textcolor>Unfocused</textcolor>
+						</control>
+					</itemlayout>
+					<focusedlayout width="300" height="50">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>300</width>
+							<height>50</height>
+							<texture border="5">black-bottom-grey.png</texture>
+						</control>
+						<control type="label">
+							<posx>20</posx>
+							<posy>0</posy>
+							<width>300</width>
+							<font>Regular-18</font>
+							<height>50</height>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>ListItem.Label</info>
+							<textcolor>Focused</textcolor>
+						</control>
+					</focusedlayout>
+					<content>
+						<item id="1">
+							<description>General</description>
+							<label>$LOCALIZE[31604]</label>
+							<onclick>SetFocus(201)</onclick>
+						</item>
+						<item id="2">
+							<description>Home Menu</description>
+							<label>$LOCALIZE[32206]</label>
+							<onclick>SetFocus(202)</onclick>
+						</item>
+						<item id="7">
+							<description>Home Decks</description>
+							<label>$LOCALIZE[32207]</label>
+							<onclick>SetFocus(207)</onclick>
+						</item>
+						
+						<item id="3">
+							<description>Background</description>
+							<label>$LOCALIZE[32208]</label>
+							<onclick>SetFocus(203)</onclick>
+						</item>
+						
+						<item id="4">
+							<description>TV Show Thumbs</description>
+							<label>$LOCALIZE[32209]</label>
+							<onclick>SetFocus(204)</onclick>
+						</item>
+						<item id="5">
+							<description>Movie Thumbs</description>
+							<label>$LOCALIZE[32210]</label>
+							<onclick>SetFocus(205)</onclick>
+						</item>
+						<item id="6">
+							<description>Expert</description>
+							<label>$LOCALIZE[32211]</label>
+							<onclick>SetFocus(206)</onclick>
+						</item>
+					</content>
+				</control>
+				<!-- a hack for highlighting the parent category while in settings list -->
+				<control type="group">
+					<control type="image">
+						<posx>120</posx>
+						<posy>135</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(201).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>General</description>
+						<posx>140</posx>
+						<posy>135</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[31604]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(201).HasFocus</visible>
+					</control>
+					<control type="image">
+						<posx>120</posx>
+						<posy>185</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(202).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>Home Menu</description>
+						<posx>140</posx>
+						<posy>185</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32206]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(202).HasFocus</visible>
+					</control>
+					<control type="image">
+						<posx>120</posx>
+						<posy>235</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(207).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>Home Decks</description>
+						<posx>140</posx>
+						<posy>235</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32207]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(207).HasFocus</visible>
+					</control>
+					<control type="image">
+						<posx>120</posx>
+						<posy>285</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(203).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>Background</description>
+						<posx>140</posx>
+						<posy>285</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32208]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(203).HasFocus</visible>
+					</control>
+				
+					<control type="image">
+						<posx>120</posx>
+						<posy>335</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(204).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>TV Show Thumbs</description>
+						<posx>140</posx>
+						<posy>335</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32209]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(204).HasFocus</visible>
+					</control>
+					<control type="image">
+						<posx>120</posx>
+						<posy>385</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(205).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>Movie Thumbs</description>
+						<posx>140</posx>
+						<posy>385</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32210]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(205).HasFocus</visible>
+					</control>
+					<control type="image">
+						<posx>120</posx>
+						<posy>435</posy>
+						<width>300</width>
+						<height>50</height>
+						<texture border="5">black-bottom-grey.png</texture>
+						<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+						<visible>ControlGroup(206).HasFocus</visible>
+					</control>
+					<control type="label">
+						<description>Expert</description>
+						<posx>140</posx>
+						<posy>435</posy>
+						<width>300</width>
+						<font>Regular-18</font>
+						<height>50</height>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$LOCALIZE[32211]</label>
+						<textcolor>Focused</textcolor>
+						<visible>ControlGroup(206).HasFocus</visible>
+					</control>
+				</control>
+			</control>
+			<!-- Main control area -->
+			<control type="group" id="5">
+				<posx>400</posx>
+				<posy>135</posy>
+				<!-- General Options -->
+				<control type="grouplist" id="201">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>625</width>
+					<height>500</height>
+					<onup>201</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(1) | ControlGroup(201).HasFocus()</visible>
+					<orientation>vertical</orientation>
+
+					<!--
+
+					<control type="radiobutton" id="216">
+						<description>Show Now playing in viz description</description>
+						<width>625</width>
+						<label>$LOCALIZE[31984]</label>
+						<onclick>Skin.ToggleSetting(HideNowPlayingInViz)</onclick>
+						<selected>!Skin.HasSetting(HideNowPlayingInViz)</selected>
+					</control>
+					<control type="radiobutton" id="216">
+						<description>Show Extended Media flags in preplays</description>
+						<width>625</width>
+						<label>$LOCALIZE[32117]</label>
+						<onclick>Skin.ToggleSetting(ShowAllMediaFlags)</onclick>
+						<selected>Skin.HasSetting(ShowAllMediaFlags)</selected>
+					</control>
+					-->
+
+					<control type="radiobutton" id="211">
+						<description>Hide Movie/TV Infos in OSD when Player is paused</description>
+						<width>625</width>
+						<label>$LOCALIZE[32212]</label>
+						<onclick>Skin.ToggleSetting(HidePausedInfos)</onclick>
+						<selected>Skin.HasSetting(HidePausedInfos)</selected>
+					</control>	
+			
+					<control type="radiobutton" id="212">
+						<description>Show Now Playing Video in Background</description>
+						<width>625</width>
+						<label>$LOCALIZE[32213]</label>
+						<onclick>Skin.ToggleSetting(ShowNowPlayingVidBackround)</onclick>
+						<selected>Skin.HasSetting(ShowNowPlayingVidBackround)</selected>
+					</control>	
+					<control type="radiobutton" id="213">	
+						<description>Show Movie Extras always</description>
+						<width>625</width>				
+						<label>$LOCALIZE[32216]</label>
+						<onclick>Skin.ToggleSetting(MoviePreplayStyle2)</onclick>					
+						<selected>Skin.HasSetting(MoviePreplayStyle2)</selected>						
+					</control>
+					<control type="radiobutton" id="214">
+						<description>Global Clock</description>
+						<width>625</width>
+						<label>$LOCALIZE[32217]</label>
+						<onclick>Skin.ToggleSetting(GlobalClock)</onclick>
+						<selected>Skin.HasSetting(GlobalClock)</selected>
+					</control>		
+					<control type="radiobutton" id="215">
+						<description>Show Now Playing Music Tracklist</description>
+						<width>625</width>
+						<label>$LOCALIZE[32214]</label>
+						<onclick>Skin.ToggleSetting(ShowMusicPlaylist)</onclick>
+						<selected>Skin.HasSetting(ShowMusicPlaylist)</selected>
+					</control>	
+					<control type="radiobutton" id="216">	
+						<description>Show Full-Screen Music Extras (PlexPass)</description>
+						<width>625</width>				
+						<label>$LOCALIZE[32215]</label>
+						<onclick>Skin.ToggleSetting(FullScreenMusicExtras)</onclick>					
+						<selected>Skin.HasSetting(FullScreenMusicExtras)</selected>
+					</control>
+					<control type="radiobutton" id="220">
+						<description>Hide plot for Unwatched/In Progress</description>
+						<width>625</width>
+						<label>$LOCALIZE[32114]</label>
+						<onclick>Skin.ToggleSetting(HidePlotForUnwatched)</onclick>
+						<selected>Skin.HasSetting(HidePlotForUnwatched)</selected>
+					</control>
+					<control type="radiobutton" id="221">
+						<description>Hide thumb for Unwatched/In Progress Episodes</description>
+						<width>625</width>
+						<label>$LOCALIZE[32218]</label>
+						<onclick>Skin.ToggleSetting(HideUnwatchedEpisodeThumb)</onclick>
+						<selected>Skin.HasSetting(HideUnwatchedEpisodeThumb)</selected>
+					</control>
+			
+					<control type="radiobutton" id="222">
+						<description>Kiosk Mode (disable view mode changes)</description>
+						<width>625</width>
+						<label>$LOCALIZE[32219]</label>
+						<onclick>Skin.ToggleSetting(KioskMode)</onclick>
+						<selected>Skin.HasSetting(KioskMode)</selected>
+					</control>					
+					<control type="radiobutton" id="223">
+						<description>Hide Rotten Tomatoes/IMDB Rating</description>
+						<width>625</width>
+						<label>$LOCALIZE[32220]</label>
+						<onclick>Skin.ToggleSetting(HideRottenTomatoesRating)</onclick>
+						<selected>Skin.HasSetting(HideRottenTomatoesRating)</selected>
+					</control>
+					
+					
+				</control>
+				<!-- Home Menu Options-->
+				<control type="grouplist" id="202">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>625</width>
+					<height>500</height>
+					<onup>202</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(2) | ControlGroup(202).HasFocus()</visible>
+					<orientation>vertical</orientation>
+					
+					<control type="radiobutton" id="215">
+						<description>Home menu width small</description>
+						<width>625</width>
+						<label>$LOCALIZE[32221]</label>
+						<onclick>Skin.ToggleSetting(SmallHomeMenu)</onclick>
+						<onclick>Skin.Reset(BiggerHomeMenu)</onclick>
+						<onclick>Skin.Reset(BiggerHomeMenu3)</onclick>
+						<selected>Skin.HasSetting(SmallHomeMenu) | [!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)]</selected>					
+					</control>					
+					<control type="radiobutton" id="216">
+						<description>Home menu width medium</description>
+						<width>625</width>
+						<label>$LOCALIZE[32222]</label>
+						<onclick>Skin.ToggleSetting(BiggerHomeMenu)</onclick>
+						<onclick>Skin.Reset(BiggerHomeMenu3)</onclick>
+						<onclick>Skin.Reset(SmallHomeMenu)</onclick>
+						<selected>Skin.HasSetting(BiggerHomeMenu)</selected>					
+					</control>
+					<control type="radiobutton" id="217">
+						<description>Home menu width large</description>
+						<width>625</width>
+						<label>$LOCALIZE[32223]</label>
+						<onclick>Skin.ToggleSetting(BiggerHomeMenu3)</onclick>
+						<onclick>Skin.Reset(BiggerHomeMenu)</onclick>
+						<onclick>Skin.Reset(SmallHomeMenu)</onclick>
+						<selected>Skin.HasSetting(BiggerHomeMenu3)</selected>					
+					</control>
+					<control type="radiobutton" id="218">
+						<description>Home menu font small</description>
+						<width>625</width>
+						<label>$LOCALIZE[32224]</label>
+						<onclick>Skin.ToggleSetting(HomeMenuFontSmall)</onclick>
+						<onclick>Skin.Reset(LargerHomeMenuFont)</onclick>
+						<onclick>Skin.Reset(LargerHomeMenuFont3)</onclick>
+						<selected>!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)</selected>
+					</control>
+					<control type="radiobutton" id="219">
+						<description>Home menu font medium</description>
+						<width>625</width>
+						<label>$LOCALIZE[32225]</label>
+						<onclick>Skin.ToggleSetting(LargerHomeMenuFont)</onclick>
+						<onclick>Skin.Reset(HomeMenuFontSmall)</onclick>
+						<onclick>Skin.Reset(LargerHomeMenuFont3)</onclick>
+						<selected>Skin.HasSetting(LargerHomeMenuFont)</selected>
+					</control>
+					<control type="radiobutton" id="220">
+						<description>Home menu font large</description>
+						<width>625</width>
+						<label>$LOCALIZE[32226]</label>
+						<onclick>Skin.ToggleSetting(LargerHomeMenuFont3)</onclick>
+						<onclick>Skin.Reset(LargerHomeMenuFont)</onclick>
+						<onclick>Skin.Reset(HomeMenuFontSmall)</onclick>
+						<selected>Skin.HasSetting(LargerHomeMenuFont3)</selected>
+					</control>
+					<control type="radiobutton" id="221">
+						<description>Home menu text align left</description>
+						<width>625</width>
+						<label>$LOCALIZE[32227]</label>
+						<onclick>Skin.ToggleSetting(HomeMenuAlignLeft)</onclick>
+						<onclick>Skin.Reset(HomeMenuAlignRight)</onclick>
+						<selected>!Skin.HasSetting(HomeMenuAlignRight)</selected>
+					</control>
+					<control type="radiobutton" id="222">
+						<description>Home menu text align right</description>
+						<width>625</width>
+						<label>$LOCALIZE[32228]</label>
+						<onclick>Skin.ToggleSetting(HomeMenuAlignRight)</onclick>
+						<onclick>Skin.Reset(HomeMenuAlignLeft)</onclick>
+						<selected>Skin.HasSetting(HomeMenuAlignRight)</selected>
+					</control>
+						
+					<control type="radiobutton" id="223">
+						<description>Wrap Home Menu</description>
+						<height>40</height>
+						<texturenofocus border="5">-</texturenofocus>
+						<width>625</width>
+						<label>$LOCALIZE[32229]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu)</selected>
+					</control>	
+					
+					<control type="radiobutton" id="224">
+						<description> - 3 Items</description>
+						<texturenofocus border="5">-</texturenofocus>
+						<width>625</width>
+						<height>31</height>
+						<label>$LOCALIZE[32230]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu3Items)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu3Items)</selected>
+						<onclick>Skin.Reset(WrapHomeMenu5Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu7Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu9Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu11Items)</onclick>
+						<enable>Skin.HasSetting(WrapHomeMenu)</enable>
+					</control>		
+					<control type="radiobutton" id="225">
+						<description> - 5 Items</description>
+						<texturenofocus border="5">-</texturenofocus>
+						<width>625</width>
+						<height>31</height>
+						<label>$LOCALIZE[32231]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu5Items)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu5Items)</selected>
+						<onclick>Skin.Reset(WrapHomeMenu3Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu7Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu9Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu11Items)</onclick>
+						<enable>Skin.HasSetting(WrapHomeMenu)</enable>						
+					</control>							
+					<control type="radiobutton" id="226">
+						<description> - 7 Items</description>
+						<texturenofocus border="5">-</texturenofocus>
+						<width>625</width>
+						<height>31</height>
+						<label>$LOCALIZE[32232]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu7Items)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu7Items)</selected>
+						<onclick>Skin.Reset(WrapHomeMenu3Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu5Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu9Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu11Items)</onclick>
+						<enable>Skin.HasSetting(WrapHomeMenu)</enable>
+					</control>	
+					<control type="radiobutton" id="227">
+						<description> - 9 Items</description>
+						<texturenofocus border="5">-</texturenofocus>
+						<width>625</width>
+						<height>31</height>
+						<label>$LOCALIZE[32233]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu9Items)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu9Items)</selected>
+						<onclick>Skin.Reset(WrapHomeMenu3Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu5Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu7Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu11Items)</onclick>
+						<enable>Skin.HasSetting(WrapHomeMenu)</enable>
+					</control>									
+					<control type="radiobutton" id="228">
+						<description> - 11 Items</description>
+						<width>625</width>
+						<height>31</height>
+						<label>$LOCALIZE[32234]</label>
+						<onclick>Skin.ToggleSetting(WrapHomeMenu11Items)</onclick>
+						<selected>Skin.HasSetting(WrapHomeMenu11Items)</selected>
+						<onclick>Skin.Reset(WrapHomeMenu3Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu5Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu7Items)</onclick>
+						<onclick>Skin.Reset(WrapHomeMenu9Items)</onclick>
+						<enable>Skin.HasSetting(WrapHomeMenu)</enable>
+					</control>
+				
+					<control type="radiobutton" id="229">
+						<description>Fade out Home menu when idle</description>
+						<width>625</width>
+						<label>$LOCALIZE[32235]</label>
+						<onclick>Skin.ToggleSetting(FadeOutHomeMenu)</onclick>
+						<selected>Skin.HasSetting(FadeOutHomeMenu)</selected>
+					</control>			
+					<control type="radiobutton" id="230">
+						<description>Show Digital clock</description>
+						<width>625</width>
+						<label>$LOCALIZE[32236]</label>
+						<onclick>Skin.ToggleSetting(HomeClockDigital)</onclick>
+						<onclick>Skin.Reset(HideHomeClock)</onclick>
+						<onclick>Skin.Reset(AnalogWatch)</onclick>
+						<onclick>Skin.Reset(ShowPlexLogo)</onclick>
+						<selected>!Skin.HasSetting(HideHomeClock)+!Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(ShowPlexLogo)</selected>
+					</control>	
+					<control type="radiobutton" id="231">
+						<description>Show Analog watch</description>
+						<width>625</width>
+						<label>$LOCALIZE[32237]</label>
+						<onclick>Skin.ToggleSetting(AnalogWatch)</onclick>
+						<onclick>Skin.Reset(HomeClockDigital)</onclick>
+						<onclick>Skin.Reset(HideHomeClock)</onclick>
+						<onclick>Skin.Reset(ShowPlexLogo)</onclick>
+						<selected>Skin.HasSetting(AnalogWatch)</selected>
+					</control>	
+					<control type="radiobutton" id="232">
+						<description>Hide clock</description>
+						<width>625</width>
+						<label>$LOCALIZE[32238]</label>
+						<onclick>Skin.ToggleSetting(HideHomeClock)</onclick>
+						<onclick>Skin.Reset(HomeClockDigital)</onclick>
+						<onclick>Skin.Reset(AnalogWatch)</onclick>
+						<onclick>Skin.Reset(ShowPlexLogo)</onclick>
+						<selected>Skin.HasSetting(HideHomeClock)</selected>
+					</control>							
+					<control type="radiobutton" id="233">
+						<description>Show Plex logo</description>
+						<width>625</width>
+						<label>$LOCALIZE[32239]</label>
+						<onclick>Skin.ToggleSetting(ShowPlexLogo)</onclick>
+						<onclick>Skin.Reset(HomeClockDigital)</onclick>
+						<onclick>Skin.Reset(HideHomeClock)</onclick>
+						<onclick>Skin.Reset(AnalogWatch)</onclick>
+						<selected>Skin.HasSetting(ShowPlexLogo)</selected>
+					</control>					
+					
+					<control type="radiobutton" id="244">
+						<description>Show "Play File" in Home menu</description>
+						<width>625</width>
+						<label>$LOCALIZE[32240]</label>
+						<onclick>Skin.ToggleSetting(HomeMenuPlayFile)</onclick>
+						<selected>Skin.HasSetting(HomeMenuPlayFile)</selected>
+					</control>
+					<control type="radiobutton" id="245">
+						<description>Hide shared library server owner</description>
+						<width>625</width>
+						<label>$LOCALIZE[32242]</label>
+						<onclick>Skin.ToggleSetting(HomeHideServerOwner)</onclick>
+						<selected>Skin.HasSetting(HomeHideServerOwner)</selected>
+					</control>						
+					<control type="radiobutton" id="246">
+						<description>Display Search in Submenu</description>
+						<width>625</width>
+						<label>$LOCALIZE[32241]</label>
+						<onclick>Skin.ToggleSetting(HideSearch)</onclick>
+						<selected>Skin.HasSetting(HideSearch)</selected>
+					</control>		
+					<control type="radiobutton" id="247">
+						<description>Submenu: Hide Channel Directory</description>
+						<width>625</width>
+						<label>$LOCALIZE[32243]</label>
+						<onclick>Skin.ToggleSetting(HideChannelDirectoryItem)</onclick>
+						<selected>Skin.HasSetting(HideChannelDirectoryItem)</selected>
+					</control>
+					<control type="radiobutton" id="248">
+						<description>Submenu: Hide Quit</description>
+						<width>625</width>
+						<label>$LOCALIZE[32244]</label>
+						<onclick>Skin.ToggleSetting(HideQuitItem)</onclick>
+						<selected>Skin.HasSetting(HideQuitItem)</selected>
+						<!--<visible>!System.isSystem(openelec)</visible>-->
+					</control>
+					<control type="radiobutton" id="249">
+						<description>Submenu: Hide Sleep</description>
+						<width>625</width>
+						<label>$LOCALIZE[32245]</label>
+						<onclick>Skin.ToggleSetting(HideSleepItem)</onclick>
+						<selected>Skin.HasSetting(HideSleepItem)</selected>
+						<!--<visible>!System.isSystem(rasplex)</visible>-->
+					</control>					
+					<control type="radiobutton" id="250">
+						<description>Submenu: Hide Shut Down</description>
+						<width>625</width>
+						<label>$LOCALIZE[32246]</label>
+						<onclick>Skin.ToggleSetting(HideShutDownItem)</onclick>
+						<selected>Skin.HasSetting(HideShutDownItem)</selected>
+					</control>
+					<control type="radiobutton" id="251">
+						<description>Submenu: Hide Restart</description>
+						<width>625</width>
+						<label>$LOCALIZE[32247]</label>
+						<onclick>Skin.ToggleSetting(HideRestartItem)</onclick>
+						<selected>Skin.HasSetting(HideRestartItem)</selected>
+					</control>
+					<control type="radiobutton" id="252">
+						<description>Submenu: Hide Activate Screensaver</description>
+						<width>625</width>
+						<label>$LOCALIZE[32248]</label>
+						<onclick>Skin.ToggleSetting(HideActivateScreensaverItem)</onclick>
+						<selected>Skin.HasSetting(HideActivateScreensaverItem)</selected>
+					</control>
+					<control type="radiobutton" id="253">
+						<description>Show Shut Down and Restart to restricted users</description>
+						<width>625</width>
+						<label>$LOCALIZE[32249]</label>
+						<onclick>Skin.ToggleSetting(ShowRestrictedPowerOptions)</onclick>
+						<selected>Skin.HasSetting(ShowRestrictedPowerOptions)</selected>
+					</control>
+					
+					<control type="radiobutton" id="254">
+						<description>Disable Submenu (Move Submenu items to main menu)</description>
+						<width>625</width>
+						<label>$LOCALIZE[32250]</label>
+						<onclick>Skin.ToggleSetting(SingleHomeMenu)</onclick>
+						<selected>Skin.HasSetting(SingleHomeMenu)</selected>
+					</control>
+				</control>
+				
+				
+				
+				<!-- Home Decks Options-->
+				<control type="grouplist" id="207">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>625</width>
+					<height>500</height>
+					<onup>202</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(7) | ControlGroup(207).HasFocus()</visible>
+					<orientation>vertical</orientation>				
+					<control type="radiobutton" id="234">
+						<description>Do not fadeout loggedin user avatar</description>
+						<width>625</width>
+						<label>$LOCALIZE[32251]</label>
+						<onclick>Skin.ToggleSetting(DoNotFadeOutUserAvatar)</onclick>
+						<selected>Skin.HasSetting(DoNotFadeOutUserAvatar)</selected>
+					</control>		
+					
+					<control type="radiobutton" id="236">
+						<description>Blur Fanart</description>
+						<width>625</width>
+						<label>$LOCALIZE[32252]</label>
+						<onclick>Skin.ToggleSetting(HomeFanartBlur)</onclick>
+						<selected>Skin.HasSetting(HomeFanartBlur)</selected>
+					</control>
+					<control type="radiobutton" id="235">
+						<description>Show On Deck/Recently Added always</description>
+						<width>625</width>
+						<label>$LOCALIZE[32253]</label>
+						<onclick>Skin.ToggleSetting(showNewLists)</onclick>
+						<selected>Skin.HasSetting(showNewLists)</selected>
+					</control>		
+					<control type="radiobutton" id="237">
+						<description>Disable Zoom effect</description>
+						<width>625</width>
+						<label>$LOCALIZE[32254]</label>
+						<onclick>Skin.ToggleSetting(DisableOndeckZoom)</onclick>
+						<selected>Skin.HasSetting(DisableOndeckZoom)</selected>
+						<enable>Skin.HasSetting(showNewLists)</enable>
+					</control>
+					<control type="radiobutton" id="238">
+						<description>Disable transparency for unfocused Deck</description>
+						<width>625</width>
+						<label>$LOCALIZE[32255]</label>
+						<onclick>Skin.ToggleSetting(NoTransOnDeck)</onclick>
+						<selected>Skin.HasSetting(NoTransOnDeck)</selected>
+					</control>						
+					<control type="radiobutton" id="240">
+						<description>Bigger Thumbs (hide Plot/Summary)</description>
+						<width>625</width>
+						<label>$LOCALIZE[32256]</label>
+						<onclick>Skin.ToggleSetting(HomeBigIcons)</onclick>
+						<selected>Skin.HasSetting(HomeBigIcons)</selected>
+					</control>	
+					<control type="radiobutton" id="239">
+						<description>Show Thumb Border</description>
+						<width>625</width>
+						<label>$LOCALIZE[32257]</label>
+						<onclick>Skin.ToggleSetting(ShowThumbBorder)</onclick>
+						<selected>Skin.HasSetting(ShowThumbBorder)</selected>
+					</control>
+					<control type="radiobutton" id="242">
+						<description>Focused item: Hide border/show Play button</description>
+						<width>625</width>
+						<label>$LOCALIZE[32258]</label>
+						<onclick>Skin.ToggleSetting(HomeHideFocusedBorder)</onclick>
+						<selected>Skin.HasSetting(HomeHideFocusedBorder)</selected>
+					</control>
+					<control type="radiobutton" id="243">
+						<description>Dim unfocused Thumbs</description>
+						<width>625</width>
+						<label>$LOCALIZE[32259]</label>
+						<onclick>Skin.ToggleSetting(FadeoutUnfocusedThumb)</onclick>
+						<selected>Skin.HasSetting(FadeoutUnfocusedThumb)</selected>
+					</control>		
+					<control type="radiobutton" id="241">
+						<description>Poster artworks for Home Movies</description>
+						<width>625</width>
+						<label>$LOCALIZE[32260]</label>
+						<onclick>Skin.ToggleSetting(HomeVideosPortrait)</onclick>
+						<selected>Skin.HasSetting(HomeVideosPortrait)</selected>
+					</control>				
+				</control>
+				
+				<!-- background Options-->
+				<control type="grouplist" id="203">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>625</width>
+					<height>500</height>
+					<onup>203</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(3) | ControlGroup(203).HasFocus()</visible>
+					<orientation>vertical</orientation>
+					<control type="radiobutton" id="210">
+						<description>Hide Slideshows</description>
+						<width>625</width>
+						<label>$LOCALIZE[32119]</label>
+						<onclick>Skin.ToggleSetting(HideFanart)</onclick>
+						<selected>Skin.HasSetting(HideFanart)</selected>
+					</control>
+					<control type="radiobutton" id="211">
+						<width>625</width>
+						<texturefocus border="5">black-bottom-grey.png</texturefocus>
+						<texturenofocus border="5">-</texturenofocus>
+						<description>Custom Single Home Background Image</description>
+						<label>$LOCALIZE[32261]</label>
+						<onclick>Skin.Reset(HomeBGMulti)</onclick>
+						<onclick>Skin.SetString(FileBrowserType,photo)</onclick>
+						<onclick>Skin.SetLargeImage(HomeBGSingle)</onclick>
+						<selected>!isEmpty(Skin.String(HomeBGSingle))</selected>				
+					</control>				
+					<control type="button" id="212">
+						<description> - Reset</description>
+						<width>625</width>
+						<height>30</height>
+						<description></description>
+						<label>$LOCALIZE[32262]</label>
+						<onclick>Skin.Reset(HomeBGSingle)</onclick>	
+					</control>			
+					<control type="radiobutton" id="213">
+						<width>625</width>
+						<texturefocus border="5">black-bottom-grey.png</texturefocus>
+						<texturenofocus border="5">-</texturenofocus>
+						<description>Custom Multi Home Background Images</description>
+						<label>$LOCALIZE[32263]</label>
+						<onclick>Skin.Reset(HomeBGSingle)</onclick>
+						<onclick>Skin.SetString(FileBrowserType,file)</onclick>
+						<onclick>Skin.SetPath(HomeBGMulti)</onclick>
+						<selected>!isEmpty(Skin.String(HomeBGMulti))</selected>
+					</control>
+					<control type="button" id="214">
+						<width>625</width>
+						<height>30</height>
+						<description> - Reset</description>
+						<label>$LOCALIZE[32262]</label>
+						<onclick>Skin.Reset(HomeBGMulti)</onclick>
+					</control>
+					<control type="radiobutton" id="275">
+						<width>625</width>
+						<texturefocus border="5">black-bottom-grey.png</texturefocus>
+						<texturenofocus border="5">-</texturenofocus>
+						<description>Custom Multi Musicplayer Background Images</description>
+						<label>$LOCALIZE[32264]</label>
+						<onclick>Skin.SetString(FileBrowserType,file)</onclick>
+						<onclick>Skin.SetPath(CustomMusicBG)</onclick>
+						<selected>!isEmpty(Skin.String(CustomMusicBG))</selected>				
+					</control>
+					<control type="button" id="276">
+						<width>625</width>
+						<height>30</height>
+						<description> - Reset</description>
+						<label>$LOCALIZE[32262]</label>
+						<onclick>Skin.Reset(CustomMusicBG)</onclick>	
+					</control>
+						<control type="radiobutton" id="261">
+						<description>BG DIM Home/Filter/OSD 10%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32265]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>		
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>				
+						<selected>Skin.HasSetting(GlobalBGDIM10)</selected>
+					</control>
+					<control type="radiobutton" id="262">
+						<description>BG DIM Home/Filter/OSD 20%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32266]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>		
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>				
+						<selected>Skin.HasSetting(GlobalBGDIM20)</selected>
+					</control>
+					<control type="radiobutton" id="263">
+						<description>BG DIM Home/Filter/OSD 30%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32267]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>		
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>				
+						<selected>Skin.HasSetting(GlobalBGDIM30)</selected>
+					</control>
+					<control type="radiobutton" id="264">
+						<description>BG DIM Home/Filter/OSD 40%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32268]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>			
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>			
+						<selected>Skin.HasSetting(GlobalBGDIM40)</selected>
+					</control>
+					<control type="radiobutton" id="265">
+						<description>BG DIM Home/Filter/OSD 50%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32269]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>				
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>		
+						<selected>Skin.HasSetting(GlobalBGDIM50)</selected>
+					</control>
+					<control type="radiobutton" id="266">
+						<description>BG DIM Home/Filter/OSD 60% (default)</description>
+						<width>625</width>
+						<label>$LOCALIZE[32270]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>		
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>				
+						<selected>Skin.HasSetting(GlobalBGDIM60) | [!Skin.HasSetting(GlobalBGDIM10)+!Skin.HasSetting(GlobalBGDIM20)+!Skin.HasSetting(GlobalBGDIM30)+!Skin.HasSetting(GlobalBGDIM40)+!Skin.HasSetting(GlobalBGDIM50)+!Skin.HasSetting(GlobalBGDIM60)+!Skin.HasSetting(GlobalBGDIM70)+!Skin.HasSetting(GlobalBGDIM80)+!Skin.HasSetting(GlobalBGDIM90)+!Skin.HasSetting(GlobalBGDIM100)]</selected>
+					</control>
+					<control type="radiobutton" id="267">
+						<description>BG DIM Home/Filter/OSD 70%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32271]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>						
+						<selected>Skin.HasSetting(GlobalBGDIM70)</selected>
+					</control>
+					<control type="radiobutton" id="268">
+						<description>BG DIM Home/Filter/OSD 80%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32272]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM80)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM90)</onclick>		
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>				
+						<selected>Skin.HasSetting(GlobalBGDIM80)</selected>
+					</control>
+					<control type="radiobutton" id="269">
+						<description>BG DIM Home/Filter/OSD 90%</description>
+						<width>625</width>
+						<label>$LOCALIZE[32273]</label>
+						<onclick>Skin.ToggleSetting(GlobalBGDIM90)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM10)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM20)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM30)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM40)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM50)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM60)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM70)</onclick>
+						<onclick>Skin.Reset(GlobalBGDIM80)</onclick>						
+						<onclick>Skin.Reset(GlobalBGDIM100)</onclick>
+						<selected>Skin.HasSetting(GlobalBGDIM90)</selected>
+					</control>
+				
+						<!--
+					<control type="radiobutton" id="269">
+						<width>625</width>
+						<texturefocus border="5">black-bottom-grey.png</texturefocus>
+						<texturenofocus border="5">-</texturenofocus>
+						<description>Custom Shared Content Background Image</description>
+						<label>Custom Shared Content Background Image</label>
+						<onclick>Skin.SetString(FileBrowserType,photo)</onclick>
+						<onclick>Skin.SetLargeImage(BGSharedContent)</onclick>
+						<selected>!isEmpty(Skin.String(BGSharedContent))</selected>				
+					</control>
+					<control type="button" id="270">
+						<width>625</width>
+						<height>30</height>
+						<description>Custom Shared Content Images</description>
+						<label> - Reset</label>
+						<onclick>Skin.Reset(BGSharedContent)</onclick>	
+					</control>
+						-->
+				</control>
+			
+				<!-- TV Thumbs Options -->
+	
+				<control type="grouplist" id="204">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>495</width>
+					<height>500</height>
+					<onup>205</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(4) | ControlGroup(204).HasFocus()</visible>
+					<orientation>vertical</orientation>
+				
+					<control type="radiobutton" id="280">
+						<description>Hide TV Show Title</description>
+						<width>495</width>
+						<label>$LOCALIZE[32274]</label>
+						<onclick>Skin.ToggleSetting(DisableTVShowTitle)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>
+						<onclick>Skin.Reset(DisableTVShowTitleUnfocused)</onclick>
+						<selected>Skin.HasSetting(DisableTVShowTitle)</selected>
+					</control>
+					
+					<control type="radiobutton" id="281">
+						<description>Move overlays to Title position</description>
+						<width>495</width>
+						<label>$LOCALIZE[32275]</label>
+						<onclick>Skin.ToggleSetting(TVShowOverlayBottom)</onclick>
+						<selected>Skin.HasSetting(TVShowOverlayBottom)</selected>
+						<onclick>Skin.Reset(LargeUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(SmallerUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodesTop)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(HideUnwatchedIconsTVShows)</onclick>
+						<enable>Skin.HasSetting(DisableTVShowTitle)</enable>
+					</control>					
+					<control type="radiobutton" id="282">
+						<description>Show TV Show Title only for focused Thumb</description>
+						<width>495</width>
+						<label>$LOCALIZE[32276]</label>
+						<onclick>Skin.ToggleSetting(DisableTVShowTitleUnfocused)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>
+						<onclick>Skin.Reset(DisableTVShowTitle)</onclick>
+						<selected>Skin.HasSetting(DisableTVShowTitleUnfocused)</selected>
+					</control>
+					<control type="radiobutton" id="283">
+            <description>Highlight focused title</description>
+            <width>495</width>
+            <label>$LOCALIZE[32277]</label>
+            <onclick>Skin.ToggleSetting(FocusedTextThemeColor)</onclick>
+            <selected>Skin.HasSetting(FocusedTextThemeColor)</selected>
+          </control>	
+          <control type="radiobutton" id="284">
+						<description>Colorize Unwachted Count indicators</description>
+						<width>495</width>
+						<label>$LOCALIZE[32278]</label>
+						<onclick>Skin.ToggleSetting(ColorizeUnwachtedCountOverlay)</onclick>
+						<selected>Skin.HasSetting(ColorizeUnwachtedCountOverlay)</selected>						
+						<enable>!Skin.HasSetting(HideUnwatchedIconsTVShows)</enable>
+					</control>
+          
+					<control type="radiobutton" id="285">
+						<description>Hide Star Rating overlay</description>
+						<width>495</width>
+						<label>$LOCALIZE[32279]</label>
+						<onclick>Skin.ToggleSetting(DisableTVShowStarRating)</onclick>
+						<selected>Skin.HasSetting(DisableTVShowStarRating)</selected>
+					</control>
+					<control type="radiobutton" id="286">
+						<description>Unwatched Episodes overlay on bottom</description>
+						<width>495</width>
+						<label>$LOCALIZE[32280]</label>
+						<onclick>Skin.ToggleSetting(AltUnwatchedEpisodes)</onclick>
+						<selected>!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+[Skin.HasSetting(AltUnwatchedEpisodes) | ![Skin.HasSetting(SmallerUnwatchedEpisodes) | Skin.HasSetting(LargeUnwatchedEpisodes) | Skin.HasSetting(AltUnwatchedEpisodesTop) | Skin.HasSetting(UnwatchedIndicatorTVShows)]]</selected>					
+						<onclick>Skin.Reset(LargeUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(SmallerUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodesTop)</onclick>
+						<onclick>Skin.Reset(HideUnwatchedIconsTVShows)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>	
+						<onclick>Skin.Reset(UnwatchedIndicatorTVShows)</onclick>	
+					</control>
+					<control type="radiobutton" id="287">
+						<description>Unwatched Episodes overlay on top</description>
+						<width>495</width>
+						<label>$LOCALIZE[32281]</label>
+						<onclick>Skin.ToggleSetting(AltUnwatchedEpisodesTop)</onclick>
+						<selected>Skin.HasSetting(AltUnwatchedEpisodesTop)</selected>
+						<onclick>Skin.Reset(LargeUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(SmallerUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(HideUnwatchedIconsTVShows)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>	
+						<onclick>Skin.Reset(UnwatchedIndicatorTVShows)</onclick>	
+					</control>					
+					<control type="radiobutton" id="288">
+						<description>Large Unwatched Episodes style</description>
+						<width>495</width>
+						<label>$LOCALIZE[32282]</label>
+						<onclick>Skin.ToggleSetting(LargeUnwatchedEpisodes)</onclick>
+						<selected>Skin.HasSetting(LargeUnwatchedEpisodes)</selected>
+						<onclick>Skin.Reset(SmallerUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodesTop)</onclick>
+						<onclick>Skin.Reset(HideUnwatchedIconsTVShows)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>	
+						<onclick>Skin.Reset(UnwatchedIndicatorTVShows)</onclick>	
+					</control>
+					<control type="radiobutton" id="289">
+						<description>Small Unwatched Episodes style</description>
+						<width>495</width>
+						<label>$LOCALIZE[32283]</label>
+						<onclick>Skin.ToggleSetting(SmallerUnwatchedEpisodes)</onclick>
+						<selected>Skin.HasSetting(SmallerUnwatchedEpisodes)</selected>
+						<onclick>Skin.Reset(LargeUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodesTop)</onclick>
+						<onclick>Skin.Reset(HideUnwatchedIconsTVShows)</onclick>						
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>	
+						<onclick>Skin.Reset(UnwatchedIndicatorTVShows)</onclick>	
+					</control>					
+	
+					<control type="radiobutton" id="290">
+						<description>Hide Unwatched Overlay for TV Shows</description>
+						<width>495</width>
+						<label>$LOCALIZE[32284]</label>
+						<onclick>Skin.ToggleSetting(HideUnwatchedIconsTVShows)</onclick>
+						<onclick>Skin.Reset(LargeUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(SmallerUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodes)</onclick>
+						<onclick>Skin.Reset(AltUnwatchedEpisodesTop)</onclick>
+						<onclick>Skin.Reset(TVShowOverlayBottom)</onclick>	
+						<onclick>Skin.Reset(UnwatchedIndicatorTVShows)</onclick>	
+						<selected>Skin.HasSetting(HideUnwatchedIconsTVShows)</selected>
+					</control>			
+				</control>
+				<control type="group" id="216">
+					<posx>610</posx>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(4) | ControlGroup(204).HasFocus()</visible>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(DisableTVShowStarRating)</visible>
+						<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb1_1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(DisableTVShowStarRating)</visible>
+						<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb2.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb2_1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb3.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+[Skin.HasSetting(AltUnwatchedEpisodes) | ![Skin.HasSetting(SmallerUnwatchedEpisodes) | Skin.HasSetting(LargeUnwatchedEpisodes) | Skin.HasSetting(AltUnwatchedEpisodesTop) | Skin.HasSetting(UnwatchedIndicatorTVShows)]]+Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb3_1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+[Skin.HasSetting(AltUnwatchedEpisodes) | ![Skin.HasSetting(SmallerUnwatchedEpisodes) | Skin.HasSetting(LargeUnwatchedEpisodes) | Skin.HasSetting(AltUnwatchedEpisodesTop) | Skin.HasSetting(UnwatchedIndicatorTVShows)]]+!Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb4.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb4_1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb5.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(HideUnwatchedIconsTVShows)+Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>186</height>
+						<texture>thumbs/thumb5_1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(HideUnwatchedIconsTVShows)+!Skin.HasSetting(DisableTVShowStarRating)</visible>
+					</control>
+					<control type="image">
+						<posy>186</posy>
+						<width>126</width>
+						<height>23</height>
+						<texture>thumbs/thumb1.png</texture>
+						<aspectratio aligny="bottom" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(DisableTVShowTitle)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>215</height>
+						<texture>thumbs/thumb6.png</texture>
+						<aspectratio aligny="bottom" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(TVShowOverlayBottom)</visible>
+					</control>
+					<control type="image">
+						<posx>86</posx>
+						<posy>154</posy>
+						<width>37</width>
+						<height>29</height>
+						<texture>thumbs/colorized_unwatchedcount_overlay2.png</texture>
+						<colordiffuse>tvshowoverlay</colordiffuse>
+						<visible>Skin.HasSetting(ColorizeUnwachtedCountOverlay)+!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+!Skin.HasSetting(AltUnwatchedEpisodesTop)</visible>
+					</control>
+					<control type="image">
+						<posx>88</posx>
+						<posy>185</posy>
+						<width>37</width>
+						<height>29</height>
+						<texture>thumbs/colorized_unwatchedcount_overlay2.png</texture>
+						<colordiffuse>tvshowoverlay</colordiffuse>
+						<visible>Skin.HasSetting(ColorizeUnwachtedCountOverlay)+Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+!Skin.HasSetting(AltUnwatchedEpisodesTop)</visible>
+					</control>
+					<control type="image">
+						<posx>86</posx>
+						<posy>2</posy>
+						<width>37</width>
+						<height>29</height>
+						<texture>thumbs/colorized_unwatchedcount_overlay2.png</texture>
+						<colordiffuse>tvshowoverlay</colordiffuse>
+						<visible>Skin.HasSetting(ColorizeUnwachtedCountOverlay)+!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsTVShows)+Skin.HasSetting(AltUnwatchedEpisodesTop)</visible>
+					</control>
+					<control type="label">
+						<posx>3</posx>
+						<posy>183</posy>
+						<width>126</width>
+						<height>28</height>
+						<label>The Big Bang...</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-17</font>
+						<textcolor>white</textcolor>
+						<visible>!Skin.HasSetting(DisableTVShowTitle)+!Skin.HasSetting(FocusedTextThemeColor)</visible>
+					</control>
+					<control type="label">
+						<posx>3</posx>
+						<posy>183</posy>
+						<width>126</width>
+						<height>28</height>
+						<label>The Big Bang...</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-17</font>
+						<textcolor>FocusedThemeColor</textcolor>
+						<visible>!Skin.HasSetting(DisableTVShowTitle)+Skin.HasSetting(FocusedTextThemeColor)</visible>
+					</control>
+				</control>
+				
+				<!-- Movie Thumbs Options -->
+
+				<control type="grouplist" id="205">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>495</width>
+					<height>500</height>
+					<onup>205</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(5) | ControlGroup(205).HasFocus()</visible>
+					<orientation>vertical</orientation>
+					<control type="radiobutton" id="290">
+						<description>Hide Movie Title</description>
+						<width>495</width>
+						<label>$LOCALIZE[32285]</label>
+						<onclick>Skin.ToggleSetting(DisableMovieTitle)</onclick>
+						<onclick>Skin.Reset(MovieOverlayBottom)</onclick>
+						<onclick>Skin.Reset(DisableMovieTitleUnfocused)</onclick>
+						<selected>Skin.HasSetting(DisableMovieTitle)</selected>
+					</control>
+					
+					<control type="radiobutton" id="291">
+						<description>Move overlays to Title position</description>
+						<width>495</width>
+						<label>$LOCALIZE[32286]</label>
+						<onclick>Skin.ToggleSetting(MovieOverlayBottom)</onclick>
+						<selected>Skin.HasSetting(MovieOverlayBottom)</selected>
+						<enable>Skin.HasSetting(DisableMovieTitle)+!Skin.HasSetting(disableOverlayIMDB)</enable>
+					</control>
+					<control type="radiobutton" id="292">
+						<description>Show Movie Title only for focused Thumb</description>
+						<width>495</width>
+						<label>$LOCALIZE[32287]</label>
+						<onclick>Skin.ToggleSetting(DisableMovieTitleUnfocused)</onclick>
+						<onclick>Skin.Reset(MovieOverlayBottom)</onclick>
+						<onclick>Skin.Reset(DisableMovieTitle)</onclick>
+						<selected>Skin.HasSetting(DisableMovieTitleUnfocused)</selected>
+					</control>
+					<control type="radiobutton" id="293">
+            <description>Highlight focused title</description>
+            <width>495</width>
+            <label>$LOCALIZE[32277]</label>
+            <onclick>Skin.ToggleSetting(FocusedTextThemeColor)</onclick>
+            <selected>Skin.HasSetting(FocusedTextThemeColor)</selected>
+          </control>	
+          <control type="radiobutton" id="294">
+						<description>Colorize Unwachted indicators</description>
+						<width>495</width>
+						<label>$LOCALIZE[32289]</label>
+						<onclick>Skin.ToggleSetting(ColorizeUnwachtedOverlay)</onclick>
+						<selected>Skin.HasSetting(ColorizeUnwachtedOverlay)</selected>						
+						<enable>!Skin.HasSetting(HideUnwatchedIconsMovies)</enable>
+					</control>
+          
+					<control type="radiobutton" id="295">
+						<description>Hide Star Rating overlay</description>
+						<width>495</width>
+						<label>$LOCALIZE[32279]</label>
+						<onclick>Skin.ToggleSetting(disableOverlayIMDB)</onclick>
+						<onclick>Skin.Reset(MovieOverlayBottom)</onclick>
+						<selected>Skin.HasSetting(disableOverlayIMDB)</selected>
+					</control>
+					<control type="radiobutton" id="296">
+						<description>Hide Unwatched indicators for Movies</description>
+						<width>495</width>
+						<label>$LOCALIZE[32115]</label>
+						<onclick>Skin.ToggleSetting(HideUnwatchedIconsMovies)</onclick>
+						<onclick>Skin.Reset(MovieOverlayBottom)</onclick>
+						<selected>Skin.HasSetting(HideUnwatchedIconsMovies)</selected>
+					</control>
+				
+				
+				</control>
+				<control type="group" id="215">
+					<posx>610</posx>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(5) | ControlGroup(205).HasFocus()</visible>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>216</height>
+						<texture>thumbs/moviethumb1.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(disableOverlayIMDB)+!Skin.HasSetting(HideUnwatchedIconsMovies)+!Skin.HasSetting(MovieOverlayBottom)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>216</height>
+						<texture>thumbs/moviethumb2.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(disableOverlayIMDB)+!Skin.HasSetting(HideUnwatchedIconsMovies)</visible>
+					</control>
+					<control type="image">
+
+						<posy>0</posy>
+						<width>126</width>
+						<height>216</height>
+						<texture>thumbs/moviethumb3.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(disableOverlayIMDB)+Skin.HasSetting(HideUnwatchedIconsMovies)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>216</height>
+						<texture>thumbs/moviethumb4.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>!Skin.HasSetting(disableOverlayIMDB)+Skin.HasSetting(HideUnwatchedIconsMovies)</visible>
+					</control>
+					<control type="image">
+						<posy>0</posy>
+						<width>126</width>
+						<height>216</height>
+						<texture>thumbs/moviethumb3.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(MovieOverlayBottom)</visible>
+					</control>
+					
+					<control type="label">
+						<posx>3</posx>
+						<posy>183</posy>
+						<width>126</width>
+						<height>28</height>
+						<label>The Dark Knight</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-17</font>
+						<textcolor>white</textcolor>
+						<visible>!Skin.HasSetting(DisableMovieTitle)+!Skin.HasSetting(FocusedTextThemeColor)</visible>
+					</control>
+					<control type="label">
+						<posx>3</posx>
+						<posy>183</posy>
+						<width>126</width>
+						<height>28</height>
+						<label>The Dark Knight</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-17</font>
+						<textcolor>FocusedThemeColor</textcolor>
+						<visible>!Skin.HasSetting(DisableMovieTitle)+Skin.HasSetting(FocusedTextThemeColor)</visible>
+					</control>
+					
+					
+					<control type="image">
+						<posy>186</posy>
+						<width>126</width>
+						<height>28</height>
+						<texture>thumbs/moviethumb_bottom_overlays.png</texture>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(DisableMovieTitle)+Skin.HasSetting(MovieOverlayBottom)</visible>
+					</control>
+					<control type="image">
+						<posx>97</posx>
+						<posy>158</posy>
+						<width>24</width>
+						<height>24</height>
+						<texture>OverlayUnwatched.png</texture>
+						<colordiffuse>overlay</colordiffuse>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(ColorizeUnwachtedOverlay)+!Skin.HasSetting(MovieOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsMovies)</visible>
+					</control>
+					<control type="image">
+						<posx>97</posx>
+						<posy>188</posy>
+						<width>24</width>
+						<height>24</height>
+						<texture>OverlayUnwatched.png</texture>
+						<colordiffuse>overlay</colordiffuse>
+						<aspectratio aligny="top" align="right">scale</aspectratio>
+						<visible>Skin.HasSetting(ColorizeUnwachtedOverlay)+Skin.HasSetting(MovieOverlayBottom)+!Skin.HasSetting(HideUnwatchedIconsMovies)</visible>
+					</control>
+				</control>
+				<!-- expert Options-->
+				<control type="grouplist" id="206">
+					<posy>0</posy>
+					<posx>105</posx>
+					<width>625</width>
+					<height>500</height>
+					<onup>203</onup>
+					<onleft>101</onleft>
+					<itemgap>0</itemgap>
+					<pagecontrol>61</pagecontrol>
+					<visible allowhiddenfocus="false">Container(101).HasFocus(6) | ControlGroup(206).HasFocus()</visible>
+					<orientation>vertical</orientation>
+					<control type="radiobutton" id="292">
+						<width>625</width>
+						<texturefocus border="5">black-bottom-grey.png</texturefocus>
+						<texturenofocus border="5">-</texturenofocus>
+						<description>Show 'Reload Skin' in Submenu</description>
+						<label>$LOCALIZE[32290]</label>
+						<onclick>Skin.ToggleSetting(reloadSkin)</onclick>				
+						<selected>Skin.HasSetting(reloadSkin)</selected>				
+					</control>		
+					<control type="radiobutton" id="293">
+						<description>Disable plot scrolling</description>
+						<width>625</width>
+						<label>$LOCALIZE[32291]</label>
+						<onclick>Skin.ToggleSetting(DisableAutoScroll)</onclick>
+						<selected>Skin.HasSetting(DisableAutoScroll)</selected>
+					</control>	
+					<control type="radiobutton" id="294">
+						<description>Disable cast scrolling</description>
+						<width>625</width>
+						<label>$LOCALIZE[32292]</label>
+						<onclick>Skin.ToggleSetting(DisableCastAutoScroll)</onclick>
+						<selected>Skin.HasSetting(DisableCastAutoScroll)</selected>
+					</control>
+					<control type="radiobutton" id="296">
+						<description>Hide warning and error notifications</description>
+						<width>625</width>
+						<label>$LOCALIZE[32293]</label>
+						<onclick>Skin.ToggleSetting(HideErrorPopups)</onclick>
+						<selected>Skin.HasSetting(HideErrorPopups)</selected>
+					</control>
+					<control type="radiobutton" id="297">
+						<description>Hide info notifications</description>
+						<width>625</width>
+						<label>$LOCALIZE[32294]</label>
+						<onclick>Skin.ToggleSetting(HideInfoPopups)</onclick>
+						<selected>Skin.HasSetting(HideInfoPopups)</selected>
+					</control>
+					
+					<control type="radiobutton" id="298">
+						<description>Hide busy notification</description>
+						<width>625</width>
+						<label>$LOCALIZE[32295]</label>
+						<onclick>Skin.ToggleSetting(HideBusyAnimation)</onclick>
+						<selected>Skin.HasSetting(HideBusyAnimation)</selected>						
+					</control>
+				</control>
+				<!-- Scrollbar -->
+				<control type="scrollbar" id="61">
+					<description>Scroll Bar</description>
+					<posx>735</posx>
+					<posy>0</posy>
+					<height>500</height>
+				</control>
+			</control>
+		</control>
+		<!--version-->
+		<control type="group">
+			<control type="label">
+				<posx>1200</posx>
+				<posy>53</posy>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Regular-34</font>
+				<textcolor>FF606060</textcolor>	
+				<width>500</width>
+				<include>SkinVersion</include>		
+			</control>
+		</control>
+		
+		<!-- top-level ui (LeftSidemenu.xml & IncludesGlobals.xml & Debug.xml) -->
+		<include>LeftSideMenuSettings</include>
+		<include>debugInfos</include>
+		<include>Grid</include>
+		<include>WindowFade</include>
+		<include>Non16x9Cache</include>
+	</controls>
+</window>

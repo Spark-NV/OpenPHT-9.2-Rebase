@@ -1,0 +1,621 @@
+<?xml version="1.0"?>
+<includes>
+	
+<include name="HomeMenuPosy">
+	<posy>35</posy>
+</include>
+
+<include name="SectionNameCollisionLabel">
+	<control type="label">		
+		<visible>!Skin.HasSetting(HomeHideServerOwner)+!IsEmpty(ListItem.Property(SectionNameCollision))</visible>
+		<visible>!StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+		<posy>33</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<height>20</height>
+		<font>homeMenuLabel2</font>
+		<textcolor>title2</textcolor>
+		<label>$INFO[ListItem.Label2]</label>
+		<animation effect="slide" start="0,0" end="1,0" time="0"  condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)+!Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+		<animation effect="slide" start="0,0" end="-1,0" time="0"  condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)+Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+		<animation effect="slide" start="0,0" end="2,2" time="0"  condition="Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+		<animation effect="slide" start="0,0" end="-1,2" time="0"  condition="Skin.HasSetting(LargerHomeMenuFont)+Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+		<animation effect="slide" start="0,0" end="2,5" time="0"  condition="Skin.HasSetting(LargerHomeMenuFont3)+!Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+		<animation effect="slide" start="0,0" end="-2,5" time="0"  condition="Skin.HasSetting(LargerHomeMenuFont3)+Skin.HasSetting(HomeMenuAlignRight)">Conditional</animation>
+	</control>	
+</include>
+	
+<include name="HomeMenuItemlayoutAlignLeft">
+	<align>left</align>
+	<posx>15</posx>
+</include>
+
+<include name="HomeMenuItemlayoutAlignRight">
+	<align>right</align>
+	<posx>195</posx>
+</include>
+
+<include name="HomeMenuItemlayoutAlignRightBigger">
+	<align>right</align>
+	<posx>265</posx>
+</include>
+
+<include name="HomeMenuItemlayoutAlignRightBigger3">
+	<align>right</align>
+	<posx>335</posx>
+</include>
+
+<include name="HomeMenuLabelWidth">
+	<width>185</width>
+	<include condition="Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignRight</include>
+	<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignLeft</include>
+</include>
+<include name="HomeMenuLabelWidthBigger">
+	<width>255</width>
+	<include condition="Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignRightBigger</include>
+	<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignLeft</include>
+</include>
+<include name="HomeMenuLabelWidthBigger3">
+	<width>325</width>
+	<include condition="Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignRightBigger3</include>
+	<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuItemlayoutAlignLeft</include>
+</include>
+
+<include name="HomeMenuFocusedItemWidth">
+	<width>210</width>
+</include>
+
+<include name="HomeMenuFocusedItemWidthBigger">
+	<width>280</width>
+</include>
+<include name="HomeMenuFocusedItemWidthBigger3">
+	<width>350</width>
+</include>
+
+
+<include name="HomeMenuHeight">
+	<height>610</height>
+</include>
+<include name="HomeMenuHeightLargeFont">
+	<height>635</height>
+</include>
+<include name="HomeMenuHeightAnalogWatch">
+	<height>525</height>
+</include>
+<include name="HomeMenuHeightAnalogWatchLargeFont">
+	<height>540</height>
+</include>	
+<include name="homeMenuFont">
+	<font>homeMenu</font>
+</include>
+<include name="homeMenuFontMedium">
+	<font>homeMenuMedium</font>
+</include>
+<include name="homeMenuFontLarge">
+	<font>homeMenuLarge</font>
+</include>
+<include name="homeSubMenu">
+	<font>homeSubMenu</font>
+</include>
+<include name="homeSubMenuBig">
+	<font>homeSubMenuBig</font>
+</include>
+<include name="homeMenuFocusedHeight">
+	<height>35</height>
+	<posy>9</posy>
+</include>
+<include name="homeMenuFocusedHeightMedium">
+	<height>39</height>
+	<posy>7</posy>
+</include>
+<include name="homeMenuFocusedHeightLarge">
+	<height>45</height>
+	<posy>5</posy>
+</include>
+	
+<include name="HomeMenuLabelRemoveSpaceAnimation">
+	<animation effect="slide" start="0,0" end="-7,0" time="0" condition='!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-14,0" time="0" condition='!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-21,0" time="0" condition='!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-9,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont)+SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-18,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont)+SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-27,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont)+SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-10,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-20,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+	<animation effect="slide" start="0,0" end="-30,0" time="0" condition='Skin.HasSetting(LargerHomeMenuFont3)+SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+</include>	
+
+<!-- submenu items -->
+
+<include name="HideRestartItem">
+	<item id="114">
+			<description>Restart</description>
+			<label>$LOCALIZE[31072]</label>
+			<onclick>Dialog.Close(4998)</onclick>
+			<onclick>System.Exec(reboot)</onclick>
+			<visible>System.isSystem(openelec) + [ !System.UserIsRestricted | Skin.HasSetting(ShowRestrictedPowerOptions) ]</visible>
+		</item>
+	<item id="116">
+		<description>Restart</description>
+		<label>$LOCALIZE[31072]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.Reboot</onclick>
+		<visible>System.CanReboot + !System.isSystem(openelec) + [ !System.UserIsRestricted | Skin.HasSetting(ShowRestrictedPowerOptions) ]</visible>
+	</item>
+</include>
+
+<include name="SubMenuContent">
+	<item id="8">
+		<description>Switch User</description>
+		<label>Switch User</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>XBMC.ActivateWindow(selectuser)</onclick>
+		<visible>System.IsSignedIn + System.UserIsInHome</visible>
+	</item>
+	<item id="9">
+		<description>Sign In</description>
+		<label>Sign in</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.ActivateWindow(plexlogin)</onclick>
+		<visible>!System.IsSignedIn</visible>
+	</item>	
+	<item id="12">
+		<visible>!Skin.HasSetting(HideChannelDirectoryItem)</visible>
+		<description>Channel Directory</description>
+		<label>$LOCALIZE[31952]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.ActivateWindow(1,plexserver://channeldirectory,return)</onclick>
+	</item>
+	<item id="6">
+		<description>Preferences</description>
+		<label>$LOCALIZE[31955]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>XBMC.ActivateWindow(appearancesettings)</onclick>
+		<visible>!System.UserIsRestricted</visible>
+	</item>
+	<item id="103">
+		<description>Skin Settings</description>
+    <label>$LOCALIZE[20077]</label>
+    <onclick>ActivateWindow(SkinSettings)</onclick>
+    <onclick>Dialog.Close(4998)</onclick>
+    <visible>!System.UserIsRestricted</visible>
+  </item>
+  <item id="104">
+  		<description>Reload Settings</description>
+      <label>$LOCALIZE[20183]</label>
+      <onclick>ReloadSkin()</onclick>    
+      <visible>Skin.HasSetting(reloadSkin)</visible>
+  </item>    
+	<item id="101">
+		<description>OE Settings Button</description>
+		<label>$LOCALIZE[41000]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>RunAddon(service.openelec.settings)</onclick>
+		<visible>System.isSystem(openelec) + !System.UserIsRestricted</visible>
+	</item>	
+	<item id="102">
+		<description>Control Global Caching</description>
+		<label>$LOCALIZE[41001]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>XBMC.ActivateWindow(10208)</onclick>
+		<visible>System.isSystem(rasplex) + !System.UserIsRestricted</visible>
+	</item>
+	<item id="115">
+    <description>ActivateScreensaver</description>
+    <label>Screensaver</label>        
+    <onclick>XBMC.ActivateScreensaver()</onclick>
+    <onclick>Dialog.Close(4998)</onclick>
+    <visible>!Skin.HasSetting(HideActivateScreensaverItem)</visible>
+	</item>
+	<item id="111">
+		<description>Quit</description>
+		<label>$LOCALIZE[31007]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.Quit</onclick>
+		<visible>!System.isSystem(openelec)+!Skin.HasSetting(HideQuitItem)</visible>
+	</item>
+	<item id="112">
+		<description>Sleep</description>
+		<label>$LOCALIZE[31960]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.Suspend</onclick>
+		<visible>!System.isSystem(rasplex)+!Skin.HasSetting(HideSleepItem)</visible>
+	</item>
+	<item id="113">
+		<description>Shut Down</description>
+		<label>$LOCALIZE[31961]</label>
+		<onclick>Dialog.Close(4998)</onclick>
+		<onclick>Plex.Powerdown</onclick>
+		<visible>[!System.UserIsRestricted | Skin.HasSetting(ShowRestrictedPowerOptions)]+!Skin.HasSetting(HideShutDownItem)</visible>
+	</item>
+	<include condition="!Skin.HasSetting(HideRestartItem)">HideRestartItem</include>	
+</include>
+
+	<!-- additional menu items -->
+<include name="AdditionalHomeMenuItems">
+	<content>
+		<item id="122">
+			<description>nowplaying</description>
+			<label>$LOCALIZE[14086]</label>
+			<onclick>fullscreen</onclick>
+			<visible>Player.HasVideo|Player.HasAudio</visible>
+		</item>
+		<item id="7">
+			<description>Search</description>
+			<label>$LOCALIZE[137]</label>
+			<onclick>Plex.ActivateWindow(10051)</onclick>
+			<visible>!Skin.HasSetting(HideSearch)|Skin.HasSetting(SingleHomeMenu)</visible>
+		</item>
+		<item id="114">
+			<description>Update and Restart</description>
+			<label>Update</label><!--$LOCALIZE[40018]-->
+			<onclick>Plex.UpdateAndRestart</onclick>
+			<visible>System.UpdateIsAvailable</visible>
+		</item>	
+		<item id="121">
+			<label>$LOCALIZE[32205]</label>
+			<onclick>Skin.SetString(FileBrowserType,file)</onclick>
+			<onclick>Skin.Reset(PlayFilePath)</onclick>
+			<onclick>Skin.SetFile(PlayFilePath)</onclick>
+			<onclick>PlayMedia($ESCINFO[Skin.String(PlayFilePath)])</onclick>
+			<onclick>Skin.Reset(PlayFilePath)</onclick>
+			<visible>Skin.HasSetting(HomeMenuPlayFile)</visible>
+		</item>			
+	
+		<include condition="Skin.HasSetting(SingleHomeMenu)">SubMenuContent</include>					
+	</content>
+</include>
+
+<include name="HomeMenuItemlayout">
+	<!--menu label-->		
+	<control type="label">
+		<visible>!StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+		<posy>1</posy>
+				
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		
+		<height>50</height>
+		<label>$INFO[ListItem.Label]</label>
+		<textcolor>Unfocused</textcolor>					
+		<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuLabelRemoveSpaceAnimation</include>
+	</control>	
+	<!--playback-->
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>	
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<label>$LOCALIZE[14086]</label>
+		<textcolor>Selected</textcolor>
+		<visible>StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+	</control>			
+	<!--SectionNameCollision-->			
+	<include>SectionNameCollisionLabel</include>
+
+</include>
+
+<include name="HomeMenuFocusedlayout">
+	<!--selected bg-->		
+	<control type="image">
+		<visible>true</visible>				
+		<posx>0</posx>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFocusedHeight</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFocusedHeightMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFocusedHeightLarge</include>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuFocusedItemWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidthBigger3</include>
+		<aspectratio align="left">stretch</aspectratio>
+		<texture border="0">white.png</texture>
+		<colordiffuse>FF373737</colordiffuse>
+		<animation effect="fade" start="0" end="85" time="0" condition="true">Conditional</animation>
+		<animation effect="slide" start="0,0" end="0,6" time="0"  condition="!IsEmpty(ListItem.Property(SectionNameCollision))+!Skin.HasSetting(HomeHideServerOwner)">Conditional</animation>
+	</control>	
+	
+	<!--menu label-->		
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<textcolor>white</textcolor>
+		<label>$INFO[ListItem.Label]</label>
+		<visible>!StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+		<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuLabelRemoveSpaceAnimation</include>
+	</control>
+				
+	<!--playback-->
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<textcolor>ThemeColor</textcolor>
+		<label>$LOCALIZE[14086]</label>
+		<visible>StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+	</control>
+	
+	<!--SectionNameCollision-->
+	<include>SectionNameCollisionLabel</include>
+</include>
+	
+<include name="ListHomeMenu">		
+	<control type="list" id="300">
+		<animation effect="fade" start="100" end="0" time="322" condition="ControlGroup(5000).HasFocus">Conditional</animation>
+		<description>Home Main Menu</description>
+		<posx>20</posx>
+		<include>HomeMenuPosy</include>
+		<width>372</width>
+		<!--<height>520</height>-->
+		<include condition="!Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(LargerHomeMenuFont3)">HomeMenuHeight</include>
+		<include condition="Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(LargerHomeMenuFont3)">HomeMenuHeightAnalogWatch</include>
+		<include condition="!Skin.HasSetting(AnalogWatch)+Skin.HasSetting(LargerHomeMenuFont3)">HomeMenuHeightLargeFont</include>
+		<include condition="Skin.HasSetting(AnalogWatch)+Skin.HasSetting(LargerHomeMenuFont3)">HomeMenuHeightAnalogWatchLargeFont</include>
+		<onup>300</onup>
+		<ondown>300</ondown>
+		<onleft condition="!Skin.HasSetting(SingleHomeMenu)">Plex.ActivateWindow(4998)</onleft>	
+		<onright>5000</onright>
+		<include>ItemScrollTime</include>
+		<animation type="Conditional" condition="!Window.IsActive(4998)" reversible="false">
+			<effect type="slide" start="-320,0" end="0,0" time="350"/>
+			<effect type="fade" start="0" end="100" time="50" delay="0"/>
+		</animation>
+		<animation type="Conditional" condition="Window.IsActive(4998)" reversible="false">
+			<effect type="slide" start="0,0" end="-320,0" time="350"/>
+			<effect type="fade" start="100" end="0" time="230"/>
+		</animation>			
+		<animation type="Conditional" condition="ControlGroup(5000).HasFocus()" reversible="false">
+			<effect type="fade" start="100" end="50" time="0"/>
+		</animation>
+		<itemlayout width="600" height="43" condition="!Skin.HasSetting(LargerHomeMenuFont3)">
+				<include>HomeMenuItemlayout</include>
+		</itemlayout>
+		
+		<focusedlayout width="600" height="43" condition="!Skin.HasSetting(LargerHomeMenuFont3)">
+				<include>HomeMenuFocusedlayout</include>
+		</focusedlayout>
+		
+		<itemlayout width="600" height="48" condition="Skin.HasSetting(LargerHomeMenuFont3)">
+			<include>HomeMenuItemlayout</include>
+		</itemlayout>
+		
+		<focusedlayout width="600" height="48" condition="Skin.HasSetting(LargerHomeMenuFont3)">
+			<include>HomeMenuFocusedlayout</include>
+		</focusedlayout>	
+			
+		<!-- additional menu items -->
+		<include>AdditionalHomeMenuItems</include>
+	</control>		
+</include>
+
+
+
+<include name="WrapHomeMenuPosy">
+	<posy>55</posy>
+	<height>565</height>
+	<focusposition>6</focusposition>
+</include>
+
+<include name="WrapHomeMenu3Items">
+	<posy>267</posy>
+	<height>140</height>
+	<focusposition>1</focusposition>
+</include>
+<include name="WrapHomeMenu5Items">
+	<posy>225</posy>
+	<height>225</height>
+	<focusposition>2</focusposition>
+</include>
+<include name="WrapHomeMenu7Items">
+	<posy>180</posy>
+	<height>308</height>
+	<focusposition>3</focusposition>
+</include>
+<include name="WrapHomeMenu9Items">
+	<posy>137</posy>
+	<height>400</height>
+	<focusposition>4</focusposition>
+</include>
+<include name="WrapHomeMenu11Items">
+	<posy>95</posy>
+	<height>482</height>
+	<focusposition>5</focusposition>
+</include>
+
+
+<include name="WrapHomeMenuPosyLargeFont">
+	<posy>65</posy>
+	<height>562</height>
+	<focusposition>5</focusposition>
+</include>
+
+<include name="WrapHomeMenu3ItemsLargeFont">
+	<posy>260</posy>
+	<height>153</height>
+	<focusposition>1</focusposition>
+</include>
+<include name="WrapHomeMenu5ItemsLargeFont">
+	<posy>215</posy>
+	<height>250</height>
+	<focusposition>2</focusposition>
+</include>
+<include name="WrapHomeMenu7ItemsLargeFont">
+	<posy>165</posy>
+	<height>350</height>
+	<focusposition>3</focusposition>
+</include>
+<include name="WrapHomeMenu9ItemsLargeFont">
+	<posy>115</posy>
+	<height>456</height>
+	<focusposition>4</focusposition>
+</include>
+
+<include name="WrapHomeMenuItemlayout">
+	<!--menu label-->		
+	<control type="label">
+		<visible>!StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<label>$INFO[ListItem.Label]</label>
+		<textcolor>Unfocused</textcolor>					
+		<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuLabelRemoveSpaceAnimation</include>
+	</control>	
+	<!--playback-->
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<label>$LOCALIZE[14086]</label>
+		<textcolor>Selected</textcolor>
+		<visible>StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+	</control>	
+	
+	<!--SectionNameCollision-->					
+	<include>SectionNameCollisionLabel</include>
+</include>
+
+<include name="WrapHomeMenuFocusedlayout">
+	<!--selected bg-->
+	<control type="image">
+		<visible>true</visible>				
+		<posx>0</posx>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFocusedHeight</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFocusedHeightMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFocusedHeightLarge</include>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuFocusedItemWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidthBigger3</include>
+		<aspectratio align="left">stretch</aspectratio>
+		<texture border="0">white.png</texture>
+		<colordiffuse>FF373737</colordiffuse>
+		<animation effect="fade" start="0" end="85" time="0" condition="true">Conditional</animation>
+		<animation effect="slide" start="0,0" end="0,6" time="0"  condition="!IsEmpty(ListItem.Property(SectionNameCollision))+!Skin.HasSetting(HomeHideServerOwner)">Conditional</animation>
+	</control>	
+
+	<!--menu label-->		
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<textcolor>white</textcolor>
+		<label>$INFO[ListItem.Label]</label>
+		<visible>!StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+		<include condition="!Skin.HasSetting(HomeMenuAlignRight)">HomeMenuLabelRemoveSpaceAnimation</include>
+	</control>
+				
+	<!--playback-->
+	<control type="label">
+		<posy>1</posy>
+		<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+		<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont)">homeMenuFontMedium</include>
+		<include condition="Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFontLarge</include>
+		<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeMenuFont</include>
+		<height>50</height>
+		<textcolor>ThemeColor</textcolor>
+		<label>$LOCALIZE[14086]</label>
+		<visible>StringCompare(ListItem.Label,$LOCALIZE[14086])</visible>
+	</control>
+	<!--SectionNameCollision-->
+	<include>SectionNameCollisionLabel</include>
+</include>
+
+<include name="WrapHomeMenu">
+	<control type="wraplist" id="300">	
+		<description>Home Main Menu Wrap</description>
+			<animation effect="fade" start="100" end="0" time="322" condition="ControlGroup(5000).HasFocus">Conditional</animation>			
+			<posx>20</posx>		
+			<include condition="!Skin.HasSetting(WrapHomeMenu3Items)+!Skin.HasSetting(WrapHomeMenu5Items)+!Skin.HasSetting(WrapHomeMenu7Items)+!Skin.HasSetting(WrapHomeMenu9Items)+!Skin.HasSetting(WrapHomeMenu11Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenuPosy</include>
+			
+			<include condition="Skin.HasSetting(WrapHomeMenu3Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu3Items</include>	
+			<include condition="Skin.HasSetting(WrapHomeMenu5Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu5Items</include>		
+			<include condition="Skin.HasSetting(WrapHomeMenu7Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu7Items</include>		
+			<include condition="Skin.HasSetting(WrapHomeMenu9Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu9Items</include>
+			<include condition="Skin.HasSetting(WrapHomeMenu11Items)+!Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu11Items</include>							
+			
+			<include condition="!Skin.HasSetting(WrapHomeMenu3Items)+!Skin.HasSetting(WrapHomeMenu5Items)+!Skin.HasSetting(WrapHomeMenu7Items)+!Skin.HasSetting(WrapHomeMenu9Items)+Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenuPosyLargeFont</include>		
+			<include condition="Skin.HasSetting(WrapHomeMenu3Items)+Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu3ItemsLargeFont</include>	
+			<include condition="Skin.HasSetting(WrapHomeMenu5Items)+Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu5ItemsLargeFont</include>		
+			<include condition="Skin.HasSetting(WrapHomeMenu7Items)+Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu7ItemsLargeFont</include>		
+			<include condition="Skin.HasSetting(WrapHomeMenu9Items)+Skin.HasSetting(LargerHomeMenuFont3)">WrapHomeMenu9ItemsLargeFont</include>
+			
+			<animation effect="slide" start="0,0" end="0,-33" condition="Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(LargerHomeMenuFont3)">Conditional</animation>
+			<animation effect="slide" start="0,0" end="0,-43" condition="Skin.HasSetting(AnalogWatch)+Skin.HasSetting(LargerHomeMenuFont3)">Conditional</animation>
+											
+			<width>372</width>
+			<onup>300</onup>
+			<ondown>300</ondown>
+			<onleft condition="!Skin.HasSetting(SingleHomeMenu)">Plex.ActivateWindow(4998)</onleft>	
+			<onright>5000</onright>
+			
+			<include>ItemScrollTime</include>
+			<animation type="Conditional" condition="!Window.IsActive(4998)" reversible="false">
+				<effect type="slide" start="-320,0" end="0,0" time="350"/>
+				<effect type="fade" start="0" end="100" time="50" delay="0"/>
+			</animation>
+			<animation type="Conditional" condition="Window.IsActive(4998)" reversible="false">
+				<effect type="slide" start="0,0" end="-320,0" time="350"/>
+				<effect type="fade" start="100" end="0" time="230"/>
+			</animation>			
+			<animation type="Conditional" condition="ControlGroup(5000).HasFocus()" reversible="false">
+				<effect type="fade" start="100" end="50" time="0"/>
+			</animation>
+			<itemlayout width="600" height="43" condition="!Skin.HasSetting(LargerHomeMenuFont3)">
+				<include>WrapHomeMenuItemlayout</include>
+			</itemlayout>
+			
+			<focusedlayout width="600" height="43" condition="!Skin.HasSetting(LargerHomeMenuFont3)">	
+				<include>WrapHomeMenuFocusedlayout</include>				
+			</focusedlayout>	
+			
+			<itemlayout width="600" height="50" condition="Skin.HasSetting(LargerHomeMenuFont3)">
+				<include>WrapHomeMenuItemlayout</include>
+			</itemlayout>
+			
+			<focusedlayout width="600" height="50" condition="Skin.HasSetting(LargerHomeMenuFont3)">	
+				<include>WrapHomeMenuFocusedlayout</include>				
+			</focusedlayout>	
+				
+			<!-- additional menu items -->
+			<include>AdditionalHomeMenuItems</include>
+		</control>		
+</include>
+	
+
+</includes>

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<window type="dialog" id="4998">
+	<defaultcontrol always="true">1300</defaultcontrol>
+	<controls>
+		<control type="group" id="1400">
+			<control type="list" id="1300">
+				<description>Home Secondary Menu</description>
+				<posx>20</posx>
+				<include>HomeMenuPosy</include>
+				<width>372</width>
+				<height>500</height>
+				<onup>1300</onup>
+				<ondown>1300</ondown>
+				<onleft>-</onleft>
+				<onright>Dialog.Close(4998)</onright>
+				<onright condition="!IsEmpty(Container(300).ListItem(0).Label)">Control.SetFocus(300)</onright>
+				<focusposition>2</focusposition>
+				<include>ItemScrollTime</include>
+				<animation type="WindowOpen" condition="true" reversible="false">
+					<effect type="slide" start="-320,0" end="0,0" time="350" delay="0"/>
+					<effect type="fade" start="0" end="100" time="50" delay="0"/>
+				</animation>
+				<animation type="WindowClose" condition="true" reversible="false">
+					<effect type="slide" start="0,0" end="-320,0" time="350"/>
+					<effect type="fade" start="100" end="0" time="230"/>
+				</animation>
+				<animation effect="fade" start="100" end="0" time="500" condition="Skin.HasSetting(FadeOutHomeMenu) + System.IdleTime(15) + !ControlGroup(5000).HasFocus">Conditional</animation>
+				<itemlayout width="600" height="40">
+					<control type="label">
+						<posy>0</posy>
+						<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+						<include condition="Skin.HasSetting(LargerHomeMenuFont)|Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenuBig</include>
+						<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenu</include>
+						<height>50</height>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>Unfocused</textcolor>
+					</control>
+				</itemlayout>
+				<focusedlayout width="600" height="40">
+					<control type="image">
+						<visible>true</visible>
+						<posy>9</posy>
+						<posx>0</posx>
+						<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidth</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuFocusedItemWidthBigger</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuFocusedItemWidthBigger3</include>
+						<height>35</height>
+						<aspectratio align="left">stretch</aspectratio>
+						<texture border="0">white.png</texture>
+						<colordiffuse>FF373737</colordiffuse>
+						<animation effect="fade" start="0" end="85" time="0" condition="true">Conditional</animation>
+					</control>
+					<control type="label">
+						<posy>0</posy>
+						<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+						<include condition="Skin.HasSetting(LargerHomeMenuFont)|Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenuBig</include>
+						<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenu</include>
+						<height>50</height>
+						<align>left</align>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<posy>3</posy>
+						<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidth</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuLabelWidthBigger</include>
+						<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuLabelWidthBigger3</include>
+						<include condition="Skin.HasSetting(LargerHomeMenuFont)|Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenuBig</include>
+						<include condition="!Skin.HasSetting(LargerHomeMenuFont)+!Skin.HasSetting(LargerHomeMenuFont3)">homeSubMenu</include>
+						<height>50</height>
+						<align>left</align>
+						<textcolor>white</textcolor>
+						<label>[LOWERCASE]$INFO[ListItem.Label2][/LOWERCASE]</label>
+						<visible>!IsEmpty(ListItem.Property(SectionNameCollision))</visible>
+					</control>
+				</focusedlayout>
+				<content>
+					<item id="7">
+						<description>Search</description>
+						<label>$LOCALIZE[137]</label>
+						<onclick>Dialog.Close(4998)</onclick>
+						<onclick>Plex.ActivateWindow(10051)</onclick>
+						<visible>Skin.HasSetting(HideSearch)</visible>
+					</item>
+					<include>SubMenuContent</include>					
+				</content>
+			</control>
+		</control>
+		<!-- Mouse Trigger (Submenu) -->
+		<control type="group">
+     <visible>Window.isActive(4998) + !ControlGroup(5000).hasFocus</visible>           
+			<control type="button" id="65021">
+				<posx>0</posx>
+				<posy>0</posy>
+				<height>720</height>
+				<width>15</width>
+				<onclick>Dialog.Close(4998)</onclick>
+				<include>Mouse_Trigger</include>			
+			</control>
+		</control>
+	</controls>
+</window>

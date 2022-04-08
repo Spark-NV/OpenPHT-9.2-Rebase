@@ -1,0 +1,1193 @@
+<?xml version="1.0"?>
+<includes>
+	<include name="VideoPIPFull">
+			<control type="videowindow">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>1280</width>
+				<height>720</height>
+				<aspectratio>keep</aspectratio>
+				<fadetime>500</fadetime>
+				<visible>Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)</visible>
+			</control>
+	</include>
+	<include name="BGHomeRight">
+		<control type="image">
+			<include>FullScreenScaled</include>
+			<texture>background_home_right.png</texture>
+		</control>
+	</include>
+	<include name="BGDarkenImage">
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="Skin.HasSetting(GlobalBGDIM10)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="Skin.HasSetting(GlobalBGDIM20)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="Skin.HasSetting(GlobalBGDIM30)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="Skin.HasSetting(GlobalBGDIM40)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="Skin.HasSetting(GlobalBGDIM50)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="!Skin.HasSetting(GlobalBGDIM10)+!Skin.HasSetting(GlobalBGDIM20)+!Skin.HasSetting(GlobalBGDIM30)+!Skin.HasSetting(GlobalBGDIM40)+!Skin.HasSetting(GlobalBGDIM50)+!Skin.HasSetting(GlobalBGDIM70)+!Skin.HasSetting(GlobalBGDIM80)+!Skin.HasSetting(GlobalBGDIM90)+!Skin.HasSetting(GlobalBGDIM100)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="Skin.HasSetting(GlobalBGDIM70)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="Skin.HasSetting(GlobalBGDIM80)">Conditional</animation>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="Skin.HasSetting(GlobalBGDIM90)">Conditional</animation>			
+	</include>	
+	<include name="BGMainOverlayImage">
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+	</include>	
+	<include name="BGDarken2">
+		<control type="group">
+			<control type="largeimage">
+				<posy>0</posy>
+				<posx>0</posx>
+				<width>1280</width>
+				<height>720</height>
+				<aspectratio aligny="top">stretch</aspectratio>
+				<texture>backgrounds/background_black3.png</texture>
+				<animation effect="fade" start="0" end="Dim10" time="0" condition="Skin.HasSetting(GlobalBGDIM10)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim20" time="0" condition="Skin.HasSetting(GlobalBGDIM20)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim30" time="0" condition="Skin.HasSetting(GlobalBGDIM30)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim40" time="0" condition="Skin.HasSetting(GlobalBGDIM40)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim50" time="0" condition="Skin.HasSetting(GlobalBGDIM50)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim60" time="0" condition="!Skin.HasSetting(GlobalBGDIM10)+!Skin.HasSetting(GlobalBGDIM20)+!Skin.HasSetting(GlobalBGDIM30)+!Skin.HasSetting(GlobalBGDIM40)+!Skin.HasSetting(GlobalBGDIM50)+!Skin.HasSetting(GlobalBGDIM70)+!Skin.HasSetting(GlobalBGDIM80)+!Skin.HasSetting(GlobalBGDIM90)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim70" time="0" condition="Skin.HasSetting(GlobalBGDIM70)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim80" time="0" condition="Skin.HasSetting(GlobalBGDIM80)">Conditional</animation>
+				<animation effect="fade" start="0" end="Dim90" time="0" condition="Skin.HasSetting(GlobalBGDIM90)">Conditional</animation>			
+			</control>
+			<include>BGMainOverlay</include>
+		</control>
+	</include>	
+	<include name="BGBlackEdition">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+	<!--Settings BG-->
+	<include name="BGSettings">
+		<control type="image">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<posx>-45</posx>
+			<include>FullScreenScaled</include>
+			<texture>backdrops/settings.jpg</texture>
+		</control>
+		<include>VideoPIPFull</include>
+	</include>	
+	<include name="BGMainOverlay">
+		<control type="largeimage">
+			<posy>0</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>720</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	
+	<include name="BGDim0">
+		<!--do nothing
+	
+		-->
+	</include>
+	<include name="BGDim10">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim20">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim30">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim40">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim50">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim60">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim70">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim80">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	<include name="BGDim90">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay</include>
+	</include>
+	
+	<include name="BGDimRight10">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="20" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight20">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="30" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight30">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="40" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight40">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="50" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight50">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="60" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight60">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="70" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight70">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="80" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight80">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="BGDimRight90">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black_right.png</texture>
+			<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+		</control>
+	</include>
+		
+	<include name="Scaled109">
+		<posy>611</posy>
+		<posx>0</posx>
+		<width>1280</width>
+		<height>109</height>
+	</include>
+	<include name="BGMainOverlay_109">
+		<control type="largeimage">
+			<posy>611</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>109</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGDim0_109">
+		<!--
+		
+		-->
+	</include>
+	<include name="BGDim10_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim20_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim30_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim40_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim50_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim60_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim70_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim80_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim90_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_109</include>
+	</include>
+	<include name="BGDim100_109">
+		<control type="largeimage">
+			<include>Scaled109</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+	<!--280-->
+	<include name="Scaled280">
+		<posy>448</posy>
+		<posx>0</posx>
+		<width>1280</width>
+		<height>280</height>
+	</include>
+	<include name="BGMainOverlay_280">
+		<control type="largeimage">
+			<posy>448</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>280</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGDim0_280">
+		<!--
+	
+		-->
+	</include>
+	<include name="BGDim10_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim20_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim30_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim40_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim50_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim60_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim70_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim80_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim90_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_280</include>
+	</include>
+	<include name="BGDim100_280">
+		<control type="largeimage">
+			<include>Scaled280</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+	
+	
+	<!--middle-->
+	<include name="ScaledMiddle">
+		<posy>102</posy>
+		<posx>390</posx>
+		<width>495</width>
+		<height>516</height>
+	</include>
+	<include name="ScaledMiddleRight">
+		<posy>102</posy>
+		<posx>898</posx>
+		<width>350</width>
+		<height>516</height>
+	</include>
+	<include name="BGMainOverlay_middle">
+		<control type="largeimage">
+			<posy>102</posy>
+			<posx>390</posx>
+			<width>495</width>
+			<height>516</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGMainOverlay_middleRight">
+		<control type="largeimage">	
+			<posx>898</posx>
+			<posy>102</posy>
+			<width>350</width>
+			<height>516</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGDim0_middle">
+		<!--
+	
+		-->
+	</include>
+	<include name="BGDim10_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>	
+		
+	<include name="BGDim20_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim30_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim40_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim50_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim60_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>		
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim70_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>	
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim80_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>	
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim90_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>	
+		<include>BGMainOverlay_middle</include>
+		<include>BGMainOverlay_middleRight</include>
+	</include>
+	
+	<include name="BGDim100_middle">
+		<control type="largeimage">
+			<include>ScaledMiddle</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+		<control type="largeimage">
+			<include>ScaledMiddleRight</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+	
+	<!--325-->
+	<include name="Scaled325">
+		<posy>395</posy>
+		<posx>0</posx>
+		<width>1280</width>
+		<height>325</height>
+	</include>
+	<include name="BGMainOverlay_325">
+		<control type="largeimage">
+			<posy>395</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>325</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGDim0_325">
+		<!--
+	
+		-->
+	</include>
+	<include name="BGDim10_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim20_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim30_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim40_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim50_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim60_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim70_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim80_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim90_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_325</include>
+	</include>
+	<include name="BGDim100_325">
+		<control type="largeimage">
+			<include>Scaled325</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+	
+	
+	<!--395-->
+	<include name="Scaled395">
+		<posy>325</posy>
+		<posx>0</posx>
+		<width>1280</width>
+		<height>395</height>
+	</include>
+	<include name="BGMainOverlay_395">
+		<control type="largeimage">
+			<posy>325</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>395</height>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture background="true">background.png</texture>
+		</control>
+	</include>
+	<include name="BGDim0_395">
+		<!--
+	
+		-->
+	</include>
+	<include name="BGDim10_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim10" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim20_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim20" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim30_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim40_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim40" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim50_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim50" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim60_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim70_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim70" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim80_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim80" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim90_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>backgrounds/background_black3.png</texture>
+			<animation effect="fade" start="0" end="Dim90" time="0" condition="true">Conditional</animation>
+		</control>
+		<include>BGMainOverlay_395</include>
+	</include>
+	<include name="BGDim100_395">
+		<control type="largeimage">
+			<include>Scaled395</include>
+			<aspectratio aligny="top">stretch</aspectratio>
+			<texture>background_black_edition.png</texture>
+		</control>
+	</include>
+
+
+	<include name="BGFanart">
+		<control type="group">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<control type="group">
+				<!--Fanart-->		
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<fadetime>FanartFadeTime</fadetime>
+					<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+					<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+					<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+					<visible>!IsEmpty(ListItem.Property(Fanart_Image))</visible>
+				</control>						
+				<!--
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<texture>backgrounds/background_black_edition.png</texture>
+					<animation effect="fade" start="0" end="100" time="600">WindowOpen</animation>
+					<animation effect="fade" start="100" end="0" time="600">WindowClose</animation>
+					<visible>!IsEmpty(Container.Property(primaryFilterActivated))</visible>
+				</control>
+				-->				
+			</control>
+			<!-- Clip backgrounds use item thumb, not as pretty so we'll hide them a bit more -->
+			<control type="group">
+				<visible>Container.PlexContent(Clips)</visible>
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<fadetime>FanartFadeTime</fadetime>
+					<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+					<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+					<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+				</control>		
+			</control>
+			
+		</control>
+		<include>VideoPIPFull</include>
+	</include>
+	
+	<include name="BGFanartBlur">
+		<control type="group">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<control type="group">
+				<!--Fanart-->		
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<fadetime>FanartFadeTime</fadetime>
+					<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+					<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+					<texture background="true" blur="100">$INFO[ListItem.Property(Fanart_Image)]</texture>
+					<visible>!IsEmpty(ListItem.Property(Fanart_Image))</visible>
+				</control>						
+				
+				<!--
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<texture>backgrounds/background_black_edition.png</texture>
+					<animation effect="fade" start="0" end="100" time="600">WindowOpen</animation>
+					<animation effect="fade" start="100" end="0" time="600">WindowClose</animation>
+					<visible>!IsEmpty(Container.Property(primaryFilterActivated))</visible>
+				</control>
+				-->
+				
+			</control>
+			<!-- Clip backgrounds use item thumb, not as pretty so we'll hide them a bit more -->
+			<control type="group">
+				<visible>Container.PlexContent(Clips)</visible>
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<fadetime>FanartFadeTime</fadetime>
+					<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+					<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+					<texture background="true" blur="100">$INFO[ListItem.Art(thumb)]</texture>
+				</control>
+			
+			</control>
+			
+		</control>
+		<include>VideoPIPFull</include>
+	</include>
+
+	<include name="BGSharedContent">
+		<control type="group">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<control type="largeimage">
+				<include>FullScreenScaled</include>
+				<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+				<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+				<texture background="true">backdrops/sharedcontent.jpg</texture>				
+			</control>
+		</control>
+		<include>VideoPIPFull</include>
+	</include>
+
+	
+	
+	<include name="BGHomeList">
+		<include>FullScreenScaled</include>
+		<fadetime>FanartFadeTime</fadetime>
+		<animation effect="fade" start="30" end="100" time="300" delay="0">Visible</animation>
+		<animation effect="fade" start="100" end="30" time="300" delay="0">Hidden</animation>
+	</include>
+	
+	<include name="SlideshowHome">
+		<control type="group">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<!-- Custom Single -->
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(HomeBGSingle)]</texture>
+				<aspectratio>keep</aspectratio>
+				<visible>!isEmpty(Skin.String(HomeBGSingle)) + isEmpty(Skin.String(HomeBGMulti))</visible>
+				<animation effect="fade" start="100" end="0" time="400" condition="ControlGroup(5000).HasFocus">Conditional</animation>
+				<animation type="WindowClose">
+					<effect type="fade" start="100" end="0" time="800"/>
+				</animation>				
+			</control>			
+			<!-- Custom Multi -->
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>
+				<info>Skin.String(HomeBGMulti)</info>			
+				<animation effect="fade" start="100" end="0" time="400" condition="ControlGroup(5000).HasFocus">Conditional</animation>
+				<animation type="WindowClose">
+					<effect type="fade" start="100" end="0" time="800"/>
+				</animation>
+				<visible>isEmpty(Skin.String(HomeBGSingle)) + !isEmpty(Skin.String(HomeBGMulti))</visible>
+			</control>
+		
+			<control type="group">
+				<!-- generic autopopulated fanart slideshow -->		
+				<visible>!Skin.HasSetting(HideFanart)</visible>
+				<control type="multiimage" id="10101">
+					<visible>isEmpty(Skin.String(HomeBGSingle)) + isEmpty(Skin.String(HomeBGMulti))</visible>
+					<include>FullScreenScaled</include>
+					<timeperimage>SlideShowTimePerImage</timeperimage>
+					<fadetime>SlideShowFadeTime</fadetime>
+					<randomize>true</randomize>
+					<loop>yes</loop>
+					<animation effect="fade" start="100" end="0" time="400" condition="ControlGroup(5000).HasFocus">Conditional</animation>
+					<animation type="WindowClose">
+						<effect type="fade" start="100" end="0" time="800"/>
+					</animation>
+				</control>
+			
+				<!-- "new list" focused item fanart while using inside the list -->
+				<!-- on deck -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7002).HasFocus</visible>
+					<visible>!Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true">$INFO[Container(11001).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7002).HasFocus</visible>
+					<visible>Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true" blur="100">$INFO[Container(11001).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<!-- recently added -->				
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7001).HasFocus</visible>
+					<visible>!Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true">$INFO[Container(11000).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7001).HasFocus</visible>
+					<visible>Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true" blur="100">$INFO[Container(11000).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<!-- queue & recommendations -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7003).HasFocus</visible>
+					<visible>!Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true">$INFO[Container(11003).ListItem(0).Art(thumb)]</texture>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7003).HasFocus</visible>
+					<visible>Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true" blur="100">$INFO[Container(11003).ListItem(0).Art(thumb)]</texture>
+				</control>
+				<!-- queue & recommendations -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7008).HasFocus</visible>
+					<visible>!Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true">$INFO[Container(11004).ListItem(0).Art(thumb)]</texture>
+				</control>
+					<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7008).HasFocus</visible>
+					<visible>Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true" blur="100">$INFO[Container(11004).ListItem(0).Art(thumb)]</texture>
+				</control>
+				<!-- recently used -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7004).HasFocus</visible>
+					<visible>!Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true">$INFO[Container(11002).ListItem(0).Art(fanart)]</texture>
+				</control>
+					<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7004).HasFocus</visible>
+					<visible>Skin.HasSetting(HomeFanartBlur)</visible>
+					<texture background="true" blur="100">$INFO[Container(11002).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<!-- "default Playlists bg" -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<texture background="true">backdrops/playlist_movie.jpg</texture>
+					<visible>isEmpty(Skin.String(HomeBGPlaylists))</visible>
+					<visible>ControlGroup(7005).HasFocus</visible>	
+					<visible>Container(11005).ListItem(0).Type(videoplaylist) | Container(11005).ListItem(0).Type(videoplayqueue)</visible>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<texture background="true">backdrops/playlist_music.jpg</texture>
+					<visible>isEmpty(Skin.String(HomeBGPlaylists))</visible>
+					<visible>ControlGroup(7005).HasFocus</visible>
+					<visible>Container(11005).ListItem(0).Type(musicplaylist) | Container(11005).ListItem(0).Type(musicplayqueue)</visible>
+				</control>
+						
+				<!-- Custom Playlists BG -->
+				<control type="largeimage">
+					<include>FullScreenScaled</include>
+					<texture>$INFO[Skin.String(HomeBGPlaylists)]</texture>
+					<visible>!isEmpty(Skin.String(HomeBGPlaylists))</visible>
+					<visible>ControlGroup(7005).HasFocus</visible>
+				</control>
+	
+				<!-- "Play Queues" -->
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7007).HasFocus + System.PlexPlayQueue(Clip)</visible>
+					<texture background="true">$INFO[Container(11007).ListItem(0).Art(thumb)]</texture>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7007).HasFocus + System.PlexPlayQueue(Video)</visible>
+					<texture background="true">$INFO[Container(11007).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<control type="largeimage">
+					<include>BGHomeList</include>
+					<visible>ControlGroup(7006).HasFocus + System.PlexPlayQueue(Music)</visible>
+					<texture background="true">$INFO[Container(11006).ListItem(0).Art(fanart)]</texture>
+				</control>
+				<!-- positioning grid -->
+				<!--deadeye disabled
+				<control type="largeimage">
+					<posy>0</posy>
+					<posx>0</posx>
+					<width>1280</width>
+					<height>720</height>
+					<aspectratio aligny="top">scale</aspectratio>
+					<texture>grid-black_.jpg</texture>
+					<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+					<visible>true</visible>
+				</control>
+				-->
+			</control>
+		</control>
+		<include>VideoPIPFull</include>
+	</include>
+	<include name="SlideshowDimmed">
+		<control type="group">
+			<visible>![Player.HasVideo+Skin.HasSetting(ShowNowPlayingVidBackround)]</visible>
+			<control type="multiimage">
+				<visible>!Skin.HasSetting(HideFanart)</visible>
+				<include>FullScreenScaled</include>
+				<timeperimage>SlideShowTimePerImage</timeperimage>
+				<fadetime>SlideShowFadeTime</fadetime>
+				<randomize>true</randomize>
+				<loop>yes</loop>
+				<imagepath background="true">plexserver://best:32400/library/arts</imagepath>
+				<animation effect="fade" end="100" time="400" condition="true">Conditional</animation>
+				<animation type="WindowClose">
+					<effect type="fade" start="100" end="0" time="800"/>
+				</animation>
+			</control>
+		</control>
+		<include>VideoPIPFull</include>
+		<include>BGDarken2</include>
+	</include>
+	<include name="BeginnersBackground">
+		<control type="image">
+			<width>1280</width>
+			<height>720</height>
+			<texture>bg-beginner.jpg</texture>
+			<aspectratio>stretch</aspectratio>
+			<animation effect="fade" start="0" end="70" time="0" condition="true">Conditional</animation>
+			<visible>true</visible>
+		</control>
+		<include>BGDarken2</include>
+	</include>
+</includes>

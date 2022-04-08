@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<includes>
+	<include name="PauseIcon">
+		<control type="group">
+			<control type="image">
+				<posy>30</posy>
+				<width>30</width>
+				<height>100</height>
+				<texture>base.png</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<animation effect="fade" end="80" condition="true">Conditional</animation>
+			</control>
+			<control type="image">
+				<posx>50</posx>
+				<posy>30</posy>
+				<width>30</width>
+				<height>100</height>
+				<texture>base.png</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<animation effect="fade" end="80" condition="true">Conditional</animation>
+			</control>
+		</control>
+	</include>
+
+	<!-- titles -->
+	<variable name="CurrentlyPlayingTitle1">
+		<value condition="Player.HasAudio">$INFO[MusicPlayer.Artist]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle]</value>
+		<value condition="Player.HasVideo + IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.Title]</value>
+	</variable>
+	<variable name="CurrentlyPlayingTitle2">
+		<value condition="Player.HasAudio">$INFO[MusicPlayer.Album]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle]</value>
+		<value condition="Player.HasVideo + IsEmpty(VideoPlayer.TVShowTitle) + !IsEmpty(VideoPlayer.Episode)">TVShowTitle is EMPTY</value>
+	</variable>
+	<variable name="CurrentlyPlayingTitle3">
+		<value condition="Player.HasAudio">$INFO[MusicPlayer.Title]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.Episode)">S$INFO[VideoPlayer.Season]&#xB7;E$INFO[VideoPlayer.Episode]</value>
+	</variable>
+	<variable name="CurrentlyPlayingTitle4">
+		<value condition="Player.HasAudio">$INFO[MusicPlayer.Time] / $INFO[MusicPlayer.Duration]</value>
+		<value condition="Player.HasVideo">$INFO[VideoPlayer.Time] / $INFO[VideoPlayer.Duration]</value>
+	</variable>
+	<variable name="NextPlayingTitle1">
+		<value condition="MusicPlayer.HasNext">$INFO[MusicPlayer.Offset(1).Artist]</value>
+		<value condition="Player.HasVideo">$INFO[VideoPlayer.Offset(1).Title]</value>
+	</variable>
+	<variable name="NextPlayingTitle2">
+		<value condition="MusicPlayer.HasNext">$INFO[MusicPlayer.Offset(1).Album]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.Offset(1).TVShowTitle)">$INFO[VideoPlayer.Offset(1).TVShowTitle]</value>
+		<value condition="Player.HasVideo + IsEmpty(VideoPlayer.Offset(1).TVShowTitle) + !IsEmpty(VideoPlayer.Offset(1).Episode)">TVShowTitle is EMPTY</value>
+	</variable>
+	<variable name="NextPlayingTitle3">
+		<value condition="MusicPlayer.HasNext">$INFO[MusicPlayer.Offset(1).Title]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.Offset(1).Episode)">S$INFO[VideoPlayer.Offset(1).Season]&#xB7;E$INFO[VideoPlayer.Offset(1).Episode]</value>
+	</variable>
+	<variable name="NextPlayingTitle4">
+		<value condition="MusicPlayer.HasNext">$INFO[MusicPlayer.Offset(1).Duration]</value>
+		<value condition="Player.HasVideo + !IsEmpty(VideoPlayer.Offset(1).Duration)">$INFO[VideoPlayer.Offset(1).Time] / $INFO[VideoPlayer.Offset(1).Duration]</value>
+	</variable>
+	<!-- mini now playing homescreen -->
+	<include name="NowPlayingSideBar">
+		<control type="group">
+			<animation effect="fade" time="500">VisibleChange</animation>
+			<animation effect="fade" start="100" end="0" time="200" condition="Control.IsVisible(999) + Window.IsActive(home)">Conditional</animation>
+			<!-- music -->
+			<control type="group">
+				<posy>30</posy>
+				<posx>1193</posx>
+
+			</control>
+			<!-- video -->
+			<control type="group">
+				<posy>30</posy>
+				<posx>1193</posx>
+				
+			</control>
+				<!-- player toast video -->
+			<control type="group">
+				<visible>true</visible>
+				<!--<visible>Player.HasAudio + Player.OnNew</visible>-->
+				<visible>Player.HasVideo</visible>
+				<animation effect="fade" time="500">VisibleChange</animation>
+				<posy>12</posy>
+				<posx>915</posx>
+				<!-- backgrounds -->
+				<control type="group">				
+					<control type="image">
+						<posy>0</posy>
+						<posx>16</posx>
+						<width>312</width>
+						<height>60</height>
+						<include>Black</include>
+						<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+					</control>
+				</control>
+				<!-- infos video -->
+				<control type="group">
+					<posy>9</posy>
+					<posx>23</posx>
+					<visible>Player.HasVideo</visible>
+					<control type="label">
+						<posy>10</posy>
+						<width>200</width>
+						<label>$INFO[VideoPlayer.Title]</label>
+						<font>Regular-16</font>
+						<textcolor>white</textcolor>
+						<shadowcolor>ff222222</shadowcolor>
+						<align>left</align>
+					</control>
+					<control type="label">
+						<posy>32</posy>
+						<width>200</width>
+						<label>$INFO[VideoPlayer.TVShowTitle]</label>
+						<font>Regular-16</font>
+						<textcolor>white</textcolor>
+						<shadowcolor>ff222222</shadowcolor>
+						<align>left</align>
+					</control>
+				</control>
+			  <!--fanart + progress-->
+				<control type="group">
+					<posy>4</posy>
+					<posx>235</posx>
+					<visible>Player.HasVideo</visible>
+	
+				
+					<control type="image">
+						<width>89</width>
+						<height>50</height>
+						<texture>default-square-big.png</texture>
+					</control>
+					<control type="image">
+						<width>89</width>
+						<height>50</height>
+						<fadetime>200</fadetime>
+						<texture>$INFO[Player.Art(fanart)]</texture>
+						<aspectratio scalediffuse="false">scale</aspectratio>
+					</control>
+					<control type="progress">
+						<posy>51</posy>
+						<width>89</width>
+						<height>2</height>
+						<aligny>center</aligny>
+						<info>Player.Progress</info>
+						<texturebg border="1,0,1,0">OSDProgressBack6.png</texturebg>
+						<midtexture border="1,0,1,0">OSDProgressMid-white6.png</midtexture>
+					</control>
+				</control>
+				
+			</control>
+			
+			
+				<!-- player toast music -->
+			<control type="group">
+				<visible>true</visible>
+				<!--<visible>Player.HasAudio + Player.OnNew</visible>-->
+				<visible>Player.HasAudio</visible>
+				<animation effect="fade" time="500">VisibleChange</animation>
+				<posy>12</posy>
+				<posx>955</posx>
+				<!-- backgrounds -->
+				<control type="group">					
+					<control type="image">
+						<posy>0</posy>
+						<posx>16</posx>
+						<width>272</width>
+						<height>60</height>
+						<include>Black</include>
+						<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+					</control>
+				</control>
+				<!-- infos -->
+				<control type="group">
+					<posy>9</posy>
+					<posx>23</posx>
+					<control type="label">
+						<posy>10</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[MusicPlayer.Artist]</label>
+						<font>Regular-18</font>
+						<textcolor>white</textcolor>
+						<align>right</align>
+					</control>
+					<control type="label">
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[MusicPlayer.Title]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+					</control>
+					
+					<!--
+					<control type="label">
+						<posy>54</posy>
+						<width>200</width>
+						<label>$INFO[MusicPlayer.Album]</label>
+						<font>Regular-16</font>
+						<textcolor>FF999999</textcolor>
+						<shadowcolor>ff222222</shadowcolor>
+						<align>left</align>
+					</control>
+					-->
+				</control>
+				<control type="group">
+					<posy>4</posy>
+					<posx>234</posx>
+					<!--
+					<control type="image">
+						<posx>-13</posx>
+						<posy>-13</posy>
+						<width>77</width>
+						<height>77</height>
+						<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+						<texture background="true" border="30">shadow.png</texture>
+					</control>
+					-->
+					<control type="image">
+						<width>50</width>
+						<height>50</height>
+						<texture>default-square-small.png</texture>
+					</control>
+					<control type="image">
+						<width>50</width>
+						<height>50</height>
+						<fadetime>200</fadetime>
+						<texture>$INFO[MusicPlayer.Cover]</texture>
+						<aspectratio scalediffuse="false">scale</aspectratio>
+					</control>
+					<control type="progress">
+						<posy>51</posy>
+						<width>50</width>
+						<height>2</height>
+						<aligny>center</aligny>
+						<info>Player.Progress</info>
+						<texturebg border="1,0,1,0">OSDProgressBack6.png</texturebg>
+						<midtexture border="1,0,1,0">OSDProgressMid-white6.png</midtexture>
+					</control>
+				</control>
+				
+			</control>
+		</control>
+	</include>
+
+	<!-- full now playing -->
+	<include name="NowPlaying">
+		<!-- backup bg -->
+		<control type="largeimage">
+			<posy>0</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>720</height>
+			<texture>backdrops/music.jpg</texture>
+			<aspectratio>keep</aspectratio>
+			<visible>IsEmpty(Player.Art(fanart)) + isEmpty(Skin.String(CustomMusicBG))</visible>
+		</control>
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<texture>$INFO[Player.Art(fanart)]</texture>
+			<fadetime>FanartFadeTime</fadetime>
+			<visible>isEmpty(Skin.String(CustomMusicBG))</visible>
+		</control>
+		<control type="multiimage">
+			<include>FullScreenScaled</include>
+			<imagepath background="true">$INFO[Skin.String(CustomMusicBG)]</imagepath>
+			<timeperimage>SlideShowTimePerImage</timeperimage>
+			<fadetime>SlideShowFadeTime</fadetime>
+			<randomize>true</randomize>
+			<loop>yes</loop>			
+			<animation effect="fade" end="100" time="300" delay="0">Visible</animation>
+			<animation effect="fade" end="0" time="300" delay="0">Hidden</animation>
+			<animation type="WindowClose">
+				<effect type="fade" start="100" end="0" time="800"/>
+			</animation>				
+			<visible>!isEmpty(Skin.String(CustomMusicBG))</visible>
+		</control>
+		<!--osd + overlay-->
+		<control type="group">
+			<visible>!Player.ShowInfo</visible>
+			<animation effect="fade" end="100" time="800">Visible</animation>
+			<animation effect="fade" end="0" time="500">Hidden</animation>
+			<!--BG-->
+			<control type="largeimage">
+				<posy>633</posy>
+				<posx>0</posx>
+				<width>1280</width>
+				<height>87</height>
+				<include>BGDarkenImage</include>
+			</control>
+			<control type="largeimage">
+				<posy>633</posy>
+				<posx>0</posx>
+				<width>1280</width>
+				<height>87</height>
+				<include>BGMainOverlayImage</include>
+			</control>			
+			<include>NowPlayingMusicOSD</include>			
+			<control type="group">
+				<visible>Skin.HasSetting(ShowMusicPlaylist)</visible>
+				<animation effect="fade" end="100" time="800">Visible</animation>
+				<animation effect="fade" end="0" time="500">Hidden</animation>
+				<include>NowPlayingMusicPlayList</include>
+			</control>
+		</control>
+		
+
+		<!-- paused -->
+		<control type="group">
+			<visible>Player.Paused</visible>
+			<animation effect="fade" end="100" time="800">Visible</animation>
+			<animation effect="fade" end="0" time="500">Hidden</animation>
+			<control type="group">
+				<posx>40</posx>
+				<include>PauseIcon</include>
+			</control>
+		
+		</control>
+	
+	</include>
+</includes>

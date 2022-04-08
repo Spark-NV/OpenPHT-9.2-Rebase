@@ -1,0 +1,1301 @@
+<?xml version="1.0"?>
+<includes>
+	<include name="leftMenuSlide">
+		
+		<animation effect="slide" start="0" end="340" time="MenuSlideTime" condition="Control.HasFocus(65060) | ControlGroup(998).HasFocus() | ControlGroup(1300).HasFocus()">Conditional</animation>
+
+		<!--
+		<animation effect="slide" start="0" end="-340" time="MenuSlideTime" condition="ControlGroup(998).HasFocus() | ControlGroup(1300).HasFocus()">WindowClose</animation>
+		<animation effect="slide" start="0" end="-340" time="MenuSlideTime" condition="ControlGroup(1500).HasFocus()">Conditional</animation>
+		<animation effect="slide" start="0" end="-340" time="MenuSlideTime" condition="[ControlGroup(998).HasFocus() | ControlGroup(1300).HasFocus()] + Container.PlexContent(Secondary)">Conditional</animation>
+		-->
+	</include>
+
+	<include name="leftMenuBg">
+		<control type="group">
+			<posy>0</posy>
+			<control type="image">
+				<posx>-347</posx>
+				<height>720</height>
+				<width>327</width>
+				<include>BGDarkenImage</include>
+			</control>
+			<control type="image">
+				<posx>-347</posx>
+				<height>720</height>
+				<width>327</width>
+				<include>BGMainOverlayImage</include>
+			</control>
+		</control>
+	</include>
+	<include name="leftMenuBgSettings">
+		<control type="group">
+			<posy>0</posy>
+			<control type="image">
+				<posx>0</posx>
+				<width>74</width>
+				<height>720</height>
+				<include>Black</include>
+				<animation type="Conditional" condition="true">
+				<effect type="fade" start="0" end="40"/>
+				</animation>
+			</control>
+		</control>
+	</include>
+	<include name="leftMenuTitle">
+		<textoffsety>9</textoffsety>
+		<textoffsetx>37</textoffsetx>
+		<font>LightCaps-26</font>
+		<height>40</height>
+		<textcolor>white</textcolor>
+		<texturenofocus>-</texturenofocus>
+		<align>right</align>
+		<aligny>bottom</aligny>
+		<width>260</width>
+	</include>
+	<include name="leftMenuFormat">
+		<width>223</width>
+		<height>23</height>
+		<align>right</align>
+		<textoffsety>5</textoffsety>
+		<textoffsetx>34</textoffsetx>
+		<font>Regular-17</font>
+		<textcolor>Unfocused</textcolor>
+		<focusedcolor>Focused</focusedcolor>
+		<texturefocus border="10">focused_grey.png</texturefocus>
+		<texturenofocus border="10">-</texturenofocus>
+		<selectedcolor>white</selectedcolor>
+		<scroll>false</scroll>
+	</include>
+	<include name="leftSubMenuClearFilters">
+		<width>223</width>
+		<height>23</height>
+		<align>left</align>
+		<textoffsety>5</textoffsety>
+		<textoffsetx>10</textoffsetx>
+		<font>Regular-17</font>
+		<textcolor>Unfocused</textcolor>
+		<focusedcolor>Focused</focusedcolor>
+		<selectedcolor>white</selectedcolor>
+		<texturefocus border="10">bg-b-clear-subfilters-s.png</texturefocus>
+		<texturenofocus border="10">-</texturenofocus>		
+	</include>
+	<include name="leftMenuClearFilters">
+		<width>223</width>
+		<height>23</height>
+		<align>right</align>
+		<textoffsety>5</textoffsety>
+		<textoffsetx>0</textoffsetx>
+		<font>Regular-17</font>
+		<textcolor>ThemeColor</textcolor>
+		<focusedcolor>Focused</focusedcolor>
+		<texturefocus border="10">focused_grey.png</texturefocus><!--bg-b-clear-filters-s.png-->
+		<texturenofocus border="10">-</texturenofocus>
+	</include>
+
+	<include name="leftMenuFilterRadioButton">
+		<description>default radio button</description>
+		<textureradiofocus>left-menu-ticked-icon.png</textureradiofocus>
+		<textureradionofocus>-</textureradionofocus>
+		<align>right</align>
+		<aligny>center</aligny>
+		<pulseonselect>false</pulseonselect>
+		<radioheight>14</radioheight>
+		<radiowidth>20</radiowidth>
+		<radioposx>221</radioposx>	
+	</include>
+	
+	<include name="leftSubMenuRadioButton">
+		<width>185</width>
+		<height>26</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<textoffsetx>10</textoffsetx>
+		<font>Regular-17</font>
+		<textcolor>Unfocused</textcolor>
+		<focusedcolor>Focused</focusedcolor>
+		<texturefocus border="5">focused_grey.png</texturefocus>
+		<texturenofocus border="5">-</texturenofocus>
+		<radioposx>191</radioposx>
+		<radioheight>26</radioheight>
+	</include>
+	<include name="leftMenuSortingButton">
+		<description>sorting radio button</description>
+		<textureorderascending>arrow-big-up.png</textureorderascending>
+		<textureorderdescending flipy="true">arrow-big-up.png</textureorderdescending>
+		<colordiffuse>white</colordiffuse>
+		<align>right</align>
+		<aligny>center</aligny>
+		<pulseonselect>false</pulseonselect>
+		<radioheight>14</radioheight>
+		<radiowidth>16</radiowidth>
+		<radioposy>6</radioposy>
+		<radioposx>224</radioposx>	
+	</include>
+	<include name="leftMenuPreplayButton">
+		<width>74</width>
+		<height>30</height>
+		<onleft>1300</onleft>
+		<onright>-</onright>
+	</include>
+	<include name="leftMenuBarButton">
+		<width>74</width>
+		<height>30</height>
+		<onleft condition="!IsEmpty(Container.Property(PlexFilter))">1300</onleft>
+		<onright>777</onright>
+	</include>
+	
+	<include name="LeftSideMenu">
+		<include>ViewmodeHeader</include>
+		<control type="group" id="995">
+			<include>leftMenuBg</include>
+			<include>leftMenuSlide</include>
+			<control type="button" id="65060">
+				<posx>-340</posx>
+				<posy>0</posy>
+				<height>720</height>
+				<width>320</width>
+				<onfocus>Control.setFocus(998)</onfocus>
+				<onunfocus>-</onunfocus>
+				<texturefocus>-</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<visible allowhiddenfocus="true">false</visible>
+			</control>	
+			<control type="grouplist" id="998">
+				<visible>!Container.PlexContent(Movie) + !Container.PlexContent(Episode) + !Container.PlexContent(Clip) + Control.IsVisible(995)</visible>
+				<posy>33</posy>
+				<posx>-94</posx>
+				<width>74</width>
+				<aligny>top</aligny>
+				<onup>998</onup>
+				<ondown>998</ondown>
+				<orientation>vertical</orientation>
+				<itemgap>20</itemgap>
+				<control type="button" id="199">
+					<texturefocus>left-menu-home-icon-s.png</texturefocus>
+					<texturenofocus>left-menu-home-icon-u.png</texturenofocus>
+					<onclick>ActivateWindow(home)</onclick>
+					<include>leftMenuBarButton</include>				
+				</control>
+				<control type="button" id="102">
+					<texturefocus>left-menu-filters-icon-s.png</texturefocus>
+					<texturenofocus>left-menu-filters-icon-u.png</texturenofocus>
+					<onclick>Control.SetFocus(1300)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>!IsEmpty(Container.Property(PlexFilter))</visible>
+					<!--<visible>[!Container.PlexContent(Albums) | [Container.PlexContent(Albums) + [Container.PlexFilter(Albums) | Container.PlexFilter(recentlyAdded)]]] + !Container.PlexContent(Songs) + !Container.PlexContent(Seasons) + [!Container.PlexContent(Episodes) | [Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + IsEmpty(Container.Property(PlexPreplay))]] + ![Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode) | ListItem.Type(song)]]</visible>-->
+				</control>
+				<!--Music Extras-->
+				<control type="button" id="198">
+					<texturefocus>b-pp-extras-s.png</texturefocus>
+					<texturenofocus>b-pp-extras.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>SetFocus(3)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>!IsEmpty(Container.Property(PlexExtras))+[Container.PlexContent(Artists) | Container.PlexContent(Albums) | Container.PlexContent(Songs)]</visible>
+				</control>
+				<control type="button" id="104">
+					<texturefocus>b-pp-play-s.png</texturefocus>
+					<texturenofocus>b-pp-play.png</texturenofocus>
+					<onclick>Plex.PlayAll()</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>!Container.PlexContent(Channel)+!Container.PlexContent(Channels)+!Control.isVisible(54)+!Control.isVisible(571)</visible>
+					<!--<visible>![Window.IsActive(501) + Container.PlexFilter(recentlyAdded)] + !Container.PlexFilter(recentlyViewedShows)</visible>-->
+				</control>
+				<control type="button" id="105">
+					<texturefocus>left-menu-shuffle-icon-s.png</texturefocus>
+					<texturenofocus>left-menu-shuffle-icon-u.png</texturenofocus>
+					<onclick>Plex.ShuffleAll()</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>!Container.PlexContent(Channel)+!Container.PlexContent(Channels)+!Control.isVisible(54)+!Control.isVisible(571)</visible>
+					<!--<visible>![Window.IsActive(501) + Container.PlexFilter(recentlyAdded)] + !Container.PlexFilter(recentlyViewedShows)</visible>-->
+				</control>
+				<!-- Now Playing -->
+				<control type="button" id="106">
+					<texturefocus>left-menu-nowplaying-icon-s.png</texturefocus>
+					<texturenofocus>left-menu-nowplaying-icon-u.png</texturenofocus>
+					<onclick>fullscreen</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Player.HasAudio | Player.HasVideo</visible>
+				</control>
+				<control type="button" id="119">
+					<texturefocus>b-nextviewmode-s.png</texturefocus>
+					<texturenofocus>b-nextviewmode-u.png</texturenofocus>
+					<onclick>Container.NextViewMode</onclick>
+					
+					<include>leftMenuBarButton</include>
+					<visible>!Control.isVisible(611)+!Control.isVisible(541)+!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				
+				<control type="button" id="120">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,50)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(50_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(50_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(50_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(50_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(50_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(50_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(50_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(50_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(50_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(50_Blur)])</onclick>		
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(50_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(50_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(50)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="121">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,51)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(51_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(51_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(51_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(51_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(51_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(51_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(51_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(51_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(51_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(51_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(51_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(51_HideScrollBar)])</onclick>			
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(51)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="122">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,557)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(557_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(557_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(557_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(557_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(557_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(557_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(557_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(557_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(557_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(557_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(557_Blur)])</onclick>			
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(557_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(557)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="123">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,552)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(552_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(552_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(552_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(552_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(552_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(552_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(552_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(552_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(552_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(552_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(552_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(552_HideScrollBar)])</onclick>	
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(552)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="124">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,553)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(553_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(553_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(553_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(553_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(553_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(553_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(553_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(553_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(553_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(553_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(553_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(553_HideScrollBar)])</onclick>						
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(553)|Control.IsVisible(5531)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="125">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,558)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(558_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(558_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(558_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(558_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(558_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(558_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(558_HideScrollBar)])</onclick>			
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(558)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="126">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,556)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(556_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(556_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(556_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(556_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(556_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(556_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(556_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(556_HideScrollBar)])</onclick>		
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(556)|Control.IsVisible(5561)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="127">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,58)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(58_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(58_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(58_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(58_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(58_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(58_Blur)])</onclick>		
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(58_HideScrollBar)])</onclick>	
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(58)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="129">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,52)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(52_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(52_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(52_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(52_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(52_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(52_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(52_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(52_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(52_Blur)])</onclick>			
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(52_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(52_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(52)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="130">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,53)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(53_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(53_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(53_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(53_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(53_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(53_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(53_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(53_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(53_Blur)])</onclick>		
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(53_HideScrollBar)])</onclick>	
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(53)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="131">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,56)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(56_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(56_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(56_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(56_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(56_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(56_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(56_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(56_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(56_Blur)])</onclick>			
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(56_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(56)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="132">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,57)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(57_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(57_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(57_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(57_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(57_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(57_HideScrollBar)])</onclick>		
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(57)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="133">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,561)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(561_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(561_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(561_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(561_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(561_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(561_HideScrollBar)])</onclick>		
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(561)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="134">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,70)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(70_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(70_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(70_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(70_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(70_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(70_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(70_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(70_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(70_Blur)])</onclick>			
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(70_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(70)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="135">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,99)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(99_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(99_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(99_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(99_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(99_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(99_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(99_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(99_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(99_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(99_HideScrollBar)])</onclick>		
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(99)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="136">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,60)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(60_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(60_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(60_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(60_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(60_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(60_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(60_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(60_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(60_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(60_Blur)])</onclick>		
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(60_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(60_HideScrollBar)])</onclick>	
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(60)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="137">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,61)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(61_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(61_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(61_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(61_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(61_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(61_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(61_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(61_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(61_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(61_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(61_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(61_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(61)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="138">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,80)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(80_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(80_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(80_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(80_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(80_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(80_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(80_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(80_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(80_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(80_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(80)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="139">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,54)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(54_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(54_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(54_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(54_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(54_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(54_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(54)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="140">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,571)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(571_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(571_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(571_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(571_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(571_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(571_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(571_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(571_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(571_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(571_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(571)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="141">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,560)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(560_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(560_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(560_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(560_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(560_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(560_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(560_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(560_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(560_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(560_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(560_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(560)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="142">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,554)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(554_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(554_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(554_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(554_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(554_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(554_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(554_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(554)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="143">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,563)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(563_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(563_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(563_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(563_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(563_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(563_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(563_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(563)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="144">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,564)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(564_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(564_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(564_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(564_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(564_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(564_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(564_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(564_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(564_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(564_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(564_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(564_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(564)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>	
+				<control type="button" id="146">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,559)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(559_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(559_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(559_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(559_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(559_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(559_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(559_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(559_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(559_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(559)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="147">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,565)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(565_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(565_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(565_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(565_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(565_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(565_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(565_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(565_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(565_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(565_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(565_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(565_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(565)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="148">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,566)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(566_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(566_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(566_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(566_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(566_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(566_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(566_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(566_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(566_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(566_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(566_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(566_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(566)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="149">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,567)</onclick>
+					<onclick>Skin.SetString(SelectedShowInfos,$INFO[Skin.String(567_ShowInfos)])</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(567_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(567_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(567_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(567_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(567_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(567_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(567_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(567_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(567_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(567_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(567_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(567_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(567)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="151">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,521)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(521_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(521_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(521_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(521_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(521_Blur)])</onclick>		
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(521_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(521)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="152">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,611)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(611_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(611_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(611_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(611_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(611_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(611_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(611_FocusedNoBorder)])</onclick>		
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(611_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(611_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(611_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(611_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(611)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="153">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,541)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(541_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(541_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(541_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(541_DimUnfocused)])</onclick>	
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(541_Blur)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(541_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(541)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="154">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,568)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(568_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(568_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(568_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(568_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(568_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(568_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(568_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(568_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(568_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(568_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(568_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(568_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(568)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="155">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,562)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(562_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(562_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(562_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(562_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(562_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(562_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(562_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(562_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(562_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(562_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(562_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(562_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(562_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(562)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="156">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,574)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(574_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(574_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(574_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(574_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(574_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(574_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(574_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(574_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(574_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(574_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(574_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(574_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(574_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(574)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="157">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,578)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(578_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(578_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(578_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(578_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(578_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(578_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(578_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(578_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(578_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(578_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHidepopup,$INFO[Skin.String(578_HidePopup)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(578_ThumbBorder)])</onclick>	
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(578_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(578)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				
+				<control type="button" id="158">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,569)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(569_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(569_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(569_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(569_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(569_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedZoomFocused,$INFO[Skin.String(569_ZoomFocused)])</onclick>
+					<onclick>Skin.SetString(SelectedDimUnfocused,$INFO[Skin.String(569_DimUnfocused)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedNoBorder,$INFO[Skin.String(569_FocusedNoBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedFocusedPlayBtn,$INFO[Skin.String(569_FocusedPlayBtn)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(569_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedThumbBorder,$INFO[Skin.String(569_ThumbBorder)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(569_HideScrollBar)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(569)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="159">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,570)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(570_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(570_BGSingle)])</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(570_BGMulti)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(570_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedDimWatched,$INFO[Skin.String(570_DimWatched)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(570_Blur)])</onclick>
+					<onclick>Skin.SetString(SelectedHideScrollBar,$INFO[Skin.String(570_HideScrollBar)])</onclick>			
+					<onclick>Control.SetFocus(1500)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(570)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+			</control>
+			<control type="grouplist" id="1300">
+
+				<animation effect="fade" start="100" end="30" condition="Control.isVisible(54) | Control.isVisible(571) | [Container.PlexContent(Albums) + ![Container.PlexFilter(Albums) | Container.PlexFilter(recentlyAdded)]] | Container.PlexContent(Songs) | Container.PlexContent(Seasons) | [Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(PlexPreplay))]	| [Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode) | ListItem.Type(song)]]">Conditional</animation>
+					<animation type="Conditional" condition="!Window.IsActive(10202)" reversible="false">
+					<effect type="rotatey" center="-120" start="80" end="0" time="300"/>
+					<effect type="fade" start="0" end="100" time="0" delay="0"/>
+				</animation>
+				<animation type="Conditional" condition="Window.IsActive(10202)" reversible="false">
+					<effect type="rotatey" center="-120" start="0" end="80" time="300"/>
+					<effect type="fade" start="100" end="0" time="250"/>
+				</animation>
+				<posx>-330</posx>
+				<posy>20</posy>
+				<width>253</width>
+				<height>730</height>
+				<ondown>1300</ondown>
+				<orientation>vertical</orientation>
+				<include>ItemScrollTime</include>
+				<control type="label" id="19008">
+					<description>Title</description>
+					<include>leftMenuTitle</include>
+				</control>
+				<!-- primary filters list -->
+				<control type="grouplist" id="19000">
+					<height max="700">auto</height>
+					<onup>-</onup>
+ 					<ondown>29999</ondown>
+ 					<onright>777</onright>
+ 					<itemgap>0</itemgap>
+				</control>
+				<!--Filter-->				
+				<control type="label" id="19009">
+					<description>Secondary Title</description>
+					<include>leftMenuTitle</include>
+					<label>FILTER</label>
+					<visible>!IsEmpty(Container.Property(HasAdvancedFilters))</visible>
+				</control>
+				<control type="grouplist" id="19001">
+					<posx>0</posx>
+					<onup>19000</onup>
+					<ondown>32000</ondown>
+					<onright>777</onright>
+					<itemgap>0</itemgap>
+					<height max="700">auto</height>
+				</control>
+						
+				<!--Sort-->
+				<control type="label" id="19019">
+					<description>Title</description>
+					<posx>255</posx>
+					<include>leftMenuTitle</include>
+					<label>SORT</label>				
+					<visible>!IsEmpty(Container.Property(HasAdvancedFilters))</visible>
+				</control>			
+				<control type="grouplist" id="19010">
+					<height max="700">auto</height>
+					<posx>0</posx>
+					<onup>19001</onup>
+					<ondown>30000</ondown>
+					<onright>777</onright>
+					<itemgap>0</itemgap>				
+				</control>		
+			</control>
+			<control type="group">
+				<visible>false</visible>
+				<control type="button" id="19005">
+					<textoffsetx>12</textoffsetx>
+					<onup>19000</onup>
+					<ondown>31000</ondown>
+					<onright>777</onright>
+					<include>leftMenuClearFilters</include>
+				</control>
+				<control type="radiobutton" id="19006">
+					<textoffsetx>12</textoffsetx>
+					<include>leftMenuFormat</include>
+					<include>leftMenuFilterRadioButton</include>
+				</control>
+				<control type="label" id="19007">
+					<textoffsetx>40</textoffsetx>
+					<include>leftMenuFormat</include>
+					<font>Regular-14</font>
+					<shadowcolor>ff222222</shadowcolor>
+					<textcolor>FFFFCCCC</textcolor>
+				</control>
+				<control type="filterorderbutton" id="19011">
+					<textoffsetx>12</textoffsetx>
+					<include>leftMenuFormat</include>
+					<include>leftMenuSortingButton</include>
+				</control>
+			</control>			
+			<include>LeftSideCustomSkinSettings</include>			
+		</control>
+		<!-- Mouse Trigger (leftsidemenu) -->
+		<control type="group">
+    	<visible>![Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(998).HasFocus() | ControlGroup(1300).HasFocus() | ControlGroup(1500).HasFocus()]</visible>  	
+			<control type="button" id="65031">
+				<posx>0</posx>
+				<posy>0</posy>
+				<height>720</height>
+				<width>15</width>
+				<onclick>Control.SetFocus(998)</onclick>
+				<include>Mouse_Trigger</include>				
+			</control>			
+		</control>	
+	</include>
+	<include name="LeftSideMenuPreplay">
+		<control type="group" id="995">
+			<visible allowhiddenfocus="false">[!Container.PlexContent(Channel) | [Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode) | ListItem.Type(song)]]]</visible>
+			<control type="grouplist" id="998">
+				<visible>[Container.PlexContent(Movie) | Container.PlexContent(Episode) | Container.PlexContent(Clip)] | [Container.PlexContent(Channel) + !IsEmpty(Container.Property(PlexPreplay))]</visible>
+				<posy>40</posy>
+				<posx>0</posx>
+				<width>74</width>
+				<aligny>top</aligny>
+				<onup>998</onup>
+				<ondown>998</ondown>
+				<orientation>vertical</orientation>
+				<itemgap>20</itemgap>
+				<control type="button" id="199">
+					<texturefocus>left-menu-home-icon-s.png</texturefocus>
+					<texturenofocus>left-menu-home-icon-u.png</texturenofocus>
+					<onclick>ActivateWindow(home)</onclick>
+					<onright>XBMC.NextItem</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<include>leftMenuBarButton</include>				
+				</control>
+				<control type="button" id="102">
+					<texturefocus>b-pp-play-s.png</texturefocus>
+					<texturenofocus>b-pp-play.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onclick>Plex.PlayWith(VideoDefaultPlayer)</onclick>
+					<include>leftMenuBarButton</include>
+				</control>
+				<control type="button" id="103">
+					<texturefocus>b-pp-audio-s.png</texturefocus>
+					<texturenofocus>b-pp-audio.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>ActivateWindow(10205)</onclick>
+					<include>leftMenuBarButton</include>
+					<onfocus>Skin.SetString(DialogPos,audiostreampicker)</onfocus>
+					<onunfocus>Skin.Reset(DialogPos)</onunfocus>
+				</control>
+				<control type="button" id="104">
+					<texturefocus>b-pp-subtitles-s.png</texturefocus>
+					<texturenofocus>b-pp-subtitles.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>ActivateWindow(10204)</onclick>
+					<include>leftMenuBarButton</include>
+					<onfocus>Skin.SetString(DialogPos,subtitlestreampicker)</onfocus>
+					<onunfocus>Skin.Reset(DialogPos)</onunfocus>
+				</control>
+				<control type="button" id="110">
+					<texturefocus>b-pp-extras-s.png</texturefocus>
+					<texturenofocus>b-pp-extras.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>SetFocus(30)</onclick>
+					<include>leftMenuBarButton</include>
+					<visible>!IsEmpty(ListItem.Property(PlexExtras))</visible>
+				</control>
+				<control type="button" id="105">
+					<texturefocus>b-pp-rate-s.png</texturefocus>
+					<texturenofocus>b-pp-rate.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>			
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>ActivateWindow(10200,$INFO[ListItem(0).Path])</onclick>
+					<include>leftMenuBarButton</include>
+					<onfocus>Skin.SetString(DialogPos,rate)</onfocus>
+					<onunfocus>Skin.Reset(DialogPos)</onunfocus>
+				</control>
+				<control type="button" id="107">
+				<texturefocus>b-pp-share-s.png</texturefocus>
+					<texturenofocus>b-pp-share.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<include>leftMenuBarButton</include>
+					<visible>!IsEmpty(ListItem(0).Property(canShare))</visible>
+					<onfocus>Skin.SetString(DialogPos,share)</onfocus>
+					<onunfocus>Skin.Reset(DialogPos)</onunfocus>
+				</control>
+				<control type="button" id="108">
+					<texturefocus>b-pp-watched-s.png</texturefocus>
+					<texturenofocus>b-pp-watched.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>markasunwatched</onclick>
+					<include>leftMenuBarButton</include>
+				</control>
+				<control type="button" id="109">
+					<texturefocus>b-pp-unwatched-s.png</texturefocus>
+					<texturenofocus>b-pp-unwatched.png</texturenofocus>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<onclick>markaswatched</onclick>
+					<include>leftMenuBarButton</include>
+				</control>		
+				<control type="button" id="120">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,571)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(571_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(571_Blur)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(571)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="121">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,572)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(572_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedHideEpisodeThumb,$INFO[Skin.String(572_HideEpisodeThumb)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(572_Blur)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(572)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+				<control type="button" id="122">
+					<texturefocus>b-skinoption-s.png</texturefocus>
+					<texturenofocus>b-skinoption-u.png</texturenofocus>
+					<onclick>Skin.SetString(ViewmodeID,573)</onclick>
+					<onclick>Skin.SetString(SelectedDim,$INFO[Skin.String(573_Dim)])</onclick>
+					<onclick>Skin.SetString(SelectedBlur,$INFO[Skin.String(573_Blur)])</onclick>
+					<onclick>Control.SetFocus(1500)</onclick>
+					<onright>XBMC.NextItem</onright>
+					<onright condition="!IsEmpty(ListItem.Property(PlexExtras))">SetFocus(30)</onright>
+					<onleft>XBMC.PrevItem</onleft>
+					<include>leftMenuBarButton</include>
+					<visible>Control.IsVisible(573)</visible>
+					<visible>!Skin.HasSetting(KioskMode)</visible>
+				</control>
+			</control>
+			
+				
+			<include>LeftSideCustomSkinSettings</include>
+			
+			<!--<include>NowPlayingSideBar</include>-->
+		</control>
+	</include>
+	<include name="LeftSideMenuSettings">
+		<control type="group">
+			<include>leftMenuBgSettings</include>
+			<control type="group">
+				<posx>100</posx>
+				<posy>40</posy>
+				<control type="group">
+					<posy>13</posy>
+					<posx>45</posx>
+					<control type="label">
+						<width>1400</width>
+						<label>$VAR[TopBarSelectedItemStrings]</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-36</font>
+						<textcolor>Focused</textcolor>
+						<shadowcolor>ff111111</shadowcolor>
+						<animation effect="fade" start="80" end="80" condition="true">Conditional</animation>
+						<visible>Window.IsActive(4997)</visible>
+					</control>
+					<control type="label">
+						<width>1400</width>
+						<label>$VAR[TopBarSelectedItemStrings]</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<font>Regular-36</font>
+						<textcolor>Focused</textcolor>
+						<shadowcolor>ff111111</shadowcolor>
+						<animation effect="fade" time="300" start="0" end="30" condition="true">Conditional</animation>
+						<visible>!Window.IsActive(4997)</visible>
+					</control>
+			</control>
+		</control>
+		<control type="group">
+			<animation effect="fade" start="0" end="50" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>0</posx>
+				<posy>108</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-photos.png</texture>
+				<visible>!Skin.String(SettingsCategory,appearance)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>108</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-photos-s.png</texture>
+				<visible>Skin.String(SettingsCategory,appearance)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>158</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-video.png</texture>
+				<visible>!Skin.String(SettingsCategory,playback)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>158</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-video-s.png</texture>
+				<visible>Skin.String(SettingsCategory,playback)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>208</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-system.png</texture>
+				<visible>!Skin.String(SettingsCategory,system)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>208</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-system-s.png</texture>
+				<visible>Skin.String(SettingsCategory,system)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>258</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-network.png</texture>
+				<visible>!Skin.String(SettingsCategory,network)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>258</posy>
+				<include>leftMenuPreplayButton</include>
+				<texture>b-s-network-s.png</texture>
+				<visible>Skin.String(SettingsCategory,network)</visible>
+			</control>
+		</control>		
+		</control>
+		<!--mouse trigger-->
+		<control type="button" id="65041">
+			<posx>0</posx>
+			<posy>0</posy>
+			<height>720</height>
+			<width>77</width>
+			<onfocus>ActivateWindow(4997)</onfocus>
+			<texturefocus>-</texturefocus>
+			<include>Mouse_Trigger</include>		
+		</control>
+		
+	</include>
+	
+</includes>

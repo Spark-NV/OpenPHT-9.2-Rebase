@@ -56,7 +56,7 @@ HAVE_AVFILTERBUFFERREFVIDEOPROPS_SAMPLE_ASPECT_RATIO)
 if(DEFINED HAVE_LIBAVUTIL_PIXFMT_H)
     CHECK_CXX_SOURCE_COMPILES("
       #include <libavutil/pixfmt.h>
-      int main() { PixelFormat format = PIX_FMT_VDPAU_MPEG4; }" 
-    PIX_FMT_VDPAU_MPEG4_IN_AVUTIL)
+      int main() { AVPixelFormat format = AV_PIX_FMT_VDPAU_MPEG4; }"
+    AV_PIX_FMT_VDPAU_MPEG4_IN_AVUTIL)
 endif()
 

@@ -16,6 +16,7 @@
 #include "Stopwatch.h"
 #include "settings/GUISettings.h"
 
+#include "Application.h"
 #include "PlexApplication.h"
 #include "PlexServerCacheDatabase.h"
 #include "ApplicationMessenger.h"
@@ -274,6 +275,11 @@ void CPlexServerManager::ServerRefreshComplete(int connectionType)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void CPlexServerManager::UpdateReachability(bool force)
 {
+  if (!force && g_application.m_pPlayer->IsPlayingVideo()) {
+    CLog::Log(LOGDEBUG, "CPlexServerManager::UpdateReachability Ignoring reachability test during playback");
+    return;
+  }
+
   CSingleLock lk(m_serverManagerLock);
 
   if (force && m_reachabilityThreads.size() > 0)

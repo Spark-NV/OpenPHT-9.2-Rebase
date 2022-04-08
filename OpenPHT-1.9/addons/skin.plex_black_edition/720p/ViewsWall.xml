@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<includes>
+	<!-- Views Poster Wall 557-->
+	<include name="LibraryPostersWall">
+		<!--BG-->
+		<control type="group">
+			<visible>Control.IsVisible(557)</visible>
+			<control type="group">
+				<visible>isEmpty(Skin.String(557_BGMulti))</visible>
+				<visible>!Skin.String(557_Dim,100)+!IsEmpty(Skin.String(557_Dim))+!Skin.String(557_Blur,1)</visible>
+				<include>BGFanart</include>
+			</control>			
+			<control type="group">
+				<visible>isEmpty(Skin.String(557_BGMulti))</visible>
+				<visible>!Skin.String(557_Dim,100)+!IsEmpty(Skin.String(557_Dim))+Skin.String(557_Blur,1)</visible>
+				<include>BGFanartBlur</include>
+			</control>				
+			
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(557_BGSingle)]</texture>		
+				<visible>!isEmpty(Skin.String(557_BGSingle)) + isEmpty(Skin.String(557_BGMulti))</visible>
+			</control>
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>	
+				<info>Skin.String(557_BGMulti)</info>
+				<visible>isEmpty(Skin.String(557_BGSingle)) + !isEmpty(Skin.String(557_BGMulti))</visible>
+			</control>		
+		</control>
+		<control type="group" id="777">
+			<visible>!Container.PlexContent(Secondary) + [Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)]</visible>
+			<include>rightSideSlide</include>
+			<!--BG Dim-->		
+			<control type="group">
+				<visible>Control.IsVisible(557)</visible>
+				<visible>!Skin.String(557_Dim,100)</visible>
+				<control type="group">
+					<visible>Skin.String(557_Dim,10)</visible>
+					<include>BGDim10</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,20)</visible>
+					<include>BGDim20</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,30)</visible>
+					<include>BGDim30</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,40)</visible>
+					<include>BGDim40</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,50)</visible>
+					<include>BGDim50</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,60)</visible>
+					<include>BGDim60</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,70)</visible>
+					<include>BGDim70</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,80)</visible>
+					<include>BGDim80</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(557_Dim,90)</visible>
+					<include>BGDim90</include>
+				</control>
+			</control>
+			<!--Main List-->					
+			<control type="panel" id="557">
+				<visible>!Container.PlexContent(Secondary) + [Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)]</visible>
+				<viewtype label="Wall">panel</viewtype>
+				<include>FadeDialog</include>
+				<onup>557</onup>
+				<ondown>557</ondown>
+				<onright condition="Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(557_HideScrollbar,1)">557</onright>
+				<onright condition="![Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(557_HideScrollbar,1)]">1601</onright>
+				<pagecontrol>1601</pagecontrol>
+				<onleft>998</onleft>
+				<orientation>vertical</orientation>
+				<posx>-3</posx>
+				<posy>-2</posy>
+				<width>1290</width>
+				<height>714</height>
+				<include>ItemScrollTime</include>
+				<preloaditems>2</preloaditems>
+				<itemlayout width="140" height="210">
+					<control type="group">
+						<animation effect="fade" start="100" end="23" time="400" condition="!Skin.String(557_DimUnfocused,1)+Skin.String(557_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+						<animation effect="fade" start="100" end="23" time="400" condition="!Skin.String(557_DimUnfocused,1)+Skin.String(557_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>
+						<animation effect="fade" start="100" end="33" time="400" condition="Skin.String(557_DimUnfocused,1)+Skin.String(557_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+						<animation effect="fade" start="100" end="33" time="400" condition="Skin.String(557_DimUnfocused,1)+Skin.String(557_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>				
+						<control type="group">
+							<animation effect="fade" start="100" end="65" time="400" condition="Skin.String(557_DimUnfocused,1)">Conditional</animation>
+							<include>MovieTVPosterWall</include>
+						</control>			
+						<include>MovieTVPosterWallUnwatchedOverlay</include>
+					</control>
+				</itemlayout>			
+				<focusedlayout width="140" height="210">
+					<control type="group">						
+						<visible>Skin.String(557_HidePopup,1) | ![Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>	
+						<animation effect="zoom" start="100" end="108" center="84,120" time="300">Focus</animation>	
+						<control type="group">
+							<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(557_DimUnfocused,1)">Focus</animation>
+							<include>MovieTVPosterWall</include>
+						</control>
+						<control type="group">
+							<visible>Skin.String(557_FocusedPlayBtn,1)</visible>												
+							<include>MovieTVPosterWallPlayBtnOverlay</include>
+						</control>
+						<include>MovieTVPosterWallUnwatchedOverlay</include>
+						<control type="group">
+							<posy>1</posy>
+							<visible>!Skin.String(557_FocusedNoBorder,1)</visible>
+							<include>MovieTVPosterWallSelectedBorder</include>
+						</control>					
+					</control>
+					<control type="group">
+						<visible>!Skin.String(557_HidePopup,1)+[Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>
+						<visible>!Container.Column(5) + !Container.Column(6) + !Container.Column(7) + !Container.Column(8)</visible>
+						<control type="group">
+							<animation effect="zoom" start="100" end="108" center="84,120" time="300">Focus</animation>
+							<control type="group">
+								<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(557_DimUnfocused,1)">Focus</animation>
+								<include>MovieTVPosterWall</include>
+							</control>
+							<control type="group">
+								<visible>Skin.String(557_FocusedPlayBtn,1)</visible>												
+								<include>MovieTVPosterWallPlayBtnOverlay</include>
+							</control>	
+							<include>MovieTVPosterWallUnwatchedOverlay</include>
+							<control type="group">
+								<visible>!Skin.String(557_FocusedNoBorder,1)</visible>
+								<animation effect="fade" start="100" end="0" time="200" delay="2750">Focus</animation>
+								<posy>1</posy>								
+								<include>MovieTVPosterWallSelectedBorder</include>
+							</control>
+													
+						</control>						
+						<include>MovieTVPosterWallSelectedContentRight</include>
+					</control>
+					<control type="group">
+						<visible>!Skin.String(557_HidePopup,1)+[Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>
+						<visible>Container.Column(5) | Container.Column(6) | Container.Column(7) | Container.Column(8)</visible>
+						<control type="group">
+							<animation effect="zoom" start="100" end="108" center="84,120" time="300">Focus</animation>
+							<control type="group">
+								<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(557_DimUnfocused,1)">Focus</animation>
+								<include>MovieTVPosterWall</include>
+							</control>
+							<control type="group">
+								<visible>Skin.String(557_FocusedPlayBtn,1)</visible>												
+								<include>MovieTVPosterWallPlayBtnOverlay</include>
+							</control>
+							<include>MovieTVPosterWallUnwatchedOverlay</include>
+							<control type="group">
+								<visible>!Skin.String(557_FocusedNoBorder,1)</visible>
+								<animation effect="fade" start="100" end="0" time="200" delay="2750">Focus</animation>
+								<posy>1</posy>
+								<include>MovieTVPosterWallSelectedBorder</include>
+							</control>
+						
+						</control>
+						<include>MovieTVPosterWallSelectedContentLeft</include>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+	</include>
+	<!-- Views Poster Wall Big -->
+	<include name="LibraryPostersWallBig">
+		<!-- Library Movies & TV Shows -->
+		<!--BG-->
+		<control type="group">
+			<visible>Control.IsVisible(565)</visible>
+
+			<control type="group">
+				<visible>isEmpty(Skin.String(565_BGMulti))</visible>
+				<visible>!Skin.String(565_Dim,100)+!IsEmpty(Skin.String(565_Dim))+!Skin.String(565_Blur,1)</visible>
+				<include>BGFanart</include>
+			</control>			
+			<control type="group">
+				<visible>isEmpty(Skin.String(565_BGMulti))</visible>
+				<visible>!Skin.String(565_Dim,100)+!IsEmpty(Skin.String(565_Dim))+Skin.String(565_Blur,1)</visible>
+				<include>BGFanartBlur</include>
+			</control>
+			
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(565_BGSingle)]</texture>		
+				<visible>!isEmpty(Skin.String(565_BGSingle)) + isEmpty(Skin.String(565_BGMulti))</visible>
+			</control>
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>	
+				<info>Skin.String(565_BGMulti)</info>
+				<visible>isEmpty(Skin.String(565_BGSingle)) + !isEmpty(Skin.String(565_BGMulti))</visible>
+			</control>		
+		</control>
+		<control type="group" id="777">
+			<visible>!Container.PlexContent(Secondary) + [Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)]</visible>
+			<include>rightSideSlide</include>
+			<!--BG Dim-->		
+			<control type="group">
+				<visible>Control.IsVisible(565)</visible>
+				<visible>!Skin.String(565_Dim,100)</visible>
+				<control type="group">
+					<visible>Skin.String(565_Dim,10)</visible>
+					<include>BGDim10</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,20)</visible>
+					<include>BGDim20</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,30)</visible>
+					<include>BGDim30</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,40)</visible>
+					<include>BGDim40</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,50)</visible>
+					<include>BGDim50</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,60)</visible>
+					<include>BGDim60</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,70)</visible>
+					<include>BGDim70</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,80)</visible>
+					<include>BGDim80</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(565_Dim,90)</visible>
+					<include>BGDim90</include>
+				</control>
+			</control>
+			<!--Main List-->					
+			<control type="panel" id="565">
+				<visible>!Container.PlexContent(Secondary) + [Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)]</visible>
+				<viewtype label="Big Wall">panel</viewtype>
+				<include>FadeDialog</include>
+				<onup>565</onup>
+				<ondown>565</ondown>
+				<onright condition="Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(565_HideScrollbar,1)">565</onright>
+				<onright condition="![Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(565_HideScrollbar,1)]">1601</onright>
+				<pagecontrol>1601</pagecontrol>
+				<onleft>998</onleft>
+				<orientation>vertical</orientation>
+				<posx>52</posx>
+				<posy>8</posy>
+				<width>1280</width>
+				<height>704</height>
+				<include>ItemScrollTime</include>
+				<preloaditems>2</preloaditems>
+				<itemlayout width="235" height="352">	
+					<control type="group">		
+						<animation effect="fade" start="100" end="23" time="400" condition="!Skin.String(565_DimUnfocused,1)+Skin.String(565_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+						<animation effect="fade" start="100" end="23" time="400" condition="!Skin.String(565_DimUnfocused,1)+Skin.String(565_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>
+						<animation effect="fade" start="100" end="33" time="400" condition="Skin.String(565_DimUnfocused,1)+Skin.String(565_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+						<animation effect="fade" start="100" end="33" time="400" condition="Skin.String(565_DimUnfocused,1)+Skin.String(565_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>				
+						<control type="group">
+							<animation effect="fade" start="100" end="65" time="400" condition="Skin.String(565_DimUnfocused,1)">Conditional</animation>
+							<include>MovieTVPosterWallBig</include>
+						</control>
+						<include>MovieTVPosterWallBigUnwatchedOverlay</include>
+					</control>
+				</itemlayout>
+				<focusedlayout width="235" height="352">
+
+					<control type="group">
+						<visible>Skin.String(565_HidePopup,1) | ![Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>	
+						<animation effect="zoom" start="100" end="104" center="110,170" time="300">Focus</animation>
+						<control type="group">
+							<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(565_DimUnfocused,1)">Focus</animation>
+							<include>MovieTVPosterWallBig</include>
+						</control>						
+						<control type="group">
+							<visible>Skin.String(565_FocusedPlayBtn,1)</visible>												
+							<include>MovieTVPosterWallBigPlayBtnOverlay</include>
+						</control>
+						<include>MovieTVPosterWallBigUnwatchedOverlay</include>
+						<control type="group">
+							<visible>!Skin.String(565_FocusedNoBorder,1)</visible>
+							<include>MovieTVPosterWallBigSelectedBorder</include>
+						</control>
+					
+					</control>
+					<control type="group">
+						<visible>!Skin.String(565_HidePopup,1)+[Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>
+						<visible>!Container.Column(3) + !Container.Column(4)</visible>
+						<control type="group">
+							<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(565_DimUnfocused,1)">Focus</animation>
+							<include>MovieTVPosterWallBig</include>
+						</control>
+						<control type="group">
+							<visible>Skin.String(565_FocusedPlayBtn,1)</visible>												
+							<include>MovieTVPosterWallBigPlayBtnOverlay</include>
+						</control>
+						<include>MovieTVPosterWallBigUnwatchedOverlay</include>
+						<control type="group">
+							<visible>!Skin.String(565_FocusedNoBorder,1)</visible>
+							<animation effect="fade" start="100" end="0" time="200" delay="2750">Focus</animation>
+							<include>MovieTVPosterWallBigSelectedBorder</include>
+						</control>						
+						<include>MovieTVPosterWallBigSelectedContentRight</include>
+					</control>
+					<control type="group">
+						<visible>!Skin.String(565_HidePopup,1)+[Container.PlexContent(movies) | Container.PlexContent(tvshows)]</visible>
+						<visible>Container.Column(3) | Container.Column(4)</visible>
+						<control type="group">
+							<animation effect="fade" start="65" end="100" time="300" reversible="false" condition="Skin.String(565_DimUnfocused,1)">Focus</animation>
+							<include>MovieTVPosterWallBig</include>
+						</control>
+						<control type="group">
+							<visible>Skin.String(565_FocusedPlayBtn,1)</visible>												
+							<include>MovieTVPosterWallBigPlayBtnOverlay</include>
+						</control>
+						<include>MovieTVPosterWallBigUnwatchedOverlay</include>
+						<control type="group">
+							<visible>!Skin.String(565_FocusedNoBorder,1)</visible>
+							<animation effect="fade" start="100" end="0" time="200" delay="2750">Focus</animation>
+							<include>MovieTVPosterWallBigSelectedBorder</include>
+						</control>						
+						<include>MovieTVPosterWallBigSelectedContentLeft</include>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+	</include>
+</includes>

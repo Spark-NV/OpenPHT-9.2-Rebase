@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<includes>
+	<include name="CurrentUserAvatar">
+		<control type="group">
+			<visible>System.UserIsInHome+!Player.HasVideo+!Player.HasAudio</visible>
+			<posy>15</posy>
+			<control type="image">
+				<posx>1188</posx>
+				<width>60</width>
+				<height>60</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture diffuse="round.png" background="true">round.png</texture>
+				<animation effect="fade" start="20" end="20" time="0" condition="true">Conditional</animation>
+			</control>
+			<control type="image">
+				<posy>5</posy>
+				<posx>1205</posx>
+				<width>50</width>
+				<height>50</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture diffuse="round.png" background="true" fallback="default-square-small.png">$INFO[System.CurrentUserThumb]</texture>
+			</control>
+			<control type="label">
+				<posx>1180</posx>
+				<width>600</width>
+				<height>87</height>
+				<label>$INFO[System.CurrentUser]</label>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Regular-22</font>
+				<textcolor>white</textcolor>
+				<animation effect="fade" end="70" time="0" condition="true">Conditional</animation>
+			</control>
+			<animation effect="fade" start="100" end="0" time="500" delay="18000" condition="!Skin.HasSetting(DoNotFadeOutUserAvatar)">Conditional</animation>
+		</control>
+	</include>
+	<include name="FadeoutHomeMenu">
+		<animation effect="fade" start="100" end="0" time="500" condition="Skin.HasSetting(FadeOutHomeMenu) + System.IdleTime(15) + !ControlGroup(5000).HasFocus">Conditional</animation>
+	</include>
+	<include name="SlideHomeMenu">
+		<animation effect="slide" start="0,0" end="-180,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+		<animation effect="slide" start="-180,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+		<animation effect="slide" start="0,0" end="-250,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+		<animation effect="slide" start="-250,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+		<animation effect="slide" start="0,0" end="-320,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu3)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+		<animation effect="slide" start="-320,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu3)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+	</include>
+	
+	<include name="HomeMenu">	
+		<!--menu BG (left)-->
+		<control type="group">		
+			<include>SlideHomeMenu</include>
+			<include>FadeoutHomeMenu</include>
+			<control type="image">
+				<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidth</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuWidthBigger</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidthBigger3</include>
+				<include>BGDarkenImage</include>	
+				<height>720</height>
+			</control>	
+			<control type="image">
+				<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidth</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuWidthBigger</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidthBigger3</include>
+				<include>BGMainOverlayImage</include>	
+				<height>720</height>
+			</control>	
+		</control>
+		<!--HomeScreen BG (right)-->
+		<control type="group">
+			<visible>ControlGroup(7001).HasFocus | ControlGroup(7002).HasFocus | ControlGroup(7003).HasFocus | ControlGroup(7004).HasFocus | ControlGroup(7005).HasFocus | ControlGroup(7006).HasFocus | ControlGroup(7007).HasFocus | ControlGroup(7008).HasFocus</visible>
+			<!--<posx>265</posx>-->
+			<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeBGPosx</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeBGPosxBigger</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeBGPosxBigger3</include>
+			<include>BGDarken2</include>		
+			<include>SlideHomeMenu</include>	
+			<animation effect="fade" start="0" end="100" time="322" condition="ControlGroup(5000).HasFocus">Conditional</animation>			
+		</control>
+		
+		<control type="group">
+			<visible>Skin.HasSetting(showNewLists) + !ControlGroup(5000).HasFocus</visible><!-- + !System.isSystem(openelec)-->
+			<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeBGPosx</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeBGPosxBigger</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeBGPosxBigger3</include>
+			<include>SlideHomeMenu</include>
+			<include>FadeoutHomeMenu</include>
+			<include>BGHomeRight</include>		
+		</control>
+				
+		<!-- Main Menu -->
+		<control type="group">			
+			<include>SlideHomeMenu</include>
+			<include>FadeoutHomeMenu</include>
+
+			<!--Clock-->
+			<include condition="Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(HideHomeClock)">analog_clock</include>
+			<control type="group">
+				<posx>0</posx>
+				<posy>670</posy>
+				<visible>!Skin.HasSetting(AnalogWatch)+!Skin.HasSetting(HideHomeClock)+!Skin.HasSetting(ShowPlexLogo)</visible>
+				<control type="label">
+					<label>$INFO[System.Time(short_no_meridian)]</label>
+					<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidth</include>
+					<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuWidthBigger</include>
+					<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidthBigger3</include>
+					<height>49</height>
+					<font>smallCaps</font>
+					<align>center</align>
+					<textcolor>Unfocused</textcolor>
+				</control>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>675</posy>
+				<visible>Skin.HasSetting(ShowPlexLogo)</visible>
+				<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidth</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuWidthBigger</include>
+				<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuWidthBigger3</include>
+				<height>26</height>
+				<aspectratio align="center">keep</aspectratio>
+				<texture border="0">plex-logo-menu.png</texture>
+				<colordiffuse>FFDBDBDB</colordiffuse>
+			</control>
+
+			<!-- list -->
+			<include condition="Skin.HasSetting(WrapHomeMenu)">WrapHomeMenu</include>
+			<include condition="!Skin.HasSetting(WrapHomeMenu)">ListHomeMenu</include>
+			
+		</control>
+		
+		<!--Loading-->
+		<control type="list" id="333">
+			<visible>IsEmpty(Container(300).ListItem(0).Label)</visible>
+			<description>loading Menu</description>
+			<posx>20</posx>
+			<include>HomeMenuPosy</include>
+			<width>372</width>
+			<height>300</height>
+			<onup>300</onup>
+			<ondown>300</ondown>
+			<onleft>Plex.ActivateWindow(4998)</onleft>	
+			<onright>300</onright>
+			<include>ItemScrollTime</include>
+			<animation type="Conditional" condition="!Window.IsActive(4998)" reversible="false">
+				<effect type="slide" start="-320,0" end="0,0" time="MenuSlideTime"/>
+				<effect type="fade" start="0" end="100" time="50" delay="0"/>
+			</animation>
+			<animation type="Conditional" condition="Window.IsActive(4998)" reversible="false">
+				<effect type="slide" start="0,0" end="-320,0" time="MenuSlideTime"/>
+				<effect type="fade" start="100" end="0" time="230"/>
+			</animation>					
+			<itemlayout width="600" height="43">
+				<control type="label">
+					<posx>15</posx>
+					<posy>1</posy>
+					<width>130</width>
+					<height>50</height>
+					<align>left</align>
+					<label>$INFO[ListItem.Label]</label>
+					<textcolor>Unfocused</textcolor>					
+				</control>	
+			</itemlayout>
+			<focusedlayout width="600" height="43">						
+				<control type="label">
+					<posy>1</posy>
+					<posx>15</posx>
+					<width>130</width>
+					<height>50</height>
+					<align>left</align>
+					<textcolor>Unfocused</textcolor>
+					<label>$INFO[ListItem.Label]</label>					
+				</control>	
+			</focusedlayout>		
+			<content>		
+				<item id="133">
+					<description>fake</description>
+					<label> </label>
+					<onclick>Plex.ActivateWindow(4998)</onclick>
+				</item>					
+			</content>
+		</control>
+	</include>
+	
+	
+	
+
+</includes>

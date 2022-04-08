@@ -13,6 +13,7 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 #include "PlexApplication.h"
+#include "Application.h"
 
 #include <boost/lexical_cast.hpp>
 
@@ -51,8 +52,15 @@ void CPlexManualServerManager::checkManualServersAsync()
 
 void CPlexManualServerManager::OnTimeout()
 {
-  checkManualServersAsync();
-  g_plexApplication.timer->SetTimeout(1 * 60 * 1000, this);
+  // don't run any checks during video playback
+  if (g_application.m_pPlayer->IsPlayingVideo())
+  {
+    CLog::Log(LOGDEBUG, "Disabling manual server refresh during playback");
+    g_plexApplication.timer->SetTimeout(1 * 60 * 1000, this);
+  }
+  else {
+    checkManualServersAsync();
+  }
 }
 
 void CPlexManualServerManager::OnJobComplete(unsigned int jobID, bool success, CJob *job)

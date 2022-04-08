@@ -6163,11 +6163,10 @@ void CApplication::UpdateFileState(const string& aState, bool force)
   else
     state = IsBuffering() ? PLEX_MEDIA_STATE_BUFFERING : m_pPlayer->IsPaused() ? PLEX_MEDIA_STATE_PAUSED : PLEX_MEDIA_STATE_PLAYING;
 
-  if (!m_itemCurrentFile->HasProperty("duration"))
-    m_itemCurrentFile->SetProperty("duration", GetTotalTime());
-
-  if (state == PLEX_MEDIA_STATE_STOPPED || m_pPlayer->IsPlayingVideo() || m_pPlayer->IsPlayingAudio())
+  if (state == PLEX_MEDIA_STATE_STOPPED || state == PLEX_MEDIA_STATE_PAUSED)
   {
+    if (!m_itemCurrentFile->HasProperty("duration"))
+      m_itemCurrentFile->SetProperty("duration", GetTotalTime());
     if (g_plexApplication.timelineManager)
       g_plexApplication.timelineManager->ReportProgress(m_itemCurrentFile, state, GetTime() * 1000, force);
   }

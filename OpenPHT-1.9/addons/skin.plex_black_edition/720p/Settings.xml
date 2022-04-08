@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<window id="4">
+	<defaultcontrol>9000</defaultcontrol>
+	<allowoverlay>no</allowoverlay>
+	<controls>
+		<control type="largeimage">
+			<description>Background</description>
+			<include>Base</include>
+			<include>FullScreenStretched</include>
+			<colordiffuse>FF111315</colordiffuse>
+		</control>
+		<control type="image">
+			<posy>170</posy>
+			<posx>500</posx>
+			<width>200</width>
+			<height>65</height>
+			<aspectratio>keep</aspectratio>
+			<texture>plex-logo-light-small.png</texture>
+		</control>
+		<control type="label">
+			<label>Black Edition</label>
+			<posy>250</posy>
+			<posx>496</posx>
+			<width>504</width>
+			<height>49</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<font>pagelabel</font>
+			<textcolor>white</textcolor>
+		</control>
+		<control type="label">
+			<label>by DeadEyeFlint</label>
+			<posy>330</posy>
+			<posx>500</posx>
+			<width>504</width>
+			<height>49</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<font>Regular-22</font>
+			<textcolor>white</textcolor>	
+		</control>
+		<control type="group">
+			<posy>410</posy>
+			<posx>60</posx>
+			<control type="button" id="9000">
+				<description>OK</description>
+				<posx>1060</posx>
+				<posy>200</posy>
+				<width>100</width>
+				<label>OK</label>
+				<onclick>ActivateWindow(0)</onclick>
+				<include>DialogPressButton</include>
+			</control>
+		</control>
+		<include>debugInfos</include>
+		<include>Grid</include>
+		<include>Non16x9Cache</include>
+	</controls>
+</window>

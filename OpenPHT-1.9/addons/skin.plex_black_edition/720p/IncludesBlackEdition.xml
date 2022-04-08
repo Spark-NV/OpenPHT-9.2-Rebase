@@ -1,0 +1,2419 @@
+<?xml version="1.0"?>
+<includes>
+	
+	<include name="SkinVersion">
+		<label>Black Edition V17.03.16</label>
+	</include>
+
+	<!-- Mouse Support -->
+	<include name="Mouse_Trigger">
+		<label>-</label>
+		<font>-</font>
+		<texturenofocus>-</texturenofocus>	
+		<texturefocus>MouseTrigger.png</texturefocus>		
+		<visible>system.getbool(input.enablemouse)</visible>
+		<animation effect="fade" start="0" end="100" time="250">Focus</animation>
+	</include>
+	
+
+	<!-- Constants -->
+	<constant name="MenuSlideTime">500</constant>
+	<constant name="OSDSlideTime">300</constant>
+	<constant name="VideoSeekSlideTime">250</constant>
+	<constant name="HomeDeckFadeTime">500</constant>
+	<constant name="HomePlotFadeTime">600</constant>
+	<constant name="FanartFadeTime">200</constant>
+	<constant name="SlideShowFadeTime">500</constant>
+	<constant name="SlideShowTimePerImage">8000</constant> 
+
+	<constant name="Dim10">1</constant>
+	<constant name="Dim20">20</constant> 
+	<constant name="Dim30">34</constant> 
+	<constant name="Dim40">43</constant> 
+	<constant name="Dim50">52</constant> 
+	<constant name="Dim60">61</constant> 
+	<constant name="Dim70">69</constant>
+	<constant name="Dim80">77</constant>
+	<constant name="Dim90">86</constant> 
+	
+	<constant name="DimDialogs">77</constant> 
+
+  
+  <!--The time (in ms) to scroll from one item to another.-->
+  <include name="ItemScrollTime">
+  	<scrolltime>200</scrolltime>
+  </include>
+  <!-- Constants end-->   
+	
+	<!--Vars-->
+	<variable name="PlaylistCountStrings">
+		<value condition="ListItem.Type(musicplaylist) | ListItem.Type(musicplayqueue)">$INFO[ListItem.Property(LeafCount)] $LOCALIZE[134]</value>
+		<value condition="ListItem.Type(videoplaylist) | ListItem.Type(videoplayqueue)">$INFO[ListItem.Property(LeafCount)] $LOCALIZE[10006]</value>
+	</variable>
+	
+	
+	<include name="overlayDiffuse">
+		<colordiffuse>overlay</colordiffuse>
+	</include>
+	<include name="overlayDiffuseDefault">
+		<colordiffuse>FFefefef</colordiffuse>
+	</include>
+	
+	<include name="unwachtedCountOverlayDiffuse">
+		<colordiffuse>episodeoverlay</colordiffuse>
+	</include>
+	<include name="unwachtedCountOverlayDiffuseDefault">
+		<colordiffuse>FFefefef</colordiffuse>
+	</include>
+	
+	
+	<include name="sectionTitleMiddle">
+		<font>Regular-30</font>
+		<textcolor>white</textcolor>
+	</include>
+	<include name="GlobalMultiImageFade">
+		<include>FullScreenKeep</include>
+		<timeperimage>SlideShowTimePerImage</timeperimage>
+		<fadetime>SlideShowFadeTime</fadetime>
+		<randomize>true</randomize>
+		<loop>yes</loop>			
+	</include>
+	<include name="UnfosusedTitleAnimation">
+		<animation effect="fade" start="80" end="80" time="0" condition="true">Conditional</animation>	
+	</include>
+	<include name="StarRatingOverlay">
+		<control type="image">
+			<width>21</width>
+			<height>21</height>
+			<texture>star.png</texture>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+			<colordiffuse>title2</colordiffuse>
+		</control>
+		<control type="label">
+			<posx>25</posx>
+			<posy>1</posy>
+			<width>40</width>
+			<height>18</height>
+			<font>smallCaps</font>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+	</include>
+	<include name="StarRatingOverlayWhite">
+		<control type="image">
+			<width>21</width>
+			<height>21</height>
+			<texture>star.png</texture>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+			<colordiffuse>white</colordiffuse>
+		</control>
+		<control type="label">
+			<posx>25</posx>
+			<posy>2</posy>
+			<width>40</width>
+			<height>18</height>
+			<font>Regular-18</font>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<textcolor>white</textcolor>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+	</include>
+	<include name="StarRatingOverlayWhiteBig">
+		<control type="image">
+			<width>24</width>
+			<height>24</height>
+			<texture>star.png</texture>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+			<colordiffuse>white</colordiffuse>
+		</control>
+		<control type="label">
+			<posx>28</posx>
+			<posy>0</posy>
+			<width>50</width>
+			<height>28</height>
+			<font>Regular-22</font>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<textcolor>white</textcolor>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+	</include>
+	<include name="RTRating">
+		<control type="image">
+			<width>24</width>
+			<height>24</height>
+			<texture>$INFO[ListItem.Property(ratingImage)]</texture>
+			<aspectratio align="right" aligny="center">keep</aspectratio>
+		</control>
+		<control type="label">
+			<height>28</height>
+			<width min="20" max="80">auto</width>
+			<label>$INFO[ListItem.Property(ratingPercent)]%  </label>
+			<font>Regular-18</font>
+			<textcolor>title2</textcolor>
+		</control>
+		<control type="image">
+			<width>24</width>
+			<height>24</height>
+			<texture>$INFO[ListItem.Property(audienceRatingImage)]</texture>
+			<aspectratio align="right" aligny="center">keep</aspectratio>
+		</control>
+		<control type="label">
+			<height>28</height>
+			<width min="20" max="80">auto</width>
+			<label>$INFO[ListItem.Property(audienceRatingPercent)]%</label>
+			<font>Regular-18</font>
+			<textcolor>title2</textcolor>
+		</control>	
+	</include>
+	<include name="MediaFlagsCustom">
+		<control type="image">
+			<visible>!IsEmpty(Listitem.Property(mediaTag-videoResolution))</visible>
+			<height>40</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoResolution),custom_mediaflags/,.png]</texture>
+			<aspectratio>keep</aspectratio>	
+		</control>
+		<control type="image">
+			<visible>!IsEmpty(Listitem.Property(mediaTag-videoCodec))</visible>
+			<height>40</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoCodec),custom_mediaflags/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>	
+		</control>	
+		<control type="image">
+			<visible>!IsEmpty(Listitem.Property(mediaTag-videoFrameRate))</visible>
+			<height>40</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoFrameRate),custom_mediaflags/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>		
+		</control>
+		<control type="image">
+			<visible>!IsEmpty(Listitem.Property(mediaTag-audioCodec))</visible>
+			<height>40</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioCodec),custom_mediaflags/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+		</control>
+		<control type="image">
+			<visible>!IsEmpty(Listitem.Property(mediaTag-audioChannels))</visible>
+			<height>40</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioChannels),custom_mediaflags/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+		</control>
+	</include>
+	
+	<include name="MediaFlagsBE">
+		<control type="image">
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoResolution),mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoResolution))</visible>
+		</control>
+		<control type="image">
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoCodec),mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoFrameRate),mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoFrameRate))</visible>
+		</control>
+		<control type="image">	
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioCodec),mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioChannels),mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioChannels))</visible>
+		</control>
+	</include>
+	
+	<include name="MediaFlagsBEVideoPlayer">
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[VideoPlayer.videoResolution,mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+		</control>
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[VideoPlayer.VideoCodec,mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+		</control>
+		<!--NA
+		<control type="image">	
+			<height>21</height>
+			<width min="1" max="95">auto</width>
+			<texture fallback="mediatags/na_video.png">$INFO[VideoPlayer.videoFrameRate,mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+		</control>-->
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[VideoPlayer.audioCodec,mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[VideoPlayer.audioChannels,mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+		</control>
+		<control type="label">	
+			<height>14</height>
+			<width min="1" max="110">auto</width>
+			<label>[B]$INFO[VideoPlayer.AudioLanguage][/B]</label>
+			<font>smallerCaps</font>
+			<textcolor>mediatag</textcolor>			
+			<visible>!SubString(VideoPlayer.AudioLanguage,"Und",Left)</visible>
+		</control>
+	</include>
+	<!--
+	<include name="MediaFlagsBEText">
+		<control type="label">		
+				<height>21</height>
+				<width min="1" max="95">auto</width>
+				<label>$INFO[ListItem.Property(mediaTag-videoResolution)]</label>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">			
+				<height>21</height>
+				<width min="1" max="95">auto</width>
+				<label>$INFO[ListItem.Property(mediaTag-videoCodec)]</label>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">			
+				<height>21</height>
+				<width min="1" max="95">auto</width>
+				<label>$INFO[ListItem.Property(mediaTag-videoFrameRate)]</label>
+				<aspectratio>keep</aspectratio>
+			</control>
+		
+			<control type="label">			
+				<height>21</height>
+				<width min="1" max="95">auto</width>
+				<label>$INFO[ListItem.Property(mediaTag-audioCodec)]</label>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="label">			
+				<height>21</height>
+				<width min="1" max="95">auto</width>
+				<label>$INFO[ListItem.Property(mediaTag-audioChannels)]</label>
+				<aspectratio>keep</aspectratio>
+			</control>
+	</include>
+		-->
+	<include name="MediaFlagsBESmall">
+		<control type="image">
+			<height>18</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoResolution),mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoResolution))</visible>
+		</control>
+		<control type="image">
+			<height>18</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoCodec),mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>18</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoFrameRate),mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoFrameRate))</visible>
+		</control>
+		<control type="image">	
+			<height>18</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioCodec),mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>18</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioChannels),mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioChannels))</visible>
+		</control>
+	</include>
+	
+	<include name="MediaFlagsBEMiddle">
+		<control type="image">
+			<height>20</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoResolution),mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoResolution))</visible>
+		</control>
+		<control type="image">
+			<height>20</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoCodec),mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>20</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-videoFrameRate),mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-videoFrameRate))</visible>
+		</control>
+		<control type="image">	
+			<height>20</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioCodec),mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>20</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[ListItem.Property(mediaTag-audioChannels),mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(ListItem.Property(mediaTag-audioChannels))</visible>
+		</control>
+	</include>
+	
+	<include name="MediaFlagsBEHomeOnDeck">
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11001).ListItem(0).Property(mediaTag-videoResolution),mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-videoResolution))</visible>
+		</control>
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11001).ListItem(0).Property(mediaTag-videoCodec),mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-videoCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11001).ListItem(0).Property(mediaTag-videoFrameRate),mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-videoFrameRate))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11001).ListItem(0).Property(mediaTag-audioCodec),mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-audioCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11001).ListItem(0).Property(mediaTag-audioChannels),mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-audioChannels))</visible>
+		</control>
+	</include>
+	
+	<include name="MediaFlagsBEHomeRecentlyAdded">
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11000).ListItem(0).Property(mediaTag-videoResolution),mediatags/videoresolution/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-videoResolution))</visible>
+		</control>
+		<control type="image">
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11000).ListItem(0).Property(mediaTag-videoCodec),mediatags/videocodec/,.png]</texture>
+			<aspectratio>keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-videoCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11000).ListItem(0).Property(mediaTag-videoFrameRate),mediatags/videoframerate/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-videoFrameRate))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11000).ListItem(0).Property(mediaTag-audioCodec),mediatags/audiocodec/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-audioCodec))</visible>
+		</control>
+		<control type="image">	
+			<height>15</height>
+			<width min="1" max="95">auto</width>
+			<texture>$INFO[Container(11000).ListItem(0).Property(mediaTag-audioChannels),mediatags/audiochannels/,.png]</texture>
+			<aspectratio align="center" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-audioChannels))</visible>
+		</control>
+	</include>
+
+
+	<include name="ViewmodeHeader">
+		<control type="group">
+			<posx>399</posx>
+			<posy>80</posy>		
+			<visible>Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(1300).HasFocus() | ControlGroup(998).HasFocus() | ControlGroup(1500).HasFocus()</visible>
+			<animation effect="zoom" start="20" end="100" time="MenuSlideTime" delay="0" center="-100,-100" condition="Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(1300).HasFocus() | ControlGroup(998).HasFocus() |ControlGroup(1500).HasFocus()">Conditional</animation>
+			<control type="image">
+				<posy>5</posy>
+				<posx>1</posx>
+				<width>52</width>
+				<height>46</height>
+				<aspectratio aligny="top">stretch</aspectratio>
+				<texture background="true">b-nextviewmode.png</texture>
+			</control>
+			<control type="label">
+				<posx>55</posx>
+				<posy>25</posy>
+				<aligny>center</aligny>
+				<font>pagelabel</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF444444</shadowcolor>
+				<align>left</align>
+				<label>$INFO[Container.Viewmode]</label>
+			</control>
+			<control type="label">
+				<posx>801</posx>
+				<posy>25</posy>
+				<aligny>center</aligny>
+				<font>pagelabel</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF444444</shadowcolor>
+				<align>right</align>
+				<width>300</width>
+				<label>$INFO[Container.NumItems] Items</label>
+			</control>		
+		</control>	
+		<control type="group">
+			<posx>399</posx>
+			<posy>609</posy>	
+			<visible>Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(1300).HasFocus() | ControlGroup(998).HasFocus() | ControlGroup(1500).HasFocus()</visible>
+			<animation effect="zoom" start="20" end="100" time="MenuSlideTime" delay="0" center="-100,800" condition="Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(1300).HasFocus() | ControlGroup(998).HasFocus() |ControlGroup(1500).HasFocus()">Conditional</animation>	
+			<control type="label">
+					<posx>5</posx>
+					<posy>0</posy>
+					<aligny>center</aligny>
+					<font>pagelabel</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>FF444444</shadowcolor>
+					<align>left</align>
+					<width>500</width>
+					<label>$INFO[System.Date]</label>			
+				</control>
+				<control type="label">
+					<posx>801</posx>
+					<posy>0</posy>
+					<aligny>center</aligny>
+					<font>pagelabel</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>FF444444</shadowcolor>
+					<align>right</align>
+					<width>300</width>
+					<label>$INFO[System.Time(short_no_meridian)]</label>			
+				</control>
+			</control>
+	</include>
+	
+	<variable name="clockSZ">
+		<value condition="system.time(06:00,06:15)">clock/clockSZ06.png</value>
+		<value condition="system.time(06:15,06:30)">clock/clockSZ0615.png</value>
+		<value condition="system.time(06:30,06:45)">clock/clockSZ0630.png</value>
+		<value condition="system.time(06:45,07:00)">clock/clockSZ0645.png</value>
+		<value condition="system.time(07:00,07:15)">clock/clockSZ07.png</value>
+		<value condition="system.time(07:15,07:30)">clock/clockSZ0715.png</value>
+		<value condition="system.time(07:30,07:45)">clock/clockSZ0730.png</value>
+		<value condition="system.time(07:45,08:00)">clock/clockSZ0745.png</value>
+		<value condition="system.time(08:00,08:15)">clock/clockSZ08.png</value>
+		<value condition="system.time(08:15,08:30)">clock/clockSZ0815.png</value>
+		<value condition="system.time(08:30,08:45)">clock/clockSZ0830.png</value>
+		<value condition="system.time(08:45,09:00)">clock/clockSZ0845.png</value>
+		<value condition="system.time(09:00,09:15)">clock/clockSZ09.png</value>
+		<value condition="system.time(09:15,09:30)">clock/clockSZ0915.png</value>
+		<value condition="system.time(09:30,09:45)">clock/clockSZ0930.png</value>
+		<value condition="system.time(09:45,10:00)">clock/clockSZ0945.png</value>
+		<value condition="system.time(10:00,10:15)">clock/clockSZ10.png</value>
+		<value condition="system.time(10:15,10:30)">clock/clockSZ1015.png</value>
+		<value condition="system.time(10:30,10:45)">clock/clockSZ1030.png</value>
+		<value condition="system.time(10:45,11:00)">clock/clockSZ1045.png</value>
+		<value condition="system.time(11:00,11:15)">clock/clockSZ11.png</value>
+		<value condition="system.time(11:15,11:30)">clock/clockSZ1115.png</value>
+		<value condition="system.time(11:30,11:45)">clock/clockSZ1130.png</value>
+		<value condition="system.time(11:45,12:00)">clock/clockSZ1145.png</value>
+		<value condition="system.time(12:00,12:15)">clock/clockSZ12.png</value>
+		<value condition="system.time(12:15,12:30)">clock/clockSZ1215.png</value>
+		<value condition="system.time(12:30,12:45)">clock/clockSZ1230.png</value>
+		<value condition="system.time(12:45,13:00)">clock/clockSZ1245.png</value>
+		<value condition="system.time(13:00,13:15)">clock/clockSZ01.png</value>
+		<value condition="system.time(13:15,13:30)">clock/clockSZ0115.png</value>
+		<value condition="system.time(13:30,13:45)">clock/clockSZ0130.png</value>
+		<value condition="system.time(13:45,14:00)">clock/clockSZ0145.png</value>
+		<value condition="system.time(14:00,14:15)">clock/clockSZ02.png</value>
+		<value condition="system.time(14:15,14:30)">clock/clockSZ0215.png</value>
+		<value condition="system.time(14:30,14:45)">clock/clockSZ0230.png</value>
+		<value condition="system.time(14:45,15:00)">clock/clockSZ0245.png</value>
+		<value condition="system.time(15:00,15:15)">clock/clockSZ03.png</value>
+		<value condition="system.time(15:15,15:30)">clock/clockSZ0315.png</value>
+		<value condition="system.time(15:30,15:45)">clock/clockSZ0330.png</value>
+		<value condition="system.time(15:45,16:00)">clock/clockSZ0345.png</value>
+		<value condition="system.time(16:00,16:15)">clock/clockSZ04.png</value>
+		<value condition="system.time(16:15,16:30)">clock/clockSZ0415.png</value>
+		<value condition="system.time(16:30,16:45)">clock/clockSZ0430.png</value>
+		<value condition="system.time(16:45,17:00)">clock/clockSZ0445.png</value>
+		<value condition="system.time(17:00,17:15)">clock/clockSZ05.png</value>
+		<value condition="system.time(17:15,17:30)">clock/clockSZ0515.png</value>
+		<value condition="system.time(17:30,17:45)">clock/clockSZ0530.png</value>
+		<value condition="system.time(17:45,18:00)">clock/clockSZ0545.png</value>
+		<value condition="system.time(18:00,18:15)">clock/clockSZ06.png</value>
+		<value condition="system.time(18:15,18:30)">clock/clockSZ0615.png</value>
+		<value condition="system.time(18:30,18:45)">clock/clockSZ0630.png</value>
+		<value condition="system.time(18:45,19:00)">clock/clockSZ0645.png</value>
+		<value condition="system.time(19:00,19:15)">clock/clockSZ07.png</value>
+		<value condition="system.time(19:15,19:30)">clock/clockSZ0715.png</value>
+		<value condition="system.time(19:30,19:45)">clock/clockSZ0730.png</value>
+		<value condition="system.time(19:45,20:00)">clock/clockSZ0745.png</value>
+		<value condition="system.time(20:00,20:15)">clock/clockSZ08.png</value>
+		<value condition="system.time(20:15,20:30)">clock/clockSZ0815.png</value>
+		<value condition="system.time(20:30,20:45)">clock/clockSZ0830.png</value>
+		<value condition="system.time(20:45,21:00)">clock/clockSZ0845.png</value>
+		<value condition="system.time(21:00,21:15)">clock/clockSZ09.png</value>
+		<value condition="system.time(21:15,21:30)">clock/clockSZ0915.png</value>
+		<value condition="system.time(21:30,21:45)">clock/clockSZ0930.png</value>
+		<value condition="system.time(21:45,22:00)">clock/clockSZ0945.png</value>
+		<value condition="system.time(22:00,22:15)">clock/clockSZ10.png</value>
+		<value condition="system.time(22:15,22:30)">clock/clockSZ1015.png</value>
+		<value condition="system.time(22:30,22:45)">clock/clockSZ1030.png</value>
+		<value condition="system.time(22:45,23:00)">clock/clockSZ1045.png</value>
+		<value condition="system.time(23:00,23:15)">clock/clockSZ11.png</value>
+		<value condition="system.time(23:15,23:30)">clock/clockSZ1115.png</value>
+		<value condition="system.time(23:30,23:45)">clock/clockSZ1130.png</value>
+		<value condition="system.time(23:45,00:00)">clock/clockSZ1145.png</value>
+		<value condition="system.time(00:00,00:15)">clock/clockSZ12.png</value>
+		<value condition="system.time(00:15,00:30)">clock/clockSZ1215.png</value>
+		<value condition="system.time(00:30,00:45)">clock/clockSZ1230.png</value>
+		<value condition="system.time(00:45,01:00)">clock/clockSZ1245.png</value>
+		<value condition="system.time(01:00,01:15)">clock/clockSZ01.png</value>
+		<value condition="system.time(01:15,01:30)">clock/clockSZ0115.png</value>
+		<value condition="system.time(01:30,01:45)">clock/clockSZ0130.png</value>
+		<value condition="system.time(01:45,02:00)">clock/clockSZ0145.png</value>
+		<value condition="system.time(02:00,02:15)">clock/clockSZ02.png</value>
+		<value condition="system.time(02:15,02:30)">clock/clockSZ0215.png</value>
+		<value condition="system.time(02:30,02:45)">clock/clockSZ0230.png</value>
+		<value condition="system.time(02:45,03:00)">clock/clockSZ0245.png</value>
+		<value condition="system.time(03:00,03:15)">clock/clockSZ03.png</value>
+		<value condition="system.time(03:15,03:30)">clock/clockSZ0315.png</value>
+		<value condition="system.time(03:30,03:45)">clock/clockSZ0330.png</value>
+		<value condition="system.time(03:45,04:00)">clock/clockSZ0345.png</value>
+		<value condition="system.time(04:00,04:15)">clock/clockSZ04.png</value>
+		<value condition="system.time(04:15,04:30)">clock/clockSZ0415.png</value>
+		<value condition="system.time(04:30,04:45)">clock/clockSZ0430.png</value>
+		<value condition="system.time(04:45,05:00)">clock/clockSZ0445.png</value>
+		<value condition="system.time(05:00,05:15)">clock/clockSZ05.png</value>
+		<value condition="system.time(05:15,05:30)">clock/clockSZ0515.png</value>
+		<value condition="system.time(05:30,05:45)">clock/clockSZ0530.png</value>
+		<value condition="system.time(05:45,06:00)">clock/clockSZ0545.png</value>
+	</variable>
+	<variable name="clockMZ">
+		<value condition="SubString(System.Time(mm),01)">clock/clockMZ01.png</value>
+		<value condition="SubString(System.Time(mm),02)">clock/clockMZ02.png</value>
+		<value condition="SubString(System.Time(mm),03)">clock/clockMZ03.png</value>
+		<value condition="SubString(System.Time(mm),04)">clock/clockMZ04.png</value>
+		<value condition="SubString(System.Time(mm),05)">clock/clockMZ05.png</value>
+		<value condition="SubString(System.Time(mm),06)">clock/clockMZ06.png</value>
+		<value condition="SubString(System.Time(mm),07)">clock/clockMZ07.png</value>
+		<value condition="SubString(System.Time(mm),08)">clock/clockMZ08.png</value>
+		<value condition="SubString(System.Time(mm),09)">clock/clockMZ09.png</value>
+		<value condition="SubString(System.Time(mm),10)">clock/clockMZ10.png</value>
+		<value condition="SubString(System.Time(mm),11)">clock/clockMZ11.png</value>
+		<value condition="SubString(System.Time(mm),12)">clock/clockMZ12.png</value>
+		<value condition="SubString(System.Time(mm),13)">clock/clockMZ13.png</value>
+		<value condition="SubString(System.Time(mm),14)">clock/clockMZ14.png</value>
+		<value condition="SubString(System.Time(mm),15)">clock/clockMZ15.png</value>
+		<value condition="SubString(System.Time(mm),16)">clock/clockMZ16.png</value>
+		<value condition="SubString(System.Time(mm),17)">clock/clockMZ17.png</value>
+		<value condition="SubString(System.Time(mm),18)">clock/clockMZ18.png</value>
+		<value condition="SubString(System.Time(mm),19)">clock/clockMZ19.png</value>
+		<value condition="SubString(System.Time(mm),20)">clock/clockMZ20.png</value>
+		<value condition="SubString(System.Time(mm),21)">clock/clockMZ21.png</value>
+		<value condition="SubString(System.Time(mm),22)">clock/clockMZ22.png</value>
+		<value condition="SubString(System.Time(mm),23)">clock/clockMZ23.png</value>
+		<value condition="SubString(System.Time(mm),24)">clock/clockMZ24.png</value>
+		<value condition="SubString(System.Time(mm),25)">clock/clockMZ25.png</value>
+		<value condition="SubString(System.Time(mm),26)">clock/clockMZ26.png</value>
+		<value condition="SubString(System.Time(mm),27)">clock/clockMZ27.png</value>
+		<value condition="SubString(System.Time(mm),28)">clock/clockMZ28.png</value>
+		<value condition="SubString(System.Time(mm),29)">clock/clockMZ29.png</value>
+		<value condition="SubString(System.Time(mm),30)">clock/clockMZ30.png</value>
+		<value condition="SubString(System.Time(mm),31)">clock/clockMZ31.png</value>
+		<value condition="SubString(System.Time(mm),32)">clock/clockMZ32.png</value>
+		<value condition="SubString(System.Time(mm),33)">clock/clockMZ33.png</value>
+		<value condition="SubString(System.Time(mm),34)">clock/clockMZ34.png</value>
+		<value condition="SubString(System.Time(mm),35)">clock/clockMZ35.png</value>
+		<value condition="SubString(System.Time(mm),36)">clock/clockMZ36.png</value>
+		<value condition="SubString(System.Time(mm),37)">clock/clockMZ37.png</value>
+		<value condition="SubString(System.Time(mm),38)">clock/clockMZ38.png</value>
+		<value condition="SubString(System.Time(mm),39)">clock/clockMZ39.png</value>
+		<value condition="SubString(System.Time(mm),40)">clock/clockMZ40.png</value>
+		<value condition="SubString(System.Time(mm),41)">clock/clockMZ41.png</value>
+		<value condition="SubString(System.Time(mm),42)">clock/clockMZ42.png</value>
+		<value condition="SubString(System.Time(mm),43)">clock/clockMZ43.png</value>
+		<value condition="SubString(System.Time(mm),44)">clock/clockMZ44.png</value>
+		<value condition="SubString(System.Time(mm),45)">clock/clockMZ45.png</value>
+		<value condition="SubString(System.Time(mm),46)">clock/clockMZ46.png</value>
+		<value condition="SubString(System.Time(mm),47)">clock/clockMZ47.png</value>
+		<value condition="SubString(System.Time(mm),48)">clock/clockMZ48.png</value>
+		<value condition="SubString(System.Time(mm),49)">clock/clockMZ49.png</value>
+		<value condition="SubString(System.Time(mm),50)">clock/clockMZ50.png</value>
+		<value condition="SubString(System.Time(mm),51)">clock/clockMZ51.png</value>
+		<value condition="SubString(System.Time(mm),52)">clock/clockMZ52.png</value>
+		<value condition="SubString(System.Time(mm),53)">clock/clockMZ53.png</value>
+		<value condition="SubString(System.Time(mm),54)">clock/clockMZ54.png</value>
+		<value condition="SubString(System.Time(mm),55)">clock/clockMZ55.png</value>
+		<value condition="SubString(System.Time(mm),56)">clock/clockMZ56.png</value>
+		<value condition="SubString(System.Time(mm),57)">clock/clockMZ57.png</value>
+		<value condition="SubString(System.Time(mm),58)">clock/clockMZ58.png</value>
+		<value condition="SubString(System.Time(mm),59)">clock/clockMZ59.png</value>
+		<value condition="SubString(System.Time(mm),00)">clock/clockMZ60.png</value>
+	</variable>
+	<include name="analog_clock">
+		<control type="group">
+			<include condition="Skin.HasSetting(BiggerHomeMenu)">BiggerHomeMenuAnalogWatchPosx</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu3)">BiggerHomeMenu3AnalogWatchPosx</include>
+			<control type="group">
+				<posx>35</posx>
+				<posy>560</posy>
+				<animation effect="fade" start="100" end="0" time="MenuSlideTime" condition="ControlGroup(5000).HasFocus">Conditional</animation>
+				<control type="image">
+					<posx>19</posx>
+					<posy>19</posy>
+					<width>142</width>
+					<height>142</height>
+					<texture>clock/clock_transparent.png</texture>
+					<align>center</align>
+					<aligny>center</aligny>
+				</control>
+				<control type="label">
+					<posx>19</posx>
+					<posy>103</posy>
+					<width>142</width>
+					<height>20</height>
+					<align>center</align>
+					<aligny>bottom</aligny>
+					<label>PLEX</label>
+					<font>watch</font>
+					<textcolor>title2</textcolor>
+					<animation effect="fade" start="70" end="70" time="0" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<posx>5</posx>
+					<posy>5</posy>
+					<width>170</width>
+					<height>170</height>
+					<texture>$VAR[clockSZ]</texture>
+					<align>center</align>
+					<aligny>center</aligny>
+					<colordiffuse>title2</colordiffuse>
+				</control>
+				<control type="image">
+					<posx>5</posx>
+					<posy>5</posy>
+					<width>170</width>
+					<height>170</height>
+					<texture>$VAR[clockMZ]</texture>
+					<align>center</align>
+					<aligny>center</aligny>
+					<colordiffuse>title2</colordiffuse>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="global_clock_format">
+		<label>$INFO[System.Time(hh:mm)]</label>
+		<width>150</width>
+		<height>30</height>
+		<align>right</align>
+		<font>global_clock</font>
+		<textcolor>white</textcolor>
+	</include>
+	<include name="global_clock">
+		<control type="group">
+			<visible>Skin.HasSetting(GlobalClock)</visible>
+			<animation effect="slide" end="-6,0" time="180" condition="Control.hasFocus(1601)">Conditional</animation>
+			<animation effect="slide" end="0,6" time="180" condition="Control.hasFocus(1602)">Conditional</animation>
+			<control type="image">
+				<description>Background</description>
+				<posx>1212</posx>
+				<posy>0</posy>
+				<width>68</width>
+				<height>31</height>
+				<include>Black</include>			
+				<animation effect="fade" start="0" end="Dim30" time="0" condition="true">Conditional</animation>		
+			</control>
+			<control type="label">
+				<include>global_clock_format</include>		
+				<posx>1271</posx>
+				<posy>-1</posy>					
+			</control>
+		</control>
+	</include>
+	<include name="custom_radiobutton">
+		<width>270</width>
+		<height>26</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<textoffsetx>10</textoffsetx>
+		<font>Regular-17</font>
+		<textcolor>Unfocused</textcolor>
+		<focusedcolor>Focused</focusedcolor>
+		<texturefocus border="5">focused_grey.png</texturefocus>
+		<texturenofocus border="5">-</texturenofocus>
+		<radioposx>278</radioposx>
+		<radioheight>24</radioheight>
+	</include>
+
+	<include name="custom_button">
+		<width>270</width>
+		<height>17</height>
+		<textoffsetx>10</textoffsetx>
+		<font>Regular-16</font>
+		<texturefocus border="5">focused_grey.png</texturefocus>
+		<texturenofocus>-</texturenofocus>
+	</include>
+	
+	
+
+	<variable name="BGDIM0Label">
+		<value condition="Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,554) | Skin.String(ViewmodeID,578) | Skin.String(ViewmodeID,569)">Background Dim 0% (default)</value>
+		<value condition="!Skin.String(ViewmodeID,560)+!Skin.String(ViewmodeID,554)+!Skin.String(ViewmodeID,578)+!Skin.String(ViewmodeID,569)">Background Dim 0%</value>	
+	</variable>
+	<variable name="BGDIM60Label">
+		<value condition="Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,554) | Skin.String(ViewmodeID,557)| Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,578) | Skin.String(ViewmodeID,569)">Background Dim 60%</value>
+		<value condition="!Skin.String(ViewmodeID,560)+!Skin.String(ViewmodeID,554)+!Skin.String(ViewmodeID,557)+!Skin.String(ViewmodeID,565)+!Skin.String(ViewmodeID,559)+!Skin.String(ViewmodeID,578)+!Skin.String(ViewmodeID,569)">Background Dim 60% (default)</value>	
+	</variable>
+	<variable name="HideFanartLabel">
+		<value condition="Skin.String(ViewmodeID,557)|Skin.String(ViewmodeID,565)|Skin.String(ViewmodeID,559)">Hide Fanart (default)</value>
+		<value condition="Skin.String(ViewmodeID,558) | Skin.String(ViewmodeID,570) | Skin.String(ViewmodeID,556)">Background Dim 100%</value>
+		<value condition="!Skin.String(ViewmodeID,557)+!Skin.String(ViewmodeID,565)+!Skin.String(ViewmodeID,558)+!Skin.String(ViewmodeID,570)+!Skin.String(ViewmodeID,556)+!Skin.String(ViewmodeID,559)">Hide Fanart</value>
+	</variable>
+	<variable name="HideInfosLabel">
+		<value condition="Skin.String(ViewmodeID,557)|Skin.String(ViewmodeID,565)">Focused item: hide popup</value>
+		<value condition="Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,556)  | Skin.String(ViewmodeID,562)">Hide Infos</value>	
+	</variable>
+	
+	<include name="LeftSideCustomSkinSettings">
+		<control type="group">
+			<animation effect="slide" start="0" end="667" time="MenuSlideTime" condition="Control.HasFocus(65061) | ControlGroup(1500).HasFocus()">Conditional</animation>
+			<animation effect="slide" start="0" end="-667" time="MenuSlideTime">WindowClose</animation>
+			<control type="button" id="65061">
+				<posx>-667</posx>
+				<posy>0</posy>
+				<height>720</height>
+				<width>324</width>
+				<onfocus>Control.setFocus(1500)</onfocus>
+				<onunfocus>-</onunfocus>
+				<texturefocus>background.png</texturefocus>
+				<texturenofocus>background.png</texturenofocus>
+				<visible allowhiddenfocus="true">false</visible>
+			</control>	
+			
+			<control type="group">
+				<control type="image">
+					<posx>-667</posx>
+					<height>720</height>
+					<width>327</width>
+					<include>BGDarkenImage</include>			
+				</control>
+				<control type="image">
+					<posx>-667</posx>
+					<height>720</height>
+					<width>327</width>
+					<include>BGMainOverlayImage</include>
+				</control>
+			</control>
+			<control type="label">
+				<posy>25</posy>
+				<posx>-667</posx>
+				<width>320</width>
+				<height>40</height>
+				<align>center</align>
+				<textcolor>white</textcolor>
+				<!--<shadowcolor>black</shadowcolor>-->
+				<font>LightCaps-26</font>
+				<label>[UPPERCASE]Skin Settings[/UPPERCASE]</label>
+			</control>
+			<control type="grouplist" id="1500">
+				<posx>-655</posx>
+				<posy>70</posy>
+				<width>320</width>
+				<height>660</height>
+				<onup>1500</onup>
+				<ondown>1500</ondown>
+				<onright>998</onright>
+				<onleft>998</onleft>
+				<scrolltime>200</scrolltime>
+				<itemgap>1</itemgap>
+				<!--reset-->
+				<control type="button" id="1599">
+					<visible>true</visible>
+					<include>custom_radiobutton</include>
+					<label>Reset Settings</label>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_HidePopup)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_ShowInfos)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_ZoomFocused)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_FocusedNoBorder)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_FocusedPlayBtn)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_DimWatched)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_DimUnfocused)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_HideEpisodeThumb)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGSingle)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGMulti)</onclick>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_Dim)</onclick>				
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_Blur)</onclick>	
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_HideScrollBar)</onclick>	
+					<onclick>Skin.Reset(MoviePreplayStyle2)</onclick>	
+						
+					<onclick>Control.SetFocus(998)</onclick>
+				</control>
+				<control type="radiobutton" id="1519">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,554) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,578) | Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,558) | Skin.String(ViewmodeID,570) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,563) | Skin.String(ViewmodeID,569) | Skin.String(ViewmodeID,567) | Skin.String(ViewmodeID,58) | Skin.String(ViewmodeID,556) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,559)]</visible>
+					<include>custom_radiobutton</include>
+					<description>Hide Scrollbar</description>
+					<label>Hide Scrollbar</label>				
+					<onclick condition="Skin.String(SelectedHideScrollBar,0)|IsEmpty(Skin.String(SelectedHideScrollBar))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HideScrollBar,1)</onclick>
+					<onclick condition="Skin.String(SelectedHideScrollBar,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HideScrollBar,0)</onclick>
+					<onclick condition="Skin.String(SelectedHideScrollBar,0)|IsEmpty(Skin.String(SelectedHideScrollBar))">Skin.SetString(SelectedHideScrollBar,1)</onclick>
+					<onclick condition="Skin.String(SelectedHideScrollBar,1)">Skin.SetString(SelectedHideScrollBar,0)</onclick>					
+					<selected>Skin.String(SelectedHideScrollBar,1)</selected>
+				</control>		
+				<control type="radiobutton" id="1501">
+					<visible>[Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,556) | Skin.String(ViewmodeID,562)]</visible>
+					<include>custom_radiobutton</include>
+					<label>$VAR[HideInfosLabel]</label>				
+					<onclick condition="Skin.String(SelectedHidepopup,0)|IsEmpty(Skin.String(SelectedHidepopup))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HidePopup,1)</onclick>
+					<onclick condition="Skin.String(SelectedHidepopup,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HidePopup,0)</onclick>
+					<onclick condition="Skin.String(SelectedHidepopup,0)|IsEmpty(Skin.String(SelectedHidepopup))">Skin.SetString(SelectedHidepopup,1)</onclick>
+					<onclick condition="Skin.String(SelectedHidepopup,1)">Skin.SetString(SelectedHidepopup,0)</onclick>					
+					<selected>Skin.String(SelectedHidepopup,1)</selected>
+				</control>							
+				<control type="radiobutton" id="1503">
+					<visible>[Skin.String(ViewmodeID,567)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Show Movie/TV Poster</label>
+					<onclick condition="Skin.String(SelectedShowInfos,0)|IsEmpty(Skin.String(SelectedShowInfos))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ShowInfos,1)</onclick>
+					<onclick condition="Skin.String(SelectedShowInfos,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ShowInfos,0)</onclick>
+					<onclick condition="Skin.String(SelectedShowInfos,0)|IsEmpty(Skin.String(SelectedShowInfos))">Skin.SetString(SelectedShowInfos,1)</onclick>
+					<onclick condition="Skin.String(SelectedShowInfos,1)">Skin.SetString(SelectedShowInfos,0)</onclick>					
+				</control>						
+				<control type="radiobutton" id="1505">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,5531) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,56) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,70) | Skin.String(ViewmodeID,99) | Skin.String(ViewmodeID,80) | Skin.String(ViewmodeID,53) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,571) | Skin.String(ViewmodeID,574)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Focused item: Zoom effect</label>
+					<onclick condition="Skin.String(SelectedZoomFocused,0)|IsEmpty(Skin.String(SelectedZoomFocused))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ZoomFocused,1)</onclick>
+					<onclick condition="Skin.String(SelectedZoomFocused,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ZoomFocused,0)</onclick>
+					<onclick condition="Skin.String(SelectedZoomFocused,0)|IsEmpty(Skin.String(SelectedZoomFocused))">Skin.SetString(SelectedZoomFocused,1)</onclick>
+					<onclick condition="Skin.String(SelectedZoomFocused,1)">Skin.SetString(SelectedZoomFocused,0)</onclick>					
+					<selected>Skin.String(SelectedZoomFocused,1)</selected>
+				</control>	
+				<control type="radiobutton" id="1507">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,5531) | Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,569) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,56) | Skin.String(ViewmodeID,559) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,70) | Skin.String(ViewmodeID,99) | Skin.String(ViewmodeID,80) | Skin.String(ViewmodeID,53) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,571) | Skin.String(ViewmodeID,574)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Focused item: hide border</label>
+					<onclick condition="Skin.String(SelectedFocusedNoBorder,0)|IsEmpty(Skin.String(SelectedFocusedNoBorder))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_FocusedNoBorder,1)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedNoBorder,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_FocusedNoBorder,0)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedNoBorder,0)|IsEmpty(Skin.String(SelectedFocusedNoBorder))">Skin.SetString(SelectedFocusedNoBorder,1)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedNoBorder,1)">Skin.SetString(SelectedFocusedNoBorder,0)</onclick>					
+					<selected>Skin.String(SelectedFocusedNoBorder,1)</selected>
+				</control>				
+				<control type="radiobutton" id="1508">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,5531) | Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,569) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,56) | Skin.String(ViewmodeID,559) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,70) | Skin.String(ViewmodeID,99) | Skin.String(ViewmodeID,80) | Skin.String(ViewmodeID,53) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,571) | Skin.String(ViewmodeID,574)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Focused item: Play button overlay</label>
+					<onclick condition="Skin.String(SelectedFocusedPlayBtn,0)|IsEmpty(Skin.String(SelectedFocusedPlayBtn))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_FocusedPlayBtn,1)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedPlayBtn,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_FocusedPlayBtn,0)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedPlayBtn,0)|IsEmpty(Skin.String(SelectedFocusedPlayBtn))">Skin.SetString(SelectedFocusedPlayBtn,1)</onclick>
+					<onclick condition="Skin.String(SelectedFocusedPlayBtn,1)">Skin.SetString(SelectedFocusedPlayBtn,0)</onclick>					
+					<selected>Skin.String(SelectedFocusedPlayBtn,1)</selected>
+				</control>			
+				
+				<control type="radiobutton" id="1509">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,554) | Skin.String(ViewmodeID,556) | Skin.String(ViewmodeID,558)| Skin.String(ViewmodeID,570) | Skin.String(ViewmodeID,563) | Skin.String(ViewmodeID,58) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,567) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,578)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Dim watched</label>
+					<onclick condition="Skin.String(SelectedDimWatched,0)|IsEmpty(Skin.String(SelectedDimWatched))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_DimWatched,1)</onclick>
+					<onclick condition="Skin.String(SelectedDimWatched,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_DimWatched,0)</onclick>
+					<onclick condition="Skin.String(SelectedDimWatched,0)|IsEmpty(Skin.String(SelectedDimWatched))">Skin.SetString(SelectedDimWatched,1)</onclick>
+					<onclick condition="Skin.String(SelectedDimWatched,1)">Skin.SetString(SelectedDimWatched,0)</onclick>					
+					<selected>Skin.String(SelectedDimWatched,1)</selected>
+				</control>							
+				<control type="radiobutton" id="1511">
+					<visible>[Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,5531) | Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,569) | Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,56) | Skin.String(ViewmodeID,559) | Skin.String(ViewmodeID,566) | Skin.String(ViewmodeID,70) | Skin.String(ViewmodeID,99) | Skin.String(ViewmodeID,80) | Skin.String(ViewmodeID,53) | Skin.String(ViewmodeID,521) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,571) | Skin.String(ViewmodeID,574)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Dim unfocused</label>
+					<onclick condition="Skin.String(SelectedDimUnfocused,0)|IsEmpty(Skin.String(SelectedDimUnfocused))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_DimUnfocused,1)</onclick>
+					<onclick condition="Skin.String(SelectedDimUnfocused,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_DimUnfocused,0)</onclick>
+					<onclick condition="Skin.String(SelectedDimUnfocused,0)|IsEmpty(Skin.String(SelectedDimUnfocused))">Skin.SetString(SelectedDimUnfocused,1)</onclick>
+					<onclick condition="Skin.String(SelectedDimUnfocused,1)">Skin.SetString(SelectedDimUnfocused,0)</onclick>					
+					<selected>Skin.String(SelectedDimUnfocused,1)</selected>
+				</control>	
+				
+				<!--Show Thumb Border-->
+				<control type="radiobutton" id="1542">
+					<visible>[Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,50) | Skin.String(ViewmodeID,51) | Skin.String(ViewmodeID,52) | Skin.String(ViewmodeID,552) | Skin.String(ViewmodeID,562) | Skin.String(ViewmodeID,60) | Skin.String(ViewmodeID,61) | Skin.String(ViewmodeID,564) | Skin.String(ViewmodeID,568) | Skin.String(ViewmodeID,569) | Skin.String(ViewmodeID,611) | Skin.String(ViewmodeID,574)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Show Poster/Thumb Border</label>
+					<onclick condition="Skin.String(SelectedThumbBorder,0)|IsEmpty(Skin.String(SelectedThumbBorder))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ThumbBorder,1)</onclick>
+					<onclick condition="Skin.String(SelectedThumbBorder,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_ThumbBorder,0)</onclick>
+					<onclick condition="Skin.String(SelectedThumbBorder,0)|IsEmpty(Skin.String(SelectedThumbBorder))">Skin.SetString(SelectedThumbBorder,1)</onclick>
+					<onclick condition="Skin.String(SelectedThumbBorder,1)">Skin.SetString(SelectedThumbBorder,0)</onclick>					
+					<selected>Skin.String(SelectedThumbBorder,1)</selected>
+				</control>				
+						
+				<control type="radiobutton" id="1513">
+					<visible>[Skin.String(ViewmodeID,558) | Skin.String(ViewmodeID,563) | Skin.String(ViewmodeID,553) | Skin.String(ViewmodeID,572)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Hide Episode Thumb</label>
+					<onclick condition="Skin.String(SelectedHideEpisodeThumb,0)|IsEmpty(Skin.String(SelectedHideEpisodeThumb))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HideEpisodeThumb,1)</onclick>
+					<onclick condition="Skin.String(SelectedHideEpisodeThumb,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_HideEpisodeThumb,0)</onclick>
+					<onclick condition="Skin.String(SelectedHideEpisodeThumb,0)|IsEmpty(Skin.String(SelectedHideEpisodeThumb))">Skin.SetString(SelectedHideEpisodeThumb,1)</onclick>
+					<onclick condition="Skin.String(SelectedHideEpisodeThumb,1)">Skin.SetString(SelectedHideEpisodeThumb,0)</onclick>					
+					<selected>Skin.String(SelectedHideEpisodeThumb,1)</selected>
+				</control>		
+				
+				<control type="radiobutton" id="1543">
+					<visible>[Skin.String(ViewmodeID,571)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Show Extras immediately</label>
+					<onclick>Skin.ToggleSetting(MoviePreplayStyle2)</onclick>
+					<selected>Skin.HasSetting(MoviePreplayStyle2)</selected>
+				</control>		
+				
+				<!--Blur-->
+				<control type="radiobutton" id="1541">
+					<visible>!Skin.String(ViewmodeID,574)+!Skin.String(ViewmodeID,54)</visible>
+					<include>custom_radiobutton</include>
+					<label>Blur Background Fanart</label>
+					<onclick condition="Skin.String(SelectedBlur,0)|IsEmpty(Skin.String(SelectedBlur))">Skin.SetString($INFO[Skin.String(ViewmodeID)]_Blur,1)</onclick>
+					<onclick condition="Skin.String(SelectedBlur,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_Blur,0)</onclick>
+					<onclick condition="Skin.String(SelectedBlur,0)|IsEmpty(Skin.String(SelectedBlur))">Skin.SetString(SelectedBlur,1)</onclick>
+					<onclick condition="Skin.String(SelectedBlur,1)">Skin.SetString(SelectedBlur,0)</onclick>					
+					<selected>Skin.String(SelectedBlur,1)</selected>
+				</control>			
+									
+				<!--Custom BG-->
+				<control type="radiobutton" id="1515">	
+					<visible>![Skin.String(ViewmodeID,572) | Skin.String(ViewmodeID,573)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Custom Single BG Image</label>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGMulti)</onclick>
+					<onclick>Skin.SetString(FileBrowserType,photo)</onclick>
+					<onclick>Skin.SetLargeImage($INFO[Skin.String(ViewmodeID)]_BGSingle)</onclick>
+					<onclick>Skin.SetString(SelectedBGSingle,$INFO[Skin.String(ViewmodeID)]_BGSingle)</onclick>
+					<selected>!IsEmpty(Skin.String(SelectedBGSingle))</selected>
+				</control>
+				<control type="button" id="1516">
+					<visible>![Skin.String(ViewmodeID,572) | Skin.String(ViewmodeID,573)]</visible>
+					<include>custom_button</include>
+					<label> - Reset</label>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGSingle)</onclick>	
+					<onclick>Skin.Reset(SelectedBGSingle)</onclick>	
+				</control>
+				<control type="radiobutton" id="1517">
+					<visible>![Skin.String(ViewmodeID,572) | Skin.String(ViewmodeID,573)]</visible>
+					<include>custom_radiobutton</include>
+					<label>Custom Multi BG Image</label>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGSingle)</onclick>
+					<onclick>Skin.SetString(FileBrowserType,photo)</onclick>
+					<onclick>Skin.SetPath($INFO[Skin.String(ViewmodeID)]_BGMulti)</onclick>
+					<onclick>Skin.SetString(SelectedBGMulti,$INFO[Skin.String(ViewmodeID)]_BGMulti)</onclick>
+					<selected>!IsEmpty(Skin.String(SelectedBGMulti))</selected>
+				</control>
+				<control type="button" id="1518">
+					<visible>![Skin.String(ViewmodeID,572) | Skin.String(ViewmodeID,573)]</visible>
+					<include>custom_button</include>
+					<label> - Reset</label>
+					<onclick>Skin.Reset($INFO[Skin.String(ViewmodeID)]_BGMulti)</onclick>	
+					<onclick>Skin.Reset(SelectedBGMulti)</onclick>
+				</control>
+			<!--
+				<control type="radiobutton" id="1541">				
+					<include>custom_radiobutton</include>
+					<label>BG Overlay grainy</label>
+					<onclick condition="Skin.String(SelectedBGGrainy,0)|IsEmpty(Skin.String(SelectedBGGrainy)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_BGGrainy,1)</onclick>
+					<onclick condition="Skin.String(SelectedBGGrainy,1)">Skin.SetString($INFO[Skin.String(ViewmodeID)]_BGGrainy,0)</onclick>
+					<onclick condition="Skin.String(SelectedBGGrainy,0)|IsEmpty(Skin.String(SelectedBGGrainy)">Skin.SetString(SelectedBGGrainy,1)</onclick>
+					<onclick condition="Skin.String(SelectedBGGrainy,1)">Skin.SetString(SelectedBGGrainy,0)</onclick>					
+					<selected>Skin.String(SelectedBlurUnwatched,1)</selected>
+				</control>
+				-->
+				<!--Dim-->
+				<control type="radiobutton" id="1530">
+					<include>custom_radiobutton</include>
+					<label>$VAR[BGDIM0Label]</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,0)</onclick>
+					<onclick>Skin.SetString(SelectedDim,0)</onclick>
+					<selected>Skin.String(SelectedDim,0) | [[Skin.String(ViewmodeID,560) | Skin.String(ViewmodeID,554)]+IsEmpty(Skin.String(SelectedDim))]</selected>
+				</control>
+				<control type="radiobutton" id="1531">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 10%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,10)</onclick>
+					<onclick>Skin.SetString(SelectedDim,10)</onclick>
+					<selected>Skin.String(SelectedDim,10)</selected>
+				</control>
+				<control type="radiobutton" id="1532">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 20%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,20)</onclick>
+					<onclick>Skin.SetString(SelectedDim,20)</onclick>
+					<selected>Skin.String(SelectedDim,20)</selected>
+				</control>
+				<control type="radiobutton" id="1533">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 30%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,30)</onclick>
+					<onclick>Skin.SetString(SelectedDim,30)</onclick>
+					<selected>Skin.String(SelectedDim,30)</selected>
+				</control>
+				<control type="radiobutton" id="1534">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 40%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,40)</onclick>
+					<onclick>Skin.SetString(SelectedDim,40)</onclick>
+					<selected>Skin.String(SelectedDim,40)</selected>
+				</control>
+				<control type="radiobutton" id="1535">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 50%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,50)</onclick>
+					<onclick>Skin.SetString(SelectedDim,50)</onclick>
+					<selected>Skin.String(SelectedDim,50)</selected>
+				</control>
+				<control type="radiobutton" id="1536">
+					<include>custom_radiobutton</include>
+					<label>$VAR[BGDIM60Label]</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,60)</onclick>
+					<onclick>Skin.SetString(SelectedDim,60)</onclick>
+					<selected>Skin.String(SelectedDim,60) | [IsEmpty(Skin.String(SelectedDim)) + !Skin.String(ViewmodeID,560)+!Skin.String(ViewmodeID,554)+!Skin.String(ViewmodeID,557)+!Skin.String(ViewmodeID,565)+!Skin.String(ViewmodeID,559)]</selected>
+				</control>	
+				<control type="radiobutton" id="1537">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 70%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,70)</onclick>
+					<onclick>Skin.SetString(SelectedDim,70)</onclick>
+					<selected>Skin.String(SelectedDim,70)</selected>
+				</control>
+				<control type="radiobutton" id="1538">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 80%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,80)</onclick>
+					<onclick>Skin.SetString(SelectedDim,80)</onclick>
+					<selected>Skin.String(SelectedDim,80)</selected>
+				</control>
+				<control type="radiobutton" id="1539">
+					<include>custom_radiobutton</include>
+					<label>Background Dim 90%</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,90)</onclick>
+					<onclick>Skin.SetString(SelectedDim,90)</onclick>
+					<selected>Skin.String(SelectedDim,90)</selected>
+				</control>
+				<control type="radiobutton" id="1540">
+					<include>custom_radiobutton</include>
+					<label>$VAR[HideFanartLabel]</label>
+					<onclick>Skin.SetString($INFO[Skin.String(ViewmodeID)]_Dim,100)</onclick>
+					<onclick>Skin.SetString(SelectedDim,100)</onclick>
+					<selected>Skin.String(SelectedDim,100)|[[Skin.String(ViewmodeID,557) | Skin.String(ViewmodeID,565) | Skin.String(ViewmodeID,559)]+IsEmpty(Skin.String(SelectedDim))]</selected>
+				</control>
+				
+			</control>
+		</control>
+	</include>
+	
+	<include name="WallInfos">
+		<control type="label">
+			<posy>10</posy>
+			<width>225</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-18</font>
+			<textcolor>white</textcolor>		
+			<scroll>false</scroll>
+			<wrapmultiline>true</wrapmultiline>
+		</control>
+		<control type="group">
+			<posy>9</posy>
+			<posx>216</posx>
+			<include>StarRatingOverlayWhite</include>
+		</control>	
+		<control type="label">
+			<posy>39</posy>
+			<width>270</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label fallback="31047">$INFO[ListItem.DurationStr]$INFO[ListItem.Genre, &#xB7; ]</label>
+			<font>RegularCaps-16</font>
+			<scroll>false</scroll>
+			<wrapmultiline>true</wrapmultiline>
+			<textcolor>title2</textcolor>
+		</control>
+	</include>
+	<include name="WallPlot">
+		<control type="textbox" id="111">
+			<width>270</width>
+			<height>162</height>
+			<label>$VAR[ListItemFullInfoPlot]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+			<autoscroll delay="10000" time="3000" repeat="10000">!Skin.HasSetting(DisableAutoScroll)</autoscroll>
+			<visible>!IsEmpty(ListItem.Plot)</visible>
+			<visible>!Container.PlexContent(Seasons)</visible>
+		</control>
+	</include>
+	<include name="MovieTVPosterWallSelectedContentLeft">
+		
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="400" delay="2500">Focus</animation>
+			<control type="image">
+			<posx>-276</posx>
+			<posy>5</posy>
+			<width>283</width>
+			<height>226</height>		
+			<include>BlackBE</include>
+			<animation effect="fade" start="0" end="86" time="0" condition="true">Conditional</animation>
+		</control>	
+			<control type="group">
+				<posx>-269</posx>
+				<posy>0</posy>
+				<include>WallInfos</include>
+			</control>		
+			<!-- plot -->
+			<control type="group">		
+				<posx>-269</posx>
+				<posy>65</posy>
+				<include>WallPlot</include>
+			</control>
+			<control type="image">
+				<posx>-276</posx>
+				<posy>2</posy>
+				<width>438</width>
+				<height>232</height>
+				<include>Border</include>
+			</control>
+		</control>
+	</include>
+	<include name="MovieTVPosterWallSelectedContentRight">
+		
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="400" delay="2500">Focus</animation>
+			<control type="image">
+				<posx>159</posx>
+				<posy>5</posy>
+				<width>283</width>
+				<height>226</height>		
+				<include>BlackBE</include>
+				<animation effect="fade" start="0" end="86" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="group">
+				<posx>166</posx>
+				<posy>0</posy>
+				<include>WallInfos</include>
+			</control>		
+			<!-- plot -->
+			<control type="group">		
+				<posx>166</posx>
+				<posy>65</posy>
+				<include>WallPlot</include>
+			</control>
+			<control type="image">
+				<posx>4</posx>
+				<posy>2</posy>
+				<width>438</width>
+				<height>232</height>
+				<include>Border</include>
+			</control>
+		</control>
+		
+	</include>
+	
+	<include name="WallBigInfos">
+		<control type="label">
+			<width>370</width>
+			<height>30</height>
+			<align>left</align>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-30</font>
+			<scroll>false</scroll>
+			<textcolor>white</textcolor>
+			<wrapmultiline>true</wrapmultiline>
+		</control>
+		<control type="group">
+			<posx>386</posx>
+			<posy>0</posy>
+			<include>StarRatingOverlayWhiteBig</include>	
+		</control>	
+		<control type="label">
+			<height>30</height>
+			<posy>42</posy>
+			<align>left</align>
+			<label>$INFO[ListItem.Genre]</label>
+			<font>smallerCaps</font>
+			<scroll>false</scroll>
+			<textcolor>title2</textcolor>
+			<wrapmultiline>true</wrapmultiline>
+			<width>360</width>							
+		</control>		
+		<control type="label">
+			<height>30</height>
+			<posy>72</posy>
+			<align>left</align>
+			<label>$INFO[ListItem.DurationStr]$INFO[ListItem.Year, &#xB7; ]</label>
+			<font>smallerCaps</font>
+			<scroll>false</scroll>
+			<textcolor>title2</textcolor>
+			<wrapmultiline>true</wrapmultiline>
+			<width>360</width>	
+		</control>		
+		<control type="image">
+			<posy>47</posy>
+			<posx>358</posx>
+			<width>90</width>
+			<height>50</height>
+			<fadetime>200</fadetime>
+			<info>Listitem.Art(mediaTag::studio)</info>
+			<aspectratio align="right" aligny="center">keep</aspectratio>
+			<colordiffuse>mediatag</colordiffuse>
+			<visible>!IsEmpty(Listitem.Art(mediaTag::studio))</visible>
+		</control>	
+	</include>
+	<include name="WallBigPlot">	
+		<control type="textbox" id="111">
+			<width>450</width>
+			<height>218</height>
+			<label>$VAR[ListItemFullInfoPlot]</label>
+			<font>descriptionSmall</font>
+			<textcolor>white</textcolor>
+			<autoscroll delay="10000" time="3000" repeat="10000">!Skin.HasSetting(DisableAutoScroll)</autoscroll>
+			<visible>!IsEmpty(ListItem.Plot)</visible>
+			<visible>!Container.PlexContent(Seasons)</visible>
+		</control>			
+	</include>
+	
+	<include name="MovieTVPosterWallBigSelectedContentRight">
+		
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="400" delay="2500">Focus</animation>
+			<control type="image">
+				<posx>235</posx>
+				<posy>0</posy>
+				<width>470</width>
+				<height>352</height>		
+				<include>BlackBE</include>
+				<animation effect="fade" start="0" end="86" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="group">
+				<posx>244</posx>
+				<posy>11</posy>
+				<include>WallBigInfos</include>
+			</control>	
+			<!-- plot -->
+			<control type="group">		
+				<posx>244</posx>
+				<posy>123</posy>
+				<include>WallBigPlot</include>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>705</width>
+				<height>352</height>
+				<include>Border</include>
+			</control>
+		</control>
+	</include>
+	<include name="MovieTVPosterWallBigSelectedContentLeft">
+		
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="400" delay="2500">Focus</animation>
+			<control type="image">
+				<posx>-470</posx>
+				<posy>0</posy>
+				<width>470</width>
+				<height>352</height>	
+				<include>BlackBE</include>
+				<animation effect="fade" start="0" end="86" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="group">
+				<posx>-458</posx>
+				<posy>11</posy>
+				<include>WallBigInfos</include>
+			</control>		
+			<!-- plot -->
+			<control type="group">		
+				<posx>-458</posx>
+				<posy>123</posy>
+				<include>WallBigPlot</include>
+			</control>
+			<control type="image">
+				<posx>-470</posx>
+				<posy>0</posy>
+				<width>705</width>
+				<height>352</height>	
+				<include>Border</include>
+			</control>
+		</control>
+	</include>
+	
+	<include name="NowPlayingMusicPlayList">
+			<control type="group">
+			
+				<posy>20</posy>
+				<posx>0</posx>
+				
+				<!--1-->
+				<control type="group">
+					<visible>Player.HasAudio + MusicPlayer.Offset(1).Exists</visible>
+					<posy>0</posy>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(1).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(1).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(1).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(1).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--2-->
+				<control type="group">
+					<posy>60</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(2).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(2).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(2).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(2).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(2).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--3-->
+				<control type="group">
+					<posy>120</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(3).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(3).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(3).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(3).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(3).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--4-->
+				<control type="group">
+					<posy>180</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(4).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(4).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(4).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(4).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(4).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--5-->
+				<control type="group">
+					<posy>240</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(5).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(5).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(5).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(5).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(5).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--6-->
+				<control type="group">
+					<posy>300</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(6).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(6).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(6).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(6).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(6).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--7-->
+				<control type="group">
+					<posy>360</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(7).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(7).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(7).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(7).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(7).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--8-->
+				<control type="group">
+					<posy>420</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(8).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(8).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(8).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(8).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(8).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--9-->
+				<control type="group">
+					<posy>480</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(9).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(9).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(9).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(9).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(9).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<!--10-->
+				<control type="group">
+					<posy>540</posy>
+					<visible>Player.HasAudio + MusicPlayer.Offset(10).Exists</visible>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>32r</posx>
+						<width>300</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>left</align>
+						<aligny>top</aligny>
+						<font>Regular-14</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(10).PlayListPosition]</label>
+					</control>
+					<control type="label">
+						<posy>-1</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-18</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(10).Artist]</label>
+					</control>
+					<control type="label">
+						<posy>23</posy>
+						<posx>100r</posx>
+						<width>500</width>
+						<scroll>false</scroll>
+						<height>23</height>
+						<align>right</align>
+						<aligny>top</aligny>
+						<font>Regular-15</font>
+						<shadowcolor>FF222222</shadowcolor>
+						<textcolor>white</textcolor>
+						<label>$INFO[MusicPlayer.Offset(10).Title]</label>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>87r</posx>
+						<posy>0</posy>
+						<width>47</width>
+						<height>47</height>
+						<texture>$INFO[MusicPlayer.Offset(10).Cover]</texture>
+						<aspectratio scalediffuse="false" align="right" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+			</control>
+	</include>
+	<include name="NowPlayingMusicOSD">
+		<control type="group">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>48</height>		
+			<control type="group">
+				<posy>530</posy>
+				<!--<animation effect="fade" start="100" end="31" time="500" delay="10000" condition="!Player.ShowInfo">Conditional</animation>-->
+				<control type="group">
+					<control type="image">
+						<posx>40</posx>
+						<posy>-46</posy>
+						<width>182</width>
+						<height>182</height>
+						<texture background="true">default-square-small.png</texture>
+						<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+					</control>
+					<control type="image">
+						<posx>40</posx>
+						<posy>-46</posy>
+						<width>182</width>
+						<height>182</height>
+						<texture>$INFO[MusicPlayer.Cover]</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+					</control>
+				</control>
+				<control type="label">
+					<posx>246</posx>
+					<posy>7</posy>
+					<width>1000</width>
+					<height>30</height>
+					<scroll>false</scroll>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>Regular-36</font>
+					<shadowcolor>FF222222</shadowcolor>
+					<label>$INFO[MusicPlayer.Artist] &#xB7; $INFO[MusicPlayer.Album]</label>
+					<animation effect="slide" start="0,0" end="0,-12" time="200" condition="Control.IsVisible(212)">Conditional</animation>
+				</control>
+				<control type="label">
+					<posx>246</posx>
+					<posy>57</posy>
+					<width>1000</width>
+					<height>30</height>
+					<scroll>false</scroll>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>Regular-36</font>
+					<shadowcolor>FF222222</shadowcolor>
+					<label>$INFO[MusicPlayer.Title]</label>
+					<animation effect="slide" start="0,0" end="0,-12" time="200" condition="Control.IsVisible(212)">Conditional</animation>
+				</control>	
+				<!--x of y -->
+				<control type="label">
+					<visible>!Window.IsActive(50)</visible>
+					<posx>246</posx>
+					<posy>112</posy>
+					<width>1000</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<visible>Player.HasAudio</visible>
+					<font>smallerCaps</font>
+					<!--<shadowcolor>FF222222</shadowcolor>-->
+					<textcolor>title2</textcolor>
+					<label>Track: $INFO[MusicPlayer.PlayListPosition] of $INFO[MusicPlayer.PlayListLength]</label>
+				</control>	
+				<!--next-->
+				<control type="label">
+					<posx>40r</posx>
+					<posy>112</posy>
+					<width>415</width>
+					<scroll>false</scroll>
+					<height>30</height>
+					<align>right</align>
+					<aligny>center</aligny>
+					<visible>Player.HasAudio + !IsEmpty(MusicPlayer.Offset(1).Title)</visible>
+					<font>smallerCaps</font>
+					<!--<shadowcolor>FF222222</shadowcolor>-->
+					<textcolor>title2</textcolor>
+					<label>Next: $INFO[MusicPlayer.Offset(1).Title]</label>
+				</control>
+				
+			</control>
+			<!--progress-->
+			<control type="group">
+				<posy>680</posy>
+				<control type="label">
+					<posx>40</posx>
+					<posy>0</posy>
+					<width>640</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>	
+					<visible>Player.HasAudio</visible>
+					<font>Regular-18</font>
+					<!--<shadowcolor>FF222222</shadowcolor>-->
+					<textcolor>white</textcolor>
+					<label>$INFO[MusicPlayer.Time]</label> 
+				</control>
+			
+				<control type="label">
+					<posx>1240</posx>
+					<posy>0</posy>
+					<width>640</width>
+					<height>30</height>
+					<align>right</align>
+					<aligny>center</aligny>	
+					<visible>Player.HasAudio</visible>
+					<font>Regular-18</font>
+					<!--<shadowcolor>FF222222</shadowcolor>-->
+					<textcolor>white</textcolor>
+					<label>$INFO[MusicPlayer.Duration]</label>
+				</control>
+
+				<control type="progress">
+					<description>Progressbar</description>
+					<posx>100</posx>
+					<posy>13</posy>
+					<width>1080</width>
+					<height>5</height>
+					<info>Player.Progress</info>
+					<texturebg border="5,0,5,0">OSDProgressBack6.png</texturebg>
+					<midtexture border="5,0,5,0">OSDProgressMid-white6.png</midtexture>		
+				</control>
+			</control>
+			
+		</control>
+	
+		<!-- osd -->
+		<control type="group">
+			<visible>Window.isActive(50)</visible>
+			<posy>635</posy>
+			<posx>510</posx>
+			<control type="group" id="300">
+				<control type="radiobutton" id="707">
+					<texturenofocus>-</texturenofocus>
+					<texturefocus>-</texturefocus>
+					<textureradiofocus>-</textureradiofocus>
+					<textureradionofocus>-</textureradionofocus>
+					<textcolor>title2</textcolor>
+					<focusedcolor>Focused</focusedcolor>
+					<disabledcolor>Disabled</disabledcolor>
+					<selectedcolor>Selected</selectedcolor>	
+					<posx>-282</posx>
+					<posy>7</posy>
+					<width>500</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<visible>Player.HasAudio</visible>
+					<font>smallerCaps</font>
+					<!--<shadowcolor>FF222222</shadowcolor>-->
+					<label>Track: $INFO[MusicPlayer.PlayListPosition] of $INFO[MusicPlayer.PlayListLength]</label>
+					<onclick>Skin.ToggleSetting(ShowMusicPlaylist)</onclick>
+					<onleft>715</onleft>
+					<onright>708</onright>
+				</control>
+				<!-- repeat -->
+				<control type="group">
+					<posy>11</posy>
+					<posx>23</posx>
+					<include>OSDRepeatButton</include>
+				</control>
+				<!-- previous -->
+				<control type="group">
+					<posy>13</posy>
+					<posx>99</posx>
+					<include>OSDPreviousButton</include>
+				</control>
+				<!-- play/pause -->
+				<control type="group">
+					<posy>13</posy>
+					<posx>140</posx>
+					<include>OSDPlayButton</include>
+				</control>
+				<!-- next -->
+				<control type="group">					
+					<posy>13</posy>
+					<posx>179</posx>
+					<include>OSDNextButton</include>
+				</control>
+				<!-- stop -->
+				<control type="group">
+					<posy>13</posy>
+					<posx>240</posx>
+					<include>OSDStopButton</include>
+				</control>
+				<!-- pq -->
+				<control type="group">
+					<posy>14</posy>
+					<posx>280</posx>
+					<include>OSDPlayqueueButton</include>
+				</control>
+			</control>
+			
+		</control>
+	</include>
+	<include name="VideoOSDProgressbar">
+			<!-- progress bar -->
+			
+			<control type="progress">
+				<description>Progressbar</description>
+				<posx>13</posx>
+				<posy>0</posy>
+				<width>1254</width>
+				<info>Player.Progress</info>
+				<height>5</height>
+				<texturebg border="5,0,5,0">OSDProgressBack6.png</texturebg>
+				<midtexture border="5,0,5,0">OSDTransparent6.png</midtexture>							
+			</control>
+			
+			<control type="progress">
+				<description>Progressbar</description>
+				<posx>13</posx>
+				<posy>0</posy>
+				<width>1254</width>
+				<info>Player.Progress</info>
+				<height>5</height>
+				<texturebg border="5,0,5,0">OSDTransparent6.png</texturebg>
+				<midtexture border="5,0,5,0">OSDProgressMid-white6.png</midtexture>			
+				<animation effect="fade" start="100" end="46" time="0" condition="Player.Seeking+SubString(Player.SeekStepSize,-)">Conditional</animation>
+			</control>
+			<!-- seek bar -->
+			<control type="progress" id="401">
+				<description>Seek Slider</description>
+				<posx>13</posx>
+				<posy>0</posy>
+				<width>1254</width>
+				<info>Player.Seekbar</info>
+				<height>5</height>
+				<texturebg border="5,0,5,0">OSDTransparent6.png</texturebg>
+				<midtexture border="5,0,5,0">OSDProgressMid-white6.png</midtexture>			
+				<animation effect="fade" start="100" end="46" time="0" condition="Player.Seeking+!SubString(Player.SeekStepSize,-)">Conditional</animation>
+				<visible>Player.Seeking</visible>
+			</control>
+			
+			<!-- Slider (Mouse) -->
+			<control type="slider">
+				<posx>13</posx>
+				<posy>0</posy>
+				<width>1254</width>
+				<height>24</height>
+				<action>seek</action>
+				<texturesliderbar>-</texturesliderbar>
+				<textureslidernib>-</textureslidernib>
+				<textureslidernibfocus>-</textureslidernibfocus>
+			</control>
+			
+		</include>
+		<include name="VideoOSDTime">
+			<!-- left side -->
+			<control type="grouplist">
+				<posx>13</posx>
+				<posy>19</posy>
+				<width>300</width>
+				<height>20</height>
+				<itemgap>80</itemgap>
+				<align>left</align>
+				<orientation>horizontal</orientation>
+				<!-- time in media -->
+				<control type="label">
+					<height>20</height>
+					<width max="200">auto</width>				
+					<font>Regular-19</font>
+					<label>$INFO[Player.Time]</label>
+					<textcolor>white</textcolor>
+				</control>			
+				<!-- clock -->
+				<control type="label">
+					<height>20</height>
+					<width max="200">auto</width>
+					<font>Regular-19</font>
+					<label>$LOCALIZE[142] $INFO[System.Time(Short_No_meridian)]</label>
+					<textcolor>white</textcolor>
+				</control>			
+			</control>
+			
+			<!-- right side -->
+			<control type="grouplist">
+				<posx>313r</posx>
+				<posy>19</posy>
+				<width>300</width>
+				<height>20</height>
+				<itemgap>80</itemgap>
+				<align>right</align>
+				<orientation>horizontal</orientation>
+				
+				<!-- finish time -->
+				<control type="label">
+					<height>20</height>		
+					<width max="200">auto</width>						
+					<font>Regular-19</font>
+					<label>$LOCALIZE[19081] $INFO[Player.FinishTime]</label>
+					<textcolor>white</textcolor>
+				</control>			
+				<!-- duration -->
+				<control type="label">
+					<height>20</height>
+					<width max="200">auto</width>
+					<font>Regular-19</font>
+					<label>$INFO[Player.Duration]</label>
+					<textcolor>white</textcolor>
+				</control>
+			</control>			
+		</include>
+	
+		<!-- Scrollbar -->
+		<include name="GlobalScrollbar">
+			<control type="scrollbar" id="1601">
+				<orientation>vertical</orientation>
+				<posx>1280</posx>
+				<posy>0</posy>
+				<width>6</width>
+				<height>720</height>
+				<onleft>777</onleft>
+				<onright>1601</onright>
+				<texturesliderbackground>ScrollbarBackDark.png</texturesliderbackground>
+				<texturesliderbarfocus>ScrollbarFocus.png</texturesliderbarfocus>
+				<texturesliderbar>-</texturesliderbar>
+				<textureslidernib>-</textureslidernib>
+				<textureslidernibfocus>-</textureslidernibfocus>
+				<showonepage>false</showonepage>
+				<visible allowhiddenfocus="true">true</visible>
+				<animation effect="slide" end="-6,0" time="100">Focus</animation>				
+			</control>
+		</include>
+		<include name="ScrollbarLow">
+			<control type="scrollbar" id="1603">
+				<orientation>vertical</orientation>
+				<posx>1280</posx>
+				<posy>448</posy>
+				<width>6</width>
+				<height>272</height>
+				<onleft>777</onleft>
+				<onright>1603</onright>
+				<texturesliderbackground>ScrollbarBackDark.png</texturesliderbackground>
+				<texturesliderbarfocus>ScrollbarFocus.png</texturesliderbarfocus>
+				<texturesliderbar>-</texturesliderbar>
+				<textureslidernib>-</textureslidernib>
+				<textureslidernibfocus>-</textureslidernibfocus>
+				<showonepage>false</showonepage>
+				<visible allowhiddenfocus="true">true</visible>
+				<animation effect="slide" end="-6,0" time="100">Focus</animation>				
+			</control>
+		</include>
+		<include name="GlobalScrollbarY">
+			<control type="scrollbar" id="1602">
+				<orientation>horizontal</orientation>
+				<posx>0</posx>
+				<posy>-6</posy>
+				<width>1280</width>
+				<height>6</height>
+				<ondown>777</ondown>
+				<onup>1602</onup>
+				<texturesliderbackground>ScrollbarBackDark.png</texturesliderbackground>
+				<texturesliderbarfocus>ScrollbarFocus.png</texturesliderbarfocus>
+				<texturesliderbar>-</texturesliderbar>
+				<textureslidernib>-</textureslidernib>
+				<textureslidernibfocus>-</textureslidernibfocus>
+				<showonepage>false</showonepage>
+				<visible allowhiddenfocus="true">true</visible>
+				<animation effect="slide" end="0,6" time="100">Focus</animation>				
+			</control>
+		</include>
+		<include name="ScrollbarMiddle">
+			<control type="scrollbar" id="1604">
+				<orientation>vertical</orientation>
+				<posx>1280</posx>
+				<posy>102</posy>
+				<width>6</width>
+				<height>516</height>
+				<onleft>777</onleft>
+				<onright>1604</onright>
+				<texturesliderbackground>ScrollbarBackDark.png</texturesliderbackground>
+				<texturesliderbarfocus>ScrollbarFocus.png</texturesliderbarfocus>
+				<texturesliderbar>-</texturesliderbar>
+				<textureslidernib>-</textureslidernib>
+				<textureslidernibfocus>-</textureslidernibfocus>
+				<showonepage>false</showonepage>
+				<visible allowhiddenfocus="true">true</visible>
+				<animation effect="slide" end="-395,0" time="0">Focus</animation>				
+			</control>
+		</include>
+	
+	
+</includes>

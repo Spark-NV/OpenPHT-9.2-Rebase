@@ -212,10 +212,10 @@ int CEncoderFFmpeg::Encode(int nNumBytesRead, BYTE* pbtStream)
 
 bool CEncoderFFmpeg::WriteFrame()
 {
-  uint8_t outbuf[FF_MIN_BUFFER_SIZE];
+  uint8_t outbuf[AV_MIN_BUFFER_SIZE];
   int encoded;
 
-  encoded = avcodec_encode_audio(m_CodecCtx, outbuf, FF_MIN_BUFFER_SIZE, (short*)m_Buffer);
+  encoded = avcodec_encode_audio(m_CodecCtx, outbuf, AV_MIN_BUFFER_SIZE, (short*)m_Buffer);
   m_BufferSize = 0;
   if (encoded < 0) {
     CLog::Log(LOGERROR, "CEncoderFFmpeg::WriteFrame - Error encoding audio");

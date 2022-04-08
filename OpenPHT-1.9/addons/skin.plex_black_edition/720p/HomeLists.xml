@@ -1,0 +1,1500 @@
+<?xml version="1.0"?>
+<includes>	
+
+	<include name="Home_RecentlyAddedInfo">
+		<control type="group">
+			<visible>!Skin.HasSetting(HomeBigIcons)+!Container(11000).ListItem(0).Type(album)+!Container(11000).ListItem(0).Type(photo)</visible>
+			<include>HomeDescriptionPosX</include>
+			
+			<animation type="Conditional" condition="ControlGroup(7001).HasFocus">
+				<effect type="fade" time="HomePlotFadeTime" start="0" end="100" delay="HomePlotFadeTime" />
+			</animation>
+			<animation type="Conditional" condition="!ControlGroup(7001).HasFocus">
+				<effect type="fade" time="HomePlotFadeTime" start="100" end="0" />
+			</animation>
+			
+			<!--title-->
+			<control type="label">
+				<description>Title</description>
+				<include>list_Label-title</include>
+				<label>$INFO[Container(11000).ListItem(0).Title]</label>													
+				<visible>Container(11000).ListItem(0).Type(movie) | [Container(11000).ListItem(0).Type(clip) + Skin.HasSetting(HomeVideosPortrait)]</visible>				
+			</control>
+			<control type="label">
+				<description>Title</description>						
+				<include>list_Label-title</include>
+				<label>$INFO[Container(11000).ListItem(0).TVShowTitle]</label>
+				<visible>Container(11000).ListItem(0).Type(episode)|Container(11000).ListItem(0).Type(Season)</visible>			
+			</control>	
+			
+			<!--media tags recently added-->
+			<control type="grouplist">
+				<posy>40</posy>
+				<visible>Container(11000).ListItem(0).Type(movie) | Container(11000).ListItem(0).Type(episode) | [Container(11000).ListItem(0).Type(clip) + Skin.HasSetting(HomeVideosPortrait)]</visible>
+			 	<include>HomeMediatagsPosX</include>
+				<width>270</width>
+				<align>right</align>
+				<orientation>horizontal</orientation>
+				<itemgap>12</itemgap>			
+				<include>MediaFlagsBEHomeRecentlyAdded</include>
+			</control>	
+			<control type="grouplist">
+				<visible>Container(11000).ListItem(0).Type(movie) | Container(11000).ListItem(0).Type(episode) | Container(11000).ListItem(0).Type(season) | [Container(11000).ListItem(0).Type(clip) + Skin.HasSetting(HomeVideosPortrait)]</visible>
+				<posy>33</posy>
+				<orientation>horizontal</orientation>
+				<itemgap>0</itemgap>
+				<width>850</width>		
+				<align>left</align>
+				
+				<control type="label">
+					<description>LeafCount</description>
+					<label>$LOCALIZE[32101]: $INFO[Container(11000).ListItem.Property(LeafCount)]</label>
+					<width min="30" max="550">auto</width>
+					<include>list_Label-sub</include>
+					<visible>Container(11000).ListItem.Type(season)</visible>
+				</control>			
+				
+				<control type="label">
+					<description>Duration</description>
+					<label>$INFO[Container(11000).ListItem(0).DurationStr]</label>
+					<width min="30" max="250">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).DurationStr)</visible>
+				</control>
+				<control type="label">
+					<description>Year</description>
+					<label>$INFO[Container(11000).ListItem(0).Year, &#xB7; ]</label>
+					<width min="30" max="250">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Year)+!Container(11000).ListItem(0).Type(episode)</visible>
+				</control>
+				<control type="label">
+					<description>Date</description>
+					<label>$INFO[Container(11000).ListItem(0).Date, &#xB7; ]</label>
+					<width min="30" max="250">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Date)+Container(11000).ListItem(0).Type(episode)</visible>
+				</control>		
+				<control type="label">
+					<description>Genre</description>
+					<label>$INFO[Container(11000).ListItem(0).Genre, &#xB7; ]$INFO[Container(11000).ListItem(0).Country, &#xB7; ]</label>
+					<width min="30" max="550">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Genre)</visible>
+				</control>		
+				<control type="label">
+					<description>Director</description>
+					<label>$INFO[Container(11000).ListItem(0).Director, &#xB7; ]</label>
+					<width min="30" max="400">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Director)</visible>
+				</control>	
+				<control type="label">
+					<description>contentRating</description>
+					<label>$INFO[Container(11000).ListItem(0).Property(mediaTag-contentRating), &#xB7; ]</label>
+					<width min="30" max="240">auto</width>
+					<include>list_Label-sub</include>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Property(mediaTag-contentRating))</visible>
+				</control>
+				<control type="label">
+					<visible>Container(11000).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+					<width min="1" max="20">auto</width>
+					<include>list_Label-sub</include>
+					<label> &#xB7; </label>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Property(Rating))</visible>
+				</control>
+				<control type="image">
+					<visible>Container(11000).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+					<width>21</width>
+					<height>26</height>
+					<texture>inline_star_home.png</texture>
+					<colordiffuse>title2</colordiffuse>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Property(Rating))</visible>
+				</control>
+				<control type="label">
+					<visible>Container(11000).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+					<width min="1" max="80">auto</width>
+					<include>list_Label-sub</include>
+					<label> $INFO[Container(11000).ListItem(0).Property(Rating)]</label>
+					<visible>!IsEmpty(Container(11000).ListItem(0).Property(Rating))</visible>
+				</control>
+			</control>
+
+			<!--Plot -->
+			<control type="textbox">
+				<visible>Control.IsVisible(11000) + Control.IsVisible(11001)</visible>
+				<include>HomePlotPosY</include>
+				<include>HomePlotWidth</include>
+				<height>52</height>
+				<align>left</align>
+				<label>$INFO[Container(11000).ListItem(0).Plot]$INFO[Container(11000).ListItem(0).Property(Cast),[CR][UPPERCASE][COLOR=title2]$LOCALIZE[31134]:[/COLOR][/UPPERCASE] ]</label>
+				<font>descriptionSmall</font>
+				<textcolor>white</textcolor>
+				<visible>!Container(11000).ListItem(0).Type(episode) | [Container(11000).ListItem(0).Type(episode) + [Container(11000).ListItem(0).Status(Watched) | [!Skin.HasSetting(HidePlotForUnwatched) + [Container(11000).ListItem(0).Status(InProgress) | Container(11000).ListItem(0).Status(UnWatched)]]]]</visible>
+			</control>
+				<!--Plot large-->
+			<control type="textbox">
+				<visible>Control.IsVisible(11000) + !Control.IsVisible(11001)</visible>
+				<include>HomePlotPosY</include>
+				<include>HomePlotWidth</include>
+				<height>270</height>
+				<align>left</align>
+				<label>$INFO[Container(11000).ListItem(0).Plot]$INFO[Container(11000).ListItem(0).Property(Cast),[CR][CR][UPPERCASE][COLOR=title2]$LOCALIZE[31134]:[/COLOR][/UPPERCASE] ]</label>
+				<font>descriptionSmall</font>
+				<textcolor>white</textcolor>
+				<visible>!Container(11000).ListItem(0).Type(episode) | [Container(11000).ListItem(0).Type(episode) + [Container(11000).ListItem(0).Status(Watched) | [!Skin.HasSetting(HidePlotForUnwatched) + [Container(11000).ListItem(0).Status(InProgress) | Container(11000).ListItem(0).Status(UnWatched)]]]]</visible>
+			</control>
+				<!--Plot hide spoiler-->
+			<control type="textbox">
+				<include>HomePlotPosY</include>
+				<include>HomePlotWidth</include>
+				<height>52</height>
+				<font>descriptionSmall</font>
+				<textcolor>white</textcolor>
+				<label>$LOCALIZE[32105]</label>
+				<visible>Container(11000).ListItem(0).Type(episode)</visible>
+				<visible>Skin.HasSetting(HidePlotForUnwatched) + [Container(11000).ListItem(0).Status(InProgress) | Container(11000).ListItem(0).Status(UnWatched)] + !IsEmpty(Container(11000).ListItem(0).Plot)</visible>
+			</control>
+		</control>
+	</include>	
+
+	
+	<include name="OnDeckContent">
+			<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+			<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+			
+			<visible allowhiddenfocus="false">false</visible>
+			<orientation>horizontal</orientation>
+			<ondown>7001</ondown>
+			<onup>-</onup>
+			<onright>-</onright>
+			<onleft>300</onleft>	
+			<include>HomeListWidthSlide</include>
+			<include>ItemScrollTime</include>
+			<height>330</height>		
+			<animation effect="fade" start="100" end="40" time="HomeDeckFadeTime" condition="!ControlGroup(7002).HasFocus + !Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7001).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>				
+			<itemlayout width="133" height="330" condition="!Skin.HasSetting(HomeBigIcons) + [!Container(11001).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">
+				<!-- tv show episode On Deck + -->
+				<control type="group">
+					<visible>ListItem.Type(episode)</visible>						
+					<posy>42</posy>
+					<control type="group">			
+						<include>ListItemPoster</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7002).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>
+					<control type="group">						
+						<visible>ControlGroup(7002).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]</visible>
+						<include>Home_EpisodeInfo</include>
+						<include>Home_Overlay</include>
+					</control>
+				</control>
+				<!-- movie + clip On Deck -->
+				<control type="group">
+					<visible>ListItem.Type(movie) | ListItem.Type(clip)</visible>							
+					<posy>42</posy>
+					<control type="group">						
+						<include>ListItemPoster</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7002).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>
+					<control type="group">								
+						<visible>ListItem.Type(movie) + [ControlGroup(7002).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]]</visible>
+						<include>Home_OverlayIMDB</include>
+					</control>
+					<control type="group">								
+						<visible>ControlGroup(7002).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]</visible>
+						<include>Home_Overlay</include>
+					</control>
+				</control>
+			</itemlayout>
+			<focusedlayout width="133" height="330" condition="!Skin.HasSetting(HomeBigIcons) + [!Container(11001).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">						
+				<!-- tv show episode On Deck + -->
+				<control type="group">
+					<visible>ListItem.Type(episode)</visible>
+					<posy>42</posy>							
+					<include>ListItemPoster</include>
+					<include>ListItemPosterSelectedBorder</include>			
+					<include>Home_EpisodeInfo</include>
+					<include>Home_Overlay</include>				
+				</control>
+				<!-- movie + clip On Deck-->
+				<control type="group">
+					<visible>ListItem.Type(movie) | ListItem.Type(clip)</visible>
+					<posy>42</posy>							
+					<include>ListItemPoster</include>
+					<include>ListItemPosterSelectedBorder</include>
+					<include>Home_OverlayIMDB</include>
+					<include>Home_Overlay</include>
+				</control>
+			</focusedlayout>
+			<itemlayout width="150" height="330" condition="Skin.HasSetting(HomeBigIcons) + [!Container(11001).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">						
+				<!-- tv show episode On Deck + -->
+				<control type="group">
+					<visible>ListItem.Type(episode)</visible>							
+					<posy>42</posy>
+					<control type="group">					
+						<include>ListItemPoster</include>
+						<include>Home_ListItemTitleBig</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7002).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>
+					<control type="group">					
+						<visible>ControlGroup(7002).HasFocus  | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]</visible>
+						<include>Home_EpisodeInfo</include>
+						<include>Home_Overlay</include>
+					</control>
+				
+				</control>
+				<!-- movie + clip On Deck -->
+				<control type="group">
+					<visible>ListItem.Type(movie) | ListItem.Type(clip)</visible>							
+					<posy>42</posy>
+					<control type="group">					
+						<include>ListItemPoster</include>
+						<include>Home_ListItemTitleBig</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7002).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>
+					<control type="group">
+						<visible>ListItem.Type(movie) + [ControlGroup(7002).HasFocus  | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]]</visible>
+						<include>Home_OverlayIMDB</include>
+					</control>
+					<control type="group">
+						<visible>ControlGroup(7002).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7001).HasFocus]</visible>
+						<include>Home_Overlay</include>
+					</control>
+				</control>
+			</itemlayout>
+			<focusedlayout width="150" height="330" condition="Skin.HasSetting(HomeBigIcons)  + [!Container(11001).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">						
+				<!-- tv show episode  On Deck+ -->
+				<control type="group">
+					<visible>ListItem.Type(episode)</visible>
+					<posy>42</posy>							
+					<include>ListItemPoster</include>
+					<include>ListItemPosterSelectedBorder</include>
+					<include>Home_EpisodeInfo</include>
+					<include>Home_Overlay</include>
+					<include>Home_ListItemTitleBig_Focused</include>
+				</control>
+				<!-- movie + clip On Deck-->
+				<control type="group">
+					<visible>ListItem.Type(movie) | ListItem.Type(clip)</visible>
+					<posy>42</posy>							
+					<include>ListItemPoster</include>
+					<include>ListItemPosterSelectedBorder</include>
+					<include>Home_OverlayIMDB</include>				
+					<include>Home_Overlay</include>
+					<include>Home_ListItemTitleBig_Focused</include>
+				</control>
+			</focusedlayout>
+			
+			<itemlayout width="240" height="230" condition="Container(11001).ListItem(0).Type(clip)+!Skin.HasSetting(HomeVideosPortrait)">
+				<!-- homevideos  On Deck-->
+				<control type="group">
+					<posy>42</posy>
+					<visible>ListItem.Type(clip)</visible>
+					<!--<include>ListItemWideCard</include>-->
+					<control type="group">
+						<include>ListItemWide</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7002).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>					
+					<include>ListItemWideTitleDate</include>
+					<include>ListItemWideTitle</include>
+				</control>
+			</itemlayout>
+			<focusedlayout width="240" height="230" condition="Container(11001).ListItem(0).Type(clip)+!Skin.HasSetting(HomeVideosPortrait)">
+				<!-- homevideos  On Deck-->
+				<control type="group">
+					<posy>42</posy>
+					<visible>ListItem.Type(clip)</visible>
+					<!--<include>ListItemWideCard</include>-->
+					<include>ListItemWide</include>
+					<include>ListItemWideTitleDate</include>
+					<include>ListItemWideTitleFocused</include>
+					<include>ListItemWideSelectedBorder</include>
+				</control>						
+			</focusedlayout>
+			
+	</include>
+
+	<include name="RecentlyAddedContent">
+		<visible allowhiddenfocus="false">false</visible>
+		<orientation>horizontal</orientation>
+		<ondown>-</ondown>
+		<onup>7002</onup>
+		<onright>-</onright>
+		<onleft>300</onleft>
+		<!--<posx>2</posx>-->
+		<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+		<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+
+		<include>HomeListWidthSlide</include>
+		<include>ItemScrollTime</include>
+		<height>600</height>
+		<animation effect="fade" start="100" end="40" time="HomeDeckFadeTime" condition="[!ControlGroup(7001).HasFocus] + !Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7002).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+		
+		<itemlayout width="133" height="330" condition="[!Skin.HasSetting(HomeBigIcons) + !Container(11000).ListItem(0).Type(album) + !Container(11000).ListItem(0).Type(photo)] + [!Container(11000).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">
+			<!-- tv show episode Recently Added-->
+			<control type="group">
+				<visible>[ListItem.Type(episode) | ListItem.Type(season)]</visible>					
+				<posy>0</posy>
+				<control type="group">
+					<include>ListItemPoster</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+				</control>
+				<control type="group">									
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]] + ListItem.Type(episode)</visible>
+					<include>Home_EpisodeInfo</include>
+					<include>Home_Overlay</include>
+				</control>
+				<control type="group">									
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]] + ListItem.Type(season)</visible>
+					<include>Home_SeasonInfo</include>
+				</control>	
+			</control>
+		
+			<!--movie + clip Recently Added -->
+			<control type="group">
+				<visible>[ListItem.Type(movie) | ListItem.Type(clip)]</visible>								
+				<posy>0</posy>
+				<control type="group">
+					<include>ListItemPoster</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+				</control>									
+				<control type="group">				
+					<visible>ListItem.Type(movie) + [ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]]</visible>
+					<include>Home_OverlayIMDB</include>
+				</control>
+				<control type="group">				
+					<visible>ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]</visible>
+					<include>Home_Overlay</include>
+				</control>
+				
+				
+			</control>
+		
+		</itemlayout>
+		<focusedlayout width="133" height="330" condition="[!Skin.HasSetting(HomeBigIcons) + !Container(11000).ListItem(0).Type(album)+ !Container(11000).ListItem(0).Type(photo)] + [!Container(11000).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]">
+			<!--tv show episode + focus Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(episode)</visible>
+				<posy>0</posy>						
+				<include>ListItemPoster</include>	
+				<include>ListItemPosterSelectedBorder</include>
+				<include>Home_EpisodeInfo</include>
+				<include>Home_Overlay</include>
+			</control>
+			<!--tv show season + focus Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(season)</visible>
+				<posy>0</posy>						
+				<include>ListItemPoster</include>	
+				<include>ListItemPosterSelectedBorder</include>
+				<include>Home_SeasonInfo</include>
+			</control>
+					
+			<!--movie + focus Recently Added -->
+			<control type="group">
+				<posy>0</posy>
+				<visible>[ListItem.Type(movie) | ListItem.Type(clip)]</visible>
+				<include>ListItemPoster</include>
+				<include>ListItemPosterSelectedBorder</include>
+				<control type="group">				
+					<visible>ListItem.Type(movie)</visible>
+					<include>Home_OverlayIMDB</include>
+				</control>
+				<include>Home_Overlay</include>
+			</control>
+		</focusedlayout>
+		<!--Bigger Poster-->
+		<itemlayout width="150" height="330" condition="[Skin.HasSetting(HomeBigIcons)] + [!Container(11000).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]+![Container(11000).ListItem(0).Type(album) | Container(11000).ListItem(0).Type(photo)]">
+			
+			<!-- tv show episode Recently Added -->
+			<control type="group">
+				<visible>[ListItem.Type(episode) | ListItem.Type(season)]</visible>
+				<posy>0</posy>
+				<control type="group">						
+					<include>ListItemPoster</include>	
+					<include>Home_ListItemTitleBig</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>				
+				</control>
+				<control type="group">
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]]+ ListItem.Type(episode)</visible>
+					<include>Home_EpisodeInfo</include>
+					<include>Home_Overlay</include>		
+				</control>
+				<control type="group">
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]] + ListItem.Type(season)</visible>
+					<include>Home_SeasonInfo</include>			
+				</control>		
+			</control>
+				
+			<!-- movie + clip Recently Added -->
+			<control type="group">
+				<visible>[ListItem.Type(movie) | ListItem.Type(clip)]</visible>
+				<posy>0</posy>
+				<control type="group">
+					<include>ListItemPoster</include>
+					<include>Home_ListItemTitleBig</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+				</control>									
+				<control type="group">
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]] + ListItem.Type(movie)</visible>
+					<include>Home_OverlayIMDB</include>
+					
+				</control>
+				<control type="group">
+					<visible>[ControlGroup(7001).HasFocus | Skin.HasSetting(NoTransOnDeck) | [Skin.HasSetting(showNewLists)+!ControlGroup(7002).HasFocus]]</visible>
+					<include>Home_Overlay</include>			
+				</control>
+				
+			</control>		
+		</itemlayout>
+		<focusedlayout width="150" height="330" condition="[Skin.HasSetting(HomeBigIcons)] + [!Container(11000).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)] + ![Container(11000).ListItem(0).Type(album) | Container(11000).ListItem(0).Type(photo)]">
+				
+			<!-- tv show episode + focus Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(episode)</visible>
+				<posy>0</posy>						
+				<include>ListItemPoster</include>	
+				<include>ListItemPosterSelectedBorder</include>
+				<include>Home_EpisodeInfo</include>		
+				<include>Home_Overlay</include>
+				<include>Home_ListItemTitleBig_Focused</include>
+			</control>
+		
+			<!-- tv show season + focus Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(season)</visible>
+				<posy>0</posy>						
+				<include>ListItemPoster</include>	
+				<include>ListItemPosterSelectedBorder</include>
+				<include>Home_SeasonInfo</include>
+				<include>Home_ListItemTitleBig_Focused</include>
+			</control>
+	
+			<!-- movie + clip + focus Recently Added -->
+			<control type="group">
+				<posy>0</posy>
+				<visible>[ListItem.Type(movie) | ListItem.Type(clip)]</visible>
+				<include>ListItemPoster</include>
+				<include>ListItemPosterSelectedBorder</include>
+				<control type="group">
+					<visible>ListItem.Type(movie)</visible>
+					<include>Home_OverlayIMDB</include>
+				</control>
+				<include>Home_Overlay</include>
+				<include>Home_ListItemTitleBig_Focused</include>
+			</control>
+	
+		</focusedlayout>
+		
+		<itemlayout width="171" height="330" condition="[Container(11000).ListItem(0).Type(album) | Container(11000).ListItem.Type(photo)]">
+			<!-- album Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(album)</visible>								
+				<posy>0</posy>
+				<!--<include>ListItemSquareCard</include>-->
+				<control type="group">
+					<include>ListItemSquare</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+				</control>						
+				<include>ListItemSquareTitleArtist</include>
+				<include>ListItemSquareTitleAlbum</include>				
+			</control>	
+			<!-- photos Recently Added  -->
+			<control type="group">
+				<visible>ListItem.Type(photo)|ListItem.Type(clip)</visible>							
+				<posy>0</posy>
+				<!--<include>ListItemSquareCard</include>-->
+				<control type="group">
+					<include>ListItemSquare</include>
+					<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+!Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+				</control>	
+				<include>ListItemSquareTitle</include>
+				<include>ListItemSquarePhotoDate</include>				
+			</control>	
+		</itemlayout>
+		<focusedlayout width="171" height="330" condition="[Container(11000).ListItem(0).Type(album) | Container(11000).ListItem(0).Type(photo)]">
+			<!-- album Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(album)</visible>
+				<!--<include>ListItemSquareCard</include>-->
+				<include>ListItemSquare</include>
+				<include>ListItemSquareSelectedBorder</include>
+				<include>ListItemSquareTitleArtistFocused</include>
+				<include>ListItemSquareTitleAlbum</include>
+			</control>
+			<!-- photos + Recently Added -->
+			<control type="group">
+				<visible>ListItem.Type(photo)</visible>
+				<!--<include>ListItemSquareCard</include>-->
+				<include>ListItemSquare</include>
+				<include>ListItemSquareSelectedBorder</include>
+				<include>ListItemSquareTitleFocused</include>
+				<include>ListItemSquarePhotoDate</include>
+			</control>
+		</focusedlayout>
+		
+		<itemlayout width="240" height="230" condition="Container(11000).ListItem(0).Type(clip)+!Skin.HasSetting(HomeVideosPortrait)">
+				<!--homevideos Recently Added -->
+				<control type="group">				
+					<posy>0</posy>
+					<!--<include>ListItemWideCard</include>-->
+					<control type="group">
+						<include>ListItemWide</include>
+						<animation effect="fade" start="75" end="75" condition="ControlGroup(7001).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+					</control>					
+					<include>ListItemWideTitleDate</include>
+					<include>ListItemWideTitle</include>
+				</control>
+		</itemlayout>
+		<focusedlayout width="240" height="230" condition="Container(11000).ListItem(0).Type(clip)+!Skin.HasSetting(HomeVideosPortrait)">
+			<!-- homevideos Recently Added -->
+			<control type="group">
+				<posy>0</posy>
+				<!--<include>ListItemWideCard</include>-->
+				<include>ListItemWide</include>
+				<include>ListItemWideTitleDate</include>
+				<include>ListItemWideTitleFocused</include>
+				<include>ListItemWideSelectedBorder</include>
+			</control>			
+		</focusedlayout>
+		
+	</include>
+
+	<!-- lists -->
+	<include name="HomeLists">
+
+		<control type="group" id="5000">
+			<include condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)">HomeMenuListPosx</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu)">HomeMenuListPosxBigger</include>
+			<include condition="Skin.HasSetting(BiggerHomeMenu3)">HomeMenuListPosxBigger3</include>
+		
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			
+			<include>FadeDialog</include>
+			<animation effect="fade" start="100" end="0" time="500" reversible="false" condition="Skin.HasSetting(FadeOutHomeMenu) + System.IdleTime(15) + !ControlGroup(5000).HasFocus">Conditional</animation>			
+			
+			<animation effect="zoom" start="100" end="80" time="MenuSlideTime" delay="50" center="325,88" reversible="false" easing="out" tween="quadratic" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+Skin.HasSetting(showNewLists) + !ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>			
+			<animation effect="zoom" start="100" end="75" time="MenuSlideTime" delay="50" center="360,90" reversible="false" easing="out" tween="quadratic" condition="Skin.HasSetting(BiggerHomeMenu)+Skin.HasSetting(showNewLists) + !ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>			
+			<animation effect="zoom" start="100" end="69" time="MenuSlideTime" delay="50" center="425,90" reversible="false" easing="out" tween="quadratic" condition="Skin.HasSetting(BiggerHomeMenu3)+Skin.HasSetting(showNewLists) + !ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>	
+			
+			<animation effect="zoom" start="80" end="100" time="MenuSlideTime" delay="200" center="325,88" reversible="false" easing="out" tween="quadratic" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+Skin.HasSetting(showNewLists) + ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>			
+			<animation effect="zoom" start="75" end="100" time="MenuSlideTime" delay="200" center="360,90" reversible="false" easing="out" tween="quadratic" condition="Skin.HasSetting(BiggerHomeMenu)+Skin.HasSetting(showNewLists) + ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>			
+			<animation effect="zoom" start="69" end="100" time="MenuSlideTime" delay="200" center="425,90" reversible="false" easing="out" tween="quadratic" condition="Skin.HasSetting(BiggerHomeMenu3)+Skin.HasSetting(showNewLists) + ControlGroup(5000).HasFocus + !Skin.HasSetting(DisableOndeckZoom)">Conditional</animation>			
+						
+			<animation effect="slide" start="0,0" end="-234,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+			<animation effect="slide" start="-234,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="!Skin.HasSetting(BiggerHomeMenu)+!Skin.HasSetting(BiggerHomeMenu3)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+			<animation effect="slide" start="0,0" end="-307,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+			<animation effect="slide" start="-307,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+			<animation effect="slide" start="0,0" end="-376,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu3)+[ControlGroup(5000).HasFocus]">Conditional</animation>
+			<animation effect="slide" start="-376,0" end="0,0" time="MenuSlideTime" reversible="false" tween="quadratic" easing="out" condition="Skin.HasSetting(BiggerHomeMenu3)+[!ControlGroup(5000).HasFocus]">Conditional</animation>
+		
+			<!--Library title-->
+			<control type="group">			
+				<control type="label">
+					<posx>5</posx>
+					<posy>40</posy>
+					<width>950</width>
+					<aligny>center</aligny>
+					<font>HomeHeader</font>
+					<textcolor>white</textcolor>	
+					<align>left</align>
+					<label>$INFO[Container(300).ListItem(0).Label]</label>				
+					<animation effect="fade" start="0" end="100" time="300" delay="300" condition="Skin.HasSetting(showNewLists) + ControlGroup(5000).HasFocus">Conditional</animation>
+					<animation effect="fade" start="100" end="0" time="300" delay="300" condition="Skin.HasSetting(showNewLists) + !ControlGroup(5000).HasFocus">Conditional</animation>
+				  <animation effect="slide" start="0,0" end="-10,0" time="0" condition='SubString(Container(300).ListItem(0).Label," ",Left)+!SubString(Container(300).ListItem(0).Label,"  ",Left)+!SubString(Container(300).ListItem(0).Label,"   ",Left)'>Conditional</animation>
+					<animation effect="slide" start="0,0" end="-20,0" time="0" condition='SubString(Container(300).ListItem(0).Label,"  ",Left)+!SubString(Container(300).ListItem(0).Label,"   ",Left)'>Conditional</animation>
+					<animation effect="slide" start="0,0" end="-30,0" time="0" condition='SubString(Container(300).ListItem(0).Label,"   ",Left)'>Conditional</animation>
+				</control>
+			</control>
+		
+			<visible>Control.IsVisible(11000) | Control.IsVisible(11001) | Control.IsVisible(11002) | Control.IsVisible(11003) | Control.IsVisible(11004) | Control.IsVisible(11005)| Control.IsVisible(11006)| Control.IsVisible(11007) | Control.IsVisible(12000)</visible>
+			
+			<animation type="Conditional" condition="!Skin.HasSetting(showNewLists) + [ControlGroup(5100).HasFocus | ControlGroup(5200).HasFocus | ControlGroup(5300).HasFocus | ControlGroup(5400).HasFocus | ControlGroup(5500).HasFocus]">
+				<effect type="fade" time="MenuSlideTime"  start="0" end="100" />
+			</animation>	
+			
+			<animation type="Conditional" condition="!Skin.HasSetting(showNewLists) + ![ControlGroup(5100).HasFocus | ControlGroup(5200).HasFocus | ControlGroup(5300).HasFocus | ControlGroup(5400).HasFocus| ControlGroup(5500).HasFocus]">
+				<effect type="fade" time="MenuSlideTime"  start="100" end="0" />
+			</animation>
+			
+			<animation condition="Skin.HasSetting(showNewLists)+System.isSystem(openelec)" type="Visible">
+				<effect type="fade" delay="300" time="0"  start="0" end="100" />
+			</animation>
+			
+			<animation condition="Skin.HasSetting(showNewLists)+!System.isSystem(openelec)" type="Visible">
+				<effect type="fade" delay="0" time="800"  start="0" end="100" />
+			</animation>
+			
+			<!-- Container for the new lists -->
+			<!-- "On Deck" & "Recently Added" flint-->
+			<control type="grouplist" id="5100">			
+				<visible>true</visible>
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>1280</width>
+				<height>720</height>
+				<ondown>5200</ondown>
+				<onup>310</onup>
+				<onright>350</onright>
+				<onleft>350</onleft>
+				<itemgap>0</itemgap>
+				<orientation>vertical</orientation>				
+				<!-- On Deck (11001) -->
+				<control type="group" id="7002">
+					<visible>Control.IsVisible(11001)</visible>
+					<width>1280</width>
+					<!--<height>226</height>-->
+					<include condition="!Skin.HasSetting(HomeBigIcons)">HomeListHeight</include>
+					<include condition="Skin.HasSetting(HomeBigIcons)">HomeListHeightBig</include>
+					
+					<!-- On Deck title BG-->
+					<control type="group">
+						<posy>75</posy>
+						<visible>Control.IsVisible(11001)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7002).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7001).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7002).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7001).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<include>Home_Header_background2017</include>			
+						<control type="label">
+							<include>Home_Label</include>
+							<label>On Deck</label>	
+						</control>
+					</control>
+					<!--Thumbs On Deck-->
+					<control type="fixedlist" id="11001">
+						<posy>68</posy>
+						<include>OnDeckContent</include>					
+					</control>													
+					<!--Description on deck-->					
+					<control type="group" id="8003">						
+						<visible>ControlGroup(7002).HasFocus+!Skin.HasSetting(HomeBigIcons)</visible>
+						<include>HomeDescriptionPosX</include>
+						<include>HomeDescriptionPosY</include>					
+						<!--<posy>315</posy>-->
+						<animation type="Conditional" condition="ControlGroup(7002).HasFocus">
+							<effect type="fade" time="HomePlotFadeTime" start="0" end="100" delay="HomePlotFadeTime" />
+						</animation>
+						<animation type="Conditional" condition="!ControlGroup(7002).HasFocus">
+							<effect type="fade" time="HomePlotFadeTime" start="100" end="0" />
+						</animation>
+						<!--title-->
+						<control type="label">
+							<description>Title</description>
+							<include>list_Label-title</include>
+							<label>$INFO[Container(11001).ListItem(0).Title]</label>													
+							<visible>Container(11001).ListItem(0).Type(movie) | [Container(11001).ListItem(0).Type(clip) + Skin.HasSetting(HomeVideosPortrait)]</visible>				
+						</control>
+						<control type="label">
+							<description>Title</description>						
+							<include>list_Label-title</include>
+							<label>$INFO[Container(11001).ListItem(0).TVShowTitle]$INFO[Container(11001).ListItem(0).Title, &#xB7; ]</label>
+							<visible>Container(11001).ListItem(0).Type(episode)|Container(11001).ListItem(0).Type(season)</visible>			
+						</control>	
+						
+						<!--Media Tags ondeck-->
+						<control type="grouplist">
+							<visible>Container(11001).ListItem(0).Type(movie) | Container(11001).ListItem(0).Type(episode) | [Container(11001).ListItem(0).Type(clip) + Skin.HasSetting(HomeVideosPortrait)]</visible>
+							<posy>40</posy>
+			  			<include>HomeMediatagsPosX</include>
+							<width>270</width>
+							<align>right</align>
+							<orientation>horizontal</orientation>
+							<itemgap>12</itemgap>
+							<include>MediaFlagsBEHomeOnDeck</include>
+						</control>
+						
+						<!--Movie + Epsiode Description-->
+						<control type="grouplist">
+							<visible>Container(11001).ListItem(0).Type(movie) | Container(11001).ListItem(0).Type(episode) | Container(11001).ListItem(0).Type(season) | [!Container(11001).ListItem(0).Type(clip) | Skin.HasSetting(HomeVideosPortrait)]</visible>						
+							<posy>33</posy>
+							<orientation>horizontal</orientation>
+							<itemgap>0</itemgap>
+							<width>800</width>
+							<align>left</align>
+							<control type="label">
+								<description>Duration</description>
+								<label>$INFO[Container(11001).ListItem(0).DurationStr]</label>
+								<width min="30" max="250">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).DurationStr)</visible>
+							</control>
+							<control type="label">
+								<description>Year</description>
+								<label>$INFO[Container(11001).ListItem(0).Year, &#xB7; ]</label>
+								<width min="30" max="250">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Year)+!Container(11001).ListItem(0).Type(episode)</visible>
+							</control>
+							<control type="label">
+								<description>Date</description>
+								<label>$INFO[Container(11001).ListItem(0).Date, &#xB7; ]</label>
+								<width min="30" max="250">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Date)+Container(11001).ListItem(0).Type(episode)</visible>
+							</control>		
+							<control type="label">
+								<description>Genre</description>
+								<label>$INFO[Container(11001).ListItem(0).Genre, &#xB7; ]$INFO[Container(11001).ListItem(0).Country, &#xB7; ]</label>
+								<width min="30" max="550">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Genre)</visible>
+							</control>		
+							<control type="label">
+								<description>Director</description>
+								<label>$INFO[Container(11001).ListItem(0).Director, &#xB7; ]</label>
+								<width min="30" max="400">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Director)</visible>
+							</control>
+							<control type="label">
+								<description>contentRating</description>
+								<label>$INFO[Container(11001).ListItem(0).Property(mediaTag-contentRating), &#xB7; ]</label>
+								<width min="30" max="240">auto</width>
+								<include>list_Label-sub</include>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Property(mediaTag-contentRating))</visible>
+							</control>
+							<control type="label">
+								<visible>Container(11001).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+								<width min="1" max="20">auto</width>
+								<include>list_Label-sub</include>
+								<label> &#xB7; </label>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Property(Rating))</visible>
+							</control>
+							<control type="image">
+								<visible>Container(11001).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+								<width>21</width>
+								<height>26</height>
+								<texture>inline_star_home.png</texture>
+								<colordiffuse>title2</colordiffuse>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Property(Rating))</visible>
+							</control>
+			
+							<control type="label">
+								<visible>Container(11001).ListItem(0).Type(Episode)|Skin.HasSetting(disableOverlayIMDB)</visible>
+								<width min="1" max="80">auto</width>
+								<include>list_Label-sub</include>
+								<label> $INFO[Container(11001).ListItem(0).Property(Rating)]</label>
+								<visible>!IsEmpty(Container(11001).ListItem(0).Property(Rating))</visible>
+							</control>
+						</control>
+						<control type="textbox">
+							<include>HomePlotPosY</include>
+							<include>HomePlotWidth</include>
+							<height>52</height>
+							<align>left</align>
+							<label>$INFO[Container(11001).ListItem(0).Plot]$INFO[Container(11001).ListItem(0).Property(Cast),[CR][UPPERCASE][COLOR=title2]$LOCALIZE[31134]:[/COLOR][/UPPERCASE] ]</label>
+							<font>descriptionSmall</font>
+							<textcolor>white</textcolor>
+							<visible>!Container(11001).ListItem(0).Type(episode) | [Container(11001).ListItem(0).Type(episode) + [Container(11001).ListItem(0).Status(Watched) | [!Skin.HasSetting(HidePlotForUnwatched) + [Container(11001).ListItem(0).Status(InProgress) | Container(11001).ListItem(0).Status(UnWatched)]]]]</visible>
+						</control>
+						<control type="textbox">
+							<include>HomePlotPosY</include>
+							<include>HomePlotWidth</include>
+							<height>52</height>
+							<font>descriptionSmall</font>
+							<textcolor>white</textcolor>
+							<label>$LOCALIZE[32105]</label>
+							<visible>Container(11001).ListItem(0).Type(episode)</visible>
+							<visible>Skin.HasSetting(HidePlotForUnwatched) + [Container(11001).ListItem(0).Status(InProgress) | Container(11001).ListItem(0).Status(UnWatched)] + !IsEmpty(Container(11001).ListItem(0).Plot)</visible>
+						</control>
+					</control>
+					<!--end Description-->
+					
+				</control>
+
+			
+				<!-- Recently Added (11000) -->
+				<control type="group" id="7001">
+					<width>1280</width>
+					<animation type="Conditional" condition="ControlGroup(7002).HasFocus + !Skin.HasSetting(HomeBigIcons) + [!Container(11000).ListItem(0).Type(clip) | [Container(11000).ListItem(0).Type(clip)+Skin.HasSetting(HomeVideosPortrait)]]">
+						<effect type="slide" easing="in" start="0,0" end="0,120" tween="Cubic" time="HomePlotFadeTime"/>
+					</animation>
+					<animation effect="slide" start="0,0" end="0,-56" condition="[Container(11000).ListItem(0).Type(clip) + !Skin.HasSetting(HomeVideosPortrait) + Skin.HasSetting(HomeBigIcons)] + Control.IsVisible(11001)">Conditional</animation>
+					<!--<height>226</height>-->
+					<include condition="!Skin.HasSetting(HomeBigIcons)">HomeListHeight</include>
+					<include condition="Skin.HasSetting(HomeBigIcons)">HomeListHeightBig</include>
+					<!-- Recently Added title BG-->
+					<control type="group">
+						<posy>75</posy>
+						<width>250</width>
+						<visible>Control.IsVisible(11000)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7001).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7002).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7001).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7002).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>												
+						<include>Home_Header_background2017</include>					
+						<control type="label">					
+							<include>Home_Label</include>
+							<label>Recently Added</label>						
+						</control>
+					</control>
+				
+					<!--Recently Added thumbs-->			
+					<control type="fixedlist" id="11000">
+						<posy>110</posy>
+						<include>RecentlyAddedContent</include>
+					</control>
+
+					<!--Recently Added Description -->
+					<control type="group">
+						<visible>Control.IsVisible(11000)</visible>
+						<include>HomeDescriptionPosY</include>
+						<include>Home_RecentlyAddedInfo</include>
+					</control>
+		
+				</control>
+		
+			</control>
+			
+			<!-- "Watch Later" & "Recommendations" -->
+			<control type="grouplist" id="5200">
+				<visible>true</visible>
+				<orientation>vertical</orientation>
+				<posx>0</posx>
+				<posy>18</posy>
+				<width>1280</width>
+				<height>720</height>
+				<ondown>5200</ondown>
+				<onup>310</onup>
+				<onright>350</onright>
+				<onleft>350</onleft>
+				
+				<!-- Watch Later (11003) -->
+				<control type="group" id="7003">
+					<height>230</height>
+					
+					<!-- Queue title BG + Arrow when only this list is visible-->
+					<control type="group">
+						<posy>72</posy>
+						<visible>Control.IsVisible(11003)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<include>Home_Header_background2017</include>			
+						<control type="label">
+							<include>Home_Label</include>
+							<label>QUEUE</label>	
+						</control>
+					</control>
+
+					<control type="fixedlist" id="11003">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<ondown condition="Control.IsVisible(11004)">7008</ondown>
+						<ondown condition="!Control.IsVisible(11004)">300</ondown>
+						<onup>300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>106</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>500</height>
+						<itemlayout width="240" height="230">
+							<!-- queue -->
+							<control type="group">
+								<animation effect="fade" start="100" end="40" time="HomeDeckFadeTime" condition="[!ControlGroup(7003).HasFocus] + !Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<control type="group">
+									<include>ListItemWide</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7003).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>	
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="240" height="230">
+							<!-- queue -->
+							<control type="group">
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>		-->
+								<include>ListItemWide</include>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitleFocused</include>
+								<include>ListItemWideSelectedBorder</include>
+							</control>						
+						</focusedlayout>
+					</control>
+				</control>
+				<!-- Recommendations (11004) -->
+				<control type="group" id="7008">
+					<height>230</height>
+					<!--Header Recommendation only-->
+					<control type="group">
+						<posy>-162</posy>
+						<visible>Control.IsVisible(11004)+!Control.IsVisible(11003)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<include>Home_Header_background2017</include>			
+						<control type="label">
+							<include>Home_Label</include>
+							<label>Recommended</label>	
+						</control>
+					</control>
+					
+					<!--Header Recommendation+queue-->
+					<control type="group">
+						<posy>87</posy>		
+						<visible>Control.IsVisible(11003)+Control.IsVisible(11004)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7008).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+						<include>Home_Header_background2017</include>			
+						<control type="label">
+							<include>Home_Label</include>
+							<label>Recommended</label>	
+						</control>
+					</control>
+					
+					<control type="fixedlist" id="11004">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<ondown>300</ondown>
+						<onup condition="Control.IsVisible(11003)">7003</onup>
+						<onup condition="!Control.IsVisible(11003)">300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>-128</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>500</height>
+						<itemlayout width="240" height="230">
+							<!-- when both lists are visible -->
+							<control type="group">
+								<visible>Control.IsVisible(11003)</visible>
+								<animation effect="fade" start="100" end="40" time="HomeDeckFadeTime" condition="[!ControlGroup(7008).HasFocus] + !Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists) | [ControlGroup(7003).HasFocus+!Skin.HasSetting(NoTransOnDeck)]]">Conditional</animation>
+								<posy>249</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<control type="group">				
+									<include>ListItemWide</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7008).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb)+ !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitle</include>
+							</control>
+							<!-- when only this list is visible -->
+							<control type="group">
+								<visible>!Control.IsVisible(11003)</visible>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7008).HasFocus + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>								
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<control type="group">
+									<include>ListItemWide</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7008).HasFocus+Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="240" height="230">
+							<!-- when both lists are visible -->
+							<control type="group">
+								<visible>Control.IsVisible(11003)</visible>
+								<posy>249</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<control type="group">		
+									<include>ListItemWide</include>
+								</control>	
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitleFocused</include>
+								<include>ListItemWideSelectedBorder</include>
+							</control>
+							<!-- when only this list is visible -->
+							<control type="group">
+								<visible>!Control.IsVisible(11003)</visible>
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<control type="group">			
+									<include>ListItemWide</include>
+								</control>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitleFocused</include>
+								<include>ListItemWideSelectedBorder</include>
+							</control>
+						</focusedlayout>
+					</control>
+				</control>
+			</control>
+			
+			
+			<!-- "Recently Used Channels" -->
+			<control type="grouplist" id="5300">
+				<visible>true</visible>
+				<posx>0</posx>
+				<posy>13</posy>
+				<width>1280</width>
+				<height>720</height>
+				<ondown>-</ondown>
+				<onup>-</onup>
+				<onright>350</onright>
+				<onleft>350</onleft>
+				<orientation>vertical</orientation>
+				<!--Channels RecentlyAccessed (11002) -->
+				<control type="group" id="7004">
+					<!-- title BG -->
+					<control type="group">
+						<posy>72</posy>
+						<width>250</width>
+						<visible>Control.IsVisible(11002)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7004).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists)]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7004).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists)]">Conditional</animation>						
+						<include>Home_Header_background2017</include>					
+						<control type="label">					
+							<include>Home_Label</include>
+							<label>Recently Used</label>						
+						</control>
+					</control>
+
+
+					<control type="fixedlist" id="11002">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<ondown>300</ondown>
+						<onup>300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>106</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>400</height>
+						<itemlayout width="167" height="230">
+							<!-- channel -->
+							<control type="group">
+								<visible>ListItem.Type(channel)</visible>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7004).HasFocus + !Skin.HasSetting(NoTransOnDeck) + !Skin.HasSetting(showNewLists)">Conditional</animation>
+								<!--<include>ListItemChannelCard</include>-->
+								<control type="group">
+									<include>ListItemSquare</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7004).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>						
+								<include>ListItemSquareTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="167" height="230">
+							<!-- channel -->
+							<control type="group">
+								<visible>ListItem.Type(channel)</visible>
+								<!--<include>ListItemChannelCard</include>-->
+								<include>ListItemSquare</include>
+								<include>ListItemSquareTitleFocused</include>
+								<include>ListItemSquareSelectedBorder</include>
+							</control>
+						</focusedlayout>
+						<height>200</height>
+					</control>
+				</control>
+			</control>
+			<!-- "Playlists" -->
+			<control type="grouplist" id="5400">
+				<visible>true</visible>
+				<posx>0</posx>
+				<posy>13</posy>
+				<width>1280</width>
+				<height>720</height>
+				<ondown>300</ondown>
+				<onup>300</onup>
+				<onright>350</onright>
+				<onleft>350</onleft>
+				<orientation>vertical</orientation>
+				<!-- All (11005) -->
+				<control type="group" id="7005">
+					<height>230</height>
+					<!-- title BG + Arrow when only this list is visible-->
+					<control type="group">
+						<posy>72</posy>
+						<visible>Control.IsVisible(11005)</visible>
+						<animation effect="fade" time="HomeDeckFadeTime" start="50" end="100" reversible="false" condition="ControlGroup(7005).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists)]">Conditional</animation>
+						<animation effect="fade" time="HomeDeckFadeTime" start="100" end="50" reversible="false" condition="!ControlGroup(7005).HasFocus+!Skin.HasSetting(NoTransOnDeck) + [!Skin.HasSetting(showNewLists)]">Conditional</animation>						
+						<include>Home_Header_background2017</include>					
+						<control type="label">					
+							<include>Home_Label</include>
+							<label>Play List</label>						
+						</control>					
+					</control>
+
+					<control type="fixedlist" id="11005">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<ondown>300</ondown>
+						<onup>300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>106</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>330</height>
+						<itemlayout width="171" height="330">
+							<control type="group">
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7005).HasFocus + !Skin.HasSetting(NoTransOnDeck) + !Skin.HasSetting(showNewLists)">Conditional</animation>
+								<!--<include>ListItemSquareCard</include>-->
+								<control type="group">
+									<include>ListItemSquareComposite</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7005).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>
+								<include>ListItemSquareCompositeTitle2</include>
+								<include>ListItemSquareCompositeTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="171" height="330">
+							<control type="group">
+								<!--<include>ListItemSquareCard</include>-->
+								<include>ListItemSquareComposite</include>
+								<include>ListItemSquareCompositeTitle2</include>
+								<include>ListItemSquareCompositeTitle</include>
+								<include>ListItemSquareSelectedBorder</include>
+							</control>
+						</focusedlayout>
+					</control>
+				</control>
+			</control>
+			<!-- "Play Queues" -->
+			<control type="grouplist" id="5500">
+				<visible>true</visible>
+				<posx>0</posx>
+				<posy>13</posy>
+				<width>1280</width>
+				<height>720</height>
+				<ondown>5200</ondown>
+				<onup>310</onup>
+				<onright>350</onright>
+				<onleft>350</onleft>
+				<orientation>vertical</orientation>
+
+				<!-- Video (11007) -->
+				<control type="group" id="7007">
+					<!--<height>230</height>-->
+					<include condition="!Skin.HasSetting(HomeBigIcons)">HomeNowPlayingVideoHeight</include>
+					<include condition="Skin.HasSetting(HomeBigIcons)">HomeNowPlayingVideoHeightBig</include>
+					<control type="group">
+						<posy>72</posy>
+						
+						<visible>Control.IsVisible(11007)</visible>
+						<control type="group" id="8002">
+							<visible>ControlGroup(7007).HasFocus</visible>
+							<include>Home_Header_background</include>
+						</control>
+						<control type="group" id="8002">
+							<visible>!ControlGroup(7007).HasFocus</visible>
+							<include>Home_Header_background_Unfocused</include>
+						</control>
+						<control type="label" id="8001">
+							<visible>ControlGroup(7007).HasFocus</visible>
+							<include>Home_Label</include>
+							<label>Video</label>
+						</control>
+						<control type="label" id="8001">
+							<visible>!ControlGroup(7007).HasFocus</visible>
+							<include>Home_Label_Unfocused</include>
+							<label>Video</label>
+						</control>
+					</control>
+					<control type="group">		
+						<include>HomeLabelPosX</include>
+						<posy>73</posy>
+						<height>30</height>
+						<!-- tv specific + -->
+						<control type="label">
+							<label>$INFO[Container(11007).ListItem(0).TVShowTitle]$INFO[Container(11007).ListItem(0).Title, &#xB7; ]</label>
+							<include>HomeLabelLeft</include>
+							<visible>ControlGroup(7007).HasFocus + Container(11007).ListItem(0).Type(episode)</visible>
+						</control>
+						<control type="label">
+							<label>$LOCALIZE[180]: $INFO[Container(11007).ListItem(0).DurationStr]</label>
+							<include>HomeLabelRight</include>
+							<visible>ControlGroup(7007).HasFocus + Container(11007).ListItem(0).Type(episode)</visible>
+						</control>
+						<!-- movie specific + -->
+						<control type="label">
+							<label>$INFO[Container(11007).ListItem(0).Title]</label><!--$INFO[Container(11007).ListItem(0).Year, &#xB7; ]-->
+							<include>HomeLabelLeft</include>
+							<visible>ControlGroup(7007).HasFocus + Container(11007).ListItem(0).Type(movie)</visible>
+						</control>
+						<control type="label">
+							<label>$LOCALIZE[180]: $INFO[Container(11007).ListItem(0).DurationStr]</label>
+							<include>HomeLabelRight</include>
+							<visible>ControlGroup(7007).HasFocus + Container(11007).ListItem(0).Type(movie)</visible>
+						</control>
+					</control>
+					<control type="fixedlist" id="11007">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<ondown condition="Control.IsVisible(11006)">7006</ondown>
+						<ondown condition="!Control.IsVisible(11006)">300</ondown>
+						<onup>300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>106</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>330</height>
+						<!-- tv & movie -->
+						<itemlayout width="147" height="330" condition="!Skin.HasSetting(HomeBigIcons)">
+							<!-- movie & episode when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7007).HasFocus + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>							
+								<control type="group">
+									<include>ListItemPoster</include>	
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7007).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>			
+								<control type="group">
+									<visible>ListItem.Type(episode)+ControlGroup(7007).HasFocus</visible>
+									<include>Home_EpisodeInfo</include>
+								</control>
+								<control type="group">
+									<visible>ControlGroup(7007).HasFocus</visible>
+									<include>Home_Overlay</include>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="147" height="330" condition="!Skin.HasSetting(HomeBigIcons)">
+							<!-- movie & episode when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<include>ListItemPoster</include>
+								<include>ListItemPosterSelectedBorder</include>
+								<control type="group">
+									<visible>ListItem.Type(episode)</visible>
+									<include>Home_EpisodeInfo</include>
+								</control>
+								<include>Home_Overlay</include>
+							</control>
+						</focusedlayout>
+						<itemlayout width="167" height="330" condition="Skin.HasSetting(HomeBigIcons)">
+							<!-- movie & episode when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7007).HasFocus + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>							
+								<control type="group">
+									<include>ListItemPoster</include>	
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7007).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>					
+								<control type="group">
+									<visible>ListItem.Type(episode)+ControlGroup(7007).HasFocus</visible>
+									<include>Home_EpisodeInfo</include>
+								</control>
+								<control type="group">
+									<visible>ControlGroup(7007).HasFocus</visible>
+									<include>Home_Overlay</include>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="167" height="330" condition="Skin.HasSetting(HomeBigIcons)">
+							<!-- movie & episode when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<include>ListItemPoster</include>
+								<include>ListItemPosterSelectedBorder</include>
+								<control type="group">
+									<visible>ListItem.Type(episode)</visible>
+									<include>Home_EpisodeInfo</include>
+								</control>
+								<include>Home_Overlay</include>
+							</control>
+						</focusedlayout>
+						<!-- clips not in use for the moment-->
+						<itemlayout width="211" height="230" condition="System.PlexPlayQueue(Clip)">
+							<!-- when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<include>ListItemWide</include>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="211" height="230" condition="System.PlexPlayQueue(Clip)">
+							<!-- when only this list is visible -->
+							<control type="group">
+								<posy>0</posy>
+								<visible>ListItem.Type(clip)</visible>
+								<!--<include>ListItemWideCard</include>-->
+								<include>ListItemWide</include>
+								<include>ListItemWideTitleProvider</include>
+								<include>ListItemWideTitle</include>
+								<include>ListItemWideSelectedBorder</include>
+							</control>
+						</focusedlayout>
+					</control>
+				</control>
+				<!-- Music (11006) -->
+				<control type="group" id="7006">
+					<height>230</height>
+					<!--Header music only-->
+					<control type="group">
+						<posy>-162</posy>
+						<visible>Control.IsVisible(11006)+!Control.IsVisible(11007)</visible>
+						<control type="group" id="8002">
+							<visible>ControlGroup(7006).HasFocus</visible>
+							<include>Home_Header_background</include>
+						</control>
+						<control type="group" id="8002">
+							<visible>!ControlGroup(7006).HasFocus</visible>
+							<include>Home_Header_background_Unfocused</include>
+						</control>
+						<control type="label" id="8001">
+							<visible>ControlGroup(7006).HasFocus</visible>
+							<include>Home_Label</include>
+							<label>Music</label>
+						</control>
+						<control type="label" id="8001">
+							<visible>!ControlGroup(7006).HasFocus</visible>
+							<include>Home_Label_Unfocused</include>
+							<label>Music</label>
+						</control>
+					</control>
+					<!--Header music+movie-->
+					<control type="group">
+						<posy>90</posy>
+			
+						<visible>Control.IsVisible(11006)+Control.IsVisible(11007)</visible>
+						<control type="group" id="8002">
+							<visible>ControlGroup(7006).HasFocus</visible>
+							<include>Home_Header_background</include>
+						</control>
+						<control type="group" id="8002">
+							<visible>!ControlGroup(7006).HasFocus</visible>
+							<include>Home_Header_background_Unfocused</include>
+						</control>
+						<control type="label" id="8001">
+							<visible>ControlGroup(7006).HasFocus</visible>
+							<include>Home_Label</include>
+							<label>Music</label>
+						</control>
+						<control type="label" id="8001">
+							<visible>!ControlGroup(7006).HasFocus</visible>
+							<include>Home_Label_Unfocused</include>
+							<label>Music</label>
+						</control>
+					</control>
+					
+					
+					<!--Header music only-->
+					<control type="group">
+						<include>HomeLabelPosX</include>
+						<posy>-162</posy>
+						<height>30</height>
+						<visible>Control.IsVisible(11006) + !Control.IsVisible(11007)</visible>
+						<control type="label">
+							<label>$INFO[Container(11006).ListItem(0).Artist]$INFO[Container(11006).ListItem(0).Album, &#xB7; ]</label>
+							<include>HomeLabelLeft</include>
+							<visible>ControlGroup(7006).HasFocus + !IsEmpty(Container(11006).ListItem(0).Artist)</visible>
+						</control>
+						<control type="label">
+							<label>$INFO[Container(11006).ListItem(0).Year]</label>
+							<include>HomeLabelRight</include>
+							<visible>ControlGroup(7006).HasFocus + !IsEmpty(Container(11006).ListItem(0).Album)</visible>
+						</control>
+					</control>
+					<!--Header music+movie-->
+					<control type="group">
+						<include>HomeLabelPosX</include>
+						<posy>90</posy>
+						<height>30</height>
+						<visible>Control.IsVisible(11006) + Control.IsVisible(11007)</visible>
+						<control type="label">
+							<label>$INFO[Container(11006).ListItem(0).Artist]$INFO[Container(11006).ListItem(0).Album, &#xB7; ]</label>
+							<include>HomeLabelLeft</include>
+							<visible>ControlGroup(7006).HasFocus + !IsEmpty(Container(11006).ListItem(0).Artist)</visible>
+						</control>
+						<control type="label">
+							<label>$INFO[Container(11006).ListItem(0).Year]</label>
+							<include>HomeLabelRight</include>
+							<visible>ControlGroup(7006).HasFocus + !IsEmpty(Container(11006).ListItem(0).Album)</visible>
+						</control>
+					</control>
+					<control type="fixedlist" id="11006">
+						<visible allowhiddenfocus="false">false</visible>
+						<orientation>horizontal</orientation>
+						<onup condition="Control.IsVisible(11007)">7007</onup>
+						<onup condition="!Control.IsVisible(11007)">300</onup>
+						<onup>300</onup>
+						<onright>-</onright>
+						<onleft>300</onleft>
+						<!--<posx>2</posx>-->
+						<include condition="!Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX</include>
+						<include condition="Skin.HasSetting(HomeHideFocusedBorder)">HomeOnDeckThumbsPosX_NoBorder</include>
+						<posy>-236</posy>
+						<include>HomeListWidthSlide</include>
+						<include>ItemScrollTime</include>
+						<height>640</height>
+						<itemlayout width="167" height="330">
+							<!-- music when both lists are visible -->
+							<control type="group">
+								<posy>360</posy>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7006).HasFocus + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								<visible>Control.IsVisible(11007)</visible>
+								<control type="group">
+									<include>ListItemSquareCard</include>
+									<control type="group">
+										<include>ListItemSquare</include>
+										<animation effect="fade" start="75" end="75" condition="ControlGroup(7006).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+									</control>	
+									<include>ListItemSquareTitleArtist</include>
+									<include>ListItemSquareTitle</include>
+								</control>
+							</control>
+							<!-- music when only this list is visible -->
+							<control type="group">
+								<posy>108</posy>
+								<animation effect="fade" start="100" end="40" time="0" condition="!ControlGroup(7006).HasFocus + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								<visible>!Control.IsVisible(11007)</visible>
+								<include>ListItemSquareCard</include>
+								<control type="group">
+									<include>ListItemSquare</include>
+									<animation effect="fade" start="75" end="75" condition="ControlGroup(7006).HasFocus + Skin.HasSetting(FadeoutUnfocusedThumb) + !Skin.HasSetting(NoTransOnDeck)">Conditional</animation>
+								</control>	
+								<include>ListItemSquareTitleArtist</include>
+								<include>ListItemSquareTitle</include>
+							</control>
+						</itemlayout>
+						<focusedlayout width="167" height="330">
+							<!-- music when both lists are visible -->
+							<control type="group">
+								<posy>360</posy>
+								<visible>Control.IsVisible(11007)</visible>
+								<control type="group">
+									<include>ListItemSquareCard</include>
+									<include>ListItemSquare</include>
+									<include>ListItemSquareTitleArtist</include>
+									<include>ListItemSquareTitleFocused</include>
+									<include>ListItemSquareSelectedBorder</include>
+								</control>
+							</control>
+							<!-- music when only this list is visible -->
+							<control type="group">
+								<posy>108</posy>
+								<visible>!Control.IsVisible(11007)</visible>
+								<include>ListItemSquareCard</include>
+								<include>ListItemSquare</include>
+								<include>ListItemSquareTitleArtist</include>
+								<include>ListItemSquareTitleFocused</include>
+								<include>ListItemSquareSelectedBorder</include>
+							</control>
+						</focusedlayout>
+					</control>
+				</control>
+				
+			</control>
+		</control>		
+	</include>
+</includes>

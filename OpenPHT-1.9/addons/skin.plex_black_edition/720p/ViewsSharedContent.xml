@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<includes>
+
+	<include name="SharedContentLeafs">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>264</width>
+			<height>264</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>238</width>
+			<height>238</height>
+			<texture background="true">default-square-big.png</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>238</width>
+			<height>238</height>
+			<texture background="true" diffuse="mask-4leaf1.png">$INFO[ListItem.CompositeImage(width=720;height=720;cols=2;rows=2)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
+		</control>
+	</include>
+	<include name="SharedContentLeafsSelectedBorder">
+		<control type="image">
+			<width>244</width>
+			<height>244</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="SharedContentLeafsTitle">
+		<posy>258</posy>
+		<posx>15</posx>
+		<width>238</width>
+		<height>30</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>LightCaps-26</font>
+
+	</include>
+	<include name="SharedContentLeafsTitle2">
+		<posy>288</posy>
+		<posx>15</posx>
+		<width>238</width>
+		<height>30</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Property(serverOwner)]</label>
+		<textcolor>title2</textcolor>
+		<font>Regular-17</font>
+	
+		
+	</include>	
+	<include name="SharedContent">
+		<control type="group">
+			<control type="group">
+				<visible>Control.IsVisible(54)</visible>
+				<control type="group">
+					<visible>isEmpty(Skin.String(54_BGMulti))</visible>
+					<visible>!Skin.String(54_Dim,100)</visible>
+					<visible>!Skin.String(54_Blur,1)</visible>
+					<include>BGSharedContent</include>			
+				</control>	
+				<control type="image">
+					<include>FullScreenScaled</include>
+					<texture>$INFO[Skin.String(54_BGSingle)]</texture>		
+					<visible>!isEmpty(Skin.String(54_BGSingle)) + isEmpty(Skin.String(54_BGMulti))</visible>
+				</control>
+				<control type="multiimage">
+					<include>GlobalMultiImageFade</include>	
+					<info>Skin.String(54_BGMulti)</info>
+					<visible>isEmpty(Skin.String(54_BGSingle)) + !isEmpty(Skin.String(54_BGMulti))</visible>
+				</control>		
+			</control>
+			<!-- main list -->
+			<control type="group" id="777">
+				<include>rightSideSlide</include>
+				<!--BG Dim-->		
+				<control type="group">
+					<visible>Control.IsVisible(54)</visible>
+				
+					
+					<visible>!Skin.String(54_Dim,100)</visible>
+					<control type="group">
+						<visible>Skin.String(54_Dim,10)</visible>
+						<include>BGDim10</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,20)</visible>
+						<include>BGDim20</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,30)</visible>
+						<include>BGDim30</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,40)</visible>
+						<include>BGDim40</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,50)</visible>
+						<include>BGDim50</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,60) | IsEmpty(Skin.String(54_Dim))</visible>
+						<include>BGDim60</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,70)</visible>
+						<include>BGDim70</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,80)</visible>
+						<include>BGDim80</include>
+					</control>
+					<control type="group">
+						<visible>Skin.String(54_Dim,90)</visible>
+						<include>BGDim90</include>
+					</control>
+				</control>
+				<control type="panel" id="54">
+					<viewtype label="Shared Content">panel</viewtype>
+					<onup>50</onup>
+					<ondown>50</ondown>
+					<onright>50</onright>
+					<onleft>998</onleft>
+					<orientation>vertical</orientation>
+					<posx>52</posx>
+					<posy>38</posy>
+					<width>1220</width>
+					<height>645</height>
+					<itemlayout width="304" height="320">
+						<include>SharedContentLeafs</include>						
+						<control type="label">
+							<include>SharedContentLeafsTitle</include>
+							<textcolor>white</textcolor>
+							<animation effect="slide" start="0,0" end="-7,0" time="0" condition='SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-14,0" time="0" condition='SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-21,0" time="0" condition='SubString(ListItem.Label,"   ",Left)'>Conditional</animation>							
+						</control>
+						<control type="label">
+							<include>SharedContentLeafsTitle2</include>
+						</control>
+					</itemlayout>
+					<focusedlayout width="304" height="320">
+						<include>SharedContentLeafs</include>						
+						
+						<control type="label">
+							<animation effect="slide" start="0,0" end="-7,0" time="0" condition='SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-14,0" time="0" condition='SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-21,0" time="0" condition='SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<include>SharedContentLeafsTitle</include>
+							<textcolor>Focused</textcolor>
+						</control>
+						<control type="label">
+							<animation effect="slide" start="0,0" end="-7,0" time="0" condition='SubString(ListItem.Label," ",Left)+!SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-14,0" time="0" condition='SubString(ListItem.Label,"  ",Left)+!SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<animation effect="slide" start="0,0" end="-21,0" time="0" condition='SubString(ListItem.Label,"   ",Left)'>Conditional</animation>
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<include>SharedContentLeafsTitle</include>
+							<textcolor>FocusedThemeColor</textcolor>
+						</control>
+						
+						<control type="label">
+							<include>SharedContentLeafsTitle2</include>
+						</control>
+						<include>SharedContentLeafsSelectedBorder</include>
+					</focusedlayout>
+				</control>
+			</control>
+			<!-- right side thumbs -->
+		<!--<control type="group">
+				<posx>800</posx>
+				<posy>300</posy>
+				<visible>!Container.OnNext + !Container.OnPrevious</visible>
+				<animation effect="fade" start="0" end="100" time="1000" delay="300" condition="Control.HasFocus(56)" reversible="false">Conditional</animation>
+				<animation effect="fade" start="0" end="100" time="2000" delay="0">WindowOpen</animation>
+				<animation effect="fade" start="0" end="100" time="400" delay="0">Visible</animation>
+				<animation effect="fade" start="0" end="0" time="0">Hidden</animation>
+				<control type="grouplist">
+					<orientation>horizontal</orientation>
+					<itemgap>16</itemgap>					
+					<control type="image">
+						<width max="200">auto</width>
+						<height>350</height>
+						<bordertexture border="14">bigPosterFrameShadow.png</bordertexture>
+						<bordersize>9</bordersize>
+						<texture background="true" diffuse="bigPosterMask.png">$INFO[ListItem(0).Thumb0]</texture>
+						<aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+						<visible>!IsEmpty(ListItem(0).Thumb0)</visible>
+					</control>
+					<control type="grouplist">
+						<orientation>vertical</orientation>
+						<itemgap>16</itemgap>
+						<control type="image">
+							<width max="175">auto</width>
+							<height>175</height>
+							<bordertexture border="14">bigPosterFrameShadow.png</bordertexture>
+							<bordersize>9</bordersize>
+							<texture background="true" diffuse="bigPosterMask.png">$INFO[ListItem(0).Thumb1]</texture>
+							<aspectratio scalediffuse="true" align="center" aligny="top">keep</aspectratio>
+							<visible>!IsEmpty(ListItem(0).Thumb1)</visible>
+						</control>
+						<control type="image">
+							<width max="175">auto</width>
+							<height>175</height>
+							<bordertexture border="14">bigPosterFrameShadow.png</bordertexture>
+							<bordersize>9</bordersize>
+							<texture background="true" diffuse="bigPosterMask.png">$INFO[ListItem(0).Thumb2]</texture>
+							<aspectratio scalediffuse="true" align="center" aligny="bottom">keep</aspectratio>
+							<visible>!IsEmpty(ListItem(0).Thumb2)</visible>
+						</control>
+					</control>
+				</control>
+			</control>
+		-->
+		</control>
+	</include>
+</includes>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<window id="6">
+	<defaultcontrol always="false">777</defaultcontrol>
+	<views>40,50,552,51,557,565,60,61,564,568,569,66,553,5531,556,5561,554,70,71,80,99,558,570,567,58,563,560,566,578</views><!--50,51,61,62,553,-->
+	<allowoverlay>yes</allowoverlay>
+	<onload condition="Container.PlexContent(Movies)">Skin.SetString(SectionType,movies)</onload>
+	<onload condition="Container.PlexContent(TVShows)">Skin.SetString(SectionType,tvshows)</onload>
+	<onload condition="Container.PlexContent(Clips)">Skin.SetString(SectionType,clips)</onload>
+	<onload condition="Container.PlexContent(HomeMovies)">Skin.SetString(SectionType,homemovies)</onload>
+	<onload condition="Container.PlexContent(HomeMovies)+isEmpty(ListItem.Label)">SetFocus(102)</onload>
+	<onunload>SetFocus(777)</onunload>
+	<onunload>Skin.Reset(SectionType)</onunload>
+	<controls>
+		<!-- bg's (Backgrounds.xml) -->
+		<include>BGBlackEdition</include>
+		<!--<include condition="!Skin.hasSetting(HideLibFanart)">BGFanart</include>-->
+		<!-- views (ViewsList.xml & ViewsMovieTV.xml & ViewsChannels.xml & ViewsPreplay.xml & ViewsClips.xml) -->
+		<!-- ByFolder ID 40 -->
+		<include>ByFolder</include>
+		<!-- LibraryPosters ID 50 -->	
+		<include>LibraryPosters</include>
+		<!-- LibraryPostersBigger ID 51 -->
+		<include>LibraryPostersBigger</include>
+
+		<!-- LibraryPostersWall ID 557 -->
+		<include>LibraryPostersWall</include>
+		<!-- LibraryPostersWall ID 565 -->
+		<include>LibraryPostersWallBig</include>
+		<!--LibraryPostersInfo ID 552-->
+		<include>view_PosterInfo</include>
+		<!--Ipad look ID 560-->
+		<include>view_LibraryIpad</include>
+		<include>view_Banner</include>
+		<include>view_BannerInfo</include>
+		<!--MediaPreview ID 553-->
+		<include>MediaPreview</include>
+		<include>MediaPreviewTV</include>
+		
+		<include>view_bottomPoster</include>
+		<include>view_bottomPosterEpisodes</include>
+		<include>ListBE</include>
+		<include>view_RightList</include>
+		<include>view_578</include>
+		<!-- Clips ID 80 -->
+		<include>ClipThumbs</include>
+		<!-- PreplayShow ID 60 -->
+		<include>PreplayShow</include>
+		<!-- PreplaySeason ID 61 -->
+		<include>PreplaySeason</include>
+		<!-- id 564-->
+		<include>view_episodethumbs</include>
+		<!-- id 568-->
+		<include>view_episodethumbsbig</include>
+		<!-- id 569-->
+		<include>view_fanartlist</include>
+		<!-- LibraryFilteredEpisodes ID 62 -->
+		<!--<include>LibraryFilteredEpisodes</include>-->
+		<!-- FilteredEmpty ID 66 -->
+		<include>FilteredEmpty</include>
+		<!-- Channels ID 70 -->
+		<include>Channels</include>
+		<!-- ChannelVideo ID 71 -->
+		<!--<include>ChannelVideo</include>-->
+		<!-- Channel generic ID 99 -->
+		<include>Channel</include>
+		<!-- List ID 58 -->
+		<include>List</include>
+		<!-- List ID 558 -->
+		<include>bottomList</include>
+			<!-- List ID 570 -->
+		<include>view_MiddleList</include>
+		<!-- Scroll Offset -->
+		<include>scrollOffset</include>
+		<!--Scrollbar id 1601-->
+		<include>GlobalScrollbar</include>
+		<!--Scrollbar id 1602-->
+		<include>GlobalScrollbarY</include>
+		<include>ScrollbarLow</include>
+		<include>ScrollbarMiddle</include>
+		<!-- Item Full Info -->
+		<control type="group">
+			<include>ListItemFullInfo</include>
+		</control>
+		<!-- top-level ui (LeftSidemenu.xml & IncludesGlobals.xml & Debug.xml) -->
+
+		<include>LeftSideMenu</include>	
+
+		<include>global_clock</include>
+		<!--<include>CommonSortLetters</include>-->
+		<include>debugInfos</include>
+		<include>Grid</include>
+		<include>WindowFade</include>
+		<include>Non16x9Cache</include>
+		
+	</controls>
+</window>

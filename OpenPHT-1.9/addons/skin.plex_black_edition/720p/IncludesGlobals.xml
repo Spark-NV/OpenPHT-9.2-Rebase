@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<includes>
+	<!--Animations-->
+	<include name="rightSideSlide">
+		<animation effect="zoom" start="100" end="62" time="MenuSlideTime" center="1067,360" condition="[[Control.HasFocus(3)+!Skin.HasSetting(FullScreenMusicExtras)+!Control.IsVisible(521)] | Control.HasFocus(65060) | Control.HasFocus(65061) | ControlGroup(1300).HasFocus() | ControlGroup(998).HasFocus() | ControlGroup(1500).HasFocus()]">Conditional</animation>
+		<animation effect="zoom" start="100" end="0" time="MenuSlideTime" center="1067,360" condition="!Control.IsVisible(521)+[Control.HasFocus(3)+Skin.HasSetting(FullScreenMusicExtras)]">Conditional</animation>
+	</include>
+		<include name="rightSideSlidePreplay">
+		<animation effect="zoom" start="100" end="62" time="MenuSlideTime" center="1067,360" condition="ControlGroup(1500).HasFocus()">Conditional</animation>
+		<!--<animation effect="zoom" start="100" end="0" time="MenuSlideTime" center="1067,360" condition="!Control.IsVisible(521)+[Control.HasFocus(3)+Skin.HasSetting(FullScreenMusicExtras)]">Conditional</animation>-->
+	</include>
+	<include name="rightSideSlideExtras">
+		<animation effect="zoom" start="100" end="71" time="MenuSlideTime" center="1140,360" condition="Control.HasFocus(30)">Conditional</animation>
+	</include>
+	<!--End Animations-->
+	
+	
+	<!-- basic shapes etc -->
+	<include name="Base">
+		<texture border="5">base.png</texture>
+	</include>
+	<include name="BaseRounded">
+		<texture border="5">base-rounded.png</texture>
+	</include>
+	<include name="Black">
+		<include>Base</include>
+		<colordiffuse>FF000000</colordiffuse>
+	</include>
+	<include name="BlackBE">
+		<include>Base</include>
+		<colordiffuse>FF0F0F0F</colordiffuse>
+	</include>
+	<include name="Orange">
+		<include>Base</include>
+		<colordiffuse>ThemeColor</colordiffuse>
+	</include>
+	<include name="BlackRounded">
+		<include>BaseRounded</include>
+		<colordiffuse>FF101010</colordiffuse>
+	</include>
+
+	<include name="Shadow">
+		<!-- add +26 in width & length of thumb size -->
+		<posx>23</posx>
+		<posy>37</posy>
+		<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+		<texture background="true" border="50">shadow.png</texture>
+	</include>
+	<include name="Border">
+		<!-- BORDER: add 6px in width and height when applied -->
+		<posx>10</posx>
+		<posy>10</posy>
+		<texture>transparent.png</texture>
+		<bordertexture border="10">border.png</bordertexture>
+		<colordiffuse>ThemeColor</colordiffuse>
+		<bordersize>3</bordersize>
+		<animation effect="fade" start="20" end="100" time="350" tween="sine" easing="out" reversible="false">Focus</animation>
+	</include>
+
+	<include name="Card">
+		<texture border="10">base-cornered-half.png</texture>
+		<colordiffuse>FF000000</colordiffuse>
+	</include>
+	<include name="ArrowBlackLeft">
+		<texture flipx="true">arrow-big.png</texture>
+		<colordiffuse>FF000000</colordiffuse>
+		<width>14</width>
+		<height>30</height>
+	</include>
+	<include name="ArrowBlackUp">
+		<texture>arrow-big-up.png</texture>
+		<colordiffuse>FF000000</colordiffuse>
+		<width>14</width>
+		<height>30</height>
+	</include>
+	<include name="ArrowBlackDown">
+		<texture flipy="true">arrow-big-up.png</texture>
+		<colordiffuse>FF000000</colordiffuse>
+		<width>14</width>
+		<height>30</height>
+	</include>
+	<include name="FullScreenScaled">
+		<posx>0</posx>
+		<posy>0</posy>
+		<width>1280</width>
+		<height>720</height>
+		<aspectratio align="center" aligny="top">scale</aspectratio>
+	</include>
+	<include name="FullScreenKeep">
+		<posx>0</posx>
+		<posy>0</posy>
+		<width>1280</width>
+		<height>720</height>
+		<aspectratio align="center" aligny="center">keep</aspectratio>
+	</include>
+	<include name="FullScreenStretched">
+		<posx>0</posx>
+		<posy>0</posy>
+		<width>1280</width>
+		<height>720</height>
+		<aspectratio>stretch</aspectratio>
+	</include>
+	<include name="Grid">
+		<control type="largeimage">
+			<include>FullScreenScaled</include>
+			<animation effect="fade" start="0" end="20" time="200" condition="true">Conditional</animation>
+			<texture background="true">grid.png</texture>
+			<visible>Skin.HasSetting(showgrid)</visible>
+		</control>
+	</include>
+	<include name="Non16x9Cache">		
+		<control type="image">
+			<posy>720</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>720</height>
+			<texture>black.png</texture>
+		</control>
+	</include>
+	
+	<!-- fonts -->
+	<include name="WhiteShadow">
+		<textcolor>white</textcolor>
+		<shadowcolor>FF444444</shadowcolor>
+	</include>
+	<include name="White2">
+		<textcolor>FFefedeb</textcolor>
+		<shadowcolor>FF444444</shadowcolor>
+	</include>
+	<include name="sectionTitleSub">
+		<font>smallCaps</font>
+		<textcolor>title2</textcolor>
+		<!--<shadowcolor>ff222222</shadowcolor>-->
+	</include>
+	
+
+	
+	<!-- screen top bar -->
+	<!-- variables for item count in top bar -->
+	<variable name="TopBarItemCountStrings">
+		<value condition="Container.PlexContent(TVShows)">$INFO[Container.NumItems] $LOCALIZE[31008]</value>
+		<value condition="Container.PlexContent(Seasons)">$INFO[Container.NumItems] $LOCALIZE[31021]</value>
+		<value condition="Container.PlexContent(Episodes)">$INFO[Container.NumItems] $LOCALIZE[20360]</value>
+		<value condition="Container.PlexContent(Movies)">$INFO[Container.NumItems] $LOCALIZE[342]</value>
+		<value condition="Container.PlexContent(Albums)">$INFO[Container.NumItems] $LOCALIZE[132]</value>
+		<value condition="Container.PlexContent(Artists)">$INFO[Container.NumItems] $LOCALIZE[133]</value>
+		<value condition="Container.PlexContent(Songs)">$INFO[Container.NumItems] $LOCALIZE[134]</value>
+		<value condition="Container.Content(genres)">$INFO[Container.NumItems] $LOCALIZE[135]</value>
+		<value condition="Container.PlexContent(Photos)">$INFO[Container.NumItems] $LOCALIZE[1213]</value>
+		<value condition="Window.IsActive(1) + !IsEmpty(Container.SecondTitle)">$INFO[Container.NumItems] $LOCALIZE[31970]</value>
+	</variable>
+	<variable name="TopBarSelectedItemStrings">
+		<value condition="Window.IsActive(videossettings)">$LOCALIZE[31606] $LOCALIZE[31610]</value>
+		<value condition="Window.IsActive(appearancesettings)">$LOCALIZE[31606] $LOCALIZE[31601]</value>
+		<value condition="Window.IsActive(musicsettings)">$LOCALIZE[31606] $LOCALIZE[31002]</value>
+		<value condition="Window.IsActive(picturessettings)">$LOCALIZE[31606] $LOCALIZE[31003]</value>
+		<value condition="Window.IsActive(systemsettings)">$LOCALIZE[31606] $LOCALIZE[31006]</value>
+		<value condition="Window.IsActive(networksettings)">$LOCALIZE[31606] $LOCALIZE[31602]</value>
+		<value condition="Window.IsActive(skinsettings)">$LOCALIZE[31606] $LOCALIZE[31603]</value>
+		<value>$INFO[ListItem.Label]</value>
+	</variable>
+	<!-- variable for default description when no plot available -->
+	<variable name="NoPlotDefaultItem">
+		<value condition="Container.PlexContent(Songs)">$LOCALIZE[31230]</value>
+		<value condition="Container.PlexContent(Albums) + IsEmpty(Container.Property(primaryFilterActivated))">$LOCALIZE[31229]</value>
+		<value condition="Container.PlexContent(Albums) + !IsEmpty(Container.Property(primaryFilterActivated))">$LOCALIZE[31230]</value>
+		<value condition="Container.PlexContent(Photos) + ListItem.Type(photo)">$LOCALIZE[31704]</value>
+		<value condition="Container.PlexContent(Photos) + ListItem.Type(photoAlbum)">$LOCALIZE[31230]</value>
+		<value condition="Container.PlexContent(PhotoAlbums)">$LOCALIZE[31704]</value>
+		<value condition="Container.PlexContent(Movie) | Container.PlexContent(Movies)">$LOCALIZE[31142]</value>
+		<value condition="Container.Content(tvshow)">$LOCALIZE[31143]</value>
+		<value condition="Container.PlexContent(Seasons)">$LOCALIZE[31143]</value>
+		<value condition="Container.PlexContent(Episodes)">$LOCALIZE[31143]</value>
+		<value condition="Container.PlexContent(Episode)">$LOCALIZE[31114]</value>
+		<value condition="Container.PlexContent(Channels)">$LOCALIZE[32107]</value>
+		<value condition="Container.PlexContent(Clip) | Container.PlexContent(Homemovies)">$LOCALIZE[31144]</value>
+		<value condition="Window.IsActive(mysharedcontent)">$LOCALIZE[32108]</value>
+		<!--<value>Item</value>-->
+	</variable>
+
+	<!-- plot formatting -->
+	<include name="PlotFormat">
+		<posy>440</posy>
+		<posx>550</posx>
+		<width>685</width>
+		<height>193</height>
+		<font>descriptionSmall</font>
+		<fontcolor>white</fontcolor>
+		<autoscroll delay="10000" time="3000" repeat="10000">!Control.HasFocus(13)+!Skin.HasSetting(DisableAutoScroll)</autoscroll>
+	</include>
+
+	<include name="NoPlotDefault">	
+		<label>$LOCALIZE[32103]$VAR[NoPlotDefaultItem]. $LOCALIZE[32104]</label>
+	</include>
+	<!-- clock -->
+	<include name="Clock">
+		<control type="group">
+			<animation effect="slide" start="0" end="391" time="400" tween="out" condition="Control.IsVisible(999)">Conditional</animation>
+			<posx>10</posx>
+			<control type="label">
+				<label>$INFO[System.Time(short_no_meridian)]</label>
+				<width>200</width>
+				<height>49</height>
+				<font>Regular-17</font>
+				<textcolor>FF999999</textcolor>
+			</control>
+		</control>
+	</include>
+		
+	<!-- scroll letter offset -->
+	<include name="scrollOffset">
+		<control type="group">
+			<visible>Container.Scrolling | Control.hasFocus(1601) | Control.hasFocus(1602) | Control.hasFocus(1603) | Control.hasFocus(1604)</visible>
+			<animation effect="fade" start="0" end="100" time="150" delay="400">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="250" delay="200">Hidden</animation>
+			<control type="group">
+				<posy>600</posy>
+				<posx>1140</posx>
+				<control type="image">
+					<description>Background</description>
+					<width>100</width>
+					<height>85</height>
+					<include>DialogBGDark</include>
+				</control>
+				<!--
+				<control type="image">
+					<description>Background border</description>
+					<width>102</width>
+					<height>87</height>
+					<include>DialogBorder</include>
+				</control>-->	
+				<control type="label">
+					<posx>0</posx>
+					<posy>12</posy>
+					<height>60</height>
+					<width>100</width>
+					<aligny>center</aligny>
+					<align>center</align>
+					<font>Light-52</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[ListItem.SortLetter]</label>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="UnavailableIndicator">
+		<control type="group">
+			<visible>!IsEmpty(ListItem.Property(Unavailable))</visible>
+			<control type="image">
+				<posy>-5</posy>
+				<width>210</width>
+				<height>26</height>
+				<texture>b-unavailable.png</texture>
+			</control>
+			<control type="label">
+				<posy>-4</posy>
+				<width>210</width>
+				<height>26</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$LOCALIZE[32109]</label>
+				<font>Regular-18</font>
+				<textcolor>white</textcolor>
+			</control>
+		</control>
+	</include>
+		
+	<!-- animations -->
+	<include name="FadeQuick">
+		<animation effect="fade" start="0" end="100" time="100">Visible</animation>
+		<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="100">WindowOpen</animation>
+		<animation effect="fade" start="100" end="0" time="100">WindowClose</animation>
+	</include>
+	<include name="WindowFade">
+		<control type="group">
+			<control type="image">
+				<include>Black</include>
+				<include>FullScreenStretched</include>
+			</control>
+			<animation effect="fade" start="100" end="0" time="250" condition="true">WindowOpen</animation>
+			<animation effect="fade" start="0" end="100" time="100" condition="true">WindowClose</animation>
+		</control>
+	</include>	
+</includes>

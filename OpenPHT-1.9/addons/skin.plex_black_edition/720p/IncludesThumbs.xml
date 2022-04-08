@@ -1,0 +1,3605 @@
+<?xml version="1.0"?>
+<includes>
+	<!--Thumbs: Episode Thumbs-->	
+	<include name="EpisodeThumb">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>224</width>
+			<height>137</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>198</width>
+			<height>111</height>
+			<texture background="true">default-thumb-small.png</texture>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>198</width>
+			<height>111</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[Container.PlexContent(Episodes)+![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Container.PlexContent(Episodes) | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>198</width>
+			<height>111</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[Container.PlexContent(Episodes)+[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))</visible>
+		</control>
+	</include>
+	<include name="EpisodeThumbBorder">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>224</width>
+			<height>137</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>200</width>
+			<height>113</height>
+			<texture background="true">default-thumb-small.png</texture>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>200</width>
+			<height>113</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[Container.PlexContent(Episodes)+![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Container.PlexContent(Episodes) | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>200</width>
+			<height>113</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[Container.PlexContent(Episodes)+[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))</visible>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>
+	</include>
+
+	<include name="EpisodeTitle">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>128</posy>
+				<posx>13</posx>
+				<width>165</width>
+				<height>18</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control>
+			<control type="label">
+				<posy>128</posy>
+				<posx>211</posx>
+				<width>50</width>
+				<height>18</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>198</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>198</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>136</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>$INFO[ListItem.TVShowTitle]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>211</posx>
+			<width>60</width>
+			<height>18</height>
+			<align>right</align>
+			<aligny>top</aligny>
+			<label>S$INFO[ListItem.Season]&#xB7;E$INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+		</control>
+	</include>
+	
+	<include name="EpisodeTitleFocused">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>128</posy>
+				<posx>13</posx>
+				<width>165</width>
+				<height>18</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+			<control type="label">
+				<posy>128</posy>
+				<posx>13</posx>
+				<width>165</width>
+				<height>18</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+			<control type="label">
+				<posy>128</posy>
+				<posx>211</posx>
+				<width>50</width>
+				<height>18</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+			<control type="label">
+				<posy>128</posy>
+				<posx>211</posx>
+				<width>50</width>
+				<height>18</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>198</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>198</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>13</posx>
+			<width>136</width>
+			<height>18</height>
+			<align>left</align>
+			<aligny>top</aligny>
+			<label>$INFO[ListItem.TVShowTitle]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+		</control>
+		<control type="label">
+			<posy>148</posy>
+			<posx>211</posx>
+			<width>60</width>
+			<height>18</height>
+			<align>right</align>
+			<aligny>top</aligny>
+			<label>S$INFO[ListItem.Season]&#xB7;E$INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+		</control>
+	</include>
+	
+	<include name="EpisodeSelectedBorder">
+		<control type="image">
+			<posx>10</posx>
+			<posy>10</posy>
+			<width>204</width>
+			<height>117</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="EpisodePlayBtnOverlay">	
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>198</width>
+			<height>111</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>82</posx>
+			<posy>50</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+
+	<include name="PosterThumbUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>252</posy>
+				<posx>195</posx>
+				<width>80</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-40</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>ff222222</shadowcolor>
+			</control>
+			<visible>[Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+		<control type="group">
+			<control type="image">
+				<posy>99</posy>
+				<posx>186</posx>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>Container.PlexContent(Episodes) | [Container.PlexContent(clips)]</visible>
+			</control>
+		</control>
+	</include>
+	
+	
+	
+	<!--Thumbs: Episode Thumbs Medium-->	
+	<include name="EpisodeThumbMedium">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>246</width>
+			<height>144</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<texture background="true">default-thumb-small.png</texture>
+		</control>		
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))</visible>
+		</control>
+	</include>
+	<include name="EpisodeThumbCardMedium">
+		<control type="image">
+			<posx>13</posx>
+			<posy>105</posy>
+			<width>220</width>
+			<height>26</height>
+			<texture>thumbOverlay.png</texture>
+		</control>		
+	</include>
+	
+	<include name="EpisodeThumbMediumBorder">
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>222</width>
+			<height>144</height>
+			<texture background="true">episodethumbmedium_border.png</texture>
+		</control>
+	</include>
+			
+	<include name="EpisodeTitleMedium">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+			<control type="label">
+				<posy>134</posy>
+				<posx>233</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+		</control>
+	</include>
+	<include name="EpisodeTitleMediumFocused">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>134</posy>
+				<posx>233</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+			<control type="label">
+				<posy>134</posy>
+				<posx>233</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>134</posy>
+				<posx>14</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+		</control>
+	</include>		
+	<include name="EpisodeTitle2Medium">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<!--
+			<control type="label">
+				<posy>108</posy>
+				<posx>16</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Episode $INFO[ListItem.Episode]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+				<visible>IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+			</control>-->
+			<control type="label">
+				<posy>108</posy>
+				<posx>17</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>S$INFO[ListItem.Season] &#xB7; E$INFO[ListItem.Episode]</label>
+				<font>Regular-18</font>
+				<textcolor>white</textcolor>
+				<visible>IsEmpty(Container.Property(primaryFilterActivated))+ListItem.Type(episode)</visible>
+			</control>
+			<control type="label">
+				<posy>108</posy>
+				<posx>16</posx>
+				<width>185</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.TVShowTitle] &#xB7; S$INFO[ListItem.Season]E$INFO[ListItem.Episode]</label>
+				<font>Regular-15</font>
+				<textcolor>white</textcolor>
+				<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+			</control>
+			
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>154</posy>
+				<posx>13</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Date]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+			</control>
+		</control>
+	</include>
+	<include name="EpisodeSelectedBorderMedium">
+		<control type="image">
+			<posx>10</posx>
+			<posy>11</posy>
+			<width>226</width>
+			<height>123</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="EpisodeMediumPlayBtnOverlay">
+	
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>93</posx>
+			<posy>42</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+	<include name="PosterThumbUnwatchedOverlayMedium">
+		<control type="group">
+			<control type="label">
+				<posy>243</posy>
+				<posx>217</posx>
+				<width>80</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-40</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>ff222222</shadowcolor>
+			</control>
+			<visible>[Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+		<control type="group">
+			<control type="image">
+				<posy>106</posy>
+				<posx>208</posx>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>Container.PlexContent(Episodes) | [Container.PlexContent(clips)]</visible>
+			</control>
+		</control>
+	</include>
+	
+	
+	<!--Thumbs: Episode Thumbs Carousel-->		
+
+	<include name="EpisodeThumbCardCarousel">
+		<control type="image">
+			<posx>13</posx>
+			<posy>107</posy>
+			<width>220</width>
+			<height>48</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="71" time="0" condition="true">Conditional</animation>
+		</control>		
+	</include>
+	
+	<include name="EpisodeTitleCarousel">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+			<control type="label">
+				<posy>108</posy>
+				<posx>229</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+			</control> 
+		</control>
+	</include>
+	
+	<include name="EpisodeTitleCarouselFocused">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>173</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>108</posy>
+				<posx>229</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control>
+			<control type="label">
+				<posy>108</posy>
+				<posx>229</posx>
+				<width>29</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+			<control type="label">
+				<posy>108</posy>
+				<posx>18</posx>
+				<width>198</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			</control> 
+		</control>
+	</include>
+	
+	
+	<include name="EpisodeTitle2Carousel">
+		<control type="group">
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>132</posy>
+				<posx>18</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Episode $INFO[ListItem.Episode]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+			</control>
+			<control type="label">
+				<posy>132</posy>
+				<posx>18</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+			</control>
+			<control type="label">
+				<posy>132</posy>
+				<posx>18</posx>
+				<width>145</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.TVShowTitle]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+			</control>
+			<control type="label">
+				<posy>132</posy>
+				<posx>229</posx>
+				<width>60</width>
+				<height>20</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>S$INFO[ListItem.Season]&#xB7;E$INFO[ListItem.Episode]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(ListItem.TVShowTitle)</visible>
+			</control>
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(HomeMovies)</visible>
+			<control type="label">
+				<posy>132</posy>
+				<posx>18</posx>
+				<width>204</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Date]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+			</control>
+		</control>
+	</include>
+	<include name="EpisodeSelectedBorderCarousel">
+		<control type="image">
+			<posx>10</posx>
+			<posy>11</posy>
+			<width>226</width>
+			<height>146</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="EpisodeCarouselPlayBtnOverlay">
+	
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>142</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>93</posx>
+			<posy>54</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>	
+	<include name="PosterThumbUnwatchedOverlayCarousel">
+		<control type="group">
+			<control type="label">
+				<posy>243</posy>
+				<posx>217</posx>
+				<width>80</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-40</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>ff222222</shadowcolor>
+			</control>
+			<visible>[Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+		<control type="group">
+			<control type="image">
+				<posy>82</posy>
+				<posx>208</posx>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>Container.PlexContent(Episodes) | [Container.PlexContent(clips)]</visible>
+			</control>
+		</control>
+	</include>
+	
+	
+		<!--Thumbs: Fanart/ Episode Thumbs Big-->	
+	<include name="FanartThumb">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>337</width>
+			<height>201</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>311</width>
+			<height>175</height>
+			<texture background="true">default-thumb-small.png</texture>
+		</control>		
+		<control type="image">
+			<visible>Container.PlexContent(Episodes)</visible>
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>311</width>
+			<height>175</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>311</width>
+			<height>175</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>!Container.PlexContent(Episodes) | [Container.PlexContent(Episodes)+[[[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))]]</visible>
+		</control>		
+	</include>
+	<include name="FanartThumbBorder">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>337</width>
+			<height>201</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>313</width>
+			<height>177</height>
+			<texture background="true">default-thumb-small.png</texture>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>		
+		<control type="image">
+			<visible>Container.PlexContent(Episodes)</visible>
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>313</width>
+			<height>177</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>[![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>
+		<control type="image">
+			<posx>12</posx>
+			<posy>12</posy>
+			<width>313</width>
+			<height>177</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			<visible>!Container.PlexContent(Episodes) | [Container.PlexContent(Episodes)+[[[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))]]</visible>
+			<bordertexture border="1">thumb_border.png</bordertexture>
+			<bordersize>1</bordersize>
+		</control>		
+	</include>
+
+	<include name="FanartMovieTVShowTitle">	
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>310</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+			<visible>Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<!--Episode-->
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>230</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.TVShowTitle]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>323</posx>
+			<width>60</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>S$INFO[ListItem.Season]&#xB7;E$INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>300</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Date]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>323</posx>
+			<width>80</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Genre]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!ListItem.Type(episode)+!Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>323</posx>
+			<width>80</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Year]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!ListItem.Type(episode)+!Container.PlexContent(HomeMovies)</visible>
+		</control>	
+	</include>
+	<include name="FanartMovieTVShowTitleFocused">	
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>Focused</textcolor>
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>!Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>310</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>Focused</textcolor>
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>13</posx>
+			<width>310</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<!--Episode-->
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>230</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.TVShowTitle]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>323</posx>
+			<width>60</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>S$INFO[ListItem.Season]&#xB7;E$INFO[ListItem.Episode]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!IsEmpty(Container.Property(primaryFilterActivated))+ListItem.Type(episode)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>300</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Date]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>323</posx>
+			<width>80</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<font>Regular-17</font>
+			<textcolor>Focused</textcolor>
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+		<control type="label">
+			<posy>191</posy>
+			<posx>323</posx>
+			<width>80</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(Rating)]</label>
+			<font>Regular-17</font>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>13</posx>
+			<width>260</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Genre]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!ListItem.Type(episode)+!Container.PlexContent(HomeMovies)</visible>
+		</control>
+		<control type="label">
+			<posy>211</posy>
+			<posx>323</posx>
+			<width>80</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Year]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<visible>!ListItem.Type(episode)+!Container.PlexContent(HomeMovies)</visible>
+		</control>	
+	</include>
+	
+	<include name="FanartSelectedBorder">
+		<control type="image">
+			<posx>10</posx>
+			<posy>11</posy>
+			<width>317</width>
+			<height>180</height>
+			<include>Border</include>
+		</control>
+	</include>
+	
+	<include name="FanartUnwatchedOverlayCount">
+		<control type="group">
+			<control type="label">
+				<posy>151</posy>
+				<posx>323</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>-->
+			</control>
+			<control type="label">
+				<posy>158</posy>
+				<posx>322</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-36</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+			</control>
+			<control type="group">
+				<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)] | Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>280</posx>
+					<posy>156</posy>
+					<width>47</width>
+					<height>35</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>304</posx>
+					<posy>160</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>278</posx>
+					<posy>12</posy>
+					<width>47</width>
+					<height>35</height>
+					<texture>unwatchedcount_overlay2.png</texture>			
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>302</posx>
+					<posy>16</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+	</include>
+	
+	<include name="FanartUnwatchedOverlay">
+		<include>FanartUnwatchedOverlayCount</include>
+		<control type="group">
+			<control type="image">
+				<posy>161</posy>
+				<posx>297</posx>
+				<width>26</width>
+				<height>26</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>Container.PlexContent(Episodes) | Container.PlexContent(clips)  | Container.PlexContent(Movies)</visible>
+			</control>
+		</control>
+	</include>
+	<include name="FanartPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>311</width>
+			<height>175</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>128</posx>
+			<posy>60</posy>
+			<width>80</width>
+			<height>80</height>
+			<texture>play_btn.png</texture>
+		</control>		
+	</include>
+	
+	<!--Thumbs: MovieTV Poster Small-->
+	<include name="MovieTVPosterSmall">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>146</width>
+				<height>206</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">default-poster-middle.png</texture>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>			
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterSmallBorder">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>146</width>
+				<height>206</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>122</width>
+				<height>182</height>
+				<texture background="true">default-poster-middle.png</texture>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>122</width>
+				<height>182</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+			</control>
+		</control>
+	</include>
+	
+
+	<include name="MovieTVPosterSmallNoBorder">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>146</width>
+			<height>206</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>120</width>
+			<height>180</height>
+			<texture background="true">default-poster-middle.png</texture>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>120</width>
+			<height>180</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterSmallSelectedBorder">
+		<control type="image">
+			<width>126</width>
+			<height>186</height>
+			<include>Border</include>
+		</control>		
+	</include>
+	<include name="MovieTVPosterSmallPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>120</width>
+			<height>180</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="200" reversible="false">Focus</animation>
+		</control>
+		<control type="image">
+			<posx>43</posx>
+			<posy>73</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+			<animation effect="fade" start="0" end="100" time="350" reversible="false">Focus</animation>
+		</control>		
+	</include>
+	
+	
+	<include name="MovieTVPosterSmallTitleStyle">	
+		<posy>196</posy>
+		<posx>73</posx>
+		<width>120</width>
+		<height>20</height>
+		<align>center</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>Regular-17</font>	
+	</include>	
+	<include name="MovieTVPosterSmallTitle">
+		<control type="label">
+			<include>MovieTVPosterSmallTitleStyle</include>
+			<textcolor>white</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+	</include>		
+	<include name="MovieTVPosterSmallTitleFocused">
+		<control type="label">
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<include>MovieTVPosterSmallTitleStyle</include>
+			<textcolor>Focused</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+		<control type="label">
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<include>MovieTVPosterSmallTitleStyle</include>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+	</include>	
+	
+	<include name="MovieTVPosterSmallTitleLeftStyle">	
+			<posy>196</posy>
+			<posx>14</posx>
+			<width>118</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>			
+	</include>	
+	<include name="MovieTVPosterSmallTitleLeft">
+		<control type="label">
+			<include>MovieTVPosterSmallTitleLeftStyle</include>
+			<textcolor>white</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+	</include>	
+	<include name="MovieTVPosterSmallTitleLeftFocused">
+		<control type="label">
+			<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<include>MovieTVPosterSmallTitleLeftStyle</include>
+			<font>Regular-17</font>
+			<textcolor>Focused</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+		<control type="label">
+			<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+			<include>MovieTVPosterSmallTitleLeftStyle</include>
+			<font>Regular-17</font>
+			<textcolor>FocusedThemeColor</textcolor>
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		</control>
+	</include>	
+	
+	<include name="SmallUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>157</posy>
+				<posx>133</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>-->
+			</control>
+			<control type="label">
+				<posy>162</posy>
+				<posx>133</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-36</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+			</control>
+			<control type="group">
+				<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(TVShowOverlayBottom)] | [Skin.HasSetting(TVShowOverlayBottom)+Container.PlexContent(Seasons)]</visible>
+				<control type="image">
+					<posx>98</posx>
+					<posy>166</posy>
+					<width>37</width>
+					<height>29</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>			
+				</control>
+				<control type="label">
+					<posx>117</posx>
+					<posy>171</posy>
+					<width>40</width>
+					<height>18</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-15</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>96</posx>
+					<posy>12</posy>
+					<width>37</width>
+					<height>29</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>					
+				</control>
+				<control type="label">
+					<posx>115</posx>
+					<posy>18</posy>
+					<width>40</width>
+					<height>18</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-15</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Container.PlexContent(TVShows)+Skin.HasSetting(TVShowOverlayBottom)+Skin.HasSetting(DisableTVShowTitle)</visible>
+				<control type="image">
+					<posx>98</posx>
+					<posy>195</posy>
+					<width>37</width>
+					<height>29</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>117</posx>
+					<posy>201</posy>
+					<width>40</width>
+					<height>18</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-15</font>
+					<align>center</align>
+				</control>
+			</control>
+			<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterSmallUnwatchedOverlay">	
+		<control type="group">		
+			<control type="group">				
+				<visible>[Container.PlexContent(Movies)+!Skin.HasSetting(disableOverlayIMDB)+!Skin.HasSetting(MovieOverlayBottom) + !IsEmpty(ListItem.Property(Rating))]|[Container.PlexContent(TVShows)+!Skin.HasSetting(DisableTVShowStarRating)+!Skin.HasSetting(TVShowOverlayBottom)+!IsEmpty(ListItem.Property(Rating))]</visible>
+				<control type="group">
+					<visible>Container.PlexContent(Movies)|Container.PlexContent(TVShows)</visible>
+					<control type="image">
+						<texture>thumbOverlay.png</texture>
+						<width>120</width>
+						<height>26</height>
+						<posx>13</posx>
+						<posy>167</posy>	
+					</control>
+					<control type="image">
+						<posx>14</posx>
+						<posy>169</posy>
+						<width>21</width>
+						<height>21</height>
+						<texture>star.png</texture>
+					</control>
+					<control type="label">
+						<posx>39</posx>
+						<posy>171</posy>
+						<width>85</width>
+						<height>18</height>
+						<font>IMDBOverlay</font>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(Rating)]</label>
+						<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>				
+					</control>
+				</control>
+			
+			</control>			
+			<control type="group">
+				<visible>[Container.PlexContent(Movies) + !IsEmpty(ListItem.Property(Rating))+ !Skin.HasSetting(disableOverlayIMDB) + Skin.HasSetting(MovieOverlayBottom) + Skin.HasSetting(DisableMovieTitle)] | [Container.PlexContent(TVShows)+!IsEmpty(ListItem.Property(Rating)) + Skin.HasSetting(TVShowOverlayBottom)+Skin.HasSetting(DisableTVShowTitle)]</visible>
+				<control type="image">
+					<posx>14</posx>
+					<posy>199</posy>
+					<width>21</width>
+					<height>21</height>
+					<texture>star.png</texture>				
+				</control>		
+				<control type="label">
+					<posx>39</posx>
+					<posy>201</posy>
+					<width>85</width>
+					<height>18</height>
+					<font>IMDBOverlay</font>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Property(Rating)]</label>
+					<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>
+				</control>
+			</control>
+			
+			<control type="image">
+				<posx>108</posx>
+				<posy>168</posy>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+				<visible>!Skin.HasSetting(MovieOverlayBottom)</visible>
+			</control>
+			<control type="image">
+				<posx>108</posx>
+				<posy>198</posy>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+				<visible>Skin.HasSetting(MovieOverlayBottom)+Skin.HasSetting(DisableMovieTitle)</visible>
+			</control>
+
+		</control>
+		<include>SmallUnwatchedOverlay</include>
+	</include>
+	
+	
+	<!--Thumbs: MovieTV Poster Middle-->
+	<include name="MovieTVPosterMiddle">
+		<control type="group">		
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>208</width>
+				<height>300</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>185</width>
+				<height>274</height>
+				<texture background="true">default-poster-middle.png</texture>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>185</width>
+				<height>274</height>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterMiddleBorder">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>208</width>
+				<height>300</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>187</width>
+				<height>276</height>
+				<texture background="true">default-poster-middle.png</texture>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>187</width>
+				<height>276</height>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterMiddleSelectedBorder">
+		<control type="image">
+			<width>191</width>
+			<height>280</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="MovieTVPosterMiddlePlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>185</width>
+			<height>274</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>65</posx>
+			<posy>110</posy>
+			<width>80</width>
+			<height>80</height>
+			<texture>play_btn.png</texture>
+			<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>
+		</control>		
+	</include>
+	
+	
+	<include name="MovieTVPosterMiddleTitleStyle">
+		<posy>288</posy>
+		<posx>14</posx>
+		<width>183</width>
+		<height>30</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>Regular-18</font>
+	</include>
+	<include name="MovieTVPosterMiddleTitle">
+		<control type="group">
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+			<control type="label">
+				<include>MovieTVPosterMiddleTitleStyle</include>
+				<textcolor>white</textcolor>
+			</control>
+			<control type="label">
+				<posy>310</posy>
+				<posx>14</posx>
+				<width>183</width>
+				<height>30</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Genre]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>		
+				<visible>!Container.PlexContent(Seasons)+!Container.PlexContent(Homemovies)</visible>
+			</control>		
+			<control type="label">
+				<posy>310</posy>
+				<posx>14</posx>
+				<width>183</width>
+				<height>30</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Date]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>		
+				<visible>Container.PlexContent(Homemovies)</visible>
+			</control>					
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterMiddleTitleFocused">
+		<control type="group">
+			<visible>[!Skin.HasSetting(DisableTVShowTitle)+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows) | [Skin.HasSetting(DisableTVShowTitleUnfocused)+Container.PlexContent(TVShows)]</visible>
+			<visible>[!Skin.HasSetting(DisableMovieTitle)+Container.PlexContent(Movies)] | !Container.PlexContent(Movies) | [Skin.HasSetting(DisableMoviesTitleUnfocused)+Container.PlexContent(Movies)]</visible>
+		
+			<control type="label">
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<include>MovieTVPosterMiddleTitleStyle</include>
+				<textcolor>Focused</textcolor>
+			</control>
+			<control type="label">
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<include>MovieTVPosterMiddleTitleStyle</include>
+				<textcolor>FocusedThemeColor</textcolor>
+			</control>
+			<control type="label">
+				<posy>310</posy>
+				<posx>14</posx>
+				<width>183</width>
+				<height>30</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Genre]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>		
+				<visible>!Container.PlexContent(Seasons)+!Container.PlexContent(Homemovies)</visible>
+			</control>			
+			<control type="label">
+				<posy>310</posy>
+				<posx>14</posx>
+				<width>183</width>
+				<height>30</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Date]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>		
+				<visible>Container.PlexContent(Homemovies)</visible>
+			</control>		
+		</control>
+	</include>
+	
+	<include name="MiddleUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>251</posy>
+				<posx>198</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>-->
+			</control>
+			<control type="label">
+				<posy>256</posy>
+				<posx>198</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-36</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+		</control>
+		<control type="group">
+			<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)+!Skin.HasSetting(TVShowOverlayBottom)] | [Skin.HasSetting(TVShowOverlayBottom)+Container.PlexContent(Seasons)]</visible>
+			<control type="image">
+				<posx>153</posx>
+				<posy>254</posy>
+				<width>47</width>
+				<height>35</height>
+				<texture>unwatchedcount_overlay2.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+			</control>
+			<control type="label">
+				<posx>177</posx>
+				<posy>258</posy>
+				<width>60</width>
+				<height>27</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-18</font>
+				<align>center</align>
+			</control>
+		</control>
+		<control type="group">
+			<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+			<control type="image">
+				<posx>152</posx>
+				<posy>12</posy>
+				<width>47</width>
+				<height>35</height>
+				<texture>unwatchedcount_overlay2.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+			</control>
+			<control type="label">
+				<posx>176</posx>
+				<posy>16</posy>
+				<width>60</width>
+				<height>27</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-18</font>
+				<align>center</align>
+			</control>
+		</control>
+		<control type="group">
+			<visible>Container.PlexContent(TVShows)+Skin.HasSetting(TVShowOverlayBottom)+Skin.HasSetting(DisableTVShowTitle)</visible>
+			<control type="image">
+				<posx>154</posx>
+				<posy>289</posy>
+				<width>47</width>
+				<height>35</height>
+				<texture>unwatchedcount_overlay2.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+			</control>
+			<control type="label">
+				<posx>178</posx>
+				<posy>293</posy>
+				<width>60</width>
+				<height>27</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-18</font>
+				<align>center</align>
+			</control>
+		</control>
+		<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+	</control>
+	</include>
+	
+	<include name="MovieTVPosterMiddleUnwatchedOverlay">		
+		<control type="group">
+			<control type="group">				
+				<visible>[Container.PlexContent(Movies)+!Skin.HasSetting(disableOverlayIMDB)+!Skin.HasSetting(MovieOverlayBottom) + !IsEmpty(ListItem.Property(Rating))]|[Container.PlexContent(TVShows)+!Skin.HasSetting(DisableTVShowStarRating)+!Skin.HasSetting(TVShowOverlayBottom)+!IsEmpty(ListItem.Property(Rating))]</visible>
+				<control type="image">
+					<texture>thumbOverlay.png</texture>
+					<width>185</width>
+					<height>30</height>
+					<posx>13</posx>
+					<posy>257</posy>					
+				</control>
+				<control type="image">
+					<posx>15</posx>
+					<posy>260</posy>
+					<width>23</width>
+					<height>23</height>
+					<texture>star.png</texture>					
+				</control>
+				<control type="label">
+					<posx>42</posx>
+					<posy>262</posy>
+					<width>85</width>
+					<height>20</height>
+					<font>IMDBOverlayBig</font>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Property(Rating)]</label>
+					<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>					
+				</control>
+			</control>	
+			
+			<control type="image">
+				<posx>17</posx>
+				<posy>293</posy>
+				<width>21</width>
+				<height>21</height>
+				<texture>star.png</texture>
+				<visible>[Container.PlexContent(Movies) + !IsEmpty(ListItem.Property(Rating))+ !Skin.HasSetting(disableOverlayIMDB) + Skin.HasSetting(MovieOverlayBottom) + Skin.HasSetting(DisableMovieTitle)] | [Container.PlexContent(TVShows)+!IsEmpty(ListItem.Property(Rating)) + Skin.HasSetting(TVShowOverlayBottom)+Skin.HasSetting(DisableTVShowTitle)]</visible>
+			</control>			
+			<control type="label">
+				<posx>44</posx>
+				<posy>296</posy>
+				<width>85</width>
+				<height>20</height>
+				<font>IMDBOverlayBig</font>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<animation effect="fade" start="0" end="90" time="0" condition="true">Conditional</animation>
+				<visible>[Container.PlexContent(Movies) + !IsEmpty(ListItem.Property(Rating))+ !Skin.HasSetting(disableOverlayIMDB) + Skin.HasSetting(MovieOverlayBottom) + Skin.HasSetting(DisableMovieTitle)] | [Container.PlexContent(TVShows)+!IsEmpty(ListItem.Property(Rating)) + Skin.HasSetting(TVShowOverlayBottom)+Skin.HasSetting(DisableTVShowTitle)]</visible>
+			</control>
+		
+			<control type="image">
+				<posx>169</posx>
+				<posy>258</posy>
+				<width>28</width>
+				<height>28</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+				<visible>!Skin.HasSetting(MovieOverlayBottom)</visible>
+			</control>
+			<control type="image">
+				<posx>169</posx>
+				<posy>293</posy>
+				<width>28</width>
+				<height>28</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+				<visible>Skin.HasSetting(MovieOverlayBottom)+Skin.HasSetting(DisableMovieTitle)</visible>
+			</control>
+		</control>
+		<include>MiddleUnwatchedOverlay</include>
+	</include>
+
+	<!--Thumby VideoPlaylist-->
+	<include name="MovieTVPosterPlayList">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>146</width>
+				<height>206</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">default-poster-middle.png</texture>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<visible>!ListItem.Type(episode)</visible>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">$INFO[ListItem.Art(smallGrandparentThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<visible>ListItem.Type(episode)</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterPlayListBorder">
+		<control type="group">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>146</width>
+				<height>206</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>122</width>
+				<height>182</height>
+				<texture background="true">default-poster-middle.png</texture>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>122</width>
+				<height>182</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+				<visible>!ListItem.Type(episode)</visible>
+			</control>
+			<control type="image">
+				<posx>12</posx>
+				<posy>12</posy>
+				<width>122</width>
+				<height>182</height>
+				<texture background="true">$INFO[ListItem.Art(smallGrandparentThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<bordertexture border="1">thumb_border.png</bordertexture>
+				<bordersize>1</bordersize>
+				<visible>ListItem.Type(episode)</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterPlayListTitle">
+		<control type="group">
+			<visible>[![Skin.HasSetting(DisableTVShowTitle)|Skin.HasSetting(DisableTVShowTitleUnfocused)]+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows)</visible>
+			<visible>[![Skin.HasSetting(DisableMovieTitle)|Skin.HasSetting(DisableMovieTitleUnfocused)]+Container.PlexContent(Movies)] | !Container.PlexContent(Movies)</visible>
+			<control type="label">
+				<posy>197</posy>
+				<posx>73</posx>
+				<width>120</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Unfocused</textcolor>
+				<visible>!ListItem.type(episode)</visible>
+			</control>
+			<control type="label">
+				<posy>197</posy>
+				<posx>73</posx>
+				<width>120</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>S$INFO[ListItem.Season] E$INFO[ListItem.Episode] $INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Unfocused</textcolor>
+				<visible>ListItem.type(episode)</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterPlayListTitleFocused">
+		<control type="group">
+			<visible>[![Skin.HasSetting(DisableTVShowTitle)|Skin.HasSetting(DisableTVShowTitleUnfocused)]+Container.PlexContent(TVShows)] | !Container.PlexContent(TVShows)</visible>
+			<visible>[![Skin.HasSetting(DisableMovieTitle)|Skin.HasSetting(DisableMovieTitleUnfocused)]+Container.PlexContent(Movies)] | !Container.PlexContent(Movies)</visible>
+			<control type="label">
+				<posy>197</posy>
+				<posx>73</posx>
+				<width>120</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!ListItem.type(episode)</visible>
+			</control>
+			<control type="label">
+				<posy>197</posy>
+				<posx>73</posx>
+				<width>120</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>S$INFO[ListItem.Season] E$INFO[ListItem.Episode] $INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>ListItem.type(episode)</visible>
+			</control>
+		</control>
+	</include>
+	
+	<!--Thumbs: MovieTV Poster Description-->
+	<include name="MovieTVPosterDescriptionPlot">
+		<control type="textbox" id="112">
+			<posx>145</posx>
+			<posy>40</posy>
+			<width>230</width>
+			<height>132</height>
+			<label>$VAR[ListItemFullInfoPlot]</label>
+			<font>descriptionSmall3</font>
+			<textcolor>title2</textcolor>
+			<autoscroll delay="10000" time="3000" repeat="10000">false</autoscroll>
+			<visible>!Container.PlexContent(Seasons)</visible>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterDescriptionPlotFocus">		
+		<control type="textbox" id="111">
+			<posx>145</posx>
+			<posy>40</posy>
+			<width>230</width>
+			<height>132</height>
+			<label>$VAR[ListItemFullInfoPlot]</label>
+			<font>descriptionSmall3</font>
+			<textcolor>title2</textcolor>
+			<autoscroll delay="10000" time="3000" repeat="10000">!Skin.HasSetting(HomeAudioNowPlaying)</autoscroll>
+			<visible>!Container.PlexContent(Seasons)</visible>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterDescription">
+		<posx>5</posx>
+		<posy>5</posy>
+		<control type="group" id="101">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>401</width>
+				<height>220</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>375</width>
+				<height>192</height>
+				<include>BlackBE</include>
+				<animation effect="fade" start="0" end="71" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="image">
+				<posx>6</posx>
+				<posy>6</posy>
+				<width>146</width>
+				<height>206</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<posx>19</posx>
+				<posy>19</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">default-poster-middle.png</texture>
+			</control>
+			<control type="image">
+				<posx>19</posx>
+				<posy>19</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>19</posx>
+				<posy>19</posy>
+				<width>120</width>
+				<height>180</height>
+				<texture background="true">$INFO[ListItem.Art(poster)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				<visible>ListItem.Type(Episode)+[[[ListItem.Status(InProgress)|ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !IsEmpty(Container.Property(primaryFilterActivated))]</visible>
+			</control>
+			<control type="label">
+				<posx>145</posx>
+				<posy>17</posy>
+				<width>235</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$VAR[ListItemTitleBE]</label>
+				<font>Regular-18</font>
+				
+			</control>
+		
+			<control type="image">
+				<posx>145</posx>
+				<posy>176</posy>
+				<width>21</width>
+				<height>21</height>
+				<texture>star.png</texture>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Episodes)] + !IsEmpty(ListItem.Property(Rating))</visible>
+			</control>
+			<control type="label">
+				<posx>170</posx>
+				<posy>179</posy>
+				<width>85</width>
+				<height>18</height>
+				<font>Regular-18</font>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Episodes)] + !IsEmpty(ListItem.Property(Rating))</visible>
+			</control>
+			<control type="image">
+				<posx>358</posx>
+				<posy>175</posy>
+				<width>26</width>
+				<height>26</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(Episodes)]</visible>
+			</control>
+			<control type="image">
+				<posx>341</posx>
+				<posy>170</posy>
+				<width>47</width>
+				<height>35</height>
+				<texture>unwatchedcount_overlay2.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(TVShows) | Container.PlexContent(Seasons)] + ListItem.Property(UnWatchedEpisodes) + !Skin.HasSetting(HideUnwatchedIconsTVShows)</visible>
+			</control>
+			<control type="label">
+				<posx>365</posx>
+				<posy>174</posy>
+				<width>60</width>
+				<height>27</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-18</font>
+				<align>center</align>
+				<visible>[Container.PlexContent(TVShows) | Container.PlexContent(Seasons)] + ListItem.Property(UnWatchedEpisodes) + !Skin.HasSetting(HideUnwatchedIconsTVShows)</visible>
+			</control>
+			<control type="label">
+				<posy>40</posy>
+				<posx>145</posx>
+				<width>200</width>
+				<height>40</height>
+				<label>$INFO[ListItem.episode,, $LOCALIZE[20360]]</label>
+				<font>Regular-16</font>
+				<textcolor>title2</textcolor>
+				<visible>[Container.PlexContent(Seasons)]</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterDescriptionSelectedBorder">
+		<control type="image">
+		<posx>11</posx>
+		<posy>11</posy>
+		<width>380</width>
+		<height>197</height>
+		<include>Border</include>
+		</control>
+	</include>
+	
+	
+	
+	<!--Thumbs: MovieTV Poster Wall-->
+	<include name="MovieTVPosterWall">
+		
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>140</width>
+			<height>210</height>
+			<texture background="true">default-poster-middle.png</texture>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>140</width>
+			<height>210</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterWallUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>187</posy>
+				<posx>154</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>-->
+			</control>
+			<control type="label">
+				<posy>192</posy>
+				<posx>154</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-36</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+			</control>
+			<control type="group">
+				<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)] | Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>118</posx>
+					<posy>196</posy>
+					<width>37</width>
+					<height>29</height>
+					<texture>unwatchedcount_overlay2.png</texture>	
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>		
+				</control>
+				<control type="label">
+					<posx>137</posx>
+					<posy>202</posy>
+					<width>40</width>
+					<height>17</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-15</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>116</posx>
+					<posy>13</posy>
+					<width>37</width>
+					<height>29</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>				
+				</control>
+				<control type="label">
+					<posx>135</posx>
+					<posy>19</posy>
+					<width>40</width>
+					<height>17</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-15</font>
+					<align>center</align>
+				</control>
+			</control>
+			<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+		<control type="group">
+			<control type="image">
+				<posx>128</posx>
+				<posy>198</posy>
+				<width>24</width>
+				<height>24</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterWallSelectedBorder">
+		<control type="image">		
+			<width>146</width>
+			<height>215</height>
+			<include>Border</include>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterWallPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>140</width>
+			<height>210</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>53</posx>
+			<posy>88</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+	
+	
+	
+	<!--Thumbs: MovieTV Poster Wall Big-->
+	<include name="MovieTVPosterWallBig">		
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>235</width>
+			<height>352</height>
+			<texture background="true">default-poster-middle.png</texture>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>235</width>
+			<height>352</height>
+			<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterWallBigUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>313</posy>
+				<posx>232</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>-->
+			</control>
+			<control type="label">
+				<posy>318</posy>
+				<posx>232</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-40</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+			</control>
+			<control type="group">
+				<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)] | Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>187</posx>
+					<posy>316</posy>
+					<width>47</width>
+					<height>35</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>211</posx>
+					<posy>320</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)+!Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>183</posx>
+					<posy>3</posy>
+					<width>47</width>
+					<height>35</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>207</posx>
+					<posy>7</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+		<control type="group">
+			<control type="image">
+				<posx>202</posx>
+				<posy>319</posy>
+				<width>30</width>
+				<height>30</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)]</visible>
+			</control>
+		</control>
+	</include>
+
+	<include name="MovieTVPosterWallBigSelectedBorder">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>235</width>
+			<height>352</height>
+			<include>Border</include>
+		</control>
+	</include>
+	
+	<include name="MovieTVPosterWallBigPlayBtnOverlay">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>235</width>
+			<height>352</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>77</posx>
+			<posy>136</posy>
+			<width>80</width>
+			<height>80</height>
+			<texture>play_btn.png</texture>
+		</control>		
+	</include>
+	
+	
+	<!--Thumbs: Banner Card Thumb-->
+	<include name="TVPosterBanner">
+		<control type="group" id="101">
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>434</width>
+				<height>138</height>
+				<include>Shadow</include>
+			</control>
+			<control type="group">
+				<control type="image">
+					<posx>13</posx>
+					<posy>14</posy>
+					<width>408</width>
+					<height>110</height>
+					<aspectratio aligny="top">stretch</aspectratio>
+					<texture>backgrounds/background_black3.png</texture>
+					<animation effect="fade" start="0" end="61" time="0" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<posx>13</posx>
+					<posy>14</posy>
+					<width>408</width>
+					<height>110</height>
+					<aspectratio aligny="top">stretch</aspectratio>
+					<texture background="true">background.png</texture>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Container.PlexContent(TVShows)</visible>
+				<control type="image">
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>408</width>
+					<height>76</height>
+					<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+					<texture background="true">default-banner-small.png</texture>
+				</control>
+				<control type="image">
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>408</width>
+					<height>76</height>
+					<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+					<texture background="true">$INFO[ListItem.Art(banner)]</texture>
+				</control>
+			</control>
+			<control type="label">
+				<posx>217</posx>
+				<posy>96</posy>
+				<width>300</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Genre]</label>
+				<font>Regular-18</font>
+				<visible>!Container.PlexContent(Episodes)</visible>
+			</control>
+			<control type="image">
+				<posx>15</posx>
+				<posy>94</posy>
+				<width>21</width>
+				<height>21</height>
+				<texture>star.png</texture>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Episodes)] + !IsEmpty(ListItem.Property(Rating))</visible>
+			</control>
+			<control type="label">
+				<posx>40</posx>
+				<posy>96</posy>
+				<width>85</width>
+				<height>20</height>
+				<font>Regular-18</font>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(Rating)]</label>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Episodes)] + !IsEmpty(ListItem.Property(Rating))</visible>
+			</control>
+			<control type="image">
+				<posx>401</posx>
+				<posy>92</posy>
+				<width>27</width>
+				<height>27</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) | Container.PlexContent(Episodes)]</visible>
+			</control>
+			<control type="image">
+				<posx>374</posx>
+				<posy>88</posy>
+				<width>47</width>
+				<height>35</height>
+				<texture>unwatchedcount_overlay2.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(TVShows) | Container.PlexContent(Seasons)] + ListItem.Property(UnWatchedEpisodes) + !Skin.HasSetting(HideUnwatchedIconsTVShows)</visible>
+			</control>
+			<control type="label">
+				<posx>398</posx>
+				<posy>92</posy>
+				<width>60</width>
+				<height>26</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-18</font>
+				<align>center</align>
+				<visible>[Container.PlexContent(TVShows) | Container.PlexContent(Seasons)] + ListItem.Property(UnWatchedEpisodes) + !Skin.HasSetting(HideUnwatchedIconsTVShows)</visible>
+			</control>
+		</control>
+	</include>
+	
+	<include name="TVPosterBannerSelectedBorder">
+		<control type="image">
+			<posx>11</posx>
+			<posy>11</posy>
+			<width>412</width>
+			<height>114</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="TVPosterBannerPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>408</width>
+			<height>111</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>187</posx>
+			<posy>38</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+	
+	
+	<!--Thumbs: Banner Thumb-->
+	<include name="TVPosterBannerSmall">
+			<control type="group">
+				<visible>Container.PlexContent(TVShows)</visible>
+					<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>416</width>
+					<height>98</height>
+					<include>Shadow</include>
+				</control>		
+				<control type="image">
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>390</width>
+					<height>72</height>
+					<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+					<texture background="true">default-banner-small.png</texture>
+				</control>
+				<control type="image">
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>390</width>
+					<height>72</height>
+					<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+					<texture background="true">$INFO[ListItem.Art(banner)]</texture>
+				</control>
+			</control>
+	</include>
+	
+	<include name="TVPosterBannerSmallUnwatchedOverlay">
+		<control type="group">
+			<control type="label">
+				<posy>48</posy>
+				<posx>402</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-52</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<visible>Skin.HasSetting(LargeUnwatchedEpisodes)</visible>
+				<!--<visible>!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)</visible>-->
+			</control>
+			<control type="label">
+				<posy>55</posy>
+				<posx>402</posx>
+				<width>90</width>
+				<height>30</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Light-36</font>
+				<textcolor>white</textcolor>
+				<shadowcolor>FF222222</shadowcolor>
+				<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+				<visible>Skin.HasSetting(SmallerUnwatchedEpisodes)</visible>
+			</control>
+			<control type="group">
+				<visible>[!Skin.HasSetting(SmallerUnwatchedEpisodes)+!Skin.HasSetting(LargeUnwatchedEpisodes)+!Skin.HasSetting(AltUnwatchedEpisodesTop)] | Skin.HasSetting(TVShowOverlayBottom)</visible>
+				<control type="image">
+					<posx>358</posx>
+					<posy>52</posy>
+					<width>47</width>
+					<height>35</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>382</posx>
+					<posy>56</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Skin.HasSetting(AltUnwatchedEpisodesTop)</visible>
+				<control type="image">
+					<posx>358</posx>
+					<posy>11</posy>
+					<width>45</width>
+					<height>34</height>
+					<texture>unwatchedcount_overlay2.png</texture>
+					<include condition="Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuse</include>
+					<include condition="!Skin.HasSetting(ColorizeUnwachtedCountOverlay)">unwachtedCountOverlayDiffuseDefault</include>
+				</control>
+				<control type="label">
+					<posx>382</posx>
+					<posy>15</posy>
+					<width>60</width>
+					<height>27</height>
+					<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+					<font>Regular-18</font>
+					<align>center</align>
+				</control>
+			</control>
+			
+			<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+	</include>
+	
+	<include name="TVPosterBannerSmallSelectedBorder">
+		<control type="image">
+			<posx>11</posx>
+			<posy>11</posy>
+			<width>395</width>
+			<height>77</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="TVPosterBannerSmallPlayBtnOverlay">
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>390</width>
+			<height>72</height>
+			<include>Black</include>
+			<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+		</control>	
+		<control type="image">
+			<posx>178</posx>
+			<posy>19</posy>
+			<width>60</width>
+			<height>60</height>
+			<texture>play_btn_small.png</texture>
+		</control>		
+	</include>
+	
+		<include name="MusicSelectedBorder">
+			<control type="image">
+				<posx>10</posx>
+				<posy>10</posy>
+				<width>172</width>
+				<height>172</height>
+				<include>Border</include>
+			</control>
+		</include>
+		<include name="MusicPlayBtnOverlay">
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>166</width>
+				<height>166</height>
+				<include>Black</include>
+				<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="image">
+				<posx>67</posx>
+				<posy>67</posy>
+				<width>60</width>
+				<height>60</height>
+				<texture>play_btn_small.png</texture>
+			</control>		
+		</include>
+		
+		<include name="MusicThumb">			
+			<control type="group">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>192</width>
+					<height>192</height>
+					<include>Shadow</include>
+				</control>
+				<control type="image">
+					<description>Poster image</description>
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>166</width>
+					<height>166</height>
+					<texture background="true">default-square-small.png</texture>
+				</control>
+				<control type="image">
+					<description>Poster image</description>
+					<posx>13</posx>
+					<posy>13</posy>
+					<width>166</width>
+					<height>166</height>
+					<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+					<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+				</control>
+			</control>
+		</include>
+		
+		<include name="MusicThumbBorder">
+			<control type="group">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>192</width>
+					<height>192</height>
+					<include>Shadow</include>
+				</control>
+				<control type="image">
+					<description>Poster image</description>
+					<posx>12</posx>
+					<posy>12</posy>
+					<width>168</width>
+					<height>168</height>
+					<texture background="true">default-square-small.png</texture>
+					<bordertexture border="1">thumb_border.png</bordertexture>
+		      <bordersize>1</bordersize>	
+				</control>
+				<control type="image">
+					<description>Poster image</description>
+					<posx>12</posx>
+					<posy>12</posy>
+					<width>168</width>
+					<height>168</height>
+					<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+					<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+					<bordertexture border="1">thumb_border.png</bordertexture>
+		      <bordersize>1</bordersize>	
+				</control>
+			</control>
+		</include>
+		
+		<include name="MusicLabel">		
+			<control type="label">				
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+				<visible>!Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Artist]</label>
+				<font>Regular-17</font>
+				<textcolor>white</textcolor>
+				<visible>Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<posy>204</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<posy>205</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Genre]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>Container.PlexContent(Artists)</visible>
+			</control>
+		</include>
+		<include name="MusicLabelFocused">		
+			<control type="label">
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>!Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>!Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Artist]</label>
+				<font>Regular-17</font>
+				<textcolor>Focused</textcolor>
+				<visible>Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+				<posy>183</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Artist]</label>
+				<font>Regular-17</font>
+				<textcolor>FocusedThemeColor</textcolor>
+				<visible>Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<posy>204</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Label]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>Container.PlexContent(Albums)</visible>
+			</control>
+			<control type="label">
+				<posy>205</posy>
+				<posx>14</posx>
+				<width>164</width>
+				<height>20</height>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>$INFO[ListItem.Genre]</label>
+				<font>Regular-15</font>
+				<textcolor>title2</textcolor>
+				<visible>Container.PlexContent(Artists)</visible>
+			</control>
+		</include>
+		
+		<include name="MusicThumbWall">
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>157</width>
+				<height>157</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<description>Poster image</description>
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>157</width>
+				<height>157</height>
+				<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture><!-- diffuse="base.png"-->
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+		</include>
+			<include name="MusicThumbCardWall">
+			<control type="image">
+				<posx>13</posx>
+				<posy>142</posy>
+				<width>157</width>
+				<height>28</height>
+				<include>Card</include>
+				<animation effect="fade" start="0" end="50" time="0" condition="true">Conditional</animation>
+			</control>
+		</include>
+		<include name="MusicThumbCardWallAlbum">
+			<control type="image">
+				<posx>11</posx>
+				<posy>170</posy>
+				<width>161</width>
+				<height>55</height>
+				<include>Card</include>
+				<animation effect="fade" start="0" end="72" time="400" condition="true">Conditional</animation>				
+			</control>
+		</include>
+		<include name="MusicThumbCardWallAlbumNoBorder">
+			<control type="image">
+				<posx>13</posx>
+				<posy>170</posy>
+				<width>157</width>
+				<height>55</height>
+				<include>Card</include>
+				<animation effect="fade" start="0" end="72" time="400" condition="true">Conditional</animation>				
+			</control>
+		</include>
+		<include name="MusicLabelWall">
+			<posy>146</posy>
+			<posx>92</posx>
+			<width>150</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+		</include>
+		<include name="MusicLabelWallAlbum1">
+			<posy>175</posy>
+			<posx>92</posx>
+			<width>150</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Artist]</label>
+			<font>Regular-17</font>
+			<textcolor>white</textcolor>
+		</include>
+		<include name="MusicLabelWallAlbum2">
+			<posy>201</posy>
+			<posx>92</posx>
+			<width>150</width>
+			<height>20</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-16</font>
+			<textcolor>title2</textcolor>
+		</include>
+		<include name="MusicSelectedBorderWall">
+			<control type="image">
+				<posx>11</posx>
+				<posy>11</posy>
+				<width>161</width>
+				<height>161</height>
+				<include>Border</include>
+			</control>
+		</include>
+		<include name="MusicWallPlayBtnOverlay">
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>157</width>
+				<height>157</height>
+				<include>Black</include>
+				<animation effect="fade" start="0" end="66" time="0" condition="true">Conditional</animation>
+			</control>	
+			<control type="image">
+				<posx>61</posx>
+				<posy>61</posy>
+				<width>60</width>
+				<height>60</height>
+				<texture>play_btn_small.png</texture>
+			</control>		
+		</include>
+		
+	<include name="MusicExtrasAlbumThumb">
+		<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>220</width>
+				<height>220</height>
+				<texture background="true">default-thumb-small.png</texture>
+			</control>
+			<control type="image">
+				<posx>13</posx>
+				<posy>13</posy>
+				<width>220</width>
+				<height>220</height>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+				<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+			</control>
+	</include>
+	<include name="MusicExtrasAlbumCard">
+		<control type="image">
+			<posx>13</posx>
+			<posy>233</posy>
+			<width>220</width>
+			<height>60</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="40" time="400" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="MusicExtrasAlbumTitle">
+		<posy>240</posy>
+		<posx>23</posx>
+		<width>201</width>
+		<height>20</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>Regular-20</font>
+	</include>	
+	<include name="MusicExtrasAlbumArtist">
+		<posy>264</posy>
+		<posx>23</posx>
+		<width>201</width>
+		<height>20</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Artist]</label>
+		<font>Regular-17</font>
+		<textcolor>FF999999</textcolor>
+	</include>
+	<include name="MusicExtrasAlbumBorder">
+		<control type="image">
+			<posx>10</posx>
+			<posy>10</posy>
+			<width>226</width>
+			<height>286</height>
+			<include>Border</include>
+		</control>
+	</include>
+		
+	<!--Extra Thumbs-->	
+	<include name="ExtraThumb">
+		<!--
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>124</height>
+			<texture background="true">default-thumb-small.png</texture>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>124</height>
+			<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+		</control>
+		-->
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>246</width>
+			<height>144</height>
+			<include>Shadow</include>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<texture background="true">default-thumb-small.png</texture>
+		</control>		
+		<control type="image">
+			<posx>13</posx>
+			<posy>13</posy>
+			<width>220</width>
+			<height>118</height>
+			<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>		
+		</control>
+	</include>
+	<include name="ExtraThumbCard">
+		<!--
+		<control type="image">
+			<posx>13</posx>
+			<posy>100</posy>
+			<width>220</width>
+			<height>97</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="40" time="400" condition="true">Conditional</animation>
+		</control>-->
+		<control type="image">
+			<posx>13</posx>
+			<posy>107</posy>
+			<width>220</width>
+			<height>48</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="40" time="0" condition="true">Conditional</animation>
+		</control>
+		<control type="image">
+			<posx>13</posx>
+			<posy>107</posy>
+			<width>220</width>
+			<height>24</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="40" time="0" condition="true">Conditional</animation>
+		</control>	
+	</include>	
+
+	<include name="ExtraThumbSelectedBorder">
+		<control type="image">
+			<posx>10</posx>
+			<posy>11</posy>
+			<width>226</width>
+			<height>146</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="ExtraTitle">
+		<control type="label">
+			<posy>108</posy>
+			<posx>18</posx>
+			<width>208</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Label]</label>
+			<font>Regular-17</font>
+		</control>
+	</include>
+	<include name="ExtraTypeTitle">
+		<control type="label">
+			<posy>132</posy>
+			<posx>18</posx>
+			<width>150</width>
+			<height>20</height>
+			<align>left</align>
+			<aligny>center</aligny>
+			<label>$INFO[ListItem.Property(extraTypeStr)]</label>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+		</control>
+		<control type="label">
+			<posy>132</posy>
+			<posx>228</posx>
+			<width>50</width>
+			<height>20</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<font>Regular-15</font>
+			<textcolor>title2</textcolor>
+			<label>$INFO[ListItem.DurationStr]</label>
+		</control>
+		
+	</include>
+	<include name="ExtraSecondTitle">
+		
+	</include>
+	
+	<include name="ExtraThumbCardMusic">
+		<control type="image">
+			<posx>13</posx>
+			<posy>137</posy>
+			<width>220</width>
+			<height>60</height>
+			<include>Card</include>
+			<animation effect="fade" start="0" end="40" time="400" condition="true">Conditional</animation>
+		</control>
+	</include>
+	<include name="ExtraTitleMusic">
+		<posy>144</posy>
+		<posx>23</posx>
+		<width>201</width>
+		<height>20</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Label]</label>
+		<font>Regular-20</font>
+		<textcolor>white</textcolor>
+	</include>
+	<include name="ExtraTypeTitleMusic">
+		<posy>168</posy>
+		<posx>23</posx>
+		<width>201</width>
+		<height>20</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<label>$INFO[ListItem.Property(extraTypeStr)]</label>
+		<font>Regular-17</font>
+		<textcolor>title2</textcolor>
+	</include>
+	
+	<include name="SmallCard">
+		<control type="group">					
+				<control type="image">
+					<posy>3</posy>
+					<posx>3</posx>
+					<width>272</width>
+					<height>60</height>
+					<include>Black</include>
+					<animation effect="fade" start="0" end="Dim60" time="0" condition="true">Conditional</animation>
+				</control>
+				<!-- infos -->
+				<control type="group">
+				
+					<posy>12</posy>
+					<posx>11</posx>
+					<control type="label">
+						<visible>Container.PlexContent(Albums)|Container.PlexContent(Artists)</visible>
+						<posy>9</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[ListItem.Artist]</label>
+						<font>Regular-18</font>
+						<textcolor>white</textcolor>
+						<align>right</align>
+					</control>
+					<control type="label">
+						<visible>Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons) | Container.PlexContent(Episodes) | Container.PlexContent(homemovies)</visible>
+						<posy>9</posy>
+						<posx>200</posx>
+						<width>180</width>
+						<label>$INFO[ListItem.Label]</label>
+						<font>Regular-18</font>
+						<textcolor>white</textcolor>
+						<align>right</align>
+					</control>
+					<control type="label">
+						<visible>Container.PlexContent(Albums)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[ListItem.Title]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+					</control>	
+					<control type="label">
+						<visible>Container.PlexContent(Artists)|Container.PlexContent(Movies)|Container.PlexContent(TVShows)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[ListItem.Genre]$INFO[ListItem.Year, &#xB7; ]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+					</control>		
+						<control type="label">
+						<visible>Container.PlexContent(Homemovies)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>$INFO[ListItem.Date]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+					</control>		
+					<!--secont title Episodes-->		
+					<control type="label">
+						<visible>Container.PlexContent(Episodes)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>
+						<label>Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+						<visible>IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))</visible>
+					</control>
+					<control type="label">
+						<visible>Container.PlexContent(Episodes)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>				
+						<label>Episode $INFO[ListItem.Episode]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+						<visible>IsEmpty(Container.Property(primaryFilterActivated))+IsEmpty(Container.Property(mixedParents))</visible>
+					</control>
+					<control type="label">
+						<visible>Container.PlexContent(Episodes)</visible>
+						<posy>32</posy>
+						<posx>200</posx>
+						<width>200</width>				
+						<label>$INFO[ListItem.TVShowTitle,, &#xB7; ]$INFO[ListItem.Season,S]$INFO[ListItem.Episode,E]</label>
+						<font>Regular-15</font>
+						<textcolor>title2</textcolor>
+						<align>right</align>
+						<visible>!IsEmpty(Container.Property(primaryFilterActivated))+!IsEmpty(Container.Property(mixedParents))</visible>
+					</control>
+					
+				</control>
+				<!-- thumb -->
+				<control type="group">
+					<posy>7</posy>
+					<posx>221</posx>				
+					<control type="image">
+						<width>50</width>
+						<height>50</height>
+						<texture>default-square-small.png</texture>
+					</control>
+					<control type="image">
+						<width>50</width>
+						<height>50</height>	
+						<texture background="true">$INFO[ListItem.Art(smallThumb)]</texture>
+						<aspectratio align="center" aligny="top">scale</aspectratio>
+						<visible>[Container.PlexContent(Episodes)+![ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | !Container.PlexContent(Episodes) | !Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+					</control>
+					<control type="image">
+						<width>50</width>
+						<height>50</height>	
+						<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+						<aspectratio align="center" aligny="top">scale</aspectratio>
+						<visible>[Container.PlexContent(Episodes)+[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)] | IsEmpty(ListItem.Art(smallThumb))</visible>
+					</control>
+				</control>	
+			</control>	
+	</include>
+	<include name="SmallCardSelectedBorder">
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>278</width>
+			<height>66</height>
+			<include>Border</include>
+		</control>
+	</include>
+	<include name="SmallCardUnwatchedOverlay">	
+		<control type="group">					
+			<control type="image">
+				<posx>7</posx>
+				<posy>12</posy>
+				<width>18</width>
+				<height>18</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)] | [[Container.PlexContent(TVShows) | Container.PlexContent(Seasons) | Container.PlexContent(Episodes)] + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>			
+			</control>
+		</control>
+	</include>
+	
+</includes>

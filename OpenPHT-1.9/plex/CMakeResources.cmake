@@ -17,7 +17,7 @@ if(COMPRESS_TEXTURES AND NOT TARGET_RPI)
 
   add_custom_command(
     OUTPUT Textures.xbt
-    COMMAND ${TEXTUREPACKER_EXE} -input ${root}/addons/skin.plex/Media -output ${CMAKE_CURRENT_BINARY_DIR}/Textures.xbt
+        COMMAND ${TEXTUREPACKER_EXE} -input ${root}/addons/skin.plex/Media -output ${CMAKE_CURRENT_BINARY_DIR}/Textures.xbt -dupecheck -use_none
     MAIN_DEPENDENCY ${MEDIA_IMAGES_PLEX_SKIN}
     DEPENDS TexturePacker
     WORKING_DIRECTORY ${WORKDIR}
@@ -120,7 +120,9 @@ if(TARGET_COMMON_DARWIN)
   )
 
 else(TARGET_COMMON_DARWIN)
-  install(FILES ${CONFIG_PLEX_INSTALL_LIBRARIES} DESTINATION ${LIBPATH} COMPONENT RUNTIME)
+  # We can't use install() macro for the library files. We'll just end up copying a bunch of symlinks.
+  # This hack calls "cmake -E copy_if_different" during install
+  install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CONFIG_PLEX_INSTALL_LIBRARIES} $ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${LIBPATH})" COMPONENT RUNTIME)
   install(FILES ${plexdir}/Resources/Credits.html DESTINATION ${RESOURCEPATH} COMPONENT RUNTIME)
 
   install(DIRECTORY ${root}/media ${root}/sounds ${root}/language DESTINATION ${RESOURCEPATH} COMPONENT RUNTIME

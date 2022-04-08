@@ -1,0 +1,1332 @@
+<?xml version="1.0"?>
+<includes>
+	<include name="PosListItemViews">
+		<posy>50</posy>
+		<posx>37</posx>
+	</include>
+	<!-- Thumbs -->
+	<include name="ListSelectedArt">
+		<!-- TV Show Banner -->
+		<control type="group">
+			<visible>Container.PlexContent(TVShows)</visible>
+			<control type="image">
+				<posx>23</posx>
+				<posy>37</posy>
+				<width>458</width>
+				<height>106</height>
+				<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+				<texture background="true" border="20">shadow.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>432</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture diffuse="mask-wide-big.png" background="true">default-banner-small.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>432</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture diffuse="mask-wide-big.png" background="true">$INFO[ListItem.Art(banner)]</texture>
+			</control>
+		</control>
+		<!-- Season Thumb deadeye -->
+		<control type="group">
+			<visible>Container.PlexContent(Seasons)</visible>
+			<control type="image">
+				<posx>23</posx>
+				<posy>37</posy>
+				<width>79</width>
+				<height>106</height>
+				<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+				<texture background="true" border="20">shadow.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>53</width>
+				<height>80</height>
+				<texture background="true">default-poster-small.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>53</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+			</control>
+		</control>
+		<!-- Episode Thumb -->
+		<control type="group">
+			<visible>Container.PlexContent(Episodes) | Container.PlexContent(HomeMovies) | [Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode)]]</visible>
+			<control type="image">
+				<posx>23</posx>
+				<posy>37</posy>
+				<width>168</width>
+				<height>106</height>
+				<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+				<texture background="true" border="20">shadow.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>142</width>
+				<height>80</height>
+				<texture background="true">default-thumb-small.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>142</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>142</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+				<visible>ListItem.Type(Episode)+[ListItem.Status(InProgress) | ListItem.Status(UnWatched)]+Skin.HasSetting(HideUnwatchedEpisodeThumb)</visible>
+			</control>
+		</control>
+		<!-- Movies Poster -->
+		<control type="group">
+			<visible>Container.PlexContent(Movies)</visible>
+			<control type="image">
+				<posx>23</posx>
+				<posy>37</posy>
+				<width>79</width>
+				<height>106</height>
+				<aspectratio scalediffuse="true" align="center">stretch</aspectratio>
+				<texture background="true" border="20">shadow.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>53</width>
+				<height>80</height>
+				<texture background="true">default-poster-small.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>53</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+			</control>
+		</control>
+		<!-- Music/Photos/Channels Square Art -->
+		<control type="group">
+			<visible>Container.PlexContent(Artists) | Container.PlexContent(Albums) | Container.PlexContent(Songs) | Container.PlexContent(Photos) | Container.PlexContent(PhotoAlbums) | [Container.PlexContent(Channels) | [Container.PlexContent(Channel) + ListItem.Type(photo)]] | [Container.PlexContent(Channel) + !ListItem.Type(clip) + !ListItem.Type(episode)]</visible>
+			<control type="image">
+				<posx>23</posx>
+				<posy>37</posy>
+				<width>106</width>
+				<height>106</height>
+				<include>Shadow</include>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>80</width>
+				<height>80</height>
+				<texture background="true">default-square-small.png</texture>
+			</control>
+			<control type="image">
+				<include>PosListItemViews</include>
+				<width>80</width>
+				<height>80</height>
+				<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+				<texture diffuse="mask-square.png" background="true">$INFO[ListItem.Art(thumb)]</texture>
+			</control>
+		</control>
+	</include>
+	<include name="ListSquareItemThumb">
+		<control type="image">
+			<include>PosListItemViews</include>
+			<width>30</width>
+			<height>30</height>
+			<texture background="true">default-square-small.png</texture>
+		</control>
+		<control type="image">
+			<include>PosListItemViews</include>
+			<width>30</width>
+			<height>30</height>
+			<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+			<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+		</control>
+		
+	</include>
+	<include name="ListPlayQueueSquareItemThumb">
+		<control type="image">
+			<include>PosListItemViews</include>
+			<width>40</width>
+			<height>40</height>
+			<texture background="true">default-square-small.png</texture>
+		</control>
+		<control type="image">
+			<include>PosListItemViews</include>
+			<width>40</width>
+			<height>40</height>
+			<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+			<texture diffuse="mask-square.png" background="true">$INFO[ListItem.Art(thumb)]</texture>
+		</control>
+	</include>
+	<include name="ListChannelTypeIcon">
+		<control type="image">
+			<posx>0</posx>
+			<posy>17</posy>
+			<width>16</width>
+			<height>16</height>
+			<texture>icon-video.png</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">keep</aspectratio>
+			<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+			<visible>ListItem.Type(video)</visible>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>17</posy>
+			<width>16</width>
+			<height>16</height>
+			<texture>icon-music.png</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">keep</aspectratio>
+			<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+			<visible>ListItem.Type(music)</visible>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>17</posy>
+			<width>16</width>
+			<height>16</height>
+			<texture>icon-photo.png</texture>
+			<aspectratio scalediffuse="false" align="center" aligny="top">keep</aspectratio>
+			<animation effect="fade" start="0" end="100" time="0" condition="true">Conditional</animation>
+			<visible>ListItem.Type(photos)</visible>
+		</control>
+	</include>
+	<include name="ListMovieTVUnwatchedOverlay">
+		<control type="group">
+			<control type="image">
+				<posy>15</posy>
+				<posx>28</posx>
+				<width>20</width>
+				<height>20</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+			</control>
+			<control type="label">
+				<posy>1</posy>
+				<posx>22</posx>
+				<width>40</width>
+				<height>50</height>
+				<label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+				<font>Regular-14</font>
+				<include>White2</include>
+				<align>right</align>
+			</control>
+			<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)] | [Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+		</control>
+	</include>
+	<!-- List -->
+	<include name="List">
+		<control type="group">
+			<visible>Control.IsVisible(58)</visible>
+			<control type="group">
+				<visible>isEmpty(Skin.String(58_BGMulti))</visible>
+				<visible>!Skin.String(58_Dim,100)</visible>
+				<visible>!Skin.String(58_Blur,1)</visible>
+				<include>BGFanart</include>
+			</control>	
+			<control type="group">
+				<visible>isEmpty(Skin.String(58_BGMulti))</visible>
+				<visible>!Skin.String(58_Dim,100)</visible>
+				<visible>Skin.String(58_Blur,1)</visible>
+				<include>BGFanartBlur</include>
+			</control>	
+				
+			<control type="image">
+				<include>FullScreenScaled</include>
+				<texture>$INFO[Skin.String(58_BGSingle)]</texture>		
+				<visible>!isEmpty(Skin.String(58_BGSingle)) + isEmpty(Skin.String(58_BGMulti))</visible>
+			</control>
+			<control type="multiimage">
+				<include>GlobalMultiImageFade</include>	
+				<info>Skin.String(58_BGMulti)</info>
+				<visible>isEmpty(Skin.String(58_BGSingle)) + !isEmpty(Skin.String(58_BGMulti))</visible>
+			</control>		
+		</control>
+		<control type="group">
+			<include>rightSideSlide</include>
+			<!--BG Dim-->		
+			<control type="group">
+				<visible>Control.IsVisible(58)</visible>
+				<visible>!Skin.String(58_Dim,100)</visible>
+				<control type="group">
+					<visible>Skin.String(58_Dim,10)</visible>
+					<include>BGDim10</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,20)</visible>
+					<include>BGDim20</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,30)</visible>
+					<include>BGDim30</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,40)</visible>
+					<include>BGDim40</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,50)</visible>
+					<include>BGDim50</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,60) | IsEmpty(Skin.String(58_Dim))</visible>
+					<include>BGDim60</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,70)</visible>
+					<include>BGDim70</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,80)</visible>
+					<include>BGDim80</include>
+				</control>
+				<control type="group">
+					<visible>Skin.String(58_Dim,90)</visible>
+					<include>BGDim90</include>
+				</control>
+			</control>		
+			<visible>!Container.PlexContent(Movie) + !Container.PlexContent(Episode) + !Container.PlexContent(Folders) + !Container.PlexContent(Clip) + !Container.PlexContent(Clips)</visible>			
+			<control type="group" id="777">
+				<include>FadeDialog</include>
+				<control type="fixedlist" id="58">
+					<viewtype label="InfoList">panel</viewtype>
+					<visible>!Container.PlexContent(Movie) + !Container.PlexContent(Episode) + !Container.PlexContent(Folders) + !Container.PlexContent(Clip) + !Container.PlexContent(Clips)</visible>
+					<posy>31</posy>
+					<posx>505</posx>
+					<width>805</width>
+					<height>655</height>
+					<onright condition="Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(58_HideScrollbar,1)">58</onright>
+					<onright condition="![Container.PlexContent(Episodes) | Container.PlexContent(Seasons) | Skin.String(58_HideScrollbar,1)]">1601</onright>
+					<pagecontrol>1601</pagecontrol>
+					<onleft>998</onleft>
+					<onup>58</onup>
+					<ondown>58</ondown>
+					<focusposition>6</focusposition>
+					<wraparound>true</wraparound>
+					<include>ItemScrollTime</include>
+					<pagecontrol>61</pagecontrol>
+					<!-- movies & tv shows -->
+					<itemlayout height="50" condition="Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)">
+						<control type="group">
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>
+							<control type="image">
+								<posx>0</posx>
+								<posy>0</posy>
+								<width>736</width>
+								<height>49</height>
+								<texture border="5">border-bottom-grey.png</texture>
+							</control>
+							<include>ListMovieTVUnwatchedOverlay</include>
+							<control type="label">
+								<posy>-1</posy>
+								<width>840</width>
+								<height>50</height>
+								<info>ListItem.Label</info>
+								<font>Regular-20</font>
+								<textcolor>Unfocused</textcolor>
+								<textoffsetx>80</textoffsetx>
+							</control>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Container.PlexContent(Movies) | Container.PlexContent(TVShows) | Container.PlexContent(Seasons)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>28</posx>
+							<posy>-41</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="group">
+							<posy>25</posy>
+							<include>ListMovieTVUnwatchedOverlay</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>135</posx>
+							<posy>0</posy>
+							<width>600</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<visible>Container.PlexContent(Movies)|Container.PlexContent(Seasons)</visible>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>135</posx>
+							<posy>0</posy>
+							<width>600</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<visible>Container.PlexContent(Movies)|Container.PlexContent(Seasons)</visible>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- filtered episodes -->
+					<itemlayout height="50" condition="[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))] | [Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents))]">
+						<control type="group">
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>
+							<control type="image">
+								<posx>0</posx>
+								<posy>0</posy>
+								<width>736</width>
+								<height>49</height>
+								<texture border="5">border-bottom-grey.png</texture>
+							</control>
+							<control type="image">
+								<posy>16</posy>
+								<posx>28</posx>
+								<width>20</width>
+								<height>20</height>
+								<info>ListItem.Overlay</info>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+							<control type="label">
+								<width>840</width>
+								<height>50</height>
+								<label>[COLOR=title2]$INFO[ListItem.TVShowTitle][/COLOR]$INFO[ListItem.Season, &#xB7; S]$INFO[ListItem.Episode, E]$INFO[ListItem.Label, &#xB7; ]</label>
+								<font>Regular-20</font>
+								<textcolor>white</textcolor>
+								<textoffsetx>80</textoffsetx>
+							</control>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))] | [Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents))]">
+						<control type="group">
+							<posx>28</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="300" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="group">
+							<posy>25</posy>
+							<control type="image">
+								<posy>16</posy>
+								<posx>28</posx>
+								<width>20</width>
+								<height>20</height>
+								<info>ListItem.Overlay</info>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">						
+							<posx>225</posx>
+							<width>525</width>
+							<height>50</height>
+							<label>$INFO[ListItem.TVShowTitle]$INFO[ListItem.Season, &#xB7; S]$INFO[ListItem.Episode, E]</label>							
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="image">
+							<posx>225</posx>
+							<posy>50</posy>
+							<width>511</width>
+							<height>1</height>
+							<texture>black.png</texture>
+							<animation effect="fade" start="0" end="30" time="0" condition="true">Conditional</animation>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>225</posx>
+							<posy>50</posy>
+							<width>525</width>
+							<height>50</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>225</posx>
+							<posy>50</posy>
+							<width>525</width>
+							<height>50</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- clips & episodes & Homemovies-->
+					<itemlayout height="50" condition="Container.PlexContent(Clips) | Container.PlexContent(Homemovies) | [Container.PlexContent(Episodes) + [IsEmpty(Container.Property(primaryFilterActivated)) | IsEmpty(Container.Property(mixedParents))]]">
+						<control type="group">
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(movies) | Container.Content(episodes)] + StringCompare(ListItem.Overlay,OverlayWatched.png)">Conditional</animation>
+							<animation effect="fade" start="100" end="28" time="400" condition="Skin.String(58_DimWatched,1)+[Container.Content(tvshows) | Container.Content(seasons)] + !IntegerGreaterThan(ListItem.Property(UnWatchedEpisodes),0)">Conditional</animation>
+							<control type="image">
+								<posx>0</posx>
+								<posy>0</posy>
+								<width>736</width>
+								<height>49</height>
+								<texture border="5">border-bottom-grey.png</texture>
+							</control>
+							<control type="image">
+								<posy>16</posy>
+								<posx>28</posx>
+								<width>20</width>
+								<height>20</height>
+								<info>ListItem.Overlay</info>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>							
+							</control>
+							<control type="label">
+								<posy>-1</posy>
+								<width>840</width>
+								<height>50</height>
+								<label>E$INFO[ListItem.Episode] &#xB7; $INFO[ListItem.Label]</label>
+								<font>Regular-20</font>
+								<textcolor>Unfocused</textcolor>
+								<textoffsetx>80</textoffsetx>
+								<visible>![Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents))]</visible>
+							</control>
+							<control type="label">
+								<posy>-1</posy>
+								<width>840</width>
+								<height>50</height>
+								<label>S$INFO[ListItem.Season] E$INFO[ListItem.Episode] &#xB7; $INFO[ListItem.Label]</label>
+								<font>Regular-20</font>
+								<textcolor>Unfocused</textcolor>
+								<textoffsetx>80</textoffsetx>
+								<visible>[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents)) + !IsEmpty(ListItem.Season)]</visible>
+							</control>
+							<control type="label">
+								<posy>-1</posy>
+								<width>840</width>
+								<height>50</height>
+								<label>$LOCALIZE[31145] &#xB7; $INFO[ListItem.Label]</label>
+								<font>Regular-20</font>
+								<textcolor>Unfocused</textcolor>
+								<textoffsetx>80</textoffsetx>
+								<visible>[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents)) + IsEmpty(ListItem.Season)]</visible>
+							</control>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Container.PlexContent(Clips) | Container.PlexContent(Homemovies) | [Container.PlexContent(Episodes) + [IsEmpty(Container.Property(primaryFilterActivated)) | IsEmpty(Container.Property(mixedParents))]]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>28</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="300" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="group">
+							<posy>25</posy>
+							<control type="image">
+								<posy>16</posy>
+								<posx>28</posx>
+								<width>20</width>
+								<height>20</height>
+								<info>ListItem.Overlay</info>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>230</posx>
+							<width>525</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>230</posx>
+							<width>525</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- photos -->
+					<itemlayout height="50" condition="Container.PlexContent(Photos) | Container.PlexContent(PhotoAlbums)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>49</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="image">
+							<posx>5</posx>
+							<posy>18</posy>
+							<width>15</width>
+							<height>15</height>
+							<texture>icon-photoalbum.png</texture>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="group">
+							<posx>-2</posx>
+							<posy>-40</posy>
+							<include>ListSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<posy>-1</posy>
+							<info>ListItem.Label</info>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Container.PlexContent(Photos) | Container.PlexContent(PhotoAlbums)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="image">
+							<posx>15</posx>
+							<posy>70</posy>
+							<width>15</width>
+							<height>15</height>
+							<texture>icon-photoalbum.png</texture>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- channels -->
+					<itemlayout height="50" condition="Container.PlexContent(Channels) | [Container.PlexContent(Channel) + ListItem.Type(photo)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>50</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<include>ListChannelTypeIcon</include>
+						<control type="group">
+							<posx>-2</posx>
+							<posy>-40</posy>
+							<include>ListSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>$INFO[ListItem.Label][COLOR=title2]$INFO[ListItem.Property(ServerName), &#xB7; ][/COLOR]</label>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Container.PlexContent(Channels) | [Container.PlexContent(Channel) + ListItem.Type(photo)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="image">
+							<posx>15</posx>
+							<posy>70</posy>
+							<width>15</width>
+							<height>15</height>
+							<texture>icon-photoalbum.png</texture>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<itemlayout height="50" condition="[Container.PlexContent(Channel) + !ListItem.Type(clip) + !ListItem.Type(episode)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>49</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<include>ListChannelTypeIcon</include>
+						<control type="group">
+							<posx>-2</posx>
+							<posy>-40</posy>
+							<include>ListSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>$INFO[ListItem.Label][COLOR=title2]$INFO[ListItem.Property(ServerName), &#xB7; ][/COLOR]</label>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="[Container.PlexContent(Channel) + !ListItem.Type(clip) + !ListItem.Type(episode)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="image">
+							<posx>15</posx>
+							<posy>70</posy>
+							<width>15</width>
+							<height>15</height>
+							<texture>icon-photoalbum.png</texture>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<itemlayout height="50" condition="[Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode)]]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>49</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="image">
+							<posx>28</posx>
+							<posy>15</posy>
+							<width>20</width>
+							<height>20</height>
+							<info>ListItem.Overlay</info>
+							<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+							<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<info>ListItem.Label</info>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>80</textoffsetx>
+							<visible>![Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents))]</visible>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>S$INFO[ListItem.Season] E$INFO[ListItem.Episode] &#xB7; $INFO[ListItem.Label]</label>
+							<font>Regular-20</font>
+							<include>White2</include>
+							<textoffsetx>80</textoffsetx>
+							<visible>[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents)) + !IsEmpty(ListItem.Season)]</visible>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>$LOCALIZE[31145] &#xB7; $INFO[ListItem.Label]</label>
+							<font>Regular-20</font>
+							<include>White2</include>
+							<textoffsetx>80</textoffsetx>
+							<visible>[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(mixedParents)) + IsEmpty(ListItem.Season)]</visible>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="[Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode)]]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>28</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="group">
+							<posy>25</posy>
+							<control type="image">
+								<posy>16</posy>
+								<posx>28</posx>
+								<width>20</width>
+								<height>20</height>
+								<info>ListItem.Overlay</info>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>55</posx>
+							<width>900</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>170</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<posx>55</posx>
+							<width>900</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<textoffsetx>170</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- shared content main -->
+					<itemlayout height="50" condition="Window.IsActive(mysharedcontent)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>49</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<include>ListChannelTypeIcon</include>
+						<control type="group">
+							<posx>-2</posx>
+							<posy>-40</posy>
+							<include>ListSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>$INFO[ListItem.Label][COLOR=title2]$INFO[ListItem.Property(SourceTitle), &#xB7; ][/COLOR][COLOR=title2]$INFO[ListItem.Property(ServerName), &#xB7; ][/COLOR]</label>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Window.IsActive(mysharedcontent)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<!--flint include missing<include>ListSelectedSquareItemThumb</include>-->
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">
+							<width>850</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<!--<shadowcolor>FF222222</shadowcolor>-->
+							<textoffsetx>120</textoffsetx>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- music -->
+					<itemlayout height="50" condition="!Window.IsActive(plexplayqueue) + [Container.PlexContent(Artists) | Container.PlexContent(Albums) | Container.PlexContent(Songs)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>49</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="image">
+							<posx>5</posx>
+							<posy>18</posy>
+							<width>15</width>
+							<height>15</height>
+							<texture>icon-photoalbum.png</texture>
+							<visible>ListItem.Type(photoAlbum)</visible>
+						</control>
+						<control type="group">
+							<posx>-2</posx>
+							<posy>-40</posy>
+							<include>ListSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<info>ListItem.Label</info>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+							<visible>[IsEmpty(Container.Property(primaryFilterActivated)) + Container.PlexContent(Albums)] | [IsEmpty(Container.Property(primaryFilterActivated)) + Container.PlexContent(Artists)]</visible>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>[COLOR=title2]$INFO[ListItem.Artist][/COLOR]$INFO[ListItem.Label, &#xB7; ]</label>
+							<font>Regular-20</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>100</textoffsetx>
+							<visible>!IsEmpty(Container.Property(primaryFilterActivated)) + Container.PlexContent(Albums)</visible>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<info>ListItem.Label</info>
+							<font>Regular-20</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>100</textoffsetx>
+							<visible>IsEmpty(Container.Property(mixedParents)) + Container.PlexContent(Songs)</visible>
+						</control>
+						<control type="label">
+							<width>840</width>
+							<height>50</height>
+							<label>[COLOR=title2]$INFO[ListItem.Album][/COLOR]$INFO[ListItem.Label, &#xB7; ]</label>
+							<font>Regular-20</font>
+							<textcolor>Focused</textcolor>
+							<textoffsetx>100</textoffsetx>
+							<visible>!IsEmpty(Container.Property(mixedParents)) + Container.PlexContent(Songs)</visible>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="!Window.IsActive(plexplayqueue) + [Container.PlexContent(Artists) | Container.PlexContent(Albums) | Container.PlexContent(Songs)]">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="group">
+							<visible>!IsEmpty(Container.Property(PrimaryFilterActivated))</visible>
+							<control type="label">								
+								<posx>115</posx>
+								<width>675</width>
+								<height>50</height>
+								<info>ListItem.Artist</info>
+								<aligny>center</aligny>
+								<font>Regular-32</font>
+								<textcolor>Focused</textcolor>
+								<animation type="Focus" reversible="false">
+									<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+									<effect type="fade" start="0" end="100" time="450"/>
+								</animation>
+							</control>
+							<control type="image">
+								<posx>115</posx>
+								<posy>50</posy>
+								<width>635</width>
+								<height>1</height>
+								<texture>black.png</texture>
+								<animation effect="fade" start="0" end="30" time="0" condition="true">Conditional</animation>
+							</control>
+							<control type="label">
+								<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+								<posx>115</posx>
+								<posy>50</posy>
+								<width>675</width>
+								<height>50</height>
+								<info>ListItem.Label</info>
+								<aligny>center</aligny>
+								<font>Regular-32</font>
+								<textcolor>Focused</textcolor>
+								<animation type="Focus" reversible="false">
+									<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+									<effect type="fade" start="0" end="100" time="450"/>
+								</animation>
+							</control>
+							<control type="label">
+								<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+								<posx>115</posx>
+								<posy>50</posy>
+								<width>675</width>
+								<height>50</height>
+								<info>ListItem.Label</info>
+								<aligny>center</aligny>
+								<font>Regular-32</font>
+								<textcolor>ThemeColor</textcolor>
+								<animation type="Focus" reversible="false">
+									<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+									<effect type="fade" start="0" end="100" time="450"/>
+								</animation>
+							</control>
+						</control>
+						<control type="label">
+							<visible>!Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<visible>IsEmpty(Container.Property(PrimaryFilterActivated))</visible>
+							<posx>120</posx>
+							<width>595</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<visible>Skin.HasSetting(FocusedTextThemeColor)</visible>
+							<visible>IsEmpty(Container.Property(PrimaryFilterActivated))</visible>
+							<posx>120</posx>
+							<width>595</width>
+							<height>100</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-32</font>
+							<textcolor>FocusedThemeColor</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+					<!-- Play Queues -->
+					<!-- music -->
+					<itemlayout height="50" condition="Window.IsActive(plexplayqueue) + Container.PlexContent(Songs)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>50</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-7</posx>
+							<posy>-45</posy>
+							<include>ListPlayQueueSquareItemThumb</include>
+						</control>
+						<control type="label">
+							<width>800</width>
+							<height>50</height>
+							<label>$INFO[ListItem.Label][COLOR=title2]$INFO[ListItem.Artist, &#xB7; ][/COLOR]</label>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+							<textoffsetx>100</textoffsetx>
+						</control>
+						<control type="label">
+							<posx>805</posx>
+							<width>100</width>
+							<height>50</height>
+							<label>$INFO[ListItem.Duration]</label>
+							<align>right</align>
+							<font>Regular-20</font>
+							<textcolor>Unfocused</textcolor>
+						</control>
+					</itemlayout>
+					<focusedlayout height="100" condition="Window.IsActive(plexplayqueue) + Container.PlexContent(Songs)">
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>736</width>
+							<height>100</height>
+							<texture border="5">border-bottom-grey.png</texture>
+						</control>
+						<control type="group">
+							<posx>-27</posx>
+							<posy>-40</posy>
+							<include>ListSelectedArt</include>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="150,0" start="85" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="650"/>
+							</animation>
+						</control>
+						<control type="label">
+							<posy>5</posy>
+							<posx>120</posx>
+							<width>550</width>
+							<height>45</height>
+							<info>ListItem.Label</info>
+							<aligny>center</aligny>
+							<font>Regular-28</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<posy>5</posy>
+							<posx>805</posx>
+							<width>120</width>
+							<height>45</height>
+							<info>ListItem.Duration</info>
+							<aligny>center</aligny>
+							<align>right</align>
+							<font>Regular-28</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="image">
+							<posx>120</posx>
+							<posy>51</posy>
+							<width>700</width>
+							<height>1</height>
+							<texture>black.png</texture>
+							<animation effect="fade" start="0" end="30" time="0" condition="true">Conditional</animation>
+						</control>
+						<control type="label">
+							<posx>120</posx>
+							<posy>57</posy>
+							<width>525</width>
+							<height>40</height>
+							<info>ListItem.Artist</info>
+							<aligny>center</aligny>
+							<font>Regular-24</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+						<control type="label">
+							<posx>805</posx>
+							<posy>57</posy>
+							<width>525</width>
+							<height>40</height>
+							<info>ListItem.Album</info>
+							<aligny>center</aligny>
+							<align>right</align>
+							<font>Regular-24</font>
+							<textcolor>Focused</textcolor>
+							<animation type="Focus" reversible="false">
+								<effect type="zoom" center="0,0" start="90" end="100" time="200" tween="Linear" easing="out"/>
+								<effect type="fade" start="0" end="100" time="450"/>
+							</animation>
+						</control>
+					</focusedlayout>
+				</control>
+			</control>
+		</control>
+	</include>
+	
+	
+	
+	
+</includes>

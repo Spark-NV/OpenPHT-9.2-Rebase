@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<colors>
+	<color name="ThemeColor">FFCC7B19</color>
+	<color name="overlay">FFCC7B19</color>
+	<color name="episodeoverlay">FFCC7B19</color>
+	
+	<color name="Selected">FFCC7B19</color>
+	<color name="Focused">FFffffff</color>
+	<color name="Unfocused">FFAFAFAF</color>
+	<color name="FocusedThemeColor">FFCC7B19</color>
+	
+	<color name="ButtonFocused">FFffffff</color>
+	<color name="ButtonUnfocused">FF777777</color>
+	
+	<color name="Disabled">FF505050</color>
+
+	<color name="mediatag">FF919191</color>
+	<color name="title">ffffffff</color>
+	<color name="title2">FF999999</color>
+	<color name="separator">FFCC7B19</color>
+
+</colors>

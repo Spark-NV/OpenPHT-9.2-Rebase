@@ -1,0 +1,728 @@
+<?xml version="1.0"?>
+<includes>
+	<!-- ListItemFullInfo -->
+	<include name="ListItemFullInfoThumbSize">
+		<posy>30</posy>
+		<posx>20</posx>
+		<width>464</width>
+		<height>256</height>
+		<fadetime>200</fadetime>
+		<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+	</include>
+	
+	<variable name="ListItemTitleBE">
+		<value condition="!Container.PlexContent(Episodes)">$INFO[ListItem.Label]</value>
+		<value condition="[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))]">$INFO[ListItem.TVShowTitle,, &#xB7; ]S$INFO[ListItem.Season] E$INFO[ListItem.Episode]$INFO[ListItem.Label, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + IsEmpty(Container.Property(mixedParents))]">E$INFO[ListItem.Episode] $INFO[ListItem.Label, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated))+ !IsEmpty(Container.Property(mixedParents))]">S$INFO[ListItem.Season] E$INFO[ListItem.Episode]$INFO[ListItem.Label, &#xB7; ]</value>
+	</variable>
+	<variable name="ListItemTitleRightBE">
+		<value condition="!Container.PlexContent(Episodes)">$INFO[ListItem.Label]</value>
+		<value condition="[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))]">$INFO[ListItem.Label,, &#xB7; ]S$INFO[ListItem.Season] E$INFO[ListItem.Episode]$INFO[ListItem.TVShowTitle, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + IsEmpty(Container.Property(mixedParents))]">$INFO[ListItem.Label,, &#xB7; ]E$INFO[ListItem.Episode]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated))+ !IsEmpty(Container.Property(mixedParents))]">$INFO[ListItem.Label,, &#xB7; ]S$INFO[ListItem.Season] E$INFO[ListItem.Episode]</value>
+	</variable>
+	
+	<variable name="ListItemFullInfoTitle">
+		<value condition="ListItem.Type(episode) + !Container.PlexContent(Episodes) + !Container.PlexContent(Channel)">$INFO[ListItem.TVShowTitle]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated))">$INFO[ListItem.Label]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Channel)">$INFO[Container.FolderName]</value>
+		<value condition="ListItem.Type(movie)">$INFO[ListItem.Label]</value>
+		<value condition="ListItem.Type(artist)">$INFO[ListItem.Label]</value>
+		<value condition="ListItem.Type(album) | Container.PlexContent(Songs) | [Container.PlexContent(Channel) + Skin.String(SectionType,music)]">$INFO[ListItem.Artist]</value>
+		<value condition="[Container.PlexContent(Albums) + !ListItem.Type(album)] | Container.PlexContent(Seasons)">$INFO[Container.Property(parentTitle)]</value>		
+		<value condition="ListItem.Type(episode) + !IsEmpty(Container.Property(primaryFilterActivated))">$INFO[ListItem.Label]</value>
+		<value>$INFO[ListItem.Label]</value>
+	</variable>
+	<variable name="ListItemFullInfoFirstTitleBE">
+		<value condition="Window.IsActive(mysharedcontent)">$INFO[ListItem.Property(ServerName)]</value>
+		
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + IsEmpty(Container.Property(mixedParents))">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))">$INFO[ListItem.TVShowTitle] &#xB7; S$INFO[ListItem.Season] E$INFO[ListItem.Episode]</value>
+		
+		<value condition="ListItem.Type(episode) + !Container.PlexContent(Episodes) + !Container.PlexContent(Channel)">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]$INFO[ListItem.Date, &#xB7; ]</value>	
+
+		<value condition="[ListItem.Type(movie) + !Container.PlexContent(Homemovies)] | Container.PlexContent(TVShows)">[UPPERCASE]$INFO[ListItem.Genre][/UPPERCASE]</value>
+		<value condition="[ListItem.Type(movie) + Container.PlexContent(Homemovies)] | [Container.PlexContent(Channel) + ListItem.Type(clip)]">$INFO[ListItem.Date]</value>
+		<value condition="ListItem.Type(season) + !Container.PlexContent(Seasons)">$LOCALIZE[32101]: $INFO[ListItem.Property(LeafCount)]</value>
+		<value condition="Container.PlexContent(Seasons)">$INFO[ListItem.Genre]</value>
+		<value condition="[!Container.PlexContent(Albums) + ListItem.Type(album) + !IsEmpty(ListItem.Album) + !Container.PlexContent(Channel)] | [Container.PlexContent(Channel) + Skin.String(SectionType,music) + !ListItem.Type(album)]">$INFO[ListItem.Album]</value>
+		<value condition="[Container.PlexContent(Channel) + Skin.String(SectionType,music) + ListItem.Type(album)]">$INFO[ListItem.Year]</value>
+		<value condition="ListItem.Type(clip) + IsEmpty(ListItem.Property(Recommender))">$INFO[ListItem.Property(sourceTitle)]</value>
+		<value condition="ListItem.Type(clip) + !IsEmpty(ListItem.Property(Recommender))">$INFO[ListItem.Property(Recommender)]$INFO[ListItem.Property(sourceTitle), &#xB7; ]</value>
+		<value condition="ListItem.Type(photo)">$INFO[ListItem.Date]</value>
+		<value condition="ListItem.Type(photoAlbum)">Album</value>
+		<value condition="ListItem.Type(artist)">$INFO[ListItem.Genre]</value>
+		<value condition="ListItem.Type(album)">$INFO[ListItem.Album]</value>
+		<!-- BUG
+		<value condition="Container.PlexContent(Albums)|Container.PlexContent(Artists)">$INFO[ListItem.Property(LeafCount)] $LOCALIZE[32106]$INFO[ListItem.Year, &#xB7; ]</value>
+		-->
+		<value condition="Container.PlexContent(Songs)">$INFO[ListItem.Album]</value>
+	</variable>	
+	<variable name="ListItemFullInfoFirstTitleBESmall">
+		<value condition="Window.IsActive(mysharedcontent)">$INFO[ListItem.Property(ServerName)]</value>	
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + IsEmpty(Container.Property(mixedParents))">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]</value>	
+		<value condition="ListItem.Type(episode) + !Container.PlexContent(Episodes) + !Container.PlexContent(Channel)">Season $INFO[ListItem.Season] &#xB7; Episode $INFO[ListItem.Episode]$INFO[ListItem.Date, &#xB7; ]</value>	
+		<value condition="[ListItem.Type(movie) + !Container.PlexContent(Homemovies)] | Container.PlexContent(TVShows)">$INFO[ListItem.Genre]</value>
+		<value condition="[ListItem.Type(movie) + Container.PlexContent(Homemovies)] | [Container.PlexContent(Channel) + ListItem.Type(clip)]">$INFO[ListItem.Date]</value>
+		<value condition="ListItem.Type(season) + !Container.PlexContent(Seasons)">$LOCALIZE[32101]: $INFO[ListItem.Property(LeafCount)]</value>
+		<value condition="Container.PlexContent(Seasons)">$INFO[ListItem.Genre]</value>
+		<value condition="[!Container.PlexContent(Albums) + ListItem.Type(album) + !IsEmpty(ListItem.Album) + !Container.PlexContent(Channel)] | [Container.PlexContent(Channel) + Skin.String(SectionType,music) + !ListItem.Type(album)]">$INFO[ListItem.Album]</value>
+		<value condition="[Container.PlexContent(Channel) + Skin.String(SectionType,music) + ListItem.Type(album)]">$INFO[ListItem.Year]</value>
+		<value condition="ListItem.Type(clip) + IsEmpty(ListItem.Property(Recommender))">$INFO[ListItem.Property(sourceTitle)]</value>
+		<value condition="ListItem.Type(clip) + !IsEmpty(ListItem.Property(Recommender))">$INFO[ListItem.Property(Recommender)]$INFO[ListItem.Property(sourceTitle), &#xB7; ]</value>
+		<value condition="ListItem.Type(photo)">$INFO[ListItem.Date]</value>
+		<value condition="ListItem.Type(photoAlbum)">Album</value>
+		<value condition="ListItem.Type(artist)">$INFO[ListItem.Genre]</value>
+		<value condition="ListItem.Type(album)">$INFO[ListItem.Album]</value>
+		<!-- BUG
+		<value condition="Container.PlexContent(Albums)|Container.PlexContent(Artists)">$INFO[ListItem.Property(LeafCount)] $LOCALIZE[32106]$INFO[ListItem.Year, &#xB7; ]</value>
+		-->
+		<value condition="Container.PlexContent(Songs)">$INFO[ListItem.Album]</value>
+	</variable>	
+	<variable name="ListItemFullInfoSecondTitleBE">
+		<value condition="ListItem.Type(movie) + !Container.PlexContent(Homemovies)">$INFO[ListItem.DurationStr]$INFO[ListItem.Year, &#xB7; ]$INFO[ListItem.Property(mediatag-Contentrating), &#xB7; ]</value>
+		<value condition="ListItem.Type(movie) + Container.PlexContent(Homemovies)">$INFO[ListItem.DurationStr]</value>
+		<value condition="Window.IsActive(mysharedcontent)">$INFO[ListItem.Property(SourceTitle)]</value>
+		<value condition="ListItem.Type(episode) + !Container.PlexContent(Episodes)">$INFO[ListItem.Label]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes)">$INFO[ListItem.DurationStr]$INFO[ListItem.Date, &#xB7; ]$INFO[ListItem.Property(mediatag-Contentrating), &#xB7; ]</value>
+		<value condition="Container.PlexContent(TVShows) | Container.PlexContent(Seasons)">$INFO[ListItem.episode,, $LOCALIZE[20360] &#xB7; ]$INFO[ListItem.Year,, &#xB7; ]$INFO[ListItem.Property(mediatag-Contentrating)]</value>
+		<value condition="ListItem.Type(clip)">$INFO[ListItem.DurationStr]</value>
+		<value condition="[Container.PlexContent(Albums) + !ListItem.Type(album)]">$INFO[ListItem.Label]</value>
+		<value condition="Container.PlexContent(Channels)">$INFO[ListItem.Property(ServerName)]</value>
+		<value condition="Container.PlexContent(Songs) | [Container.PlexContent(Channel) + Skin.String(SectionType,music)]">$INFO[ListItem.Label]$INFO[ListItem.DurationStr, &#xB7; ]</value>	
+	</variable>		
+	<variable name="ListItemFullInfoSecondTitleBESmall">
+		<value condition="ListItem.Type(movie) + !Container.PlexContent(Homemovies)">$INFO[ListItem.DurationStr]$INFO[ListItem.Year, &#xB7; ]</value>	
+		<value condition="ListItem.Type(movie) + Container.PlexContent(Homemovies)">$INFO[ListItem.DurationStr]</value>
+		<value condition="Window.IsActive(mysharedcontent)">$INFO[ListItem.Property(SourceTitle)]</value>
+		<value condition="ListItem.Type(episode) + !Container.PlexContent(Episodes)">$INFO[ListItem.Label]</value>
+		<value condition="ListItem.Type(episode) + Container.PlexContent(Episodes)">$INFO[ListItem.DurationStr]$INFO[ListItem.Date, &#xB7; ]</value>
+		<value condition="ListItem.Type(clip)">$INFO[ListItem.DurationStr]</value>
+		<value condition="ListItem.Type(artist)">$INFO[ListItem.Genre]</value>
+		<value condition="ListItem.Type(album)">$INFO[ListItem.Album]</value>
+		<value condition="Container.PlexContent(TVShows) | Container.PlexContent(Seasons)">$INFO[ListItem.episode,, $LOCALIZE[20360]]$INFO[ListItem.Year, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Albums) + !ListItem.Type(album)]">$INFO[ListItem.Label]</value>
+		<value condition="Container.PlexContent(Channels)">$INFO[ListItem.Property(ServerName)]</value>
+		<value condition="Container.PlexContent(Songs) | [Container.PlexContent(Channel) + Skin.String(SectionType,music)]">$INFO[ListItem.Label]$INFO[ListItem.DurationStr, &#xB7; ]</value>	
+	</variable>	
+	<variable name="ListItemEasyListSecondTitle">
+		<value condition="Container.PlexContent(Movies) | Container.PlexContent(TVShows)">$INFO[ListItem.Year,, &#xB7; ]$INFO[ListItem.Property(Rating)]</value>
+		<value condition="Container.PlexContent(HomeMovies)">$INFO[ListItem.Date]</value>
+		<value condition="Container.PlexContent(Seasons)">$INFO[ListItem.episode,, $LOCALIZE[20360] &#xB7; ]$INFO[ListItem.Property(Rating)]</value>
+		<value condition="Container.PlexContent(Episodes)">$INFO[ListItem.Date,, &#xB7; ]$INFO[ListItem.Property(Rating)]</value>
+		<value condition="Container.PlexContent(Albums)">$INFO[ListItem.Artist]$INFO[ListItem.Year, &#xB7; ]</value>
+		<value condition="Container.PlexContent(Artists)">$INFO[ListItem.Genre]</value>
+		<value condition="Container.PlexContent(Songs)">$INFO[ListItem.Album,, &#xB7; ]$INFO[ListItem.DurationStr]</value>
+		<value condition="$LOCALIZE[3]">Container.PlexContent(Channels)+ ListItem.Type(video)</value>
+		<value condition="$LOCALIZE[2]">Container.PlexContent(Channels)+ ListItem.Type(music)</value>
+		<value condition="$LOCALIZE[1]">Container.PlexContent(Channels)+ ListItem.Type(photos)</value>
+	</variable>
+	
+	
+	<variable name="ListItemFanartListFirstTitle">
+		<value condition="!Container.PlexContent(Episodes)">$INFO[ListItem.Label]</value>
+		<value condition="[Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated)) + !IsEmpty(Container.Property(mixedParents))]">$INFO[ListItem.TVShowTitle,, &#xB7; ] &#xB7; S$INFO[ListItem.Season] E$INFO[ListItem.Episode] $INFO[ListItem.Label,, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated)) + IsEmpty(Container.Property(mixedParents))]">E$INFO[ListItem.Episode] $INFO[ListItem.Label, &#xB7; ]</value>
+		<value condition="[Container.PlexContent(Episodes) + IsEmpty(Container.Property(primaryFilterActivated))+ !IsEmpty(Container.Property(mixedParents))]">S$INFO[ListItem.Season] E$INFO[ListItem.Episode] $INFO[ListItem.Label, &#xB7; ]</value>
+
+	</variable>
+	<variable name="ListItemFanartListSecondTitle">
+		<value condition="Container.PlexContent(Movies) | Container.PlexContent(TVShows)">$INFO[ListItem.DurationStr]$INFO[ListItem.Genre, &#xB7; ]$INFO[ListItem.Country, &#xB7; ]$INFO[ListItem.Director, &#xB7; ]$INFO[ListItem.Property(mediaTag-contentRating), &#xB7; ]</value>
+		<value condition="Container.PlexContent(HomeMovies)">$INFO[ListItem.DurationStr]$INFO[ListItem.Date, &#xB7; ]</value>
+		<value condition="Container.PlexContent(Seasons)">$INFO[ListItem.episode,, $LOCALIZE[20360] &#xB7; ]</value>
+		<value condition="Container.PlexContent(Episodes)">$INFO[ListItem.DurationStr]$INFO[ListItem.Date, &#xB7; ]</value>
+		<value condition="$LOCALIZE[3]">Container.PlexContent(Channels)+ ListItem.Type(video)</value>
+		<value condition="$LOCALIZE[2]">Container.PlexContent(Channels)+ ListItem.Type(music)</value>
+		<value condition="$LOCALIZE[1]">Container.PlexContent(Channels)+ ListItem.Type(photos)</value>
+	</variable>
+		
+	
+	
+
+	<variable name="ListItemPoster">
+		<value condition="ListItem.Type(episode)+IsEmpty(Container.Property(mixedParents))+!IsEmpty(Container.Thumb)">$INFO[Container.Thumb]</value>
+		<value condition="ListItem.Type(episode)+!IsEmpty(Container.Property(mixedParents))+!IsEmpty(ListItem.Art(parentThumb))">$INFO[ListItem.Art(parentThumb)]</value>
+		<value condition="ListItem.Type(episode)+!IsEmpty(Container.Property(mixedParents))+IsEmpty(ListItem.Art(parentThumb))">$INFO[ListItem.Art(GrandparentThumb)]</value>
+		<value condition="ListItem.Type(episode)+[[IsEmpty(Container.Thumb)+IsEmpty(Container.Property(mixedParents))] | [!IsEmpty(Container.Property(mixedParents))+IsEmpty(ListItem.Art(parentThumb))]]">$INFO[ListItem.Art(poster)]</value>
+		<value condition="ListItem.Type(season)+!IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value condition="ListItem.Type(season)+IsEmpty(ListItem.Art(thumb))">$INFO[Container.Thumb]</value>
+		<value condition="!ListItem.Type(season)+!ListItem.Type(episode)">$INFO[ListItem.Art(thumb)]</value>	
+	</variable>
+	<include name="ListItemUnwatchedCount">
+		<control type="grouplist">
+			<visible>[Container.PlexContent(TVShows) | Container.PlexContent(Seasons)]</visible>
+			<width>310</width>
+			<height>20</height>
+			<align>left</align>
+			<posy>64</posy>
+			<orientation>horizontal</orientation>
+			<itemgap>5</itemgap>
+			<control type="label">
+				<width min="0" max="150">auto</width>
+				<height>17</height>
+				<label>$INFO[ListItem.Year]</label>
+				<font>smallCaps</font>
+				<scroll>false</scroll>
+				<textcolor>title2</textcolor>
+				<wrapmultiline>false</wrapmultiline>
+				<visible>!Container.PlexContent(Seasons)</visible>
+			</control>
+			<control type="label">
+				<width min="0" max="150">auto</width>
+				<height>17</height>
+				<label>$INFO[ListItem.episode,&#xB7; , $LOCALIZE[20360]]</label>
+				<font>smallCaps</font>
+				<scroll>false</scroll>
+				<textcolor>title2</textcolor>
+				<wrapmultiline>false</wrapmultiline>
+				<visible>!Container.PlexContent(Seasons)</visible>
+			</control>
+			<control type="label">
+				<width min="10" max="150">auto</width>
+				<height>17</height>
+				<label>$INFO[ListItem.Label]</label>
+				<font>smallCaps</font>
+				<scroll>false</scroll>
+				<textcolor>title2</textcolor>
+				<wrapmultiline>false</wrapmultiline>
+				<visible>Container.PlexContent(Seasons)</visible>
+			</control>
+			
+			<control type="label">
+				<width min="0" max="20">auto</width>
+				<height>17</height>
+				<label>&#xB7;</label>
+				<font>smallCaps</font>
+				<scroll>false</scroll>
+				<textcolor>title2</textcolor>
+				<wrapmultiline>false</wrapmultiline>
+				<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+			</control>
+			<control type="image">
+				<height>17</height>
+				<width min="1" max="20">auto</width>
+				<texture>OverlayUnwatched.png</texture>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+				<aspectratio>keep</aspectratio>
+				<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+			</control>
+			<control type="label">
+				<width min="10" max="50">auto</width>
+				<height>17</height>
+				<label>$INFO[ListItem.Property(UnwatchedEpisodes)]</label>
+				<font>smallCaps</font>
+				<scroll>false</scroll>
+				<textcolor>title2</textcolor>
+				<wrapmultiline>false</wrapmultiline>
+				<visible>[Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)]</visible>
+			</control>	
+		</control>
+	</include>
+
+	<variable name="ListItemFullInfoPlot">
+		<value condition="!IsEmpty(ListItem.Plot)+!ListItem.Type(episode)">$INFO[ListItem.Plot]</value>
+		<value condition="!IsEmpty(ListItem.Plot)+ ListItem.Type(episode) + [ListItem.Status(Watched) | [!Skin.HasSetting(HidePlotForUnwatched) + [ListItem.Status(InProgress) | ListItem.Status(UnWatched)]]]">$INFO[ListItem.Plot]</value>
+		<value condition="!IsEmpty(ListItem.Plot)+ [Container.PlexContent(Episodes) + !IsEmpty(Container.Property(primaryFilterActivated))] + [ListItem.Status(Watched) | [!Skin.HasSetting(HidePlotForUnwatched) + [ListItem.Status(InProgress) | ListItem.Status(UnWatched)]]]">$INFO[ListItem.Plot]</value>
+		<value condition="!IsEmpty(ListItem.Plot)+ ListItem.Type(episode) + [Skin.HasSetting(HidePlotForUnwatched) + [ListItem.Status(InProgress) | ListItem.Status(UnWatched)] + !IsEmpty(ListItem.Plot)]">$LOCALIZE[32105]</value>			
+		<value condition="IsEmpty(ListItem.Plot) + IsEmpty(Container.Property(summary)) + !IsEmpty(ListItem.Property(summary))">$INFO[ListItem.Property(summary)]</value>
+		<value condition="IsEmpty(ListItem.Plot) + !IsEmpty(Container.Property(summary))+ IsEmpty(ListItem.Property(summary))">$INFO[Container.Property(summary)]</value>
+		<value condition="IsEmpty(ListItem.Plot) + IsEmpty(Container.Property(summary)) +!Container.PlexContent(Channels)+!Container.PlexContent(Channel)">$LOCALIZE[32103]</value>
+	</variable>
+	<include name="ListItemFullInfoFlags">
+		<control type="grouplist">
+			<width>420</width>
+			<align>center</align>
+			<posy>27</posy>
+			<orientation>horizontal</orientation>
+			<itemgap>36</itemgap>
+			<include>MediaFlagsBE</include>
+		</control>
+		<!--
+		<control type="grouplist">
+			<width>420</width>
+			<align>center</align>
+			<posy>0</posy>
+			<orientation>horizontal</orientation>
+			<itemgap>36</itemgap>
+			<include>MediaFlagsBEText</include>
+		</control>
+		-->
+		
+	</include>
+	<include name="ListItemFullInfoLeftSlide">
+		<animation effect="slide" start="0" end="-74" time="400" condition="[Container.PlexContent(Albums) + ![Container.PlexFilter(Albums) | Container.PlexFilter(recentlyAdded) | Container.PlexFilter(All)]] | Container.PlexContent(Channels) | [Container.PlexContent(Channel) + ![ListItem.Type(clip) | ListItem.Type(episode) | ListItem.Type(song)]] | Window.IsActive(mysharedcontent)">Conditional</animation>
+	</include>
+	<include name="ListItemFullInfoThumbCardUnwatchedOverlay">
+		<control type="group">
+			<control type="image">
+				<posy>206</posy>
+				<posx>370</posx>
+				<width>30</width>
+				<height>30</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+			</control>
+			<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)] | [Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | Container.PlexContent(Episodes)</visible>
+		</control>
+	</include>
+	<include name="ListItemFullInfoThumbCardUnwatchedOverlayNoFilter">
+		<control type="group">
+			<control type="image">
+				<posy>247</posy>
+				<posx>444</posx>
+				<width>30</width>
+				<height>30</height>
+				<info>ListItem.Overlay</info>
+				<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+				<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+			</control>
+			<visible>[Container.PlexContent(Movies) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsMovies)] | [Container.PlexContent(TVShows) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | [Container.PlexContent(Seasons) + [ListItem.Status(Unwatched) | ListItem.Status(InProgress)] + !Skin.HasSetting(HideUnwatchedIconsTVShows)] | Container.PlexContent(Episodes)</visible>
+		</control>
+	</include>
+	
+	<!-- left Infos for List and Posterinfo -->
+	<include name="ListItemFullInfo">
+		<control type="group">
+			<include>FadeDialog</include>
+			<visible>[Control.IsVisible(58) | Control.IsVisible(552) | Control.IsVisible(611)]</visible>
+			<include>rightSideSlide</include>
+			<control type="group" id="999">
+				<posx>0</posx>
+				<posy>0</posy>
+				<height>25</height>
+				<control type="group">					
+					<!-- orange separator -->
+					<control type="image">
+						<posx>464</posx>
+						<posy>0</posy>
+						<width>1</width>
+						<height>720</height>
+						<texture border="1">base.png</texture>
+						<colordiffuse>separator</colordiffuse>
+						<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+						<visible>true</visible>
+					</control>
+					<!-- thumb -->
+					<control type="group">
+						<posy>-30</posy>
+						<posx>-20</posx>
+						<control type="group">
+							<control type="image">
+								<include>ListItemFullInfoThumbSize</include>
+								<texture background="true">bg-myplex.png</texture>
+								<animation effect="fade" end="20" time="300" delay="0" condition="true">Conditional</animation>
+								<visible>Window.IsActive(mysharedcontent)</visible>
+							</control>
+							<control type="image">
+								<include>ListItemFullInfoThumbSize</include>
+								<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+								<visible>!IsEmpty(ListItem.Property(Fanart_Image)) + !Container.PlexContent(Homemovies) + !Container.PlexContent(Photos) + !Container.PlexContent(Artists) | [Container.PlexContent(Channel) + !ListItem.Type(photo)] + [Container.PlexContent(Channel) + [ListItem.Type(clip) | ListItem.Type(episode)]]</visible>
+							</control>
+							<control type="image">
+								<include>ListItemFullInfoThumbSize</include>
+								<fadetime>200</fadetime>
+								<aspectratio scalediffuse="false" align="center" aligny="top">scale</aspectratio>
+								<texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+								<visible>IsEmpty(ListItem.Property(Fanart_Image)) | Container.PlexContent(Homemovies) | Container.PlexContent(Photos) | Container.PlexContent(Artists) | [Container.PlexContent(Channel) + ListItem.Type(photo)] | [Container.PlexContent(Channel) + !ListItem.Type(clip) + !ListItem.Type(episode)]</visible>
+							</control>
+							<include>ListItemFullInfoThumbCardUnwatchedOverlayNoFilter</include>
+						</control>
+					</control>
+					<!-- infos -->
+					<control type="group">
+						<posy>290</posy>
+						<posx>22</posx>
+						<control type="label">
+							<width>418</width>
+							<align>left</align>
+							<label>$VAR[ListItemFullInfoTitle]</label>
+							<font>Regular-30</font>
+							<scroll>true</scroll>
+							<textcolor>white</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+						</control>					
+	
+						<control type="label">
+							<posy>44</posy>
+							<align>left</align>
+							<label>$VAR[ListItemFullInfoFirstTitleBE]</label>
+							<font>smallCaps</font>
+							<scroll>false</scroll>
+							<textcolor>title2</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+							<width>320</width>	
+							<visible>!Container.PlexContent(Albums)+!Container.PlexContent(Artists)</visible>		
+						</control>
+						
+						<control type="label">
+							<posy>44</posy>
+							<align>left</align>
+							<label>$VAR[ListItemFullInfoFirstTitleBE]</label>
+							<font>smallCaps</font>
+							<scroll>false</scroll>
+							<textcolor>title2</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+							<width>418</width>							
+							<visible>Container.PlexContent(Albums) | Container.PlexContent(Artists)</visible>
+						</control>
+						
+						
+						<control type="grouplist">	
+							<posy>67</posy>
+							<orientation>horizontal</orientation>		
+							<itemgap>4</itemgap>			
+							<height>19</height>
+							<control type="label">							
+								<align>left</align>
+								<label>$VAR[ListItemFullInfoSecondTitleBE]</label>
+								<font>smallCaps</font>
+								<scroll>false</scroll>
+								<textcolor>title2</textcolor>
+								<wrapmultiline>false</wrapmultiline>
+								<width min="1" max="300">auto</width>
+								<height>19</height>							
+							</control>	
+							
+							<control type="label">
+								<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+								<height>19</height>
+								<width min="1" max="50">auto</width>
+								<align>left</align>
+								<label>&#xB7;</label>
+								<font>smallCaps</font>
+								<scroll>false</scroll>
+								<textcolor>title2</textcolor>
+								<wrapmultiline>false</wrapmultiline>
+							</control>
+							<control type="image">
+								<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+								<height>17</height>
+								<width min="1" max="17">auto</width>
+								<aspectratio>keep</aspectratio>
+								<colordiffuse>title2</colordiffuse>
+								<texture>inline_star.png</texture>
+							</control>
+							<control type="label">
+								<visible>!IsEmpty(ListItem.Property(Rating))</visible>
+								<height>19</height>
+								<width min="1" max="50">auto</width>
+								<align>left</align>
+								<label>$INFO[ListItem.Property(Rating)]</label>
+								<font>smallCaps</font>
+								<scroll>false</scroll>
+								<textcolor>title2</textcolor>
+								<wrapmultiline>false</wrapmultiline>
+							</control>
+						</control>
+					
+						<control type="image">
+							<posy>35</posy>
+							<posx>929r</posx>
+							<width>90</width>
+							<height>50</height>
+							<fadetime>200</fadetime>
+							<info>Listitem.Art(mediaTag::studio)</info>
+							<aspectratio align="right" aligny="center">keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+							<visible>!IsEmpty(Listitem.Art(mediaTag::studio))</visible>
+						</control>	
+						
+						<control type="image">
+							<posy>40</posy>
+							<posx>889r</posx>
+							<width>50</width>
+							<height>40</height>
+							<texture>icon-photoalbum.png</texture>
+							<visible>ListItem.Type(photoAlbum)</visible>
+							<aspectratio align="right" aligny="bottom">keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+						</control>
+						<control type="image">
+							<posy>40</posy>
+							<posx>889r</posx>
+							<width>50</width>
+							<height>40</height>
+							<texture>icon-video.png</texture>
+							<aspectratio align="right" aligny="bottom">keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+							<visible>Container.PlexContent(Channels) + ListItem.Type(video)</visible>
+						</control>
+						<control type="image">
+							<posy>40</posy>
+							<posx>889r</posx>
+							<width>50</width>
+							<height>40</height>
+							<texture>icon-music.png</texture>
+							<aspectratio align="right" aligny="bottom">keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+							<visible>Container.PlexContent(Channels) + ListItem.Type(music)</visible>
+						</control>
+						<control type="image">
+							<posy>40</posy>
+							<posx>889r</posx>
+							<width>50</width>
+							<height>40</height>
+							<texture>icon-photo.png</texture>
+							<aspectratio align="right" aligny="bottom">keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+							<visible>Container.PlexContent(Channels) + ListItem.Type(photos)</visible>
+						</control>
+						<!--Vevo music icon-->
+						<control type="image">
+							<posx>889r</posx>
+							<posy>40</posy>
+							<width>50</width>
+							<height>40</height>
+							<texture>icon-music-video.png</texture>
+							<aspectratio>keep</aspectratio>
+							<colordiffuse>mediatag</colordiffuse>
+							<visible>!IsEmpty(ListItem.Property(primaryExtraKey))+[Container.PlexContent(Songs)|Container.PlexContent(Albums)|Container.PlexContent(Artists)]</visible>
+						</control>
+						
+						<control type="textbox" id="113">
+							<posy>115</posy>
+							<width>418</width>
+							<height>245</height>
+							<label>$VAR[ListItemFullInfoPlot]</label>
+							<font>descriptionSmall</font>
+							<textcolor>white</textcolor>
+							<visible>Container.PlexContent(Movies)|Container.PlexContent(HomeMovies)|Container.PlexContent(Episodes)</visible>
+						</control>	
+						<control type="textbox">
+							<posy>115</posy>
+							<width>418</width>
+							<height>272</height>
+							<label>$VAR[ListItemFullInfoPlot]</label>
+							<font>descriptionSmall</font>
+							<textcolor>white</textcolor>
+							<visible>!Container.PlexContent(Movies)+!Container.PlexContent(HomeMovies)+!Container.PlexContent(Episodes)</visible>
+						</control>	
+					</control>
+					<!-- media flags -->
+					<control type="group">
+						<posy>650</posy>
+						<posx>22</posx>
+						<include>ListItemFullInfoFlags</include>
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+
+
+	
+	<!-- SearchItemFullInfo -->
+	<variable name="SearchItemFullInfoTitle">
+		<!-- movie -->
+		<value condition="ControlGroup(7001).HasFocus">$INFO[Container(9001).ListItem.Label]</value>
+		<!-- tv show -->
+		<value condition="ControlGroup(7002).HasFocus">$INFO[Container(9002).ListItem.TVShowTitle]</value>
+		<!-- tv episode -->
+		<value condition="ControlGroup(7004).HasFocus">$INFO[Container(9004).ListItem.Label]</value>
+	</variable>
+	<variable name="SearchItemFullInfoSecondTitle">
+		<!-- movie -->
+		<value condition="ControlGroup(7001).HasFocus">$INFO[Container(9001).ListItem.DurationStr] &#xB7; $INFO[Container(9001).ListItem.Year]</value>
+		<!-- tv show -->
+		<value condition="ControlGroup(7002).HasFocus">[UPPERCASE]$INFO[Container(9002).ListItem.Genre][/UPPERCASE]</value>
+		<!-- tv episode -->
+		<value condition="ControlGroup(7004).HasFocus">$INFO[Container(9004).ListItem.TVShowTitle]</value>
+	</variable>
+	<variable name="SearchItemFullInfoThirdTitle">
+		<!-- movie -->
+		<value condition="ControlGroup(7001).HasFocus">[UPPERCASE]$INFO[Container(9001).ListItem.Genre][/UPPERCASE]</value>
+		<!-- tv show -->
+		<value condition="ControlGroup(7002).HasFocus">$INFO[Container(9002).ListItem.Property(UnWatchedEpisodes)] $LOCALIZE[31139] $LOCALIZE[31137]</value>
+		<!-- tv episode -->
+		<value condition="ControlGroup(7004).HasFocus">Season $INFO[Container(9004).ListItem.Season] &#xB7; Episode $INFO[Container(9004).ListItem.Episode] &#xB7; $INFO[Container(9004).ListItem.Date]</value>
+	</variable>
+	<variable name="SearchItemFullInfoSource">
+		<!-- movie -->
+		<value condition="ControlGroup(7001).HasFocus + !IsEmpty(Container(9001).ListItem.Property(plexServerOwner))">$INFO[Container(9001).ListItem.Property(plexServerOwner)] &#xB7; $INFO[Container(9001).ListItem.Property(plexServerName)]</value>
+		<value condition="ControlGroup(7001).HasFocus + IsEmpty(Container(9001).ListItem.Property(plexServerOwner))">$INFO[Container(9001).ListItem.Property(plexServerName)]</value>
+		<!-- tv show -->
+		<value condition="ControlGroup(7002).HasFocus + !IsEmpty(Container(9002).ListItem.Property(plexServerOwner))">$INFO[Container(9002).ListItem.Property(plexServerOwner)] &#xB7; $INFO[Container(9002).ListItem.Property(plexServerName)]</value>
+		<value condition="ControlGroup(7002).HasFocus + IsEmpty(Container(9002).ListItem.Property(plexServerOwner))">$INFO[Container(9002).ListItem.Property(plexServerName)]</value>
+		<!-- tv episode -->
+		<value condition="ControlGroup(7004).HasFocus + !IsEmpty(Container(9004).ListItem.Property(plexServerOwner))">$INFO[Container(9004).ListItem.Property(plexServerOwner)] &#xB7; $INFO[Container(9004).ListItem.Property(plexServerName)]</value>
+		<value condition="ControlGroup(7004).HasFocus + IsEmpty(Container(9004).ListItem.Property(plexServerOwner))">$INFO[Container(9004).ListItem.Property(plexServerName)]</value>
+	</variable>
+	<variable name="SearchItemFullInfoPlot">
+		<!-- movie -->
+		<value condition="ControlGroup(7001).HasFocus">$INFO[Container(9001).ListItem.Plot]</value>
+		<!-- tv show -->
+		<value condition="ControlGroup(7002).HasFocus">$INFO[Container(9002).ListItem.Plot]</value>
+		<!-- tv episode -->
+		<value condition="ControlGroup(7004).HasFocus + [!Skin.HasSetting(HidePlotForUnwatched) | Container(9004).ListItem.Status(Watched)]">$INFO[Container(9004).ListItem.Plot]</value>
+		<value condition="ControlGroup(7004).HasFocus + [Container(9004).ListItem.Status(InProgress) | Container(9004).ListItem.Status(UnWatched)] + Skin.HasSetting(HidePlotForUnwatched)">$LOCALIZE[32105]</value>
+	</variable>
+	<include name="SearchItemFullInfoSlide">
+		<animation effect="slide" start="0" end="376" time="200" tween="out" condition="ControlGroup(7001).HasFocus | ControlGroup(7002).HasFocus | ControlGroup(7004).HasFocus">Conditional</animation>
+	</include>
+	<!--Search Card -->
+	<include name="SearchItemFullInfo">
+		<control type="group">
+			<!-- left side presentation -->
+			<control type="group">
+				<include>SearchItemFullInfoSlide</include>
+				<posx>-376</posx>
+				<posy>74</posy>
+				<height>25</height>
+				<control type="group">
+					<!-- orange separator -->
+					<control type="image">
+						<posx>375</posx>
+						<posy>-74</posy>
+						<width>1</width>
+						<height>720</height>
+						<texture border="1">base.png</texture>
+						<colordiffuse>separator</colordiffuse>
+						<animation effect="fade" start="0" end="100" time="400" condition="true">Conditional</animation>
+						<visible>true</visible>
+					</control>
+					<!-- thumb -->
+					<control type="group">
+						<posy>-20</posy>
+						<posx>-12</posx>
+						
+						<control type="image">	
+							<width>349</width>
+							<height>223</height>
+							<include>Shadow</include>
+						</control>
+			
+						<control type="image">
+							<include>SearchScreenPosListItem</include>
+							<width>323</width>
+							<height>197</height>
+							<texture>default-square-small.png</texture>
+						</control>
+					
+						<!-- movie -->
+						<control type="group">
+							<visible>ControlGroup(7001).HasFocus</visible>
+							<control type="image">
+								<include>SearchScreenPosListItem</include>
+								<width>323</width>
+								<height>197</height>
+								<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+								<texture background="true">$INFO[Container(9001).ListItem.Property(Fanart_Image)]</texture>
+								<fadetime>200</fadetime>
+							</control>
+							<control type="image">
+								<posx>334</posx>
+								<posy>264</posy>
+								<width>26</width>
+								<height>26</height>
+								<texture>$INFO[Container(9001).ListItem.Overlay]</texture>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+						</control>
+						<!-- tv show -->
+						<control type="group">
+							<visible>ControlGroup(7002).HasFocus</visible>
+							<control type="image">
+								<include>SearchScreenPosListItem</include>
+								<width>323</width>
+								<height>197</height>
+								<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+								<texture background="true">$INFO[Container(9002).ListItem.Property(Fanart_Image)]</texture>
+								<fadetime>200</fadetime>
+							</control>
+							<control type="image">
+								<posx>334</posx>
+								<posy>264</posy>
+								<width>26</width>
+								<height>26</height>
+								<texture>$INFO[Container(9002).ListItem.Overlay]</texture>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+						</control>
+						<!-- tv episode -->
+						<control type="group">
+							<visible>ControlGroup(7004).HasFocus</visible>
+							<control type="image">
+								<include>SearchScreenPosListItem</include>
+								<width>323</width>
+								<height>197</height>
+								<aspectratio scalediffuse="false" align="center">scale</aspectratio>
+								<texture background="true">$INFO[Container(9004).ListItem.Art(thumb)]</texture>
+								<fadetime>200</fadetime>
+							</control>
+							<control type="image">
+								<posx>334</posx>
+								<posy>264</posy>
+								<width>26</width>
+								<height>26</height>
+								<texture>$INFO[Container(9004).ListItem.Overlay]</texture>
+								<include condition="Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuse</include>
+								<include condition="!Skin.HasSetting(ColorizeUnwachtedOverlay)">overlayDiffuseDefault</include>
+							</control>
+						</control>
+					</control>
+					<!-- infos -->
+					<control type="group">
+						<posy>255</posy>
+						<posx>26</posx>
+						<control type="label">
+							<width>285</width>
+							<align>left</align>
+							<label>$VAR[SearchItemFullInfoTitle]</label>
+							<font>Regular-22</font>
+							<scroll>true</scroll>
+							<textcolor>white</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+						</control>
+						<control type="label">
+							<posy>35</posy>
+							<align>left</align>
+							<label>$VAR[SearchItemFullInfoSecondTitle]</label>
+							<font>Regular-16</font>
+							<scroll>false</scroll>
+							<textcolor>title2</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+							<width>300</width>
+						</control>
+						<control type="label">
+							<posy>60</posy>
+							<align>left</align>
+							<label>$VAR[SearchItemFullInfoThirdTitle]</label>
+							<font>Regular-16</font>
+							<scroll>false</scroll>
+							<textcolor>title2</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+							<width>300</width>
+						</control>
+						<!--
+						<control type="label">
+							<posy>100</posy>
+							<align>left</align>
+							<label>$VAR[SearchItemFullInfoSource]</label>
+							<font>Regular-14</font>
+							<scroll>false</scroll>
+							<textcolor>title2</textcolor>
+							<wrapmultiline>false</wrapmultiline>
+							<width>300</width>
+						</control>-->
+						<control type="textbox">
+							<posy>93</posy>
+							<width>310</width>
+							<height>267</height>
+							<label>$VAR[SearchItemFullInfoPlot]</label>
+							<font>descriptionSmall2</font>
+						</control>
+					
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+</includes>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<window id="136">
+	<coordinates>
+		<system>1</system>
+		<posx>0</posx>
+		<posy>0</posy>
+	</coordinates>
+	<!-- ViewsDialog.xml -->
+	<!--<include>DialogBottomRightSlide</include>-->
+	<!--<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+	<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>-->
+	<controls>	
+		<control type="group">
+			<visible>!Skin.hasSetting(HideBusyAnimation)+[!Window.IsVisible(107)|Skin.HasSetting(HideInfoPopups)]</visible>
+			<control type="group">
+				<visible>!Window.IsActive(FullScreenVideo)</visible>
+				<posx>960</posx>
+				<posy>630</posy>
+				<control type="group">
+					<control type="image">
+						<description>Background</description>
+						<width>250</width>
+						<height>60</height>
+						<include>DialogBG</include>
+					</control>
+				</control>
+				<control type="group">
+					<visible>Control.IsVisible(10)</visible>
+					<control type="label">
+						<description>"Please wait..." label</description>
+						<posx>10</posx>
+						<width>230</width>
+						<height>35</height>
+						<align>center</align>
+						<label>$LOCALIZE[20186]...</label>
+					</control>
+					<control type="progress" id="10">
+						<description>Progressbar</description>
+						<posx>10</posx>
+						<posy>32</posy>
+						<width>230</width>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!Control.IsVisible(10)</visible>
+					<control type="label">
+						<description>"Please wait..." label</description>
+						<posx>10</posx>
+						<width>230</width>
+						<height>60</height>
+						<align>center</align>
+						<label>$LOCALIZE[20186]...</label>
+					</control>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Window.IsActive(FullScreenVideo)</visible>
+				<control type="image">
+					<description>Background</description>
+					<posx>605</posx>
+					<posy>325</posy>
+					<width>70</width>
+					<height>70</height>
+					<include>DialogBG</include>
+				</control>
+				<control type="image">
+					<description>spinner</description>
+					<posx>612</posx>
+					<posy>332</posy>
+					<width>56</width>
+					<height>56</height>
+					<texture>ActivityIndicator.gif</texture>
+					<colordiffuse>ThemeColor</colordiffuse>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

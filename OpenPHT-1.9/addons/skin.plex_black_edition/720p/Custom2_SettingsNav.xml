@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<window type="dialog" id="4997">
+	<defaultcontrol>997</defaultcontrol>
+	<onload condition="Skin.String(SettingsCategory,appearance)">SetFocus(902)</onload>
+	<onload condition="Skin.String(SettingsCategory,system)">SetFocus(903)</onload>
+	<onload condition="Skin.String(SettingsCategory,network)">SetFocus(904)</onload>
+	<onload condition="Skin.String(SettingsCategory,playback)">SetFocus(901)</onload>
+	<controls>
+		<control type="group">
+			<include>leftMenuBgSettings</include>
+			<control type="grouplist" id="997">
+				<posx>0</posx>
+				<posy>108</posy>
+				<width>1000</width>
+				<height>700</height>
+				<onup>997</onup>
+				<ondown>997</ondown>
+				<onleft>-</onleft>
+				<onright>-</onright>
+				<itemgap>20</itemgap>
+				<include>ItemScrollTime</include>
+				<orientation>vertical</orientation>
+				<control type="button" id="902">
+					<description>Appearance Settings Button</description>
+					<texturefocus>b-s-photos-s.png</texturefocus>
+					<texturenofocus>b-s-photos.png</texturenofocus>
+					<include>leftMenuPreplayButton</include>
+					<onfocus condition="!Window.IsActive(19)">XBMC.ReplaceWindow(19)</onfocus>
+					<onclick condition="!Window.IsActive(19)">XBMC.ReplaceWindow(19)</onclick>
+					<onright>Dialog.Close(4997)</onright>
+					<onclick>Dialog.Close(4997)</onclick>
+					<onfocus>Skin.SetString(SettingsCategory,appearance)</onfocus>
+				</control>
+				<control type="button" id="901">
+					<description>Playback Settings Button</description>
+					<texturefocus>b-s-video-s.png</texturefocus>
+					<texturenofocus>b-s-video.png</texturenofocus>
+					<include>leftMenuPreplayButton</include>
+					<onfocus condition="!Window.IsActive(17)">XBMC.ReplaceWindow(17)</onfocus>
+					<onclick condition="!Window.IsActive(17)">XBMC.ReplaceWindow(17)</onclick>
+					<onright>Dialog.Close(4997)</onright>
+					<onclick>Dialog.Close(4997)</onclick>
+					<onfocus>Skin.SetString(SettingsCategory,playback)</onfocus>
+				</control>
+				<control type="button" id="903">
+					<description>System Settings Button</description>
+					<texturefocus>b-s-system-s.png</texturefocus>
+					<texturenofocus>b-s-system.png</texturenofocus>
+					<include>leftMenuPreplayButton</include>
+					<onfocus condition="!Window.IsActive(16)">XBMC.ReplaceWindow(16)</onfocus>
+					<onclick condition="!Window.IsActive(16)">XBMC.ReplaceWindow(16)</onclick>
+					<onright>Dialog.Close(4997)</onright>
+					<onclick>Dialog.Close(4997)</onclick>
+					<onfocus>Skin.SetString(SettingsCategory,system)</onfocus>
+				</control>
+				<control type="button" id="904">
+					<description>Network Button</description>
+					<texturefocus>b-s-network-s.png</texturefocus>
+					<texturenofocus>b-s-network.png</texturenofocus>
+					<include>leftMenuPreplayButton</include>
+					<onfocus condition="!Window.IsActive(18)">XBMC.ReplaceWindow(18)</onfocus>
+					<onclick condition="!Window.IsActive(18)">XBMC.ReplaceWindow(18)</onclick>
+					<onright>Dialog.Close(4997)</onright>
+					<onclick>Dialog.Close(4997)</onclick>
+					<onfocus>Skin.SetString(SettingsCategory,network)</onfocus>
+				</control>
+			</control>
+		</control>
+	
+	</controls>
+</window>

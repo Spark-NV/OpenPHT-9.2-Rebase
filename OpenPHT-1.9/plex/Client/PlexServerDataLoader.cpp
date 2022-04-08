@@ -183,7 +183,7 @@ void CPlexServerDataLoaderJob::loadPreferences()
       PlexUtils::AppendPathToURL(u, "prefs");
       CFileItemList prefsList;
 
-      if (m_dir.GetDirectory(u.Get(), prefsList))
+      if (m_dir.GetDirectory(u, prefsList))
       {
         if (prefsList.Size() > 0)
         {
@@ -358,14 +358,15 @@ CFileItemListPtr CPlexServerDataLoader::GetAllChannels() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void CPlexServerDataLoader::OnTimeout()
 {
-  CSingleLock lk(m_serverLock);
-
   // don't run any checks during video playback
   if (g_application.m_pPlayer->IsPlayingVideo())
   {
+    CLog::Log(LOGDEBUG, "Disabling section refresh during playback");
     g_plexApplication.timer->SetTimeout(SECTION_REFRESH_INTERVAL, this);
     return;
   }
+
+  CSingleLock lk(m_serverLock);
 
   if (m_forceRefresh)
   {
