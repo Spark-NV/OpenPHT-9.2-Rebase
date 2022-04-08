@@ -21,23 +21,24 @@ Full command to build different image:
 * `PROJECT=*** ARCH=*** DISTRO=*** DEVICE=*** make image`
 
 
-Quick cleaning of all Openpht files within build directory(Did this cause im tired of manually deleting the files or typing the clean command for both of the packages)
-
-* `make pht-clean`
-
-
 # Changes
 
 * This is a fork of OpenPHT-Embedded that has been rebased from CoreELEC 9.2.8
 
 * This new rebase *should* bring in support for any device that CoreELEC 9 supports
 
-* My fork no longer keeps the OpenPHT(mediacenter) portion in a seperate repo. This Fork will use the settings and mediacenter that is in the root directory.
+* My fork no longer keeps the OpenPHT(mediacenter) or Settings portions in seperate repo's. This Fork will use the settings and Mediacenter that is in the root directory.
 
 * The OpenPHT(mediacenter) within this repo is the Latest clone of https://github.com/brfransen/OpenPHT (buildfix tree), with a couple changes I had to apply to get it to build.
+
 * The Settings within this repo is the Latest clone of https://github.com/RasPlex/service.openelec.settings (1.9 tree)
 
+* FFmpeg has been updated to 4.2.4
 
+* Plex Black Edition skin has been added by default
+
+* [Use CURL object directly](https://github.com/Risca/OpenPHT/commit/873ac97cb1acd9f34b8c7360f4cf9f31151ea09f) merged
+* [Reduce plex background jobs](https://github.com/Risca/OpenPHT/commit/1f1c932cf0b6548e192b7c90ec5d86f0c863fd24) merged
 
 ------------
 ------------
