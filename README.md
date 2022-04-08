@@ -1,11 +1,11 @@
 # OpenPHT-Embedded
-OpenPHT-Embedded is a 'Just enough OS' Linux distribution for running [OpenPHT](https://github.com/RasPlex/OpenPHT) on popular mediacentre hardware.
 
 This fork has only been tested to build on Ubuntu 18.04.5
 
-**Notes**
+As I test and make sure everything works, ill build as many images as I can and add them as releases for people to use.
+But as of now everything appears to be functioning and what has quirks there is work arounds.
 
-* SSH login details are user: "root" password: "openpht" or "rasplex" depending on distribution.
+------------
 
 **Build**
 
@@ -39,6 +39,13 @@ Full command to build different image:
 
 * [Use CURL object directly](https://github.com/Risca/OpenPHT/commit/873ac97cb1acd9f34b8c7360f4cf9f31151ea09f) merged
 * [Reduce plex background jobs](https://github.com/Risca/OpenPHT/commit/1f1c932cf0b6548e192b7c90ec5d86f0c863fd24) merged
+
+------------
+------------
+
+**Notes**
+
+* SSH login details are user: "root" password: "openpht" or "rasplex" depending on distribution.
 
 ------------
 ------------
