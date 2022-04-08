@@ -29,12 +29,12 @@ Full command to build different image:
 
 * My fork no longer keeps the OpenPHT(mediacenter) or Settings portions in seperate repo's. This Fork will use the settings and Mediacenter that is in the root directory.
 
-* The OpenPHT(mediacenter) within this repo is the Latest clone of https://github.com/brfransen/OpenPHT (buildfix tree), with a couple changes I had to apply to get it to build.
+* The OpenPHT(mediacenter) within this repo is the Latest clone of [OpenPHT](https://github.com/brfransen/OpenPHT) (buildfix tree), with a couple changes I had to apply to get it to build.
 
-* The Settings within this repo is the Latest clone of https://github.com/RasPlex/service.openelec.settings (1.9 tree)
+* The Settings within this repo is the Latest clone of [Settings Service](https://github.com/RasPlex/service.openelec.settings) - 1.9 tree
 
 * FFmpeg has been updated to 4.2.4
-
+* LibCEC has been updated to 6.0.6
 * Plex Black Edition skin has been added by default
 
 * [Use CURL object directly](https://github.com/Risca/OpenPHT/commit/873ac97cb1acd9f34b8c7360f4cf9f31151ea09f) merged
