@@ -248,7 +248,6 @@ public:
 #define SYNC_OUTSIDE    (2)
 
 // missing tags
-#define CODEC_TAG_VC_1  (0x312D4356)
 #define CODEC_TAG_RV30  (0x30335652)
 #define CODEC_TAG_RV40  (0x30345652)
 #define CODEC_TAG_MJPEG (0x47504a4d)
@@ -408,7 +407,6 @@ static vformat_t codecid_to_vformat(enum AVCodecID id)
   {
     case AV_CODEC_ID_MPEG1VIDEO:
     case AV_CODEC_ID_MPEG2VIDEO:
-    case AV_CODEC_ID_MPEG2VIDEO_XVMC:
       format = VFORMAT_MPEG12;
       break;
     case AV_CODEC_ID_H263:
@@ -1160,8 +1158,7 @@ int pre_header_feeding(am_private_t *para, am_packet_t *pkt)
             }
         }
         if (( AV_CODEC_ID_MPEG1VIDEO == para->video_codec_id)
-          || (AV_CODEC_ID_MPEG2VIDEO == para->video_codec_id)
-          || (AV_CODEC_ID_MPEG2VIDEO_XVMC == para->video_codec_id)) {
+          || (AV_CODEC_ID_MPEG2VIDEO == para->video_codec_id)) {
             ret = mpeg_add_header(para, pkt);
             if (ret != PLAYER_SUCCESS) {
                 return ret;

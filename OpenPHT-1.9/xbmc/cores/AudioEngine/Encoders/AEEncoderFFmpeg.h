@@ -58,7 +58,7 @@ private:
   SwrContext       *m_SwrCtx;
   CAEChannelInfo    m_Layout;
   AVPacket          m_Pkt;
-  uint8_t           m_Buffer[IEC61937_DATA_OFFSET + FF_MIN_BUFFER_SIZE];
+  uint8_t           m_Buffer[IEC61937_DATA_OFFSET + AV_INPUT_BUFFER_MIN_SIZE];
   int               m_BufferSize;
   int               m_OutputSize;
   double            m_OutputRatio;

@@ -75,7 +75,6 @@ bool CDVDVideoCodecAmlogic::Open(CDVDStreamInfo &hints, CDVDCodecOptions &option
       break;
     case AV_CODEC_ID_MPEG1VIDEO:
     case AV_CODEC_ID_MPEG2VIDEO:
-    case AV_CODEC_ID_MPEG2VIDEO_XVMC:
       m_mpeg2_sequence_pts = 0;
       m_mpeg2_sequence = new mpeg2_sequence;
       m_mpeg2_sequence->width  = m_hints.width;

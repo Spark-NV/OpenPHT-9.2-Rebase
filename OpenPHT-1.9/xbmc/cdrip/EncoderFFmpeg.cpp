@@ -63,7 +63,7 @@ bool CEncoderFFmpeg::Init(const char* strFile, int iInChannels, int iInRate, int
 
   AVCodec *codec;
   codec = avcodec_find_encoder(
-    strcmp(fmt->name, "ogg") == 0 ? CODEC_ID_VORBIS : fmt->audio_codec
+    strcmp(fmt->name, "ogg") == 0 ? AV_CODEC_ID_VORBIS : fmt->audio_codec
   );
 
   if (!codec)
@@ -106,8 +106,8 @@ bool CEncoderFFmpeg::Init(const char* strFile, int iInChannels, int iInRate, int
 
   if(fmt->flags & AVFMT_GLOBALHEADER)
   {
-    m_CodecCtx->flags |= CODEC_FLAG_GLOBAL_HEADER;
-    m_Format->flags   |= CODEC_FLAG_GLOBAL_HEADER;
+    m_CodecCtx->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+    m_Format->flags   |= AV_CODEC_FLAG_GLOBAL_HEADER;
   }
 
   av_init_packet(&m_Pkt);

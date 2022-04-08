@@ -82,7 +82,7 @@ static const struct StereoModeConversionMap WmvToInternalStereoModeMap[] =
   {}
 };
 
-#define FF_MAX_EXTRADATA_SIZE ((1 << 28) - FF_INPUT_BUFFER_PADDING_SIZE)
+#define FF_MAX_EXTRADATA_SIZE ((1 << 28) - AV_INPUT_BUFFER_PADDING_SIZE)
 
 void CDemuxStreamAudioFFmpeg::GetStreamInfo(std::string& strInfo)
 {
@@ -1693,12 +1693,12 @@ void CDVDDemuxFFmpeg::ParsePacket(AVPacket *pkt)
       // Found extradata, fill it in. This will cause
       // a new stream to be created and used.
       st->codec->extradata_size = i;
-      st->codec->extradata = (uint8_t*)av_malloc(st->codec->extradata_size + FF_INPUT_BUFFER_PADDING_SIZE);
+      st->codec->extradata = (uint8_t*)av_malloc(st->codec->extradata_size + AV_INPUT_BUFFER_PADDING_SIZE);
       if (st->codec->extradata)
       {
         CLog::Log(LOGDEBUG, "CDVDDemuxFFmpeg::Read() fetching extradata, extradata_size(%d)", st->codec->extradata_size);
         memcpy(st->codec->extradata, pkt->data, st->codec->extradata_size);
-        memset(st->codec->extradata + i, 0, FF_INPUT_BUFFER_PADDING_SIZE);
+        memset(st->codec->extradata + i, 0, AV_INPUT_BUFFER_PADDING_SIZE);
       }
       else
       {
@@ -1709,7 +1709,7 @@ void CDVDDemuxFFmpeg::ParsePacket(AVPacket *pkt)
 
   // for video we need a decoder to get desired information into codec context
   if (st->codec->codec_type == AVMEDIA_TYPE_VIDEO && st->codec->extradata &&
-      (!st->codec->width || st->codec->pix_fmt == PIX_FMT_NONE))
+      (!st->codec->width || st->codec->pix_fmt == AV_PIX_FMT_NONE))
   {
     // open a decoder, it will be cleared down by ffmpeg on closing the stream
     if (!st->codec->codec)
@@ -1766,7 +1766,7 @@ bool CDVDDemuxFFmpeg::IsVideoReady()
       st = m_pFormatContext->streams[idx];
       if (st->codec->codec_type == AVMEDIA_TYPE_VIDEO)
       {
-        if (st->codec->width && st->codec->pix_fmt != PIX_FMT_NONE)
+        if (st->codec->width && st->codec->pix_fmt != AV_PIX_FMT_NONE)
           return true;
         hasVideo = true;
       }
@@ -1779,7 +1779,7 @@ bool CDVDDemuxFFmpeg::IsVideoReady()
       st = m_pFormatContext->streams[i];
       if (st->codec->codec_type == AVMEDIA_TYPE_VIDEO)
       {
-        if (st->codec->width && st->codec->pix_fmt != PIX_FMT_NONE)
+        if (st->codec->width && st->codec->pix_fmt != AV_PIX_FMT_NONE)
           return true;
         hasVideo = true;
       }

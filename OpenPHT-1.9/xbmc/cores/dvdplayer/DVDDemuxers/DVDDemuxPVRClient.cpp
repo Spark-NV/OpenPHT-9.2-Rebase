@@ -26,7 +26,7 @@
 #include "pvr/addons/PVRClients.h"
 #include "../DVDClock.h"
 
-#define FF_MAX_EXTRADATA_SIZE ((1 << 28) - FF_INPUT_BUFFER_PADDING_SIZE)
+#define FF_MAX_EXTRADATA_SIZE ((1 << 28) - AV_INPUT_BUFFER_PADDING_SIZE)
 
 using namespace PVR;
 
@@ -209,9 +209,9 @@ void CDVDDemuxPVRClient::ParsePacket(DemuxPacket* pkt)
       st->changes++;
       st->disabled = false;
       st->ExtraSize = len;
-      st->ExtraData = new uint8_t[len+FF_INPUT_BUFFER_PADDING_SIZE];
+      st->ExtraData = new uint8_t[len+AV_INPUT_BUFFER_PADDING_SIZE];
       memcpy(st->ExtraData, pkt->pData, len);
-      memset((uint8_t*)st->ExtraData + len, 0 , FF_INPUT_BUFFER_PADDING_SIZE);
+      memset((uint8_t*)st->ExtraData + len, 0 , AV_INPUT_BUFFER_PADDING_SIZE);
       pvr->m_parser_split = false;
     }
   }

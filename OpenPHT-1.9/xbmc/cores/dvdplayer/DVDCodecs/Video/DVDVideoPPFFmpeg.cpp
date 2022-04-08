@@ -128,8 +128,8 @@ bool CDVDVideoPPFFmpeg::Process(DVDVideoPicture* pPicture)
     }
   }
 
-  int pict_type = (m_pSource->qscale_type != DVP_QSCALE_MPEG1) ?
-                   PP_PICT_TYPE_QP2 : 0;
+  // value is fetched from ffmpeg, where 0 == MPEG1
+  int pict_type = m_pSource->qscale_type ? PP_PICT_TYPE_QP2 : 0;
 
   pp_postprocess((const uint8_t**)m_pSource->data, m_pSource->iLineSize,
                 m_pTarget->data, m_pTarget->iLineSize,

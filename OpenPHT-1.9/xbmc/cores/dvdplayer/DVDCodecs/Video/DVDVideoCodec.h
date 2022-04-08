@@ -133,11 +133,6 @@ struct DVDVideoUserData
 
 // DVP_FLAG 0x00000100 - 0x00000f00 is in use by libmpeg2!
 
-#define DVP_QSCALE_UNKNOWN          0
-#define DVP_QSCALE_MPEG1            1
-#define DVP_QSCALE_MPEG2            2
-#define DVP_QSCALE_H264             3
-
 class CDVDStreamInfo;
 class CDVDCodecOption;
 class CDVDCodecOptions;
