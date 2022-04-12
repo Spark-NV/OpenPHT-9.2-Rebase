@@ -10,15 +10,20 @@
   
 Note: This fork has only been tested to build on Ubuntu 18.04.5<br><br>"Short" build commands:
 <br>
+* `make rpi`
 * `make rpi2`
+* `make rpi4`
+* `make Slice`
+* `make Slice3`
+* `make generic`
 * `make amlogic`
 * `make amlogic-ng`
-* `make pc`
+* `make A64`
+* `make H3`
+* `make H6`
 
 Full command to build different image:
 * `PROJECT=*** ARCH=*** DISTRO=*** DEVICE=*** make image`
-<br>
-Ill add new "short" build commands as I compile them as I find them to be easier for the general public to compile the image.
 <br>
 
 </details>
@@ -88,7 +93,7 @@ Ill add new "short" build commands as I compile them as I find them to be easier
   <td align="center">RK3399</td>
   <td align="center">:question:</td>
   <td align="center">RPi3/3+</td>
-  <td align="center">:question:</td>
+  <td align="center">:white_check_mark:</td>
   <td align="center">H6</td>
   <td align="center">:question:</td>
   <td align="center"></td><! --- Allwinner empty device column --->
@@ -151,7 +156,7 @@ Ill add new "short" build commands as I compile them as I find them to be easier
   <td align="center"></td><! --- X86/X64 empty working column --->
   </tr>
   <tr>
-  <td colspan="12">Legend:<br>:white_check_mark: = Confirmed working<br>:question: = Untested<br>:x: = Confirmed not working</td>
+  <td colspan="12">Legend:<br>:white_check_mark: = Confirmed working*<br>:question: = Untested<br>:x: = Confirmed not working<br>Note: Confirmed working does not mean bugfree, it only means its been confirmed to boot and basic functions work such as Video playback, Sound WIFI, Ethernet, CEC etc.</td>
   </tr>
 </table>
 
@@ -169,12 +174,13 @@ Ill add new "short" build commands as I compile them as I find them to be easier
 
 * The Settings within this repo is the Latest clone of [Settings Service](https://github.com/RasPlex/service.openelec.settings) - 1.9 tree
 
-* FFmpeg has been updated to 4.2.4
-* LibCEC has been updated to 6.0.6
+* FFmpeg has been updated to 4.4
+* LibCEC has been updated to 6.0.6 on non-RPI devices.
 * Plex Black Edition skin has been added
 
 * [Use CURL object directly](https://github.com/Risca/OpenPHT/commit/873ac97cb1acd9f34b8c7360f4cf9f31151ea09f) merged
 * [Reduce plex background jobs](https://github.com/Risca/OpenPHT/commit/1f1c932cf0b6548e192b7c90ec5d86f0c863fd24) merged
+
 
 
 ------------
