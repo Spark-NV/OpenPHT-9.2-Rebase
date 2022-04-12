@@ -182,6 +182,8 @@ Full command to build different image:
 * [Reduce plex background jobs](https://github.com/Risca/OpenPHT/commit/1f1c932cf0b6548e192b7c90ec5d86f0c863fd24) merged
 
 
+* [This](https://github.com/Spark-NV/OpenPHT-9.2-Rebase/commit/9595f9c5987fe58b4ce2e321a4a5be9e4f013c5e) commit made the projects -Generic & Allwinner use the kernel configs from LibreELEC, I did this as CoreELEC appears to only support Amlogic devices officially and they broke RPi with there changes to the kernel/drivers. considering this im assuming they might have also broke Generic and Allwinner. As a precaution I have used the LibreELEC configs... again I cant test so I cant confirm if this will break things or fix.
+
 
 ------------
 ------------
