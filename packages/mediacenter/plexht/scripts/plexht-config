@@ -43,7 +43,13 @@ if [ ! -f $HOME/.plexht/userdata/guisettings.xml ] ; then
 fi
 
 #choose libCEC version, default is libcec package version
-ln -sf /usr/lib/libcec.so.6.0.2 /var/lib/libcec.so.6
+if [ -f /usr/lib/libcec.so.6.0.2 ] ; then
+  ln -sf /usr/lib/libcec.so.6.0.2 /var/lib/libcec.so.6
+else
+  if [ -f /usr/lib/libcec.so.4.0.4 ]; then
+    ln -sf /usr/lib/libcec.so.4.0.4 /var/lib/libcec.so.4
+  fi
+fi
 
 PLEXHT_ARGS="--lircdev /run/lirc/lircd"
 
