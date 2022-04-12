@@ -118,6 +118,10 @@ if [ "$KODI_SSHLIB_SUPPORT" = yes ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libssh"
 fi
 
+if [ "$PROJECT" = "RPi" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET bcm2835-driver"
+fi
+
 if [ ! "$KODIPLAYER_DRIVER" = default ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $KODIPLAYER_DRIVER"
 
@@ -195,8 +199,13 @@ else
 fi
 
 if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
-  export PYTHON_EXECUTABLE=$TOOLCHAIN/bin/$PKG_PYTHON_VERSION
+  export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
+        -DENABLE_PYTHON=ON \
+        -DPYTHON_INCLUDE_DIRS=$SYSROOT_PREFIX/usr/include/python2.7 \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
+        -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
         -DCMAKE_PREFIX_PATH="$SYSROOT_PREFIX" \
@@ -211,19 +220,17 @@ if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
-        -DPYTHON_EXEC="$PYTHON_EXEC" \
-        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
 
 
 elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
   export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DEXTERNAL_PYTHON_HOME=$SYSROOT_PREFIX/usr \
-        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
+        -DENABLE_PYTHON=ON \
+        -DPYTHON_INCLUDE_DIRS=$SYSROOT_PREFIX/usr/include/python2.7 \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
         -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
         -DCMAKE_PREFIX_PATH="$SYSROOT_PREFIX" \
@@ -238,17 +245,15 @@ elif [ "$KODIPLAYER_DRIVER" = libamcodec ]; then
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
-        -DPYTHON_EXEC="$PYTHON_EXEC" \
-        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
 else
   export PYTHON_EXEC="$SYSROOT_PREFIX/usr/bin/python2.7"
   cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DEXTERNAL_PYTHON_HOME=$SYSROOT_PREFIX/usr \
-        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
+        -DENABLE_PYTHON=ON \
+        -DPYTHON_INCLUDE_DIRS=$SYSROOT_PREFIX/usr/include/python2.7 \
+        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
         -DPYTHON_EXEC="$PYTHON_EXEC" \
+        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         -DSWIG_EXECUTABLE=`which swig` \
         -DSWIG_DIR="$BUILD/toolchain" \
         -DCMAKE_PREFIX_PATH="$SYSROOT_PREFIX" \
@@ -265,10 +270,6 @@ else
         -DLIRC_DEVICE=/run/lirc/lircd \
         -DCMAKE_INSTALL_PREFIX=/usr/lib/plexht \
         -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE \
-        -DENABLE_PYTHON=ON \
-        -DEXTERNAL_PYTHON_HOME="$SYSROOT_PREFIX/usr" \
-        -DPYTHON_EXEC="$PYTHON_EXEC" \
-        -DPYTHON_LIBRARIES=$SYSROOT_PREFIX/usr/lib/libpython2.7.so \
         ..
 fi
 }

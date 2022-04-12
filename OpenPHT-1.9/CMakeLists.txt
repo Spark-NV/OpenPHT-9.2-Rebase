@@ -121,21 +121,21 @@ include_directories(
 if(ENABLE_PYTHON)
     if(EXTERNAL_PYTHON_HOME)
       if(TARGET_LINUX OR TARGET_OSX OR TARGET_RPI OR TARGET_FREEBSD)
-        install(DIRECTORY ${EXTERNAL_PYTHON_HOME}/lib/python${PYTHON_VERSION} DESTINATION ${LIBPATH}/lib/ COMPONENT RUNTIME
-          PATTERN python${PYTHON_VERSION}/test EXCLUDE
+        install(DIRECTORY ${EXTERNAL_PYTHON_HOME}/lib/python2.7 DESTINATION ${LIBPATH}/lib/ COMPONENT RUNTIME
+          PATTERN python2.7/test EXCLUDE
           REGEX .*\\.pyc$ EXCLUDE
           REGEX .*\\.pyo$ EXCLUDE
         )
-        install(FILES ${PYTHON_INCLUDE_DIRS}/pyconfig.h DESTINATION "${LIBPATH}/include/python${PYTHON_VERSION}" COMPONENT RUNTIME)
+        install(FILES ${PYTHON_INCLUDE_DIRS}/pyconfig.h DESTINATION "${LIBPATH}/include/python2.7" COMPONENT RUNTIME)
       endif()
     elseif()
       if(TARGET_LINUX OR TARGET_OSX OR TARGET_FREEBSD)
-        install(DIRECTORY /usr/lib/python${PYTHON_VERSION} DESTINATION ${LIBPATH}/lib/ COMPONENT RUNTIME
-          PATTERN python${PYTHON_VERSION}/test EXCLUDE
+        install(DIRECTORY /usr/lib/python2.7 DESTINATION ${LIBPATH}/lib/ COMPONENT RUNTIME
+          PATTERN python2.7/test EXCLUDE
           REGEX .*\\.pyc$ EXCLUDE
           REGEX .*\\.pyo$ EXCLUDE
         )
-        install(FILES ${PYTHON_INCLUDE_DIRS}/pyconfig.h DESTINATION "${LIBPATH}/include/python${PYTHON_VERSION}" COMPONENT RUNTIME)
+        install(FILES ${PYTHON_INCLUDE_DIRS}/pyconfig.h DESTINATION "${LIBPATH}/include/python2.7" COMPONENT RUNTIME)
       endif()
     endif()
 endif()
