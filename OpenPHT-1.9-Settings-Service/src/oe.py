@@ -46,7 +46,7 @@ import shutil
 from xml.dom import minidom
 
 __author__ = 'LibreELEC'
-__scriptid__ = 'service.libreelec.settings'
+__scriptid__ = 'service.coreelec.settings'
 __addon__ = xbmcaddon.Addon(id=__scriptid__)
 __cwd__ = __addon__.getAddonInfo('path')
 __oe__ = sys.modules[globals()['__name__']]

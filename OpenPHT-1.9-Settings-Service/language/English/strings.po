@@ -1,7 +1,6 @@
 # Kodi Media Center language file
 # Addon Name: @DISTRONAME@ Configuration
-# Addon id: service.libreelec.settings
-# Addon Provider: LibreELEC
+# Addon id: service.coreelec.settings
 msgid ""
 msgstr ""
 "MIME-Version: 1.0\n"
@@ -45,7 +44,7 @@ msgid "Architecture: "
 msgstr ""
 
 msgctxt "#609"
-msgid "@DISTRONAME@ is built to bring OpenPHT to your embedded device. It's based on Libre Embedded Linux Entertainment Center (LibreELEC)."
+msgid "@DISTRONAME@ is built to bring OpenPHT to your embedded device. It's based on Libre Embedded Linux Entertainment Center (OpenELEC)."
 msgstr ""
 
 msgctxt "#610"
