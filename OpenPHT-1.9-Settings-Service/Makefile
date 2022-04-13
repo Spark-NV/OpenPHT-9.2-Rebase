@@ -24,9 +24,9 @@
 #  OpenELEC Licensing  <license@openelec.tv>  http://www.openelec.tv
 ################################################################################
 
-ADDON_NAME=service.libreelec.settings
+ADDON_NAME=service.coreelec.settings
 ADDON_VERSION=8.2.0
-DISTRONAME:=LibreELEC
+DISTRONAME:=CoreELEC
 
 SHELL:=/bin/bash -O globstar
 BUILDDIR=build
