@@ -54,6 +54,38 @@ H6: export DEVICE=H6
 H6: export DISTRO=OpenPHT
 H6: export ARCH=arm
 
+miqi: export PROJECT=Rockchip
+miqi: export DEVICE=MiQi
+miqi: export DISTRO=OpenPHT
+miqi: export ARCH=arm
+
+rk3328: export PROJECT=Rockchip
+rk3328: export DEVICE=RK3328
+rk3328: export DISTRO=OpenPHT
+rk3328: export ARCH=arm
+
+rk3399: export PROJECT=Rockchip
+rk3399: export DEVICE=RK3399
+rk3399: export DISTRO=OpenPHT
+rk3399: export ARCH=arm
+
+tinkerboard: export PROJECT=Rockchip
+tinkerboard: export DEVICE=TinkerBoard
+tinkerboard: export DISTRO=OpenPHT
+tinkerboard: export ARCH=arm
+
+miqi:
+	./scripts/image mkimage
+
+rk3328:
+	./scripts/image mkimage
+
+rk3399:
+	./scripts/image mkimage
+
+tinkerboard:
+	./scripts/image mkimage
+
 amlogic-ng:
 	./scripts/image mkimage
 

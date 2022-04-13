@@ -162,6 +162,7 @@ post_patch() {
   rm -rf $BUILD/$PKG_NAME-$PKG_VERSION
   mkdir $BUILD/$PKG_NAME-$PKG_VERSION
   cp -r $ROOT/OpenPHT-1.9/* $BUILD/$PKG_NAME-$PKG_VERSION/
+  # HACK OPENPHT_GITREV Changed to a hardcoded value as there is no longer a git repo for it to get the true gitrev.
   OPENPHT_GITREV="$OPENPHT_BUILD_VERSION"
   OPENPHT_VERSION_PREFIX="$COREELEC_REVISION_NUMBER"
   OPENPHT_VERSION="${OPENPHT_GITREV}-CoreELEC-${OPENPHT_VERSION_PREFIX}-`date +"%d-%m-%Y"`"
