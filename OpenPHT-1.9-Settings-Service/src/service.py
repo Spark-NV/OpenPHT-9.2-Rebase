@@ -42,7 +42,7 @@ class service_thread(threading.Thread):
             oeMain.dbg_log('_service_::__init__', 'enter_function', 0)
             self.oe = oeMain
             self.wait_evt = threading.Event()
-            self.socket_file = '/var/run/service.libreelec.settings.sock'
+            self.socket_file = '/var/run/service.coreelec.settings.sock'
             self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
             self.sock.setblocking(1)
             if os.path.exists(self.socket_file):
