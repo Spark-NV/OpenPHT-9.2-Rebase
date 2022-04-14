@@ -8,19 +8,17 @@
 <details>
 <summary>Compiling</summary>
   
+ <br>
+ * Builds that default to the Linux platform config when compiling fail to build with various errors that include missing headers, conflicting definitions etc. fixing all these is out of my league so atm RPI4/Generic/Allwinner/Rockchip builds fail to compile...
+ <br>
+ Hopefully someone else that is capable to fixing those errors can/will do so.
+  
 Note: This fork has only been tested to build on Ubuntu 18.04.5<br><br>"Short" build commands:
 <br>
 * `make rpi`
 * `make rpi2`
-* `make rpi4`
-* `make Slice`
-* `make Slice3`
-* `make generic`
 * `make amlogic`
 * `make amlogic-ng`
-* `make A64`
-* `make H3`
-* `make H6`
 
 Full command to build different image:
 * `PROJECT=*** ARCH=*** DISTRO=*** DEVICE=*** make image`
@@ -181,8 +179,6 @@ Full command to build different image:
 * [Use CURL object directly](https://github.com/Risca/OpenPHT/commit/873ac97cb1acd9f34b8c7360f4cf9f31151ea09f) merged
 * [Reduce plex background jobs](https://github.com/Risca/OpenPHT/commit/1f1c932cf0b6548e192b7c90ec5d86f0c863fd24) merged
 
-
-* [This](https://github.com/Spark-NV/OpenPHT-9.2-Rebase/commit/9595f9c5987fe58b4ce2e321a4a5be9e4f013c5e) commit made the projects -Generic & Allwinner use the kernel configs from LibreELEC, I did this as CoreELEC appears to only support Amlogic devices officially and they broke RPi with there changes to the kernel/drivers. considering this im assuming they might have also broke Generic and Allwinner. As a precaution I have used the LibreELEC configs... again I cant test so I cant confirm if this will break things or fix.
 
 
 ------------
