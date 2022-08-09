@@ -73,7 +73,7 @@ Full command to build different image:
   <td align="center">S905X</td>
   <td align="center">:question:</td>
   <td align="center">S905X2</td>
-  <td align="center">:question:</td>
+  <td align="center">:white_check_mark:</td>
   <td align="center">RK3328</td>
   <td align="center">:question:</td>
   <td align="center">RPi2</td>
